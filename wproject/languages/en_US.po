@@ -1,0 +1,4027 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: wProject\n"
+"POT-Creation-Date: 2023-01-22 19:45+0800\n"
+"PO-Revision-Date: 2023-02-02 18:17+0800\n"
+"Language-Team: Rocket Apps <support@rocketapps.com.au>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: Rocket Apps <support@rocketapps.com.au>\n"
+"Language: en_US\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: 404.php:12
+msgid "404"
+msgstr "404"
+
+#. translators: The message on the 404 page
+#: 404.php:13
+msgid "Searchbot could not find whatever it was you were looking for."
+msgstr "Searchbot could not find whatever it was you were looking for."
+
+#. Theme Name of the plugin/theme
+#: admin-functions/functions-admin.php:175
+#: admin-functions/functions-admin.php:437 inc/email-template.php:41
+msgid "wProject"
+msgstr "wProject"
+
+#: admin-functions/functions-admin.php:176
+msgid "Licence"
+msgstr "Licence"
+
+#: admin-functions/functions-admin.php:312
+msgid "Save Settings"
+msgstr "Save Settings"
+
+#: admin-functions/functions-admin.php:314
+msgid "Activate License Key"
+msgstr "Activate License Key"
+
+#: admin-functions/functions-admin.php:342
+msgid "Settings Saved"
+msgstr "Settings Saved"
+
+#: admin-functions/functions-admin.php:351
+msgid "Database maintenance complete"
+msgstr "Database maintenance complete"
+
+#: admin-functions/functions-admin.php:361
+msgid "All wProject settings were successfully deleted"
+msgstr "All wProject settings were successfully deleted"
+
+#: admin-functions/functions-admin.php:377
+msgid "All read messages were successfully deleted"
+msgstr "All read messages were successfully deleted"
+
+#: admin-functions/functions-admin.php:395
+msgid "Home"
+msgstr "Home"
+
+#: admin-functions/functions-admin.php:399
+#: admin-functions/functions-admin.php:468
+msgid "Presentation"
+msgstr "Presentation"
+
+#: admin-functions/functions-admin.php:400
+#: admin-functions/functions-admin.php:778
+msgid "Permissions"
+msgstr "Permissions"
+
+#: admin-functions/functions-admin.php:401
+#: admin-functions/functions-admin.php:871
+msgid "Gantt Chart"
+msgstr "Gantt Chart"
+
+#: admin-functions/functions-admin.php:402
+#: admin-functions/functions-admin.php:1009 taxonomy-project.php:1314
+msgid "Kanban Board"
+msgstr "Kanban Board"
+
+#: admin-functions/functions-admin.php:403
+#: admin-functions/functions-admin.php:1104
+msgid "Time & Costs"
+msgstr "Time & Costs"
+
+#: admin-functions/functions-admin.php:404
+#: admin-functions/functions-admin.php:1201 functions.php:2191
+msgid "Context Labels"
+msgstr "Context Labels"
+
+#: admin-functions/functions-admin.php:405
+#: admin-functions/functions-admin.php:1279 inc/header-icons.php:35
+#: inc/notifications.php:3
+msgid "Notifications"
+msgstr "Notifications"
+
+#: admin-functions/functions-admin.php:406
+#: admin-functions/functions-admin.php:1398 inc/comments.php:25
+msgid "Comments"
+msgstr "Comments"
+
+#: admin-functions/functions-admin.php:407
+#: admin-functions/functions-admin.php:1495
+msgid "Printing"
+msgstr "Printing"
+
+#: admin-functions/functions-admin.php:411
+#: admin-functions/functions-admin.php:1540
+msgid "Other Settings"
+msgstr "Other Settings"
+
+#: admin-functions/functions-admin.php:412
+#: admin-functions/functions-admin.php:1706
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#: admin-functions/functions-admin.php:414
+#: admin-functions/functions-admin.php:1786
+msgid "Assists"
+msgstr "Assists"
+
+#: admin-functions/functions-admin.php:418
+msgid "Pro Addons"
+msgstr "Pro Addons"
+
+#: admin-functions/functions-admin.php:425
+msgid "Get Pro Addons"
+msgstr "Get Pro Addons"
+
+#: admin-functions/functions-admin.php:438
+msgid "Check for update"
+msgstr "Check for update"
+
+#: admin-functions/functions-admin.php:441 functions.php:242
+msgid "Welcome to wProject"
+msgstr "Welcome to wProject"
+
+#: admin-functions/functions-admin.php:442
+msgid "Configure wProject to your hearts desire."
+msgstr "Configure wProject to your hearts desire."
+
+#: admin-functions/functions-admin.php:446
+msgid "What's new?"
+msgstr "What's new?"
+
+#: admin-functions/functions-admin.php:447
+msgid "Read the FAQ"
+msgstr "Read the FAQ"
+
+#: admin-functions/functions-admin.php:450
+msgid "wProject health check"
+msgstr "wProject health check"
+
+#: admin-functions/functions-admin.php:457
+#, php-format
+msgid ""
+" <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">Learn more</a> about "
+"this health check."
+msgstr ""
+" <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">Learn more</a> about "
+"this health check."
+
+#: admin-functions/functions-admin.php:472
+msgid "Branding"
+msgstr "Branding"
+
+#: admin-functions/functions-admin.php:473
+msgid "Replace the login screen logo with your own."
+msgstr "Replace the login screen logo with your own."
+
+#: admin-functions/functions-admin.php:499
+#: admin-functions/functions-admin.php:570 inc/edit-task.php:319
+#: inc/new-task.php:125
+msgid "Browse"
+msgstr "Browse"
+
+#: admin-functions/functions-admin.php:543
+msgid "Favicon"
+msgstr "Favicon"
+
+#: admin-functions/functions-admin.php:544
+#, php-format
+msgid ""
+"Replace the <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">favicon</a> "
+"with your own. For best results, the image needs to be a square PNG and at "
+"least 100 x 100 pixels."
+msgstr ""
+"Replace the <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">favicon</a> "
+"with your own. For best results, the image needs to be a square PNG and at "
+"least 100 x 100 pixels."
+
+#: admin-functions/functions-admin.php:614
+msgid "Remove Pages from nav"
+msgstr "Remove Pages from nav"
+
+#: admin-functions/functions-admin.php:615
+msgid "Hide the Pages menu item in the navigation."
+msgstr "Hide the Pages menu item in the navigation."
+
+#: admin-functions/functions-admin.php:622
+#: admin-functions/functions-admin.php:698
+#: admin-functions/functions-admin.php:715
+#: admin-functions/functions-admin.php:840
+#: admin-functions/functions-admin.php:857
+#: admin-functions/functions-admin.php:1020
+#: admin-functions/functions-admin.php:1056
+#: admin-functions/functions-admin.php:1072
+#: admin-functions/functions-admin.php:1116
+#: admin-functions/functions-admin.php:1507
+#: admin-functions/functions-admin.php:1524
+#: admin-functions/functions-admin.php:1552
+#: admin-functions/functions-admin.php:1585
+#: admin-functions/functions-admin.php:1625
+#: admin-functions/functions-admin.php:1642
+#: admin-functions/functions-admin.php:1658
+msgid "Enable"
+msgstr "Enable"
+
+#: admin-functions/functions-admin.php:631
+msgid "Pages navigation label"
+msgstr "Pages navigation label"
+
+#: admin-functions/functions-admin.php:632
+msgid "The label that appears above the pages navigation."
+msgstr "The label that appears above the pages navigation."
+
+#: admin-functions/functions-admin.php:647
+msgid "Project list style"
+msgstr "Project list style"
+
+#: admin-functions/functions-admin.php:648
+msgid "Change the way projects are displayed in the left pane."
+msgstr "Change the way projects are displayed in the left pane."
+
+#: admin-functions/functions-admin.php:655
+msgid "List (default)"
+msgstr "List (default)"
+
+#: admin-functions/functions-admin.php:658
+msgid "Dropdown"
+msgstr "Dropdown"
+
+#: admin-functions/functions-admin.php:667
+msgid "Avatar style"
+msgstr "Avatar style"
+
+#: admin-functions/functions-admin.php:668
+msgid "The appearance of user avatars."
+msgstr "The appearance of user avatars."
+
+#: admin-functions/functions-admin.php:675
+msgid "Rounded corners (default)"
+msgstr "Rounded corners (default)"
+
+#: admin-functions/functions-admin.php:678
+msgid "Circular"
+msgstr "Circular"
+
+#: admin-functions/functions-admin.php:681
+msgid "Square"
+msgstr "Square"
+
+#: admin-functions/functions-admin.php:690
+msgid "Force avatar"
+msgstr "Force avatar"
+
+#: admin-functions/functions-admin.php:691
+msgid ""
+"Force users to upload a profile photo during onboarding. This is recommended "
+"to make it easier for users to identify each other."
+msgstr ""
+"Force users to upload a profile photo during onboarding. This is recommended "
+"to make it easier for users to identify each other."
+
+#: admin-functions/functions-admin.php:707
+msgid "Task spacing"
+msgstr "Task spacing"
+
+#: admin-functions/functions-admin.php:708
+msgid "Add some spacing between tasks listed on project pages."
+msgstr "Add some spacing between tasks listed on project pages."
+
+#: admin-functions/functions-admin.php:724
+msgid "System busy state"
+msgstr "System busy state"
+
+#: admin-functions/functions-admin.php:726
+msgid "What to do while the system is performing an action."
+msgstr "What to do while the system is performing an action."
+
+#: admin-functions/functions-admin.php:728
+#: admin-functions/functions-admin.php:812
+#: admin-functions/functions-admin.php:1209
+msgid "Note:"
+msgstr "Note:"
+
+#: admin-functions/functions-admin.php:728
+msgid ""
+"Disabling the UI will prevent users from navigating away until the performed "
+"action has finished."
+msgstr ""
+"Disabling the UI will prevent users from navigating away until the performed "
+"action has finished."
+
+#: admin-functions/functions-admin.php:736
+msgid "Blur the background"
+msgstr "Blur the background"
+
+#: admin-functions/functions-admin.php:739
+msgid "Disable UI"
+msgstr "Disable UI"
+
+#: admin-functions/functions-admin.php:748
+msgid "Response message position"
+msgstr "Response message position"
+
+#: admin-functions/functions-admin.php:749
+msgid "Where to show the response message (desktop only)."
+msgstr "Where to show the response message (desktop only)."
+
+#: admin-functions/functions-admin.php:756
+msgid "Bottom right (default)"
+msgstr "Bottom right (default)"
+
+#: admin-functions/functions-admin.php:759
+msgid "Bottom left"
+msgstr "Bottom left"
+
+#: admin-functions/functions-admin.php:762
+msgid "Top full width"
+msgstr "Top full width"
+
+#: admin-functions/functions-admin.php:765
+msgid "Bottom full width"
+msgstr "Bottom full width"
+
+#: admin-functions/functions-admin.php:782
+msgid "Team capability"
+msgstr "Team capability"
+
+#: admin-functions/functions-admin.php:783
+msgid "What team members can do on the front-end."
+msgstr "What team members can do on the front-end."
+
+#: admin-functions/functions-admin.php:790
+msgid "Create tasks"
+msgstr "Create tasks"
+
+#: admin-functions/functions-admin.php:793
+msgid "Assign and reassign tasks to anyone"
+msgstr "Assign and reassign tasks to anyone"
+
+#: admin-functions/functions-admin.php:796
+msgid "Request ownership of tasks from other users"
+msgstr "Request ownership of tasks from other users"
+
+#: admin-functions/functions-admin.php:799
+msgid "Claim ownership of unowned tasks"
+msgstr "Claim ownership of unowned tasks"
+
+#: admin-functions/functions-admin.php:808
+msgid "Team project access"
+msgstr "Team project access"
+
+#: admin-functions/functions-admin.php:810
+msgid "How team members can access projects on the front-end."
+msgstr "How team members can access projects on the front-end."
+
+#: admin-functions/functions-admin.php:812
+msgid ""
+"Project managers and administrators can access all projects regardless of "
+"this setting."
+msgstr ""
+"Project managers and administrators can access all projects regardless of "
+"this setting."
+
+#: admin-functions/functions-admin.php:820
+msgid "Limited (default - only projects they have tasks in)"
+msgstr "Limited (default - only projects they have tasks in)"
+
+#: admin-functions/functions-admin.php:823
+msgid "Unlimited (access all projects)"
+msgstr "Unlimited (access all projects)"
+
+#: admin-functions/functions-admin.php:832 inc/team.php:136
+msgid "Project managers"
+msgstr "Project managers"
+
+#: admin-functions/functions-admin.php:833
+msgid ""
+"Allow project managers access to the WordPress admin area. Project managers "
+"will be able to manage users and wProject settings, but can not manage "
+"plugins."
+msgstr ""
+"Allow project managers access to the WordPress admin area. Project managers "
+"will be able to manage users and wProject settings, but can not manage "
+"plugins."
+
+#: admin-functions/functions-admin.php:849
+msgid "Hide team page"
+msgstr "Hide team page"
+
+#: admin-functions/functions-admin.php:850
+msgid "Deny access to the team page."
+msgstr "Deny access to the team page."
+
+#: admin-functions/functions-admin.php:875
+msgid "Show the Gantt chart"
+msgstr "Show the Gantt chart"
+
+#: admin-functions/functions-admin.php:876
+msgid "Show the Gantt chart at these locations."
+msgstr "Show the Gantt chart at these locations."
+
+#: admin-functions/functions-admin.php:883 inc/nav.php:31 inc/status.php:2
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: admin-functions/functions-admin.php:886
+#: admin-functions/functions-admin.php:2054
+#: admin-functions/functions-admin.php:2146
+#: admin-functions/functions-admin.php:2153 inc/nav.php:36 inc/nav.php:44
+#: inc/nav.php:49 inc/nav.php:59 inc/nav.php:64 inc/project-chart.php:182
+msgid "Projects"
+msgstr "Projects"
+
+#: admin-functions/functions-admin.php:889
+msgid "All projects page"
+msgstr "All projects page"
+
+#: admin-functions/functions-admin.php:898
+msgid "Initial Gantt scale (tasks)"
+msgstr "Initial Gantt scale (tasks)"
+
+#: admin-functions/functions-admin.php:899
+msgid "The initial scale when the Gantt chart contains tasks."
+msgstr "The initial scale when the Gantt chart contains tasks."
+
+#: admin-functions/functions-admin.php:906
+#: admin-functions/functions-admin.php:929
+#: admin-functions/functions-admin.php:1692
+msgid "Days"
+msgstr "Days"
+
+#: admin-functions/functions-admin.php:909
+#: admin-functions/functions-admin.php:932
+msgid "Weeks"
+msgstr "Weeks"
+
+#: admin-functions/functions-admin.php:912
+#: admin-functions/functions-admin.php:935
+msgid "Months"
+msgstr "Months"
+
+#: admin-functions/functions-admin.php:921
+msgid "Initial Gantt scale (projects)"
+msgstr "Initial Gantt scale (projects)"
+
+#: admin-functions/functions-admin.php:922
+msgid "The initial scale when the Gantt chart contains projects."
+msgstr "The initial scale when the Gantt chart contains projects."
+
+#: admin-functions/functions-admin.php:944
+msgid "Pagination"
+msgstr "Pagination"
+
+#: admin-functions/functions-admin.php:945
+msgid "How many Gantt items to show per vertical pagination."
+msgstr "How many Gantt items to show per vertical pagination."
+
+#: admin-functions/functions-admin.php:960
+msgid "Other Gannt settings"
+msgstr "Other Gannt settings"
+
+#: admin-functions/functions-admin.php:966
+#: admin-functions/functions-admin.php:1499
+msgid "Hide completed tasks"
+msgstr "Hide completed tasks"
+
+#: admin-functions/functions-admin.php:969
+msgid "Jump to today"
+msgstr "Jump to today"
+
+#: admin-functions/functions-admin.php:972
+msgid "Show popups"
+msgstr "Show popups"
+
+#: admin-functions/functions-admin.php:975
+msgid "Show subtasks (project page only)"
+msgstr "Show subtasks (project page only)"
+
+#: admin-functions/functions-admin.php:984
+msgid "Popups position"
+msgstr "Popups position"
+
+#: admin-functions/functions-admin.php:985
+msgid "Where popups appear when you hover a task in the Gantt chart."
+msgstr "Where popups appear when you hover a task in the Gantt chart."
+
+#: admin-functions/functions-admin.php:992
+msgid "Centre (default)"
+msgstr "Centre (default)"
+
+#: admin-functions/functions-admin.php:995
+msgid "Fixed (top right)"
+msgstr "Fixed (top right)"
+
+#: admin-functions/functions-admin.php:1013
+msgid "Enable the Kanban board"
+msgstr "Enable the Kanban board"
+
+#: admin-functions/functions-admin.php:1014
+msgid ""
+"Allow viewing the Kanban board on projects. This is only available to "
+"administrators and project managers."
+msgstr ""
+"Allow viewing the Kanban board on projects. This is only available to "
+"administrators and project managers."
+
+#: admin-functions/functions-admin.php:1029
+msgid "Board density"
+msgstr "Board density"
+
+#: admin-functions/functions-admin.php:1030
+msgid "How comfortable the cards fit in the Kanban board."
+msgstr "How comfortable the cards fit in the Kanban board."
+
+#: admin-functions/functions-admin.php:1037
+msgid "Comfortable"
+msgstr "Comfortable"
+
+#: admin-functions/functions-admin.php:1038
+msgid "Loose"
+msgstr "Loose"
+
+#: admin-functions/functions-admin.php:1039
+msgid "Tight"
+msgstr "Tight"
+
+#: admin-functions/functions-admin.php:1049
+msgid "Card colours"
+msgstr "Card colors"
+
+#: admin-functions/functions-admin.php:1050
+msgid "Add priority colour emphasis to the Kanban cards."
+msgstr "Add priority color emphasis to the Kanban cards."
+
+#: admin-functions/functions-admin.php:1065
+msgid "Show descriptions"
+msgstr "Show descriptions"
+
+#: admin-functions/functions-admin.php:1066
+msgid "Show the task descriptions on the Kanban cards."
+msgstr "Show the task descriptions on the Kanban cards."
+
+#: admin-functions/functions-admin.php:1081
+msgid "Unfocused cards"
+msgstr "Unfocused cards"
+
+#: admin-functions/functions-admin.php:1082
+msgid "Fade or hide unfocused cards when using the Kanban filters."
+msgstr "Fade or hide unfocused cards when using the Kanban filters."
+
+#: admin-functions/functions-admin.php:1088
+msgid "Fade (default)"
+msgstr "Fade (default)"
+
+#: admin-functions/functions-admin.php:1091
+msgid "Hide"
+msgstr "Hide"
+
+#: admin-functions/functions-admin.php:1108
+msgid "Enable time"
+msgstr "Enable time"
+
+#: admin-functions/functions-admin.php:1109
+msgid "Allow time to be tracked on tasks and projects."
+msgstr "Allow time to be tracked on tasks and projects."
+
+#: admin-functions/functions-admin.php:1125
+msgid "Overtime prompt"
+msgstr "Overtime prompt"
+
+#: admin-functions/functions-admin.php:1126
+msgid "Prompt when any logged time entry is more than this many hours."
+msgstr "Prompt when any logged time entry is more than this many hours."
+
+#: admin-functions/functions-admin.php:1133
+msgid "Hours"
+msgstr "Hours"
+
+#: admin-functions/functions-admin.php:1142
+msgid "Currency symbol"
+msgstr "Currency symbol"
+
+#: admin-functions/functions-admin.php:1143
+msgid ""
+"The currency symbol to show next to costs. If not specified the $ symbol "
+"will be shown."
+msgstr ""
+"The currency symbol to show next to costs. If not specified the $ symbol "
+"will be shown."
+
+#: admin-functions/functions-admin.php:1159
+msgid "Currency symbol position"
+msgstr "Currency symbol position"
+
+#: admin-functions/functions-admin.php:1160
+msgid "Show the currency symbol left or right of monetary values."
+msgstr "Show the currency symbol left or right of monetary values."
+
+#: admin-functions/functions-admin.php:1167
+msgid "Left"
+msgstr "Left"
+
+#: admin-functions/functions-admin.php:1170
+msgid "Right"
+msgstr "Right"
+
+#: admin-functions/functions-admin.php:1179
+msgid "Default project hourly rate"
+msgstr "Default project hourly rate"
+
+#: admin-functions/functions-admin.php:1180
+msgid ""
+"The default hourly rate your company charges to work on projects. You can "
+"still change the rate when creating a new project."
+msgstr ""
+"The default hourly rate your company charges to work on projects. You can "
+"still change the rate when creating a new project."
+
+#: admin-functions/functions-admin.php:1205
+msgid "What are context labels?"
+msgstr "What are context labels?"
+
+#: admin-functions/functions-admin.php:1207
+msgid ""
+"Context labels are a simple way to improve the context of a task. This can "
+"assist in understanding it's purpose."
+msgstr ""
+"Context labels are a simple way to improve the context of a task. This can "
+"assist in understanding it's purpose."
+
+#: admin-functions/functions-admin.php:1209
+msgid "Enter comma separated words with letters, numbers or dashes."
+msgstr "Enter comma separated words with letters, numbers or dashes."
+
+#: admin-functions/functions-admin.php:1236
+msgid "Label colour"
+msgstr "Label color"
+
+#: admin-functions/functions-admin.php:1238
+msgid "The primary colour of all context labels."
+msgstr "The primary color of all context labels."
+
+#: admin-functions/functions-admin.php:1255
+msgid "Label display"
+msgstr "Label display"
+
+#: admin-functions/functions-admin.php:1256
+msgid "How to display the context labels when creating or editing a task."
+msgstr "How to display the context labels when creating or editing a task."
+
+#: admin-functions/functions-admin.php:1263
+msgid "Dropdown (default)"
+msgstr "Dropdown (default)"
+
+#: admin-functions/functions-admin.php:1266
+msgid "Radio buttons"
+msgstr "Radio buttons"
+
+#: admin-functions/functions-admin.php:1283
+msgid "Email notifications"
+msgstr "Email notifications"
+
+#: admin-functions/functions-admin.php:1284
+msgid "When to send an email notification."
+msgstr "When to send an email notification."
+
+#: admin-functions/functions-admin.php:1291
+msgid "To task owner when task takeover is requested"
+msgstr "To task owner when task takeover is requested"
+
+#: admin-functions/functions-admin.php:1294
+msgid "To user when task takeover decision was made"
+msgstr "To user when task takeover decision was made"
+
+#: admin-functions/functions-admin.php:1297
+msgid "To user when a task is created for them"
+msgstr "To user when a task is created for them"
+
+#: admin-functions/functions-admin.php:1300
+msgid "To user when someone replies to their comment"
+msgstr "To user when someone replies to their comment"
+
+#: admin-functions/functions-admin.php:1303
+msgid "To project manager when a task is complete"
+msgstr "To project manager when a task is complete"
+
+#: admin-functions/functions-admin.php:1306
+msgid "To entire organisation when a project is created"
+msgstr "To entire organisation when a project is created"
+
+#: admin-functions/functions-admin.php:1309
+msgid "To involved team members when a project is complete"
+msgstr "To involved team members when a project is complete"
+
+#: admin-functions/functions-admin.php:1312
+msgid "To involved team members when a project is deleted"
+msgstr "To involved team members when a project is deleted"
+
+#: admin-functions/functions-admin.php:1315
+msgid "To task owner when a comment is made on their task"
+msgstr "To task owner when a comment is made on their task"
+
+#: admin-functions/functions-admin.php:1325
+msgid "Response message duration"
+msgstr "Response message duration"
+
+#: admin-functions/functions-admin.php:1326
+msgid ""
+"How long the response message remains on-screen before fading out. Default "
+"is 6 seconds."
+msgstr ""
+"How long the response message remains on-screen before fading out. Default "
+"is 6 seconds."
+
+#. translators: A unit of time
+#: admin-functions/functions-admin.php:1333
+msgid "seconds"
+msgstr "seconds"
+
+#: admin-functions/functions-admin.php:1342
+msgid "Maximum notifications"
+msgstr "Maximum notifications"
+
+#: admin-functions/functions-admin.php:1343
+msgid "The maximum number of notifications to show in the dropdown."
+msgstr "The maximum number of notifications to show in the dropdown."
+
+#: admin-functions/functions-admin.php:1359
+msgid "Sender name"
+msgstr "Sender name"
+
+#: admin-functions/functions-admin.php:1360
+msgid "If not specified, the sender name on email notifications will be:"
+msgstr "If not specified, the sender name on email notifications will be:"
+
+#: admin-functions/functions-admin.php:1376
+msgid "Sender email"
+msgstr "Sender email"
+
+#: admin-functions/functions-admin.php:1377
+msgid ""
+"If not specified, the sender email address on email notifications will be:"
+msgstr ""
+"If not specified, the sender email address on email notifications will be:"
+
+#: admin-functions/functions-admin.php:1402
+msgid "Task comments"
+msgstr "Task comments"
+
+#: admin-functions/functions-admin.php:1403
+msgid "Allow users to comment on tasks"
+msgstr "Allow users to comment on tasks"
+
+#: admin-functions/functions-admin.php:1410
+#: admin-functions/functions-admin.php:1427
+#: admin-functions/functions-admin.php:1481 admin-functions/task-groups.php:136
+#: single-task.php:360
+msgid "Yes"
+msgstr "Yes"
+
+#: admin-functions/functions-admin.php:1419
+msgid "Page comments"
+msgstr "Page comments"
+
+#: admin-functions/functions-admin.php:1420
+msgid "Allow users to comment on pages"
+msgstr "Allow users to comment on pages"
+
+#: admin-functions/functions-admin.php:1436
+msgid "Number of recent comments"
+msgstr "Number of recent comments"
+
+#: admin-functions/functions-admin.php:1437
+msgid "How many comments to show in the recent comments dropdown."
+msgstr "How many comments to show in the recent comments dropdown."
+
+#: admin-functions/functions-admin.php:1453
+msgid "Initial comment order"
+msgstr "Initial comment order"
+
+#: admin-functions/functions-admin.php:1454
+msgid "The order in which comments are initially displayed."
+msgstr "The order in which comments are initially displayed."
+
+#: admin-functions/functions-admin.php:1461
+msgid "Newest first (default)"
+msgstr "Newest first (default)"
+
+#: admin-functions/functions-admin.php:1464
+msgid "Oldest first"
+msgstr "Oldest first"
+
+#: admin-functions/functions-admin.php:1473
+msgid "Always show comment dates"
+msgstr "Always show comment dates"
+
+#: admin-functions/functions-admin.php:1474
+msgid "Comment dates will show without having to click the comment."
+msgstr "Comment dates will show without having to click the comment."
+
+#: admin-functions/functions-admin.php:1500
+msgid "Do not include completed tasks when printing a project."
+msgstr "Do not include completed tasks when printing a project."
+
+#: admin-functions/functions-admin.php:1516
+msgid "Disable user photos when printing"
+msgstr "Disable user photos when printing"
+
+#: admin-functions/functions-admin.php:1517
+msgid "User photos will not be shown on printed or PDF documents."
+msgstr "User photos will not be shown on printed or PDF documents."
+
+#: admin-functions/functions-admin.php:1544
+msgid "Leave warnings"
+msgstr "Leave warnings"
+
+#: admin-functions/functions-admin.php:1545
+msgid ""
+"A warning will appear when accidentally attempting to leave an incomplete "
+"new task or new project."
+msgstr ""
+"A warning will appear when accidentally attempting to leave an incomplete "
+"new task or new project."
+
+#: admin-functions/functions-admin.php:1561
+msgid "Job number prefix"
+msgstr "Job number prefix"
+
+#: admin-functions/functions-admin.php:1562
+msgid "The default prefix for job numbers"
+msgstr "The default prefix for job numbers"
+
+#: admin-functions/functions-admin.php:1578
+msgid "Show the task ID"
+msgstr "Show the task ID"
+
+#: admin-functions/functions-admin.php:1579
+msgid "The post ID will show next to tasks."
+msgstr "The post ID will show next to tasks."
+
+#: admin-functions/functions-admin.php:1594
+msgid "Preferred calendar"
+msgstr "Preferred calendar"
+
+#: admin-functions/functions-admin.php:1595
+msgid "Used for when adding a task or project to your calendar."
+msgstr "Used for when adding a task or project to your calendar."
+
+#: admin-functions/functions-admin.php:1603
+msgid "Disabled"
+msgstr "Disabled"
+
+#: admin-functions/functions-admin.php:1604
+msgid "Google (web)"
+msgstr "Google (web)"
+
+#: admin-functions/functions-admin.php:1605
+msgid "Yahoo (web)"
+msgstr "Yahoo (web)"
+
+#: admin-functions/functions-admin.php:1606
+msgid "Microsoft Outlook (web)"
+msgstr "Microsoft Outlook (web)"
+
+#: admin-functions/functions-admin.php:1607
+msgid "iCal compatible (desktop)"
+msgstr "iCal compatible (desktop)"
+
+#: admin-functions/functions-admin.php:1617
+msgid "Completed projects navigation visibility"
+msgstr "Completed projects navigation visibility"
+
+#: admin-functions/functions-admin.php:1618
+msgid "Don't show completed projects in the main navigation."
+msgstr "Don't show completed projects in the main navigation."
+
+#: admin-functions/functions-admin.php:1634
+msgid "Fade on hold"
+msgstr "Fade on hold"
+
+#: admin-functions/functions-admin.php:1635
+msgid "Fade tasks that are on hold."
+msgstr "Fade tasks that are on hold."
+
+#: admin-functions/functions-admin.php:1651
+msgid "Show all project tasks on task relationships"
+msgstr "Show all project tasks on task relationships"
+
+#: admin-functions/functions-admin.php:1652
+msgid ""
+"When selecting a task relationship, allow selection from all projects "
+"instead of just the current project (not recommended, may impact "
+"performance)."
+msgstr ""
+"When selecting a task relationship, allow selection from all projects "
+"instead of just the current project (not recommended, may impact "
+"performance)."
+
+#: admin-functions/functions-admin.php:1667
+msgid "Dashboard message"
+msgstr "Dashboard message"
+
+#: admin-functions/functions-admin.php:1668
+msgid "Add a message to the dashboard (visible to all users)."
+msgstr "Add a message to the dashboard (visible to all users)."
+
+#: admin-functions/functions-admin.php:1684
+msgid "Extend session time"
+msgstr "Extend session time"
+
+#: admin-functions/functions-admin.php:1684
+msgid "Beta"
+msgstr "Beta"
+
+#: admin-functions/functions-admin.php:1685
+msgid "Stay logged in for longer."
+msgstr "Stay logged in for longer."
+
+#: admin-functions/functions-admin.php:1710
+msgid "Theme maintenance"
+msgstr "Theme maintenance"
+
+#: admin-functions/functions-admin.php:1711
+msgid ""
+"This will reset all theme settings to default. Only run theme maintenance if "
+"you are experiencing problems."
+msgstr ""
+"This will reset all theme settings to default. Only run theme maintenance if "
+"you are experiencing problems."
+
+#: admin-functions/functions-admin.php:1718
+msgid "Reset all theme settings"
+msgstr "Reset all theme settings"
+
+#: admin-functions/functions-admin.php:1727
+msgid "Notification message maintenance"
+msgstr "Notification message maintenance"
+
+#: admin-functions/functions-admin.php:1728
+msgid "Delete all read (trashed) notifications from the database."
+msgstr "Delete all read (trashed) notifications from the database."
+
+#: admin-functions/functions-admin.php:1735
+msgid "Delete all read messages"
+msgstr "Delete all read messages"
+
+#: admin-functions/functions-admin.php:1744
+msgid "Database maintenance"
+msgstr "Database maintenance"
+
+#: admin-functions/functions-admin.php:1745
+#, php-format
+msgid ""
+"Cleanup all abandoned task debris. This is highly recommended if you "
+"installed wProject before 27th October 2022. <a href=\"%1$s\" target=\"_blank"
+"\" rel=\"noopener\">Learn why</a>."
+msgstr ""
+"Cleanup all abandoned task debris. This is highly recommended if you "
+"installed wProject before 27th October 2022. <a href=\"%1$s\" target=\"_blank"
+"\" rel=\"noopener\">Learn why</a>."
+
+#: admin-functions/functions-admin.php:1752
+msgid "Cleanup database"
+msgstr "Cleanup database"
+
+#: admin-functions/functions-admin.php:1759
+msgid ""
+"IMPORTANT! As a precaution, please backup your database before running this "
+"maintenance function."
+msgstr ""
+"IMPORTANT! As a precaution, please backup your database before running this "
+"maintenance function."
+
+#: admin-functions/functions-admin.php:1760
+msgid ""
+"ARE YOU SURE? Do not proceed unless you have you backed up your database."
+msgstr ""
+"ARE YOU SURE? Do not proceed unless you have you backed up your database."
+
+#: admin-functions/functions-admin.php:1787
+msgid ""
+"The following superstars have generously contributed their time to help "
+"improve wProject:"
+msgstr ""
+"The following superstars have generously contributed their time to help "
+"improve wProject:"
+
+#: admin-functions/functions-admin.php:1798
+#: admin-functions/functions-admin.php:1818
+msgid "translation"
+msgstr "translation"
+
+#: admin-functions/functions-admin.php:1801
+#: admin-functions/functions-admin.php:1821
+#: admin-functions/functions-admin.php:1838
+msgid "Feature feedback"
+msgstr "Feature feedback"
+
+#: admin-functions/functions-admin.php:1804
+#: admin-functions/functions-admin.php:1824
+#: admin-functions/functions-admin.php:1841
+msgid "Beta testing"
+msgstr "Beta testing"
+
+#: admin-functions/functions-admin.php:1807
+#: admin-functions/functions-admin.php:1827
+#: admin-functions/functions-admin.php:1844
+msgid "Functionality suggestions"
+msgstr "Functionality suggestions"
+
+#: admin-functions/functions-admin.php:1902
+#: admin-functions/functions-admin.php:2258
+#: admin-functions/functions-admin.php:2349 functions.php:4589
+#: gantt/gantt.php:490 inc/edit-project.php:153 inc/new-project.php:73
+#: inc/user-profile.php:53 taxonomy-project.php:1014
+msgid "Project manager"
+msgstr "Project manager"
+
+#: admin-functions/functions-admin.php:1923 inc/user-profile.php:59
+msgid "Observer"
+msgstr "Observer"
+
+#: admin-functions/functions-admin.php:1932
+msgid "Operator"
+msgstr "Operator"
+
+#: admin-functions/functions-admin.php:1952 inc/user-profile.php:55
+msgid "Team member"
+msgstr "Team member"
+
+#. translators: Example: This field is required
+#: admin-functions/functions-admin.php:1998
+msgid "required"
+msgstr "required"
+
+#: admin-functions/functions-admin.php:2009
+msgid ""
+"<strong>Note:</strong> The only roles used by wProject are <strong>Team "
+"member</strong>, <strong>Project manager</strong>, <strong>Administrator</"
+"strong>, <strong>Operator</strong> and <strong>Client</strong> (if the "
+"Client Pro plugin is activated)."
+msgstr ""
+"<strong>Note:</strong> The only roles used by wProject are <strong>Team "
+"member</strong>, <strong>Project manager</strong>, <strong>Administrator</"
+"strong>, <strong>Operator</strong> and <strong>Client</strong> (if the "
+"Client Pro plugin is activated)."
+
+#: admin-functions/functions-admin.php:2048
+msgid "Account"
+msgstr "Account"
+
+#: admin-functions/functions-admin.php:2049
+msgid "Edit Project"
+msgstr "Edit Project"
+
+#: admin-functions/functions-admin.php:2050
+#: admin-functions/functions-admin.php:2103
+msgid "Edit Task"
+msgstr "Edit Task"
+
+#: admin-functions/functions-admin.php:2051
+msgid "My Tasks"
+msgstr "My Tasks"
+
+#: admin-functions/functions-admin.php:2052
+#: admin-functions/functions-ajax.php:351
+msgid "New Project"
+msgstr "New Project"
+
+#: admin-functions/functions-admin.php:2053
+#: admin-functions/functions-admin.php:2104
+#: admin-functions/functions-ajax.php:605
+msgid "New Task"
+msgstr "New Task"
+
+#: admin-functions/functions-admin.php:2055 inc/edit-project.php:313
+msgid "Report"
+msgstr "Report"
+
+#: admin-functions/functions-admin.php:2056 inc/nav.php:82
+msgid "Team"
+msgstr "Team"
+
+#: admin-functions/functions-admin.php:2057
+msgid "User Profile"
+msgstr "User Profile"
+
+#: admin-functions/functions-admin.php:2099 functions.php:2683
+#: inc/create.php:18 inc/create.php:29 inc/edit-task.php:86
+#: inc/edit-task.php:623 inc/my-latest-tasks.php:45 inc/new-task.php:53
+#: inc/new-task.php:396 taxonomy-project.php:158 taxonomy-project.php:527
+msgid "Task"
+msgstr "Task"
+
+#: admin-functions/functions-admin.php:2100 inc/projects-list.php:33
+msgid "Tasks"
+msgstr "Tasks"
+
+#: admin-functions/functions-admin.php:2101
+#: admin-functions/functions-admin.php:2102
+msgid "Add Task"
+msgstr "Add Task"
+
+#: admin-functions/functions-admin.php:2105
+msgid "Search Tasks"
+msgstr "Search Tasks"
+
+#: admin-functions/functions-admin.php:2106
+msgid "No Tasks Found"
+msgstr "No Tasks Found"
+
+#: admin-functions/functions-admin.php:2107
+msgid "No Tasks Found in Trash"
+msgstr "No Tasks Found in Trash"
+
+#: admin-functions/functions-admin.php:2108 inc/status.php:96
+msgid "All Tasks"
+msgstr "All Tasks"
+
+#: admin-functions/functions-admin.php:2136
+msgctxt "wproject"
+msgid "Projects"
+msgstr "Projects"
+
+#: admin-functions/functions-admin.php:2137
+msgctxt "wproject"
+msgid "Project"
+msgstr "Project"
+
+#: admin-functions/functions-admin.php:2138
+msgid "Search projects"
+msgstr "Search projects"
+
+#: admin-functions/functions-admin.php:2139 inc/projects-list.php:317
+msgid "All projects"
+msgstr "All projects"
+
+#: admin-functions/functions-admin.php:2140
+msgid "Parent projects"
+msgstr "Parent projects"
+
+#: admin-functions/functions-admin.php:2141
+msgid "Parent project:"
+msgstr "Parent project:"
+
+#: admin-functions/functions-admin.php:2142
+msgid "Edit project"
+msgstr "Edit project"
+
+#: admin-functions/functions-admin.php:2143
+msgid "Update project"
+msgstr "Update project"
+
+#: admin-functions/functions-admin.php:2144
+msgid "Add new project"
+msgstr "Add new project"
+
+#: admin-functions/functions-admin.php:2145
+msgid "New project name"
+msgstr "New project name"
+
+#: admin-functions/functions-admin.php:2183
+#: admin-functions/functions-admin.php:2321
+#: admin-functions/functions-admin.php:2406 functions.php:1662
+#: functions.php:2080 functions.php:2175 functions.php:3022 functions.php:3401
+#: functions.php:4610 gantt/gantt.php:227 gantt/gantt.php:455
+#: inc/edit-project.php:108 inc/edit-task.php:163 inc/my-follows.php:58
+#: inc/my-latest-tasks.php:95 inc/my-latest-tasks.php:159
+#: inc/new-project.php:41 inc/new-task.php:115 inc/project-chart.php:64
+#: inc/projects-list.php:176 inc/projects-list.php:323 single-task.php:1132
+#: taxonomy-project.php:387 taxonomy-project.php:1053
+msgid "In progress"
+msgstr "In progress"
+
+#: admin-functions/functions-admin.php:2185
+#: admin-functions/functions-admin.php:2322
+#: admin-functions/functions-admin.php:2408 functions.php:2082
+#: gantt/gantt.php:458 inc/edit-project.php:109 inc/new-project.php:42
+#: inc/project-chart.php:66 inc/projects-list.php:178 inc/projects-list.php:324
+#: taxonomy-project.php:1055
+msgid "Planning"
+msgstr "Planning"
+
+#: admin-functions/functions-admin.php:2187
+#: admin-functions/functions-admin.php:2323
+#: admin-functions/functions-admin.php:2409 functions.php:2084
+#: gantt/gantt.php:461 inc/edit-project.php:110 inc/new-project.php:43
+#: inc/project-chart.php:68 inc/projects-list.php:180 inc/projects-list.php:325
+#: taxonomy-project.php:1057 taxonomy-project.php:1067
+msgid "Proposed"
+msgstr "Proposed"
+
+#: admin-functions/functions-admin.php:2189
+#: admin-functions/functions-admin.php:2324
+#: admin-functions/functions-admin.php:2410 functions.php:2086
+#: gantt/gantt.php:464 inc/edit-project.php:111 inc/new-project.php:44
+#: inc/project-chart.php:70 inc/projects-list.php:182 inc/projects-list.php:327
+#: taxonomy-project.php:1059
+msgid "Setting up"
+msgstr "Setting up"
+
+#: admin-functions/functions-admin.php:2191
+#: admin-functions/functions-admin.php:2402 functions.php:2088
+#: gantt/gantt.php:467 inc/edit-project.php:105 inc/project-chart.php:72
+#: inc/projects-list.php:184 inc/projects-list.php:320
+#: taxonomy-project.php:1061
+msgid "Archived"
+msgstr "Archived"
+
+#: admin-functions/functions-admin.php:2193
+#: admin-functions/functions-admin.php:2403 functions.php:2090
+#: gantt/gantt.php:470 inc/edit-project.php:106 inc/project-chart.php:74
+#: inc/projects-list.php:186 inc/projects-list.php:321
+#: taxonomy-project.php:1063
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#: admin-functions/functions-admin.php:2195
+#: admin-functions/functions-admin.php:2404 functions.php:1656
+#: functions.php:2092 functions.php:2172 functions.php:3016 functions.php:3787
+#: functions.php:4604 gantt/gantt.php:220 gantt/gantt.php:473
+#: inc/edit-project.php:107 inc/edit-task.php:161 inc/home.php:173
+#: inc/my-follows.php:52 inc/my-latest-tasks.php:89 inc/my-latest-tasks.php:156
+#: inc/new-task.php:114 inc/project-chart.php:76 inc/projects-list.php:188
+#: inc/projects-list.php:322 single-task.php:1126 taxonomy-project.php:384
+#: taxonomy-project.php:1065 taxonomy-project.php:1244
+msgid "Complete"
+msgstr "Complete"
+
+#: admin-functions/functions-admin.php:2213
+msgid "Message"
+msgstr "Message"
+
+#: admin-functions/functions-admin.php:2214
+msgid "Messages"
+msgstr "Messages"
+
+#: admin-functions/functions-admin.php:2215
+#: admin-functions/functions-admin.php:2216
+msgid "Add Message"
+msgstr "Add Message"
+
+#: admin-functions/functions-admin.php:2217
+msgid "Edit Message"
+msgstr "Edit Message"
+
+#: admin-functions/functions-admin.php:2218
+msgid "New Message"
+msgstr "New Message"
+
+#: admin-functions/functions-admin.php:2219
+msgid "Search Messages"
+msgstr "Search Messages"
+
+#: admin-functions/functions-admin.php:2220
+msgid "No Messages Found"
+msgstr "No Messages Found"
+
+#: admin-functions/functions-admin.php:2221
+msgid "No Messages Found in Trash"
+msgstr "No Messages Found in Trash"
+
+#: admin-functions/functions-admin.php:2222
+msgid "All Messages"
+msgstr "All Messages"
+
+#: admin-functions/functions-admin.php:2250
+#: admin-functions/functions-admin.php:2341 inc/edit-project.php:99
+#: inc/new-project.php:34 taxonomy-project.php:1151
+msgid "Full description"
+msgstr "Full description"
+
+#: admin-functions/functions-admin.php:2287
+#: admin-functions/functions-admin.php:2364 functions.php:3368
+#: functions.php:3560 functions.php:3753 functions.php:3941 gantt/gantt.php:244
+#: gantt/gantt.php:490 inc/edit-project.php:149 inc/edit-task.php:150
+#: inc/new-project.php:69 inc/new-task.php:103 inc/projects-list.php:197
+#: search.php:85 single-task.php:355 taxonomy-project.php:1045
+msgid "Job #"
+msgstr "Job #"
+
+#: admin-functions/functions-admin.php:2298
+#: admin-functions/functions-admin.php:2299
+#: admin-functions/functions-admin.php:2375 functions.php:2113
+#: gantt/gantt.php:244 gantt/gantt.php:490 taxonomy-project.php:335
+#: taxonomy-project.php:1078
+msgid "Start date"
+msgstr "Start date"
+
+#: admin-functions/functions-admin.php:2302
+#: admin-functions/functions-admin.php:2303
+#: admin-functions/functions-admin.php:2376 functions.php:2121
+#: functions.php:3123 functions.php:3343 functions.php:3535 functions.php:3728
+#: functions.php:3916 gantt/gantt.php:244 gantt/gantt.php:490
+#: inc/my-follows.php:120 inc/my-latest-tasks.php:47 inc/projects-list.php:34
+#: inc/projects-managed.php:11 search.php:81 taxonomy-project.php:160
+#: taxonomy-project.php:339 taxonomy-project.php:529
+msgid "Due"
+msgstr "Due"
+
+#: admin-functions/functions-admin.php:2306 functions.php:2183
+#: gantt/gantt.php:244 inc/projects-list.php:247 inc/projects-managed.php:12
+#: single-task.php:270 single-task.php:329 single-task.php:397
+#: taxonomy-project.php:432 taxonomy-project.php:792
+msgid "Time"
+msgstr "Time"
+
+#: admin-functions/functions-admin.php:2307 functions.php:2129
+#: gantt/gantt.php:490 inc/projects-list.php:207 taxonomy-project.php:1093
+msgid "hrs"
+msgstr "hrs"
+
+#: admin-functions/functions-admin.php:2310
+#: admin-functions/functions-admin.php:2389
+msgid "Rate"
+msgstr "Rate"
+
+#. translators: A 'global' currency symbol placeholder.
+#: admin-functions/functions-admin.php:2311
+msgid "$"
+msgstr "$"
+
+#: admin-functions/functions-admin.php:2318
+#: admin-functions/functions-admin.php:2397 functions.php:1589
+#: gantt/gantt.php:244 gantt/gantt.php:490 inc/edit-project.php:103
+#: inc/edit-task.php:159 inc/my-latest-tasks.php:48 inc/new-project.php:38
+#: inc/new-task.php:112 inc/projects-list.php:36 inc/user-profile.php:137
+#: inc/user-profile.php:140 search.php:78 single-task.php:1030
+#: taxonomy-project.php:161 taxonomy-project.php:530 taxonomy-project.php:1071
+msgid "Status"
+msgstr "Status"
+
+#: admin-functions/functions-admin.php:2372 inc/edit-project.php:134
+#: inc/edit-task.php:144 inc/new-project.php:54 inc/new-task.php:97
+#: single-task.php:349
+msgid "Start & end dates"
+msgstr "Start & end dates"
+
+#: admin-functions/functions-admin.php:2381 functions.php:2129
+#: gantt/gantt.php:490 inc/projects-list.php:207 taxonomy-project.php:1092
+msgid "Time allocated"
+msgstr "Time allocated"
+
+#: admin-functions/functions-admin.php:2405
+msgid "Inactive"
+msgstr "Inactive"
+
+#: admin-functions/functions-admin.php:2407 functions.php:1660
+#: functions.php:2178 functions.php:3020 functions.php:3594 functions.php:4608
+#: gantt/gantt.php:225 inc/edit-task.php:165 inc/my-follows.php:56
+#: inc/my-latest-tasks.php:93 inc/my-latest-tasks.php:161 inc/new-task.php:117
+#: single-task.php:1138 taxonomy-project.php:389
+msgid "On hold"
+msgstr "On hold"
+
+#: admin-functions/functions-admin.php:2473
+msgid "Project page"
+msgstr "Project page"
+
+#: admin-functions/functions-admin.php:2488
+msgid "Only show this page on this project"
+msgstr "Only show this page on this project"
+
+#: admin-functions/functions-admin.php:2572 inc/create.php:30
+#: inc/edit-project.php:88 inc/edit-project.php:296 inc/edit-task.php:97
+#: inc/email-template.php:35 inc/new-project.php:23 inc/new-project.php:254
+#: inc/new-task.php:64 inc/projects-list.php:32 inc/projects-managed.php:9
+#: single-task.php:333 single-task.php:1021
+msgid "Project"
+msgstr "Project"
+
+#: admin-functions/functions-admin.php:2573 functions.php:4591
+#: single-task.php:295
+msgid "Task owner"
+msgstr "Task owner"
+
+#: admin-functions/functions-admin.php:2589
+msgid "[Not in a Project]"
+msgstr "[Not in a Project]"
+
+#: admin-functions/functions-ajax.php:116
+msgid "Account details saved"
+msgstr "Account details saved"
+
+#: admin-functions/functions-ajax.php:121
+msgid "Nonce check is not allowed to fail."
+msgstr "Nonce check is not allowed to fail."
+
+#: admin-functions/functions-ajax.php:127
+#: admin-functions/functions-ajax.php:1237
+msgid "Something went wrong."
+msgstr "Something went wrong."
+
+#: admin-functions/functions-ajax.php:146
+msgid "Dark mode enabled."
+msgstr "Dark mode enabled."
+
+#: admin-functions/functions-ajax.php:149
+msgid "Light mode enabled."
+msgstr "Light mode enabled."
+
+#: admin-functions/functions-ajax.php:174
+msgid "All files were deleted."
+msgstr "All files were deleted."
+
+#: admin-functions/functions-ajax.php:215
+msgid "A project with that name already exists."
+msgstr "A project with that name already exists."
+
+#: admin-functions/functions-ajax.php:353
+#, php-format
+msgid "Project <a href=\"%1$s\">%2$s</a> was created by %3$s."
+msgstr "Project <a href=\"%1$s\">%2$s</a> was created by %3$s."
+
+#: admin-functions/functions-ajax.php:399
+msgid "New project created."
+msgstr "New project created."
+
+#: admin-functions/functions-ajax.php:475
+msgid "Project modified"
+msgstr "Project modified"
+
+#: admin-functions/functions-ajax.php:477
+#, php-format
+msgid "Project <a href=\"%1$s\">%2$s</a> was modified by %3$s."
+msgstr "Project <a href=\"%1$s\">%2$s</a> was modified by %3$s."
+
+#: admin-functions/functions-ajax.php:491
+msgid "Project edits saved."
+msgstr "Project edits saved."
+
+#: admin-functions/functions-ajax.php:608
+#, php-format
+msgid ""
+"<a href=\"%1$s\">%2$s</a> created a task for you: <a href=\"%3$s\">%4$s</a>."
+msgstr ""
+"<a href=\"%1$s\">%2$s</a> created a task for you: <a href=\"%3$s\">%4$s</a>."
+
+#: admin-functions/functions-ajax.php:611
+msgid "You have a new task"
+msgstr "You have a new task"
+
+#: admin-functions/functions-ajax.php:615
+#: admin-functions/functions-ajax.php:1087
+#: admin-functions/functions-ajax.php:1610
+#: admin-functions/functions-ajax.php:1808
+msgid "View Task"
+msgstr "View Task"
+
+#. translators: Example: Edit task: Some task name
+#: admin-functions/functions-ajax.php:686
+#, php-format
+msgid "Edit Task: %1$s"
+msgstr "Edit Task: %1$s"
+
+#: admin-functions/functions-ajax.php:749
+msgid "Task saved."
+msgstr "Task saved."
+
+#: admin-functions/functions-ajax.php:777
+msgid "File deleted."
+msgstr "File deleted."
+
+#: admin-functions/functions-ajax.php:795
+msgid "Comment deleted."
+msgstr "Comment deleted."
+
+#: admin-functions/functions-ajax.php:797
+msgid "The comment was not deleted."
+msgstr "The comment was not deleted."
+
+#: admin-functions/functions-ajax.php:854
+#: admin-functions/functions-ajax.php:913
+msgid "updated."
+msgstr "updated."
+
+#: admin-functions/functions-ajax.php:866
+#: admin-functions/functions-ajax.php:869
+#, php-format
+msgid "progress changed to %1$s %2$s"
+msgstr "progress changed to %1$s %2$s"
+
+#: admin-functions/functions-ajax.php:872
+msgid "complete!"
+msgstr "complete!"
+
+#: admin-functions/functions-ajax.php:919
+msgid "Something went wrong. Reload the page and try again."
+msgstr "Something went wrong. Reload the page and try again."
+
+#: admin-functions/functions-ajax.php:966
+#, php-format
+msgid "Project extended to %1$s."
+msgstr "Project extended to %1$s."
+
+#: admin-functions/functions-ajax.php:996
+msgid "Subtask list updated."
+msgstr "Subtask list updated."
+
+#: admin-functions/functions-ajax.php:1066
+#: admin-functions/functions-ajax.php:1342
+#: admin-functions/functions-ajax.php:1761
+msgid "Task deleted."
+msgstr "Task deleted."
+
+#: admin-functions/functions-ajax.php:1079
+#: admin-functions/functions-ajax.php:1083
+#: admin-functions/functions-ajax.php:1602
+#: admin-functions/functions-ajax.php:1606
+#: admin-functions/functions-ajax.php:1800
+#: admin-functions/functions-ajax.php:1804
+msgid "Task Complete: "
+msgstr "Task Complete: "
+
+#: admin-functions/functions-ajax.php:1080
+#: admin-functions/functions-ajax.php:1603
+#: admin-functions/functions-ajax.php:1801
+#, php-format
+msgid ""
+"<a href=\"%1$s\">%2$s</a> has completed a task: <a href=\"%3$s\">%4$s</a>."
+msgstr ""
+"<a href=\"%1$s\">%2$s</a> has completed a task: <a href=\"%3$s\">%4$s</a>."
+
+#: admin-functions/functions-ajax.php:1107
+#: admin-functions/functions-ajax.php:1629
+#: admin-functions/functions-ajax.php:1828
+msgid "Task Complete"
+msgstr "Task Complete"
+
+#: admin-functions/functions-ajax.php:1109
+#: admin-functions/functions-ajax.php:1631
+#: admin-functions/functions-ajax.php:1830
+#, php-format
+msgid "Task <a href=\"%1$s\">%2$s</a> was completed by %3$s."
+msgstr "Task <a href=\"%1$s\">%2$s</a> was completed by %3$s."
+
+#: admin-functions/functions-ajax.php:1122
+msgid "Task complete."
+msgstr "Task complete."
+
+#: admin-functions/functions-ajax.php:1126
+#: admin-functions/functions-ajax.php:1128
+msgid "Task status updated."
+msgstr "Task status updated."
+
+#: admin-functions/functions-ajax.php:1165
+msgid "Project deleted."
+msgstr "Project deleted."
+
+#: admin-functions/functions-ajax.php:1225
+msgid "Time updated."
+msgstr "Time updated."
+
+#: admin-functions/functions-ajax.php:1234
+msgid "Time deleted."
+msgstr "Time deleted."
+
+#: admin-functions/functions-ajax.php:1291
+msgid "Time was added."
+msgstr "Time was added."
+
+#: admin-functions/functions-ajax.php:1365
+msgid "Task claimed: "
+msgstr "Task claimed: "
+
+#: admin-functions/functions-ajax.php:1383
+msgid "Make a Decision"
+msgstr "Make a Decision"
+
+#: admin-functions/functions-ajax.php:1401
+#: admin-functions/functions-ajax.php:1403
+msgid "Transfer of ownership request"
+msgstr "Transfer of ownership request"
+
+#: admin-functions/functions-ajax.php:1402
+#, php-format
+msgid "%1$s has requested ownership of your task: <a href=\"%2$s\">%3$s</a>."
+msgstr "%1$s has requested ownership of your task: <a href=\"%2$s\">%3$s</a>."
+
+#: admin-functions/functions-ajax.php:1426
+msgid "Ownership request sent."
+msgstr "Ownership request sent."
+
+#: admin-functions/functions-ajax.php:1452 functions.php:3128
+#: inc/edit-task.php:649
+msgid "Go to task"
+msgstr "Go to task"
+
+#. translators: Example: The request was approved
+#: admin-functions/functions-ajax.php:1471
+msgid "approved"
+msgstr "approved"
+
+#. translators: Example: the request was declined
+#: admin-functions/functions-ajax.php:1483
+msgid "declined"
+msgstr "declined"
+
+#. translators: %1$s will be either 'approved' or 'declined'. Eg: Task takeover approved
+#: admin-functions/functions-ajax.php:1490
+#, php-format
+msgid "Task takeover %1$s"
+msgstr "Task takeover %1$s"
+
+#. translators: %1$s is a user name, %2$s is the status of the task takeover. No need to touch %3$s and %4$s. Eg: Michael has approved your takeover of the task
+#: admin-functions/functions-ajax.php:1491
+#, php-format
+msgid "%1$s has %2$s your takeover of the task: <a href=\"%3$s\">%4$s</a>."
+msgstr "%1$s has %2$s your takeover of the task: <a href=\"%3$s\">%4$s</a>."
+
+#: admin-functions/functions-ajax.php:1492
+#, php-format
+msgid "Task takeover request %1$s"
+msgstr "Task takeover request %1$s"
+
+#: admin-functions/functions-ajax.php:1514
+msgid "Takeover granted."
+msgstr "Takeover granted."
+
+#: admin-functions/functions-ajax.php:1516
+msgid "Takeover declined."
+msgstr "Takeover declined."
+
+#: admin-functions/functions-ajax.php:1542
+msgid "Message read."
+msgstr "Message read."
+
+#: admin-functions/functions-ajax.php:1568
+msgid "All message marked as read."
+msgstr "All message marked as read."
+
+#: admin-functions/functions-ajax.php:1658
+msgid "Task moved"
+msgstr "Task moved"
+
+#: admin-functions/functions-ajax.php:1696
+msgid "Following task."
+msgstr "Following task."
+
+#: admin-functions/functions-ajax.php:1701
+msgid "Not following task."
+msgstr "Not following task."
+
+#: admin-functions/functions-ajax.php:1843
+#: admin-functions/functions-ajax.php:1847
+msgid "Task Complete."
+msgstr "Task Complete."
+
+#: admin-functions/functions-ajax.php:1845
+msgid "Task complete, stopped recording time."
+msgstr "Task complete, stopped recording time."
+
+#: admin-functions/functions-ajax.php:1853
+msgid "Task status changed."
+msgstr "Task status changed."
+
+#: admin-functions/functions-ajax.php:1872
+msgid "You can only record time on one task at a time."
+msgstr "You can only record time on one task at a time."
+
+#: admin-functions/functions-ajax.php:1881
+msgid "Recording time on this task."
+msgstr "Recording time on this task."
+
+#: admin-functions/functions-ajax.php:1954
+msgid "Stopped recording time."
+msgstr "Stopped recording time."
+
+#: admin-functions/functions-ajax.php:1969
+msgid "...loading..."
+msgstr "...loading..."
+
+#: admin-functions/functions-task.php:43
+msgid "Tasks must be created on the front-end."
+msgstr "Tasks must be created on the front-end."
+
+#: admin-functions/functions-task.php:44
+msgid "Create Task"
+msgstr "Create Task"
+
+#: admin-functions/functions-task.php:47
+msgid "Full task editing must be done on the front-end."
+msgstr "Full task editing must be done on the front-end."
+
+#: admin-functions/functions-task.php:48
+msgid "Edit This Task"
+msgstr "Edit This Task"
+
+#: admin-functions/license.php:9
+msgid "wProject License Key"
+msgstr "wProject License Key"
+
+#: admin-functions/license.php:41 admin-functions/license.php:101
+#: admin-functions/license.php:166
+msgid "Unexpected Error! The query returned with an error."
+msgstr "Unexpected Error! The query returned with an error."
+
+#: admin-functions/license.php:67
+msgid "Invalid license key"
+msgstr "Invalid license key"
+
+#: admin-functions/license.php:70
+msgid "License key activated"
+msgstr "License key activated"
+
+#: admin-functions/license.php:121
+msgid "Something went wrong. Please check your key and try again."
+msgstr "Something went wrong. Please check your key and try again."
+
+#: admin-functions/license.php:126
+msgid "The license key has been deactivated for this domain"
+msgstr "The license key has been deactivated for this domain"
+
+#: admin-functions/license.php:130
+msgid "The license key on this domain is already inactive"
+msgstr "The license key on this domain is already inactive"
+
+#: admin-functions/license.php:137
+msgid "License key"
+msgstr "License key"
+
+#: admin-functions/license.php:143
+msgid "Activate"
+msgstr "Activate"
+
+#: admin-functions/license.php:144
+msgid "Deactivate"
+msgstr "Deactivate"
+
+#: admin-functions/license.php:180
+msgid "License status"
+msgstr "License status"
+
+#: admin-functions/license.php:181
+msgid "Active"
+msgstr "Active"
+
+#: admin-functions/license.php:182
+msgid "Licensed to"
+msgstr "Licensed to"
+
+#: admin-functions/license.php:184
+msgid "Licenses used"
+msgstr "Licenses used"
+
+#: admin-functions/license.php:185
+msgid "Max allowed"
+msgstr "Max allowed"
+
+#: admin-functions/license.php:186
+msgid "Support expiry"
+msgstr "Support expiry"
+
+#: admin-functions/license.php:192 inc/account.php:244
+msgid "Update"
+msgstr "Update"
+
+#: admin-functions/license.php:193
+msgid "Check now"
+msgstr "Check now"
+
+#: admin-functions/license.php:194
+msgid "Version"
+msgstr "Version"
+
+#: admin-functions/license.php:205
+#, php-format
+msgid ""
+"Your license has expired. <a href=\"%1$s\" rel=\"noopener\" target=\"_blank"
+"\">Renew now</a> for continued updates and support. Thanks!"
+msgstr ""
+"Your license has expired. <a href=\"%1$s\" rel=\"noopener\" target=\"_blank"
+"\">Renew now</a> for continued updates and support. Thanks!"
+
+#: admin-functions/license.php:216
+msgid "This license key has been blocked."
+msgstr "This license key has been blocked."
+
+#: admin-functions/license.php:217
+#, php-format
+msgid ""
+"If you believe this should not have happened, please <a href=\"%1$s\" target="
+"\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+"If you believe this should not have happened, please <a href=\"%1$s\" target="
+"\"_blank\" rel=\"noopener\">make contact</a>."
+
+#: admin-functions/license.php:225
+msgid "This license key is pending server side acknowlegment."
+msgstr "This license key is pending server side acknowlegment."
+
+#: admin-functions/license.php:226
+#, php-format
+msgid ""
+"If you are still waiting for you license to be acknowleged, please <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+"If you are still waiting for you license to be acknowleged, please <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">make contact</a>."
+
+#: admin-functions/settings-sidebar.php:6
+msgid "Extend wProject with Pro Addons"
+msgstr "Extend wProject with Pro Addons"
+
+#: admin-functions/settings-sidebar.php:11
+msgid "More from Rocket Apps"
+msgstr "More from Rocket Apps"
+
+#: admin-functions/settings-sidebar.php:11
+msgid "Open Graphite Pro"
+msgstr "Open Graphite Pro"
+
+#: admin-functions/settings-sidebar.php:17
+msgid "Absolutely the best plugin of its kind..."
+msgstr "Absolutely the best plugin of its kind..."
+
+#: admin-functions/settings-sidebar.php:19
+msgid "Matthew Woods"
+msgstr "Matthew Woods"
+
+#: admin-functions/settings-sidebar.php:20
+msgid "Tour Administrator & Web Developer"
+msgstr "Tour Administrator & Web Developer"
+
+#: admin-functions/settings-sidebar.php:21
+msgid "Perth Observatory"
+msgstr "Perth Observatory"
+
+#: admin-functions/settings-sidebar.php:23
+msgid ""
+"Take control how your WordPress content is viewed when shared on social "
+"media."
+msgstr ""
+"Take control how your WordPress content is viewed when shared on social "
+"media."
+
+#: admin-functions/settings-sidebar.php:25
+msgid "Buy Open Graphite Pro"
+msgstr "Buy Open Graphite Pro"
+
+#: admin-functions/settings-system.php:63
+msgid "Installed"
+msgstr "Installed"
+
+#: admin-functions/settings-system.php:71
+msgid "Theme version"
+msgstr "Theme version"
+
+#: admin-functions/settings-system.php:73
+msgid "PHP version"
+msgstr "PHP version"
+
+#: admin-functions/settings-system.php:73
+msgid "Your PHP version is not supported."
+msgstr "Your PHP version is not supported."
+
+#: admin-functions/settings-system.php:75
+msgid "PHP memory"
+msgstr "PHP memory"
+
+#: admin-functions/settings-system.php:76
+msgid "WP memory limit"
+msgstr "WP memory limit"
+
+#: admin-functions/settings-system.php:77
+msgid "WP memory used"
+msgstr "WP memory used"
+
+#: admin-functions/settings-system.php:78
+msgid "Upload max filesize"
+msgstr "Upload max filesize"
+
+#: admin-functions/settings-system.php:79
+msgid "Post max size"
+msgstr "Post max size"
+
+#: admin-functions/settings-system.php:80
+msgid "ZipArchive class"
+msgstr "ZipArchive class"
+
+#: admin-functions/subtasks.php:2 inc/edit-task.php:389 inc/edit-task.php:635
+#: inc/new-task.php:220 inc/new-task.php:405 single-task.php:272
+#: single-task.php:1039
+msgid "Subtasks"
+msgstr "Subtasks"
+
+#: admin-functions/subtasks.php:3 inc/edit-task.php:390 inc/new-task.php:221
+msgid "Add subtask"
+msgstr "Add subtask"
+
+#: admin-functions/subtasks.php:16 admin-functions/subtasks.php:38
+#: inc/edit-task.php:400 inc/edit-task.php:533 inc/new-task.php:330
+msgid "Subtask"
+msgstr "Subtask"
+
+#: admin-functions/task-groups.php:13
+msgid "Group Item"
+msgstr "Group Item"
+
+#: admin-functions/task-groups.php:14
+msgid "Task Groups"
+msgstr "Task Groups"
+
+#: admin-functions/task-groups.php:15
+msgid "Add Group Item"
+msgstr "Add Group Item"
+
+#: admin-functions/task-groups.php:16
+msgid "Add Group or Group Item"
+msgstr "Add Group or Group Item"
+
+#: admin-functions/task-groups.php:17
+msgid "Edit Group Item"
+msgstr "Edit Group Item"
+
+#: admin-functions/task-groups.php:18
+msgid "New Group Item"
+msgstr "New Group Item"
+
+#: admin-functions/task-groups.php:19
+msgid "Search Task Group Items"
+msgstr "Search Task Group Items"
+
+#: admin-functions/task-groups.php:20
+msgid "No Task Group Items found"
+msgstr "No Task Group Items found"
+
+#: admin-functions/task-groups.php:21
+msgid "No Task Group Items found in Trash."
+msgstr "No Task Group Items found in Trash."
+
+#: admin-functions/task-groups.php:22
+msgid "All Task Group Items"
+msgstr "All Task Group Items"
+
+#: admin-functions/task-groups.php:109 functions.php:2185 gantt/gantt.php:244
+#: inc/edit-task.php:127 inc/new-task.php:80 single-task.php:345
+#: single-task.php:1027
+msgid "Priority"
+msgstr "Priority"
+
+#. translators: One of 4 possible task priorities
+#: admin-functions/task-groups.php:112 functions.php:1681 functions.php:2186
+#: functions.php:3277 functions.php:3469 functions.php:3662 functions.php:3854
+#: inc/edit-task.php:130 inc/new-task.php:83
+msgid "Low"
+msgstr "Low"
+
+#. translators: One of 4 possible task priorities
+#: admin-functions/task-groups.php:117 functions.php:1683 functions.php:2187
+#: functions.php:3279 functions.php:3471 functions.php:3664 functions.php:3856
+#: inc/edit-task.php:133 inc/new-task.php:86
+msgid "Normal"
+msgstr "Normal"
+
+#. translators: One of 4 possible task priorities
+#: admin-functions/task-groups.php:122 functions.php:1685 functions.php:2188
+#: functions.php:3281 functions.php:3473 functions.php:3666 functions.php:3858
+#: inc/edit-task.php:136 inc/new-task.php:89
+msgid "High"
+msgstr "High"
+
+#. translators: One of 4 possible task priorities
+#: admin-functions/task-groups.php:127 functions.php:1687 functions.php:2189
+#: functions.php:3283 functions.php:3475 functions.php:3668 functions.php:3860
+#: inc/edit-task.php:139 inc/new-task.php:92
+msgid "Urgent"
+msgstr "Urgent"
+
+#: admin-functions/task-groups.php:133 single-task.php:360 single-task.php:1033
+#: taxonomy-project.php:463 taxonomy-project.php:823
+msgid "Milestone"
+msgstr "Milestone"
+
+#: admin-functions/task-groups.php:142 single-task.php:1036
+msgid "Privacy"
+msgstr "Privacy"
+
+#: admin-functions/task-groups.php:145
+msgid "Obfuscate this task"
+msgstr "Obfuscate this task"
+
+#: admin-functions/task-groups.php:152
+msgid "Add to task group"
+msgstr "Add to task group"
+
+#: admin-functions/task-groups.php:171
+msgid "More details"
+msgstr "More details"
+
+#: admin-functions/task-groups.php:180 inc/edit-task.php:421
+#: inc/new-task.php:230
+msgid "Context Label"
+msgstr "Context Label"
+
+#: functions.php:229
+msgid "One last thing. Before you continue, please set your user preferences."
+msgstr "One last thing. Before you continue, please set your user preferences."
+
+#: functions.php:230
+msgid "Do it now"
+msgstr "Do it now"
+
+#: functions.php:243
+msgid ""
+"If you haven't already done so, go to the settings interface and set things "
+"up the way you want."
+msgstr ""
+"If you haven't already done so, go to the settings interface and set things "
+"up the way you want."
+
+#: functions.php:244
+msgid "Go to Settings"
+msgstr "Go to Settings"
+
+#: functions.php:245
+msgid "I've already done that."
+msgstr "I've already done that."
+
+#: functions.php:250
+msgid "Back up everything"
+msgstr "Back up everything"
+
+#: functions.php:251
+#, php-format
+msgid ""
+"It is recommended you install a <a href=\"%1$s\" target=\"_blank\" rel="
+"\"noopener\">backup plugin</a> for scheduling regular file and database "
+"backups."
+msgstr ""
+"It is recommended you install a <a href=\"%1$s\" target=\"_blank\" rel="
+"\"noopener\">backup plugin</a> for scheduling regular file and database "
+"backups."
+
+#: functions.php:252
+msgid "Find a backup plugin"
+msgstr "Find a backup plugin"
+
+#: functions.php:253
+msgid "Good idea, now what?"
+msgstr "Good idea, now what?"
+
+#: functions.php:258
+msgid "Protect your data"
+msgstr "Protect your data"
+
+#: functions.php:259
+#, php-format
+msgid ""
+"The data you store in wProject might be considered sensitive. Install a good "
+"<a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">security plugin</a> for "
+"some extra peace of mind."
+msgstr ""
+"The data you store in wProject might be considered sensitive. Install a good "
+"<a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">security plugin</a> for "
+"some extra peace of mind."
+
+#: functions.php:260
+msgid "Find a security plugin"
+msgstr "Find a security plugin"
+
+#: functions.php:261
+msgid "Good thinking, what's next?"
+msgstr "Good thinking, what's next?"
+
+#: functions.php:266
+msgid "Ready?"
+msgstr "Ready?"
+
+#: functions.php:270
+msgid "Let's go!"
+msgstr "Let's go!"
+
+#: functions.php:324 functions.php:341
+msgid "Unfollow"
+msgstr "Unfollow"
+
+#: functions.php:326 functions.php:353
+msgid "Follow"
+msgstr "Follow"
+
+#: functions.php:381
+msgid "Copied!"
+msgstr "Copied!"
+
+#: functions.php:386 functions.php:2590
+msgid "Copy link"
+msgstr "Copy link"
+
+#: functions.php:638 functions.php:1999
+msgid "There are no more tasks to do in this project."
+msgstr "There are no more tasks to do in this project."
+
+#: functions.php:708 inc/edit-task.php:658 single-task.php:1180
+msgid "Delete this task and any time recorded on it?"
+msgstr "Delete this task and any time recorded on it?"
+
+#: functions.php:840 functions.php:4243
+msgid "Select a project"
+msgstr "Select a project"
+
+#: functions.php:1010 functions.php:1036 functions.php:3070 functions.php:3377
+#: functions.php:3569 functions.php:3762 functions.php:3950 single-task.php:318
+#: taxonomy-project.php:1360
+msgid "Nobody"
+msgstr "Nobody"
+
+#: functions.php:1087
+msgid "Mark read"
+msgstr "Mark read"
+
+#: functions.php:1581 inc/account.php:104 inc/user-profile.php:113
+#: inc/user-profile.php:117
+msgid "Phone"
+msgstr "Phone"
+
+#: functions.php:1582 inc/account.php:108 inc/user-profile.php:129
+msgid "Skype"
+msgstr "Skype"
+
+#: functions.php:1583 inc/account.php:92 inc/user-profile.php:120
+msgid "Flock"
+msgstr "Flock"
+
+#: functions.php:1584 inc/account.php:112 inc/user-profile.php:132
+msgid "Slack"
+msgstr "Slack"
+
+#: functions.php:1585 inc/account.php:96 inc/user-profile.php:123
+msgid "Google Meet"
+msgstr "Google Meet"
+
+#: functions.php:1586 inc/account.php:100
+msgid "Microsoft Teams"
+msgstr "Microsoft Teams"
+
+#: functions.php:1587 inc/account.php:207
+msgid "Show tips"
+msgstr "Show tips"
+
+#: functions.php:1588 inc/account.php:38
+msgid "Title"
+msgstr "Title"
+
+#: functions.php:1590 inc/account.php:46
+msgid "Photo"
+msgstr "Photo"
+
+#: functions.php:1591 inc/account.php:123
+msgid "Default task order"
+msgstr "Default task order"
+
+#: functions.php:1592
+msgid "Default task ownership"
+msgstr "Default task ownership"
+
+#: functions.php:1593
+msgid "Recent tasks are"
+msgstr "Recent tasks are"
+
+#: functions.php:1594
+msgid "Latest activity"
+msgstr "Latest activity"
+
+#: functions.php:1595
+msgid "Hide Gantt by default"
+msgstr "Hide Gantt by default"
+
+#: functions.php:1596
+msgid "Minimise completed tasks in project view"
+msgstr "Minimize completed tasks in project view"
+
+#: functions.php:1597
+msgid "Only show my projects on the Project page"
+msgstr "Only show my projects on the Project page"
+
+#: functions.php:1598 inc/account.php:232
+msgid "Dark mode"
+msgstr "Dark mode"
+
+#: functions.php:1599
+msgid "Dashboard bar chart"
+msgstr "Dashboard bar chart"
+
+#: functions.php:1600
+msgid "Current task timer ID"
+msgstr "Current task timer ID"
+
+#: functions.php:1601
+msgid "Favourite tasks"
+msgstr "Favorite tasks"
+
+#: functions.php:1602
+msgid "Notifications count"
+msgstr "Notifications count"
+
+#: functions.php:1658 functions.php:2174 functions.php:3018 functions.php:4606
+#: gantt/gantt.php:223 inc/edit-task.php:162 inc/home.php:175
+#: inc/my-follows.php:54 inc/my-latest-tasks.php:91 inc/my-latest-tasks.php:158
+#: single-task.php:1129 taxonomy-project.php:386 taxonomy-project.php:1245
+msgid "Incomplete"
+msgstr "Incomplete"
+
+#: functions.php:1664 functions.php:2177 functions.php:3024 functions.php:3026
+#: functions.php:4612 gantt/gantt.php:229 inc/edit-task.php:164
+#: inc/home.php:174 inc/my-follows.php:60 inc/my-latest-tasks.php:97
+#: inc/my-latest-tasks.php:160 inc/new-task.php:116 single-task.php:1135
+#: taxonomy-project.php:388
+msgid "Not started"
+msgstr "Not started"
+
+#: functions.php:1728
+msgid "tasks have been completed in this project."
+msgstr "tasks have been completed in this project."
+
+#: functions.php:1730
+msgid "task has been completed in this project."
+msgstr "task has been completed in this project."
+
+#: functions.php:1810 inc/user-profile.php:57
+msgid "Client"
+msgstr "Client"
+
+#: functions.php:1851
+msgid "Total tasks"
+msgstr "Total tasks"
+
+#: functions.php:1855
+msgid "Complete tasks"
+msgstr "Complete tasks"
+
+#: functions.php:1859
+msgid "Tasks remaining"
+msgstr "Tasks remaining"
+
+#: functions.php:1863
+msgid "Project team"
+msgstr "Project team"
+
+#: functions.php:1995
+msgid "This project is complete."
+msgstr "This project is complete."
+
+#: functions.php:2106 inc/projects-list.php:211 taxonomy-project.php:1020
+msgid "Created"
+msgstr "Created"
+
+#: functions.php:2137 gantt/gantt.php:490 inc/projects-list.php:35
+#: inc/projects-managed.php:13 taxonomy-project.php:1144
+msgid "Budget"
+msgstr "Budget"
+
+#: functions.php:2169 taxonomy-project.php:167 taxonomy-project.php:537
+msgid "Filter"
+msgstr "Filter"
+
+#: functions.php:2170
+msgid "All"
+msgstr "All"
+
+#: functions.php:2171 functions.php:3254 functions.php:3451 functions.php:3644
+#: functions.php:3832 taxonomy-project.php:239 taxonomy-project.php:611
+msgid "Blocked"
+msgstr "Blocked"
+
+#: functions.php:2173 functions.php:3252 functions.php:3449 functions.php:3642
+#: functions.php:3830 taxonomy-project.php:235 taxonomy-project.php:607
+msgid "Has issues"
+msgstr "Has issues"
+
+#: functions.php:2176 taxonomy-project.php:1033
+msgid "Milestones"
+msgstr "Milestones"
+
+#: functions.php:2179
+msgid "Orphans"
+msgstr "Orphans"
+
+#: functions.php:2180 inc/projects-list.php:326
+msgid "Overdue"
+msgstr "Overdue"
+
+#: functions.php:2181
+msgid "Pinned"
+msgstr "Pinned"
+
+#: functions.php:2182
+msgid "Similar tasks"
+msgstr "Similar tasks"
+
+#: functions.php:2206
+msgid "Appears on the dashboard below existing elements."
+msgstr "Appears on the dashboard below existing elements."
+
+#: functions.php:2219
+msgid "Appears in the right pane on all pages."
+msgstr "Appears in the right pane on all pages."
+
+#: functions.php:2232
+msgid "Appears on the team page."
+msgstr "Appears on the team page."
+
+#: functions.php:2245
+msgid "Appears on the account page."
+msgstr "Appears on the account page."
+
+#: functions.php:2258
+msgid "Appears on projects pages."
+msgstr "Appears on projects pages."
+
+#: functions.php:2271
+msgid "Appears on task pages."
+msgstr "Appears on task pages."
+
+#: functions.php:2284
+msgid "Appears on custom page content."
+msgstr "Appears on custom page content."
+
+#: functions.php:2362
+msgid "Comment awaiting approval"
+msgstr "Comment awaiting approval"
+
+#: functions.php:2366
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s at %2$s"
+
+#: functions.php:2375
+msgid "Reply"
+msgstr "Reply"
+
+#: functions.php:2377 inc/home.php:177 inc/my-latest-tasks.php:157
+#: single-task.php:1141 taxonomy-project.php:385 taxonomy-project.php:1247
+#: taxonomy-project.php:1290
+msgid "Delete"
+msgstr "Delete"
+
+#: functions.php:2644
+#, php-format
+msgid "Add to %1$s calendar"
+msgstr "Add to %1$s calendar"
+
+#: functions.php:2671
+msgid "project"
+msgstr "project"
+
+#: functions.php:2693
+#, php-format
+msgid "Due: %1$s"
+msgstr "Due: %1$s"
+
+#: functions.php:2742
+msgid "Extend deadline?"
+msgstr "Extend deadline?"
+
+#: functions.php:2849
+msgid "Start Working"
+msgstr "Start Working"
+
+#: functions.php:2862
+msgid "Stop Working"
+msgstr "Stop Working"
+
+#: functions.php:2876
+msgid "Add missed time"
+msgstr "Add missed time"
+
+#: functions.php:2993
+msgid "Latest Activity"
+msgstr "Latest Activity"
+
+#: functions.php:3106
+msgid "You are recording time on this task."
+msgstr "You are recording time on this task."
+
+#: functions.php:3106 functions.php:3119 functions.php:3133
+msgid "Work in progress"
+msgstr "Work in progress"
+
+#: functions.php:3135
+msgid "You are currently not recording time."
+msgstr "You are currently not recording time."
+
+#: functions.php:3209
+msgid "To do"
+msgstr "To do"
+
+#: functions.php:3256 functions.php:3453 functions.php:3646 functions.php:3834
+msgid "Similarity"
+msgstr "Similarity"
+
+#: functions.php:3258 functions.php:3455 functions.php:3648 functions.php:3836
+msgid "Related"
+msgstr "Related"
+
+#: functions.php:3358 functions.php:3550 functions.php:3743 functions.php:3931
+msgid "100%"
+msgstr "100%"
+
+#: functions.php:3997 inc/home.php:168
+msgid "All tasks"
+msgstr "All tasks"
+
+#: functions.php:3998
+msgid "Due tasks"
+msgstr "Due tasks"
+
+#: functions.php:3999
+msgid "Tasks with comments"
+msgstr "Tasks with comments"
+
+#: functions.php:4001
+msgid "Tasks with descriptions"
+msgstr "Tasks with descriptions"
+
+#: functions.php:4003
+msgid "Low priority"
+msgstr "Low priority"
+
+#: functions.php:4004
+msgid "Normal priority"
+msgstr "Normal priority"
+
+#: functions.php:4005
+msgid "High priority"
+msgstr "High priority"
+
+#: functions.php:4006
+msgid "Urgent priority"
+msgstr "Urgent priority"
+
+#: functions.php:4392 inc/edit-task.php:105
+msgid "Nobody (unowned)"
+msgstr "Nobody (unowned)"
+
+#: functions.php:4536 inc/account.php:154 inc/team.php:44
+#: inc/user-profile.php:22
+msgid "Available"
+msgstr "Available"
+
+#: functions.php:4538 inc/account.php:155 inc/team.php:46
+#: inc/user-profile.php:24
+msgid "Away"
+msgstr "Away"
+
+#: functions.php:4540 inc/account.php:156 inc/team.php:48
+#: inc/user-profile.php:26
+msgid "Bored"
+msgstr "Bored"
+
+#: functions.php:4542 inc/account.php:157 inc/team.php:50
+#: inc/user-profile.php:28
+msgid "Busy"
+msgstr "Busy"
+
+#: functions.php:4544 inc/account.php:158 inc/team.php:52
+#: inc/user-profile.php:30
+msgid "Commuting"
+msgstr "Commuting"
+
+#: functions.php:4546 inc/account.php:159 inc/team.php:54
+#: inc/user-profile.php:32
+msgid "Do not disturb"
+msgstr "Do not disturb"
+
+#: functions.php:4548 inc/account.php:160 inc/team.php:56
+#: inc/user-profile.php:34
+msgid "In a meeting"
+msgstr "In a meeting"
+
+#: functions.php:4550 inc/account.php:161 inc/team.php:60
+#: inc/user-profile.php:38
+msgid "On vacation"
+msgstr "On vacation"
+
+#: functions.php:4552 inc/account.php:162 inc/team.php:62
+#: inc/user-profile.php:40
+msgid "Out to lunch"
+msgstr "Out to lunch"
+
+#: functions.php:4554 inc/account.php:163 inc/team.php:64
+#: inc/user-profile.php:42
+msgid "Ready to assist"
+msgstr "Ready to assist"
+
+#: functions.php:4556 inc/account.php:164 inc/team.php:66
+#: inc/user-profile.php:44
+msgid "Working remotely"
+msgstr "Working remotely"
+
+#: functions.php:4744
+msgid "Go to Comment"
+msgstr "Go to Comment"
+
+#: functions.php:4753
+msgid "A reply to your comment"
+msgstr "A reply to your comment"
+
+#: functions.php:4757 functions.php:4771
+msgid "Comment Response"
+msgstr "Comment Response"
+
+#: functions.php:4761
+msgid "has responded to your comment on this task:"
+msgstr "has responded to your comment on this task:"
+
+#: functions.php:4772
+#, php-format
+msgid "%1$s has responded to your comment: <a href=\"%2$s\">%3$s</a>."
+msgstr "%1$s has responded to your comment: <a href=\"%2$s\">%3$s</a>."
+
+#: gantt/gantt.php:244
+msgid "Owner"
+msgstr "Owner"
+
+#: gantt/gantt.php:276 gantt/gantt.php:507
+msgid "Reloading chart..."
+msgstr "Reloading chart..."
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "January"
+msgstr "January"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "February"
+msgstr "February"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "March"
+msgstr "March"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "April"
+msgstr "April"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "May"
+msgstr "May"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "June"
+msgstr "June"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "July"
+msgstr "July"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "August"
+msgstr "August"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "September"
+msgstr "September"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "October"
+msgstr "October"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "November"
+msgstr "November"
+
+#. translators: Month name
+#: gantt/gantt.php:285 gantt/gantt.php:511
+msgid "December"
+msgstr "December"
+
+#. translators: Abbreviated of the week
+#: gantt/gantt.php:286
+msgid "Sun"
+msgstr "Sun"
+
+#. translators: Abbreviated of the week
+#: gantt/gantt.php:286
+msgid "Mon"
+msgstr "Mon"
+
+#. translators: Abbreviated of the week
+#: gantt/gantt.php:286
+msgid "Tue"
+msgstr "Tue"
+
+#. translators: Abbreviated of the week
+#: gantt/gantt.php:286
+msgid "Wed"
+msgstr "Wed"
+
+#. translators: Abbreviated of the week
+#: gantt/gantt.php:286
+msgid "Thu"
+msgstr "Thu"
+
+#. translators: Abbreviated of the week
+#: gantt/gantt.php:286
+msgid "Fri"
+msgstr "Fri"
+
+#. translators: Abbreviated of the week
+#: gantt/gantt.php:286
+msgid "Sat"
+msgstr "Sat"
+
+#: gantt/gantt.php:490 inc/projects-list.php:254 taxonomy-project.php:1137
+msgid "Hourly rate"
+msgstr "Hourly rate"
+
+#: inc/account.php:27
+msgid "About You"
+msgstr "About You"
+
+#: inc/account.php:30
+msgid "First name"
+msgstr "First name"
+
+#: inc/account.php:34
+msgid "Last name"
+msgstr "Last name"
+
+#: inc/account.php:42 inc/user-profile.php:106
+msgid "Bio"
+msgstr "Bio"
+
+#: inc/account.php:50
+msgid "Upload image"
+msgstr "Upload image"
+
+#: inc/account.php:58
+msgid "Remove photo"
+msgstr "Remove photo"
+
+#: inc/account.php:85
+msgid "Contact Methods"
+msgstr "Contact Methods"
+
+#: inc/account.php:88 inc/user-profile.php:115
+msgid "Email"
+msgstr "Email"
+
+#: inc/account.php:119 inc/account.php:264
+msgid "Preferences"
+msgstr "Preferences"
+
+#: inc/account.php:126
+msgid "Alphabetical"
+msgstr "Alphabetical"
+
+#: inc/account.php:127
+msgid "Date added"
+msgstr "Date added"
+
+#: inc/account.php:128 taxonomy-project.php:1084
+msgid "Due date"
+msgstr "Due date"
+
+#: inc/account.php:129
+msgid "Last modified"
+msgstr "Last modified"
+
+#: inc/account.php:130
+msgid "Most comments"
+msgstr "Most comments"
+
+#: inc/account.php:131
+msgid "Random"
+msgstr "Random"
+
+#: inc/account.php:132
+msgid "Task ID"
+msgstr "Task ID"
+
+#: inc/account.php:137
+msgid "Recent tasks are considered"
+msgstr "Recent tasks are considered"
+
+#: inc/account.php:140
+msgid "1 day or newer"
+msgstr "1 day or newer"
+
+#: inc/account.php:141
+msgid "2 days or newer"
+msgstr "2 days or newer"
+
+#: inc/account.php:142
+msgid "3 days or newer"
+msgstr "3 days or newer"
+
+#: inc/account.php:143
+msgid "4 days or newer"
+msgstr "4 days or newer"
+
+#: inc/account.php:144
+msgid "5 days or newer"
+msgstr "5 days or newer"
+
+#: inc/account.php:145
+msgid "10 days or newer"
+msgstr "10 days or newer"
+
+#: inc/account.php:146
+msgid "20 days or newer"
+msgstr "20 days or newer"
+
+#: inc/account.php:147
+msgid "30 days or newer"
+msgstr "30 days or newer"
+
+#: inc/account.php:151
+msgid "Your status"
+msgstr "Your status"
+
+#: inc/account.php:168
+msgid "Max number of latest activity items"
+msgstr "Max number of latest activity items"
+
+#: inc/account.php:172
+msgid "Max number of notifications"
+msgstr "Max number of notifications"
+
+#: inc/account.php:180
+msgid "Projects chart on the dashboard"
+msgstr "Projects chart on the dashboard"
+
+#: inc/account.php:189
+msgid "Default task ownership to me"
+msgstr "Default task ownership to me"
+
+#: inc/account.php:195
+msgid "Always hide the Gantt chart"
+msgstr "Always hide the Gantt chart"
+
+#: inc/account.php:201
+msgid "Auto minimise completed tasks"
+msgstr "Auto minimize completed tasks"
+
+#: inc/account.php:224
+msgid "Only show my projects on the Projects page"
+msgstr "Only show my projects on the Projects page"
+
+#: inc/account.php:258
+msgid "About you"
+msgstr "About you"
+
+#: inc/account.php:259
+msgid "Your primary details. First name, last name and title are mandatory."
+msgstr "Your primary details. First name, last name and title are mandatory."
+
+#: inc/account.php:261
+msgid "Contact methods"
+msgstr "Contact methods"
+
+#: inc/account.php:262
+msgid "Your preferred contact methods. Email address is mandatory."
+msgstr "Your preferred contact methods. Email address is mandatory."
+
+#: inc/account.php:265
+msgid "Various ways you can experience and interact with wProject."
+msgstr "Various ways you can experience and interact with wProject."
+
+#: inc/account.php:271 inc/team.php:99
+msgid "View profile"
+msgstr "View profile"
+
+#: inc/avatar.php:66
+msgid "You only have 1 task to do."
+msgstr "You only have 1 task to do."
+
+#. translators: Example: You have 2/9 (22.2%) tasks to do.
+#: inc/avatar.php:68
+#, php-format
+msgid "%1$s/%2$s (%3$s&#37) tasks to do"
+msgstr "%1$s/%2$s (%3$s&#37) tasks to do"
+
+#: inc/avatar.php:70 inc/status.php:62
+msgid "No tasks for you yet."
+msgstr "No tasks for you yet."
+
+#: inc/comments.php:47
+msgid "Really delete this comment?"
+msgstr "Really delete this comment?"
+
+#: inc/comments.php:76
+msgid "Comments are closed"
+msgstr "Comments are closed"
+
+#: inc/comments.php:108
+msgid "Post Reply"
+msgstr "Post Reply"
+
+#: inc/comments.php:115
+msgid "Allowed Tags"
+msgstr "Allowed Tags"
+
+#: inc/create.php:24
+msgid "Create"
+msgstr "Create"
+
+#: inc/edit-project.php:91 inc/new-project.php:26
+msgid "Project name"
+msgstr "Project name"
+
+#: inc/edit-project.php:95 inc/new-project.php:30
+msgid "Brief description"
+msgstr "Brief description"
+
+#: inc/edit-project.php:115
+msgid "Delete this project and associated tasks?"
+msgstr "Delete this project and associated tasks?"
+
+#: inc/edit-project.php:131 inc/edit-project.php:299 inc/edit-task.php:124
+#: inc/edit-task.php:626 inc/new-project.php:51 inc/new-project.php:257
+#: inc/new-task.php:77 inc/new-task.php:399
+msgid "Specifics"
+msgstr "Specifics"
+
+#: inc/edit-project.php:134 inc/edit-task.php:144 inc/new-project.php:54
+#: inc/new-task.php:97
+msgid "Clear dates"
+msgstr "Clear dates"
+
+#: inc/edit-project.php:141 inc/new-project.php:61
+msgid "Time & Rate"
+msgstr "Time & Rate"
+
+#: inc/edit-project.php:168 inc/edit-project.php:302 inc/new-project.php:89
+#: inc/new-project.php:260 inc/projects-list.php:201 taxonomy-project.php:1158
+msgid "Materials"
+msgstr "Materials"
+
+#: inc/edit-project.php:169 inc/new-project.php:90
+msgid "Add material item"
+msgstr "Add material item"
+
+#: inc/edit-project.php:181 inc/edit-project.php:221 inc/new-project.php:196
+msgid "Item"
+msgstr "Item"
+
+#: inc/edit-project.php:195 inc/new-project.php:95
+msgid "Cost"
+msgstr "Cost"
+
+#: inc/edit-project.php:206 inc/edit-task.php:471
+msgid "Save Changes"
+msgstr "Save Changes"
+
+#: inc/edit-project.php:275
+#, php-format
+msgid "Oops! This project is managed by <a href=\"%1$s\">%2$s</a>."
+msgstr "Oops! This project is managed by <a href=\"%1$s\">%2$s</a>."
+
+#: inc/edit-project.php:281 inc/new-project.php:249
+msgid ""
+"The ability to manage projects is limited to project managers and "
+"administrators."
+msgstr ""
+"The ability to manage projects is limited to project managers and "
+"administrators."
+
+#: inc/edit-project.php:288
+msgid "This project does not exist."
+msgstr "This project does not exist."
+
+#: inc/edit-project.php:297 inc/new-project.php:255
+msgid ""
+"The minimum details required to create a project. The project name and "
+"status are both mandatory."
+msgstr ""
+"The minimum details required to create a project. The project name and "
+"status are both mandatory."
+
+#: inc/edit-project.php:300 inc/new-project.php:258
+msgid "More details about the project."
+msgstr "More details about the project."
+
+#: inc/edit-project.php:303 inc/new-project.php:261
+msgid ""
+"Include the cost(s) of any materials that belong to this project. For "
+"example: Stock photography."
+msgstr ""
+"Include the cost(s) of any materials that belong to this project. For "
+"example: Stock photography."
+
+#: inc/edit-project.php:312 inc/edit-task.php:650 single-task.php:1352
+msgid "Go to project"
+msgstr "Go to project"
+
+#: inc/edit-project.php:314
+msgid "See all projects"
+msgstr "See all projects"
+
+#: inc/edit-task.php:89 inc/new-task.php:56
+msgid "Task name"
+msgstr "Task name"
+
+#: inc/edit-task.php:93 inc/new-task.php:60 single-task.php:267
+msgid "Description"
+msgstr "Description"
+
+#: inc/edit-task.php:103 inc/new-task.php:68 single-task.php:1024
+msgid "Assigned to"
+msgstr "Assigned to"
+
+#: inc/edit-task.php:154 inc/new-task.php:107 single-task.php:364
+msgid "% Complete"
+msgstr "% Complete"
+
+#: inc/edit-task.php:172 inc/new-task.php:132
+msgid "This task is a milestone"
+msgstr "This task is a milestone"
+
+#: inc/edit-task.php:178 inc/new-task.php:137
+msgid "Hide the task details from other users"
+msgstr "Hide the task details from other users"
+
+#: inc/edit-task.php:188 inc/edit-task.php:629 inc/new-task.php:148
+#: inc/new-task.php:402
+msgid "Relationship"
+msgstr "Relationship"
+
+#: inc/edit-task.php:191 inc/new-task.php:151
+msgid "This task"
+msgstr "This task"
+
+#: inc/edit-task.php:194 inc/edit-task.php:504 inc/new-task.php:154
+#: inc/new-task.php:301
+msgid "Has issues with"
+msgstr "Has issues with"
+
+#: inc/edit-task.php:195 inc/edit-task.php:500 inc/new-task.php:155
+#: inc/new-task.php:297
+msgid "Is blocked by"
+msgstr "Is blocked by"
+
+#: inc/edit-task.php:196 inc/edit-task.php:502 inc/new-task.php:156
+#: inc/new-task.php:299
+msgid "Is similar to"
+msgstr "Is similar to"
+
+#: inc/edit-task.php:197 inc/edit-task.php:506 inc/new-task.php:157
+#: inc/new-task.php:303
+msgid "Relates to"
+msgstr "Relates to"
+
+#: inc/edit-task.php:302 inc/new-task.php:210
+msgid "Explanation"
+msgstr "Explanation"
+
+#: inc/edit-task.php:312 inc/edit-task.php:632 single-task.php:273
+#: single-task.php:1042
+msgid "Files"
+msgstr "Files"
+
+#: inc/edit-task.php:315
+msgid "Attach more files"
+msgstr "Attach more files"
+
+#: inc/edit-task.php:426 inc/new-task.php:236
+msgid "Add context"
+msgstr "Add context"
+
+#: inc/edit-task.php:588 inc/edit-task.php:606
+msgid "You can't edit this task."
+msgstr "You can't edit this task."
+
+#: inc/edit-task.php:611
+#, php-format
+msgid "Oops! This task can only be edited by <a href=\"%1$s\">%2$s</a>."
+msgstr "Oops! This task can only be edited by <a href=\"%1$s\">%2$s</a>."
+
+#: inc/edit-task.php:624 inc/new-task.php:397
+msgid ""
+"The bare minimum details of the task. A task name and project must be "
+"specified."
+msgstr ""
+"The bare minimum details of the task. A task name and project must be "
+"specified."
+
+#: inc/edit-task.php:627 inc/new-task.php:400
+msgid ""
+"Further information about this task. You can also hide this task from other "
+"users."
+msgstr ""
+"Further information about this task. You can also hide this task from other "
+"users."
+
+#: inc/edit-task.php:630 inc/new-task.php:403
+msgid "Is this task related to another? If so, specify the relationship here."
+msgstr "Is this task related to another? If so, specify the relationship here."
+
+#: inc/edit-task.php:633
+msgid "Attach files to the task."
+msgstr "Attach files to the task."
+
+#: inc/edit-task.php:636 inc/new-task.php:406
+msgid "Allow the task to be comprised of smaller, granular tasks."
+msgstr "Allow the task to be comprized of smaller, granular tasks."
+
+#: inc/edit-task.php:638 inc/new-task.php:408
+msgid "Context label"
+msgstr "Context label"
+
+#: inc/edit-task.php:639 inc/new-task.php:409
+msgid "Give this task some context."
+msgstr "Give this task some context."
+
+#: inc/edit-task.php:654
+msgid "Delete this task"
+msgstr "Delete this task"
+
+#: inc/email-template.php:38
+msgid "Message sent from "
+msgstr "Message sent from "
+
+#: inc/header-icons.php:24 inc/my-follows.php:14
+msgid "Followed tasks"
+msgstr "Followed tasks"
+
+#: inc/header-icons.php:46
+msgid "Recent comments"
+msgstr "Recent comments"
+
+#: inc/header-icons.php:52
+msgid "Print"
+msgstr "Print"
+
+#: inc/header-icons.php:55 inc/help.php:4
+msgid "Help"
+msgstr "Help"
+
+#: inc/header-icons.php:75
+msgid "Log out"
+msgstr "Log out"
+
+#: inc/header-icons.php:75 inc/nav.php:89
+msgid "Really log out?"
+msgstr "Really log out?"
+
+#: inc/header-icons.php:78
+msgid "Toggle sidebar"
+msgstr "Toggle sidebar"
+
+#: inc/header-icons.php:82
+msgid "Settings"
+msgstr "Settings"
+
+#: inc/header-icons.php:226 inc/header-icons.php:260
+msgid "Switch to dark mode"
+msgstr "Switch to dark mode"
+
+#: inc/header-icons.php:240 inc/header-icons.php:252
+msgid "Switch to light mode"
+msgstr "Switch to light mode"
+
+#: inc/home.php:47 inc/my-latest-tasks.php:222
+msgid "My latest tasks"
+msgstr "My latest tasks"
+
+#: inc/home.php:50 inc/projects-managed.php:31
+msgid "Projects I manage"
+msgstr "Projects I manage"
+
+#: inc/home.php:85
+msgid "Welcome"
+msgstr "Welcome"
+
+#: inc/home.php:86
+msgid ""
+"As an observer you are free to view any task, project or user profile, "
+"without the ability to participate or contribute. You are essentially in "
+"read-only mode."
+msgstr ""
+"As an observer you are free to view any task, project or user profile, "
+"without the ability to participate or contribute. You are essentially in "
+"read-only mode."
+
+#: inc/home.php:87
+msgid ""
+"If required, please contact an administrator below about upgrading your role."
+msgstr ""
+"If required, please contact an administrator below about upgrading your role."
+
+#. translators: Example: You have 2 tasks out of 9 to do.
+#: inc/home.php:159 inc/status.php:50
+msgid "Your tasks"
+msgstr "Your tasks"
+
+#: inc/home.php:160
+msgid ""
+"The total number of tasks you currently have outstanding, across all "
+"projects combined."
+msgstr ""
+"The total number of tasks you currently have outstanding, across all "
+"projects combined."
+
+#: inc/home.php:162 inc/status.php:68
+msgid "Your responsibility"
+msgstr "Your responsibility"
+
+#: inc/home.php:163
+msgid "The burdon you carry across all projects combined."
+msgstr "The burdon you carry across all projects combined."
+
+#: inc/home.php:165 inc/status.php:81
+msgid "Tasks for others"
+msgstr "Tasks for others"
+
+#: inc/home.php:166
+msgid ""
+"The number of tasks across all projects that other users (not you) are "
+"responsible for."
+msgstr ""
+"The number of tasks across all projects that other users (not you) are "
+"responsible for."
+
+#: inc/home.php:169
+msgid "The total number of all tasks across all projects combined."
+msgstr "The total number of all tasks across all projects combined."
+
+#: inc/home.php:171 taxonomy-project.php:1242
+msgid "Task status icons"
+msgstr "Task status icons"
+
+#: inc/home.php:172 taxonomy-project.php:1243
+msgid "Reveal status icons"
+msgstr "Reveal status icons"
+
+#: inc/home.php:176 taxonomy-project.php:1246
+msgid "Pause"
+msgstr "Pause"
+
+#: inc/my-follows.php:116 inc/my-latest-tasks.php:123 single-task.php:339
+#: single-task.php:1361
+msgid "No project"
+msgstr "No project"
+
+#: inc/my-latest-tasks.php:14
+msgid "1 day"
+msgstr "1 day"
+
+#: inc/my-latest-tasks.php:16
+msgid "2 days"
+msgstr "2 days"
+
+#: inc/my-latest-tasks.php:18
+msgid "3 days"
+msgstr "3 days"
+
+#: inc/my-latest-tasks.php:20
+msgid "4 days"
+msgstr "4 days"
+
+#: inc/my-latest-tasks.php:22
+msgid "5 days"
+msgstr "5 days"
+
+#: inc/my-latest-tasks.php:24
+msgid "10 days"
+msgstr "10 days"
+
+#: inc/my-latest-tasks.php:26
+msgid "20 days"
+msgstr "20 days"
+
+#: inc/my-latest-tasks.php:28
+msgid "30 days"
+msgstr "30 days"
+
+#: inc/my-latest-tasks.php:41
+msgid "My tasks from the past"
+msgstr "My tasks from the past"
+
+#: inc/my-latest-tasks.php:41
+msgid "change"
+msgstr "change"
+
+#: inc/my-latest-tasks.php:46 inc/projects-managed.php:10
+#: taxonomy-project.php:159 taxonomy-project.php:528
+msgid "Start"
+msgstr "Start"
+
+#: inc/my-latest-tasks.php:114 single-task.php:364 taxonomy-project.php:311
+msgid "%"
+msgstr "%"
+
+#: inc/my-latest-tasks.php:179
+msgid "You have no recent tasks."
+msgstr "You have no recent tasks."
+
+#: inc/my-latest-tasks.php:223
+msgid ""
+"Tasks that you have recently created or have been recently assigned to you."
+msgstr ""
+"Tasks that you have recently created or have been recently assigned to you."
+
+#: inc/nav.php:26 inc/pages.php:8
+msgid "Pages"
+msgstr "Pages"
+
+#: inc/nav.php:89
+msgid "Logout"
+msgstr "Logout"
+
+#: inc/new-project.php:103
+msgid "Task Group"
+msgstr "Task Group"
+
+#: inc/new-project.php:110
+msgid "Include tasks from this group"
+msgstr "Include tasks from this group"
+
+#: inc/new-project.php:129
+msgid "Task ownership"
+msgstr "Task ownership"
+
+#: inc/new-project.php:131
+msgid "Unchanged"
+msgstr "Unchanged"
+
+#: inc/new-project.php:132
+msgid "Remove ownership"
+msgstr "Remove ownership"
+
+#: inc/new-project.php:170
+msgid "There are currently no task groups."
+msgstr "There are currently no task groups."
+
+#: inc/new-project.php:181
+msgid "Create project"
+msgstr "Create project"
+
+#: inc/new-project.php:263
+msgid "Task group"
+msgstr "Task group"
+
+#: inc/new-project.php:264
+msgid "Include tasks from a task group (if any have been set up)."
+msgstr "Include tasks from a task group (if any have been set up)."
+
+#: inc/new-project.php:270 inc/new-task.php:426
+msgid "Discard"
+msgstr "Discard"
+
+#: inc/new-project.php:271
+msgid "See current projects"
+msgstr "See current projects"
+
+#: inc/new-task.php:121
+msgid "Attach files"
+msgstr "Attach files"
+
+#: inc/new-task.php:273
+msgid "Create task"
+msgstr "Create task"
+
+#: inc/new-task.php:378
+msgid ""
+"The ability to create new tasks has not been enabled. Discuss this with your "
+"project manager or an administrator."
+msgstr ""
+"The ability to create new tasks has not been enabled. Discuss this with your "
+"project manager or an administrator."
+
+#: inc/new-task.php:382
+msgid "There needs to be at least one project before you can create a task."
+msgstr "There needs to be at least one project before you can create a task."
+
+#: inc/new-task.php:388
+msgid "Create a project"
+msgstr "Create a project"
+
+#: inc/new-task.php:423
+msgid "Back to "
+msgstr "Back to "
+
+#: inc/notifications.php:20
+msgid "Mark all message as read?"
+msgstr "Mark all message as read?"
+
+#: inc/project-chart.php:5
+#, php-format
+msgid ""
+"Only projects that are in progress are displayed here. (<a href=\"%1$s"
+"\">disable this chart</a>)."
+msgstr ""
+"Only projects that are in progress are displayed here. (<a href=\"%1$s"
+"\">disable this chart</a>)."
+
+#: inc/project-chart.php:254
+msgid "Current Active Projects"
+msgstr "Current Active Projects"
+
+#: inc/project-chart.php:293
+msgid "You are not managing any projects yet."
+msgstr "You are not managing any projects yet."
+
+#: inc/projects-list.php:194
+msgid "PM"
+msgstr "PM"
+
+#: inc/projects-list.php:278
+msgid "Access to this page is limited to administrators and project managers."
+msgstr "Access to this page is limited to administrators and project managers."
+
+#: inc/projects-list.php:289
+msgid "Projects managed by all project managers are displayed here."
+msgstr "Projects managed by all project managers are displayed here."
+
+#: inc/projects-list.php:290
+msgid ""
+"To limit this view to only see projects that you manage, change the setting "
+"at the <a href=\"/account/\">account page</a>."
+msgstr ""
+"To limit this view to only see projects that you manage, change the setting "
+"at the <a href=\"/account/\">account page</a>."
+
+#: inc/projects-list.php:291 inc/projects-list.php:296
+msgid "Use the status filters to quickly change the project view."
+msgstr "Use the status filters to quickly change the project view."
+
+#: inc/projects-list.php:294
+msgid "Only projects that you manage are displayed here."
+msgstr "Only projects that you manage are displayed here."
+
+#: inc/projects-list.php:295
+msgid ""
+"To change this view to see all projects, change the setting at the <a href="
+"\"/account/\">account page</a>."
+msgstr ""
+"To change this view to see all projects, change the setting at the <a href="
+"\"/account/\">account page</a>."
+
+#: inc/projects-list.php:318
+msgid "My projects"
+msgstr "My projects"
+
+#: inc/projects-managed.php:32
+msgid "Projects that I am the project manager for."
+msgstr "Projects that I am the project manager for."
+
+#: inc/recent-comments.php:3
+msgid "Recent Comments"
+msgstr "Recent Comments"
+
+#: inc/search.php:17
+msgid "Toggle sidebars"
+msgstr "Toggle sidebars"
+
+#: inc/search.php:21
+msgid "Search"
+msgstr "Search"
+
+#: inc/status.php:48
+msgid "You only have 1 task"
+msgstr "You only have 1 task"
+
+#: inc/team.php:58 inc/user-profile.php:36
+msgid "Need something to do"
+msgstr "Need something to do"
+
+#. translators: Example: The user logged in 10 days ago
+#: inc/team.php:90 inc/user-profile.php:143
+msgid "ago"
+msgstr "ago"
+
+#: inc/team.php:119
+msgid "All team members"
+msgstr "All team members"
+
+#: inc/team.php:121
+msgid ""
+"All members of the organisation who are involved in projects are displayed "
+"here."
+msgstr ""
+"All members of the organisation who are involved in projects are displayed "
+"here."
+
+#: inc/team.php:123
+#, php-format
+msgid ""
+"A list of every user involved in any project is displayed here. If you have "
+"the <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">Clients Pro plugin</"
+"a>, clients will also be displayed."
+msgstr ""
+"A list of every user involved in any project is displayed here. If you have "
+"the <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">Clients Pro plugin</"
+"a>, clients will also be displayed."
+
+#: inc/team.php:130
+msgid "All users"
+msgstr "All users"
+
+#: inc/team.php:131
+msgid "Administrators"
+msgstr "Administrators"
+
+#: inc/team.php:133
+msgid "Clients"
+msgstr "Clients"
+
+#: inc/team.php:135
+msgid "Observers"
+msgstr "Observers"
+
+#: inc/team.php:137
+msgid "Team members"
+msgstr "Team members"
+
+#: inc/tips.php:7
+msgid ""
+"You can change the status of a task to Complete, Incomplete, On Hold, In "
+"Progress or Not Started."
+msgstr ""
+"You can change the status of a task to Complete, Incomplete, On Hold, In "
+"Progress or Not Started."
+
+#: inc/tips.php:8
+msgid ""
+"If the option is enabled, you can request ownership of a task that you don't "
+"own."
+msgstr ""
+"If the option is enabled, you can request ownership of a task that you don't "
+"own."
+
+#: inc/tips.php:9
+msgid ""
+"Because you are a human, you can only record time on one task at a time."
+msgstr ""
+"Because you are a human, you can only record time on one task at a time."
+
+#: inc/tips.php:10
+msgid "Check your notifications for any important messages."
+msgstr "Check your notifications for any important messages."
+
+#: inc/tips.php:11
+msgid "Tasks can have subtasks, which can be checked off as you complete them."
+msgstr ""
+"Tasks can have subtasks, which can be checked off as you complete them."
+
+#: inc/tips.php:12
+msgid ""
+"Tasks can have relationships with other tasks, such as blocks, similarities, "
+"issues and relations."
+msgstr ""
+"Tasks can have relationships with other tasks, such as blocks, similarities, "
+"issues and relations."
+
+#: inc/tips.php:13
+msgid ""
+"If you accidentally forget to stop recording time on a task, you can easily "
+"manually edit the time entry."
+msgstr ""
+"If you accidentally forget to stop recording time on a task, you can easily "
+"manually edit the time entry."
+
+#: inc/tips.php:14
+msgid ""
+"If you check off all your subtasks, the task will automatically be marked as "
+"complete."
+msgstr ""
+"If you check off all your subtasks, the task will automatically be marked as "
+"complete."
+
+#: inc/tips.php:15
+msgid ""
+"If the option is enabled, project managers can have access to the WordPress "
+"back end."
+msgstr ""
+"If the option is enabled, project managers can have access to the WordPress "
+"back end."
+
+#: inc/tips.php:16
+msgid ""
+"Project managers and administrators can edit any task, regardless of who "
+"owns it."
+msgstr ""
+"Project managers and administrators can edit any task, regardless of who "
+"owns it."
+
+#: inc/tips.php:17
+msgid "Project managers can only edit or delete projects they manage."
+msgstr "Project managers can only edit or delete projects they manage."
+
+#: inc/tips.php:18
+msgid "Go to your account settings page any time to tweak your preferences."
+msgstr "Go to your account settings page any time to tweak your preferences."
+
+#: inc/tips.php:19
+msgid ""
+"Clicking 'Add a task' from a project page will automatically select that "
+"project for the task."
+msgstr ""
+"Clicking 'Add a task' from a project page will automatically select that "
+"project for the task."
+
+#: inc/tips.php:20
+msgid "The Kanban board can be enabled in wProject settings."
+msgstr "The Kanban board can be enabled in wProject settings."
+
+#: inc/tips.php:21
+msgid ""
+"Quickly switch between light and dark mode by clicking the sun/moon icons."
+msgstr ""
+"Quickly switch between light and dark mode by clicking the sun/moon icons."
+
+#: inc/tips.php:25
+msgid "Tip:"
+msgstr "Tip:"
+
+#: inc/user-profile.php:51
+msgid "Administrator"
+msgstr "Administrator"
+
+#: inc/user-profile.php:61
+msgid "Unknown"
+msgstr "Unknown"
+
+#: inc/user-profile.php:98
+msgid "Position"
+msgstr "Position"
+
+#: inc/user-profile.php:100
+msgid "Job title"
+msgstr "Job title"
+
+#: inc/user-profile.php:101
+msgid "Role"
+msgstr "Role"
+
+#: inc/user-profile.php:110
+msgid "Contact Information"
+msgstr "Contact Information"
+
+#: inc/user-profile.php:126
+msgid "MS Teams"
+msgstr "MS Teams"
+
+#: inc/user-profile.php:143
+msgid "Last login"
+msgstr "Last login"
+
+#: inc/user-profile.php:146
+msgid "Timing"
+msgstr "Timing"
+
+#: inc/user-profile.php:153
+msgid "Highlighted tasks"
+msgstr "Highlighted tasks"
+
+#: inc/user-profile.php:189
+msgid "This page contains information about the user."
+msgstr "This page contains information about the user."
+
+#: inc/user-profile.php:195
+msgid "My account"
+msgstr "My account"
+
+#: inc/user-profile.php:196
+msgid "See all team members"
+msgstr "See all team members"
+
+#: page.php:56 page.php:61
+msgid "Not Available"
+msgstr "Not Available"
+
+#: search.php:31
+#, php-format
+msgid "Search Results for <span>%1$s</span>"
+msgstr "Search Results for <span>%1$s</span>"
+
+#: search.php:57 search.php:88 search.php:93 search.php:100 search.php:119
+#: single-task.php:344
+msgid "Date created"
+msgstr "Date created"
+
+#: search.php:62 taxonomy-project.php:313 taxonomy-project.php:689
+msgid "Private task"
+msgstr "Private task"
+
+#: search.php:132
+#, php-format
+msgid "Searchbot could not find <span>%1$s</span>."
+msgstr "Searchbot could not find <span>%1$s</span>."
+
+#: single-task.php:25
+msgid ""
+"Oops! You are not permitted to access tasks that are not yours. Sending you "
+"back..."
+msgstr ""
+"Oops! You are not permitted to access tasks that are not yours. Sending you "
+"back..."
+
+#: single-task.php:191 taxonomy-project.php:459 taxonomy-project.php:819
+msgid "Private"
+msgstr "Private"
+
+#: single-task.php:194
+msgid "Everyone"
+msgstr "Everyone"
+
+#: single-task.php:213
+#, php-format
+msgid "%1$s has requested ownership of this task."
+msgstr "%1$s has requested ownership of this task."
+
+#: single-task.php:217
+msgid "Approve"
+msgstr "Approve"
+
+#: single-task.php:220
+msgid "Can't transfer ownership while recording time"
+msgstr "Can't transfer ownership while recording time"
+
+#: single-task.php:223
+msgid "Decline"
+msgstr "Decline"
+
+#: single-task.php:252
+#, php-format
+msgid "This task %1$s"
+msgstr "This task %1$s"
+
+#: single-task.php:265
+msgid "Details"
+msgstr "Details"
+
+#: single-task.php:285
+msgid "Initiator"
+msgstr "Initiator"
+
+#: single-task.php:288 single-task.php:300
+msgid "Me"
+msgstr "Me"
+
+#: single-task.php:312 taxonomy-project.php:702
+msgid "Adopt"
+msgstr "Adopt"
+
+#: single-task.php:322 taxonomy-project.php:705
+msgid "Unowned task"
+msgstr "Unowned task"
+
+#: single-task.php:329
+#, php-format
+msgid "%1$s is recording time (since %2$s)."
+msgstr "%1$s is recording time (since %2$s)."
+
+#: single-task.php:357
+msgid "Visibility"
+msgstr "Visibility"
+
+#: single-task.php:367
+msgid "Context"
+msgstr "Context"
+
+#: single-task.php:370
+msgid "ID"
+msgstr "ID"
+
+#: single-task.php:396
+msgid "Contributor"
+msgstr "Contributor"
+
+#: single-task.php:398
+msgid "Date"
+msgstr "Date"
+
+#: single-task.php:399
+msgid "Action"
+msgstr "Action"
+
+#: single-task.php:474
+msgid "Did you forgot to stop time?"
+msgstr "Did you forgot to stop time?"
+
+#: single-task.php:484
+msgid "Edit time"
+msgstr "Edit time"
+
+#: single-task.php:487
+msgid "Delete time"
+msgstr "Delete time"
+
+#: single-task.php:498
+msgid "Total"
+msgstr "Total"
+
+#: single-task.php:534
+msgid "Delete this time entry?"
+msgstr "Delete this time entry?"
+
+#: single-task.php:612
+msgid "Hrs"
+msgstr "Hrs"
+
+#: single-task.php:612
+msgid "Mins"
+msgstr "Mins"
+
+#: single-task.php:893
+msgid "Delete this file?"
+msgstr "Delete this file?"
+
+#: single-task.php:970
+msgid "This is a private task."
+msgstr "This is a private task."
+
+#: single-task.php:1022
+msgid "The project that this task will belong to."
+msgstr "The project that this task will belong to."
+
+#: single-task.php:1025
+msgid ""
+"The team member that this task will be assigned to. If a team member is not "
+"selected, the task will be assigned to you."
+msgstr ""
+"The team member that this task will be assigned to. If a team member is not "
+"selected, the task will be assigned to you."
+
+#: single-task.php:1028
+msgid ""
+"How important is this task? If not selected, the default priority will be "
+"normal."
+msgstr ""
+"How important is this task? If not selected, the default priority will be "
+"normal."
+
+#: single-task.php:1031
+msgid ""
+"If this is a task you have already started work on but forgot to create "
+"before the fact, label it appropriately."
+msgstr ""
+"If this is a task you have already started work on but forgot to create "
+"before the fact, label it appropriately."
+
+#: single-task.php:1034
+msgid "Is this task considered to be a milestone?"
+msgstr "Is this task considered to be a milestone?"
+
+#: single-task.php:1037
+msgid ""
+"While this task will still appear in the project, the details will be "
+"obfuscated to other team members."
+msgstr ""
+"While this task will still appear in the project, the details will be "
+"obfuscated to other team members."
+
+#: single-task.php:1040
+msgid "Smaller tasks that make up the main task."
+msgstr "Smaller tasks that make up the main task."
+
+#: single-task.php:1043
+msgid "Files that are associated with this task."
+msgstr "Files that are associated with this task."
+
+#: single-task.php:1082 taxonomy-project.php:481 taxonomy-project.php:1287
+msgid "Edit"
+msgstr "Edit"
+
+#: single-task.php:1086
+msgid "Download all files"
+msgstr "Download all files"
+
+#: single-task.php:1087
+msgid "Delete all files"
+msgstr "Delete all files"
+
+#: single-task.php:1101
+msgid "Really delete all the files in this task?"
+msgstr "Really delete all the files in this task?"
+
+#: single-task.php:1103
+msgid ""
+"Last chance: Are you sure you want to delete all the files in this task?"
+msgstr ""
+"Last chance: Are you sure you want to delete all the files in this task?"
+
+#: single-task.php:1124
+msgid "Task status"
+msgstr "Task status"
+
+#: single-task.php:1182
+msgid "This task was deleted."
+msgstr "This task was deleted."
+
+#: single-task.php:1184
+#, php-format
+msgid "Deleted: %1$s."
+msgstr "Deleted: %1$s."
+
+#: single-task.php:1205
+msgid "Complete this task?"
+msgstr "Complete this task?"
+
+#: single-task.php:1284
+#, php-format
+msgid "Only <strong>%1$s</strong> can edit this task."
+msgstr "Only <strong>%1$s</strong> can edit this task."
+
+#: single-task.php:1291
+msgid "Request Ownership"
+msgstr "Request Ownership"
+
+#: single-task.php:1329
+#, php-format
+msgid "<strong>%1$s</strong> has requested ownership."
+msgstr "<strong>%1$s</strong> has requested ownership."
+
+#: single-task.php:1335
+msgid ""
+"You can't request ownership of this task while another user is recording "
+"time on it."
+msgstr ""
+"You can't request ownership of this task while another user is recording "
+"time on it."
+
+#: taxonomy-project.php:112
+#, php-format
+msgid ""
+"This project is <strong>%1$s</strong>. To access this project, change <a "
+"href=\"%2$s\">status</a>."
+msgstr ""
+"This project is <strong>%1$s</strong>. To access this project, change <a "
+"href=\"%2$s\">status</a>."
+
+#: taxonomy-project.php:142
+msgid "My tasks"
+msgstr "My tasks"
+
+#: taxonomy-project.php:145
+msgid "Other tasks"
+msgstr "Other tasks"
+
+#: taxonomy-project.php:236 taxonomy-project.php:608
+msgid "This task has issues with"
+msgstr "This task has issues with"
+
+#: taxonomy-project.php:240 taxonomy-project.php:612
+msgid "This task is blocked by"
+msgstr "This task is blocked by"
+
+#: taxonomy-project.php:243 taxonomy-project.php:615
+msgid "Similar"
+msgstr "Similar"
+
+#: taxonomy-project.php:244 taxonomy-project.php:616
+msgid "This task is similar to"
+msgstr "This task is similar to"
+
+#: taxonomy-project.php:247 taxonomy-project.php:619
+msgid "Relates"
+msgstr "Relates"
+
+#: taxonomy-project.php:248 taxonomy-project.php:620
+msgid "This task relates to"
+msgstr "This task relates to"
+
+#: taxonomy-project.php:325 taxonomy-project.php:402 taxonomy-project.php:716
+#: taxonomy-project.php:750 taxonomy-project.php:759 taxonomy-project.php:962
+msgid "More"
+msgstr "More"
+
+#: taxonomy-project.php:476 taxonomy-project.php:836
+msgid "Created date"
+msgstr "Created date"
+
+#: taxonomy-project.php:491
+msgid "You have nothing to do in this project."
+msgstr "You have nothing to do in this project."
+
+#: taxonomy-project.php:851
+msgid "There are no other tasks here."
+msgstr "There are no other tasks here."
+
+#: taxonomy-project.php:853
+#, php-format
+msgid "There are no other tasks here and you still have %1$s to do."
+msgstr "There are no other tasks here and you still have %1$s to do."
+
+#: taxonomy-project.php:962
+msgid "Less"
+msgstr "Less"
+
+#: taxonomy-project.php:968 taxonomy-project.php:986
+msgid "Remove highlight"
+msgstr "Remove highlight"
+
+#: taxonomy-project.php:975
+msgid "Highlight"
+msgstr "Highlight"
+
+#: taxonomy-project.php:1027
+msgid "Contact"
+msgstr "Contact"
+
+#: taxonomy-project.php:1099
+msgid "Time used"
+msgstr "Time used"
+
+#: taxonomy-project.php:1145
+msgid "time x hours"
+msgstr "time x hours"
+
+#: taxonomy-project.php:1239 taxonomy-project.php:1319
+msgid "Project info"
+msgstr "Project info"
+
+#: taxonomy-project.php:1240
+msgid "Show the full details of the project."
+msgstr "Show the full details of the project."
+
+#: taxonomy-project.php:1281
+msgid "Add a task"
+msgstr "Add a task"
+
+#: taxonomy-project.php:1294
+msgid "Really delete this project and all its tasks?"
+msgstr "Really delete this project and all its tasks?"
+
+#: taxonomy-project.php:1296
+msgid "Last chance! Really delete this project and all its tasks?"
+msgstr "Last chance! Really delete this project and all its tasks?"
+
+#: taxonomy-project.php:1368
+msgid ""
+"Access to this project is limited to administrators, project managers and "
+"users who participate in it."
+msgstr ""
+"Access to this project is limited to administrators, project managers and "
+"users who participate in it."
+
+#: theme-updates/Puc/v4p11/Plugin/Ui.php:54
+#: theme-updates/Puc/v4p7/Plugin/Ui.php:54
+msgid "View details"
+msgstr "View details"
+
+#: theme-updates/Puc/v4p11/Plugin/Ui.php:77
+#: theme-updates/Puc/v4p7/Plugin/Ui.php:77
+#, php-format
+msgid "More information about %s"
+msgstr "More information about %s"
+
+#: theme-updates/Puc/v4p11/Plugin/Ui.php:128
+#: theme-updates/Puc/v4p7/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr "Check for updates"
+
+#: theme-updates/Puc/v4p11/Plugin/Ui.php:214
+#: theme-updates/Puc/v4p7/Plugin/Ui.php:213
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr "The %s plugin is up to date."
+
+#: theme-updates/Puc/v4p11/Plugin/Ui.php:216
+#: theme-updates/Puc/v4p7/Plugin/Ui.php:215
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr "A new version of the %s plugin is available."
+
+#: theme-updates/Puc/v4p11/Plugin/Ui.php:218
+#: theme-updates/Puc/v4p7/Plugin/Ui.php:217
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr "Could not determine if updates are available for %s."
+
+#: theme-updates/Puc/v4p11/Plugin/Ui.php:224
+#: theme-updates/Puc/v4p7/Plugin/Ui.php:223
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr "Unknown update checker status \"%s\""
+
+#: theme-updates/Puc/v4p11/Vcs/PluginUpdateChecker.php:98
+#: theme-updates/Puc/v4p7/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr "There is no changelog available."
+
+#. Theme URI of the plugin/theme
+msgid "https://rocketapps.com.au/wproject-theme/"
+msgstr "https://rocketapps.com.au/wproject-theme/"
+
+#. Description of the plugin/theme
+msgid "The best project management system built on WordPress."
+msgstr "The best project management system built on WordPress."
+
+#. Author of the plugin/theme
+msgid "Rocket Apps"
+msgstr "Rocket Apps"
+
+#. Author URI of the plugin/theme
+msgid "https://rocketapps.com.au"
+msgstr "https://rocketapps.com.au"

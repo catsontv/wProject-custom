@@ -1,0 +1,310 @@
+header {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 60px);
+    height: 60px;
+    background: #fff;
+    box-shadow: 5px 5px 30px 0 rgba(0,0,0,.05);
+    z-index: 9999;
+    border-bottom-left-radius: 5px;
+
+    @include breakpoint(md) {
+        @include flex-wrap;
+        height: 50px;
+        background: #fff;
+        z-index: 99999;
+        position: fixed;
+        top: 0;
+        left: 335px;
+        width: calc(100% - 335px);
+        transition: $trans;
+
+        &.repos {
+           left: 0;
+           width: 100%;
+           border-bottom-left-radius: 0;
+        }
+    }
+
+    @include breakpoint(ipad-landscape) {
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+
+    .icons {
+
+        height: 60px;
+        @include flex-wrap;
+        justify-content: space-between;
+
+        @include breakpoint(md) {
+            position: absolute;
+            top: 0;
+            right: 0;
+            right: 0;
+            height: 50px;
+            align-items: center;
+            justify-content: unset;
+        }
+
+        @include breakpoint(ipad-landscape) {
+            right: 15px;
+        }
+
+        li {
+            padding: 16px 12px;
+            cursor: pointer;
+            display: flex;
+            width: 50px;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+
+            @include breakpoint(md) {
+                width: auto;
+                padding: 16px;
+                //border-left: solid 1px #f1f1f1;
+            }
+
+            &.active {
+                background: rgba($blue, .1);
+
+
+                svg {
+                    stroke: $blue;
+                }
+            }
+
+            &:hover {
+                svg {
+                    stroke: $blue;
+                }
+            }
+
+            a {
+                display: block;
+            }
+
+            
+        }
+        b {
+            font-weight: normal;
+            display: block;
+            //padding: 15px 10px;
+
+            &.fade {
+                opacity: .3;
+            }
+        }
+
+        .dropdown {
+            margin: 0 !important;
+        }
+
+        .notify-comment,
+        .task-in-progress .icon-container,
+        .my-favs .icon-container {
+            &.fade {
+                opacity: .3;
+                &.active {
+                    background: none;
+
+                    svg {
+                        stroke: $dark;
+                    }
+                }
+            }
+        }
+
+        .task-in-progress.glow {
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: radial-gradient(circle, rgba($blue,1) 0%, rgba($blue,0) 60%);
+                z-index: -1;
+                border-radius: 100%;
+                opacity: .4;
+
+                @include breakpoint(md) {
+                    display: none;
+                }
+            }
+        }
+
+        .toggle-sidebar {
+            svg {
+                transform: rotate(180deg); /* Present this flipped because it's more like the page layout */
+            }
+
+            &.disabled {
+                opacity: .3;
+                pointer-events: none;
+            }
+        }
+
+        .message-date {
+            display: block;
+            margin: 5px 0;
+            font-size: .8em;
+            opacity: .7;
+        }
+        
+        .toggle-theme.rotate {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+
+        a {
+            display: flex;
+        }
+
+        svg {
+            display: block;
+            width: auto;
+            height: 16px;
+            cursor: pointer;
+            transition: $trans;
+            stroke: $dark;
+
+            &:hover {
+                stroke: $blue;
+            }
+        }
+
+        .no-anim svg {
+            transition: none;
+        }
+
+        .notify {
+            padding: 16px;
+        }
+
+        .timer {
+            &.spin {
+                svg {
+                    animation: rotate 6s linear infinite;
+                    stroke: $blue;
+                }
+            }
+        }
+
+        .message-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: $tomato;
+            border-radius: 100%;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            font-weight: 700;
+            position: absolute;
+            top: 4px;
+            right: 1px;
+            font-size: 1.2em;
+
+            @include breakpoint(md) {
+                width: 18px;
+                height: 18px;
+                font-size: 1em;
+            }
+
+            &.follows {
+                background: #00d4ca;
+                right: 7px;
+            }
+
+            img {
+                display: block;
+                width: 20px;
+                height: 20px;
+
+                @include breakpoint(md) {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }        
+    }
+}
+
+.switch-theme-form-facade {
+    position: relative;
+    &::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.hamburger {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    border: none;
+    background: #daedf0;
+    padding: 0;
+    outline: 0;
+    display: block;
+
+    @include breakpoint(ipad-landscape) {
+        display: none;
+    }
+    @include breakpoint(md) {
+        display: none;
+    }
+
+    span {
+        display: block;
+        width: 30px;
+        height: 4px;
+        background: $blue;
+        border-radius: 100em;
+        position: absolute;
+        left: 15px;
+        transition: $trans;
+
+        &:nth-child(1) {
+            top: 18px;
+        }
+
+        &:nth-child(2) {
+            top: calc(50% - 2px);
+        }
+
+        &:nth-child(3) {
+            bottom: 18px;
+        }
+    }
+
+    &.animate {
+        span {
+            &:nth-child(1) {
+                transform: rotate(-45deg);
+                width: 25px;
+                top: 20px;
+                left: 12px;
+            }
+            &:nth-child(3) {
+                transform: rotate(45deg);
+                width: 25px;
+                bottom: 20px;
+                left: 12px;
+            }
+        }
+    }
+}

@@ -1,0 +1,327 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Clients Pro for wProject\n"
+"POT-Creation-Date: 2021-08-29 09:50+0800\n"
+"PO-Revision-Date: 2022-11-18 18:01+0100\n"
+"Last-Translator: \n"
+"Language-Team: Rocket Apps <support@rocketapps.com.au>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wproject-clients-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: clients-pro-license.php:4
+msgid "Clients Pro License"
+msgstr "Licenza Pro Clienti"
+
+#: clients-pro-license.php:6
+msgid "Please activate your license to get access to updates and support."
+msgstr "Attivare la licenza per accedere agli aggiornamenti e al supporto."
+
+#: clients-pro-license.php:39 clients-pro-license.php:100
+#: clients-pro-license.php:167 wproject-clients-pro.php:45
+msgid "Unexpected Error! The query returned with an error."
+msgstr "Errore imprevisto! La query ha restituito un errore."
+
+#: clients-pro-license.php:65
+msgid "Invalid license key"
+msgstr "Chiave di licenza non valida"
+
+#: clients-pro-license.php:68
+msgid "Your license is activate."
+msgstr "La licenza è attivata."
+
+#: clients-pro-license.php:120
+msgid "Something went wrong. Please check your key and try again."
+msgstr "Qualcosa è andato storto. Controlla la chiave e riprova."
+
+#: clients-pro-license.php:125
+msgid "The license key has been deactivated for this domain"
+msgstr "La chiave di licenza è stata disattivata per questo dominio"
+
+#: clients-pro-license.php:129
+msgid "The license key on this domain is already inactive"
+msgstr "La chiave di licenza su questo dominio è già inattiva"
+
+#: clients-pro-license.php:138
+msgid "License key"
+msgstr "Chiave della licenza"
+
+#: clients-pro-license.php:144
+msgid "Activate"
+msgstr "Attiva"
+
+#: clients-pro-license.php:145
+msgid "Deactivate"
+msgstr "Disattiva"
+
+#: clients-pro-license.php:181
+msgid "License status"
+msgstr "Stato della licenza"
+
+#: clients-pro-license.php:182
+msgid "Active"
+msgstr "Attivo"
+
+#: clients-pro-license.php:182
+msgid "Configure Clients Pro"
+msgstr "Configurare Clienti Pro"
+
+#: clients-pro-license.php:183
+msgid "Licensesd to"
+msgstr "Licenze a"
+
+#: clients-pro-license.php:185
+msgid "Licenses used"
+msgstr "Licenze utilizzate"
+
+#: clients-pro-license.php:186
+msgid "Max allowed"
+msgstr "Numero massimo consentito"
+
+#: clients-pro-license.php:187
+msgid "Licensed domains"
+msgstr "Domini concessi in licenza"
+
+#: clients-pro-license.php:192
+msgid "Support expiry"
+msgstr "Scadenza del supporto"
+
+#: clients-pro-license.php:206
+msgid "Your support license has expired."
+msgstr "La licenza di supporto è scaduta."
+
+#: clients-pro-license.php:207
+#, php-format
+msgid ""
+"For continued support and updates, <a href=\"%1$s\" target=\"_blank\" rel="
+"\"noopener\">renew your license today</a>."
+msgstr ""
+"Per supporto e aggiornamenti continui, <a href=\"%1$s\" target=\"_blank\" "
+"rel=\"noopener\">rinnova la tua licenza oggi stesso</a>."
+
+#: clients-pro-license.php:215
+msgid "This license key has been blocked."
+msgstr "Questa chiave di licenza è stata bloccata."
+
+#: clients-pro-license.php:216
+#, php-format
+msgid ""
+"If you believe this should not have happened, please <a href=\"%1$s\" target="
+"\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+"Se ritieni che ciò non sarebbe dovuto accadere, ti preghiamo di <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">contattarci</a>."
+
+#: clients-pro-license.php:224
+msgid "This license key is pending server side acknowledgment."
+msgstr "Questa chiave di licenza è in attesa di riconoscimento lato server."
+
+#: clients-pro-license.php:225
+#, php-format
+msgid ""
+"If you are still waiting for your license to be acknowledged, please <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+"Se stai ancora aspettando che la tua licenza venga riconosciuta, ti "
+"preghiamo di <a href=\"%1$s\" target=\"_blank\" rel=\"noopener"
+"\">contattarci</a>."
+
+#: inc/avatar.php:34
+msgid "You only have 1 task to do."
+msgstr "Hai solo 1 attività da svolgere."
+
+#: inc/avatar.php:39
+msgid "You have"
+msgstr "Quello che hai"
+
+#: inc/avatar.php:39
+msgid "tasks to do."
+msgstr "Attività da svolgere."
+
+#: inc/avatar.php:44
+msgid "No tasks for you yet."
+msgstr "Nessuna attività per te ancora."
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:54
+msgid "View details"
+msgstr "Vedi dettagli"
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:77
+#, php-format
+msgid "More information about %s"
+msgstr "Più informazioni su %s"
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr "Controlla gli aggiornamenti"
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:214
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr "Il plugin %s è aggiornato."
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:216
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr "È disponibile una nuova versione del plugin %s."
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:218
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+"Non è stato possibile determinare se è disponibile un aggiornamento di %s."
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:224
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr "Stato del controllo aggiornamenti sconosciuto \"%s\""
+
+#: plugin-update-checker/Puc/v4p11/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr "La cronologia degli aggiornamenti non è disponibile."
+
+#: wproject-clients-pro.php:125 wproject-clients-pro.php:136
+#: wproject-clients-pro.php:193
+msgid "Clients Pro"
+msgstr "Clienti Pro"
+
+#: wproject-clients-pro.php:176
+msgid "Save Settings"
+msgstr "Salva Impostazioni"
+
+#: wproject-clients-pro.php:178
+msgid "Activate License Key"
+msgstr "Attiva la chiave di licenza"
+
+#: wproject-clients-pro.php:185
+#, php-format
+msgid ""
+"wProject Clients Pro requires at least wProject v1.4.1. <a href=\"%1$s\" rel="
+"\"noopener\">Update now</a>."
+msgstr ""
+"wProject Clients Pro richiede almeno wProject v1.4.1. <a href=\"%1$s\" rel="
+"\"noopener\">Aggiorna ora</a>."
+
+#: wproject-clients-pro.php:193
+msgid "Check for update"
+msgstr "Ricerca aggiornamenti"
+
+#: wproject-clients-pro.php:195
+#, php-format
+msgid ""
+"Please <a href=\"%1$s\" rel=\"noopener\">activate your license key</a> to "
+"unlock Clients Pro."
+msgstr ""
+"Si prega di <a href=\"%1$s\" rel=\"noopener\">attivare la chiave di licenza</"
+"a> per sbloccare Clients Pro."
+
+#: wproject-clients-pro.php:200
+msgid "Project access"
+msgstr "Accesso al progetto"
+
+#: wproject-clients-pro.php:201
+msgid "Which projects can clients access on the front-end?"
+msgstr "A quali progetti possono accedere i clienti sul front-end?"
+
+#: wproject-clients-pro.php:208
+msgid "Limited (default - only projects they have tasks in)"
+msgstr ""
+"Limitato (impostazione predefinita - solo i progetti in cui hanno attività)"
+
+#: wproject-clients-pro.php:211
+msgid "Unlimited (access all projects)"
+msgstr "Illimitato (accedi a tutti i progetti)"
+
+#: wproject-clients-pro.php:220
+msgid "Capability"
+msgstr "Capacità"
+
+#: wproject-clients-pro.php:221
+msgid "What can clients do on the front-end?"
+msgstr "Cosa possono fare i clienti sul front-end?"
+
+#: wproject-clients-pro.php:228
+msgid "Create and edit their own tasks"
+msgstr "Creare e modificare le proprie attività"
+
+#: wproject-clients-pro.php:231
+msgid "Create tasks for others"
+msgstr "Creare attività per altri utenti"
+
+#: wproject-clients-pro.php:234
+msgid "Comment on tasks"
+msgstr "Commentare le attività"
+
+#: wproject-clients-pro.php:237
+msgid "Comment on pages (if enabled on pages)"
+msgstr "Commentare le pagine (se abilitato nelle pagine)"
+
+#: wproject-clients-pro.php:240
+msgid "View project info"
+msgstr "Visualizza le informazioni sul progetto"
+
+#: wproject-clients-pro.php:243
+msgid "View the team page"
+msgstr "Visualizza la pagina del team"
+
+#: wproject-clients-pro.php:247
+msgid "Access"
+msgstr "Accesso"
+
+#: wproject-clients-pro.php:247
+msgid "Pages"
+msgstr "Pagine"
+
+#: wproject-clients-pro.php:250
+msgid "Use the search (coming soon)"
+msgstr "Usa la ricerca (disponibile a breve)"
+
+#: wproject-clients-pro.php:287
+msgid "Dashboard"
+msgstr "Bacheca"
+
+#: wproject-clients-pro.php:288
+#, php-format
+msgid "Welcome %1$s"
+msgstr "Benvenuto %1$s"
+
+#: wproject-clients-pro.php:325
+msgid "My Latest Tasks"
+msgstr "Le mie ultime attività"
+
+#. Plugin Name of the plugin/theme
+msgid "Clients Pro for wProject"
+msgstr "Client Pro per wProject"
+
+#. Plugin URI of the plugin/theme
+msgid "https://rocketapps.com.au/product/clients-pro/"
+msgstr "https://rocketapps.com.au/product/clients-pro/"
+
+#. Description of the plugin/theme
+msgid "Allow clients limited access to participate in specific projects."
+msgstr ""
+"Consentire ai clienti un accesso limitato per partecipare a progetti "
+"specifici."
+
+#. Author of the plugin/theme
+msgid "Rocket Apps"
+msgstr "Applicazioni Rocket"
+
+#. Author URI of the plugin/theme
+msgid "https://rocketapps.com.au"
+msgstr "https://rocketapps.com.au"

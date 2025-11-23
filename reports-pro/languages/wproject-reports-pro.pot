@@ -1,0 +1,643 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Reports Pro for wProject\n"
+"POT-Creation-Date: 2023-01-23 11:24+0800\n"
+"PO-Revision-Date: 2023-01-23 11:24+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wproject-reports-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: inc/export-csv-tasks.php:65
+msgid "Has issues with"
+msgstr ""
+
+#: inc/export-csv-tasks.php:67
+msgid "Is blocked by"
+msgstr ""
+
+#: inc/export-csv-tasks.php:69
+msgid "Is similar to"
+msgstr ""
+
+#: inc/export-csv-tasks.php:71
+msgid "Relates to"
+msgstr ""
+
+#: inc/export-csv-tasks.php:99
+msgid "Low"
+msgstr ""
+
+#: inc/export-csv-tasks.php:101 inc/export-csv-tasks.php:107
+msgid "Normal"
+msgstr ""
+
+#: inc/export-csv-tasks.php:103
+msgid "High"
+msgstr ""
+
+#: inc/export-csv-tasks.php:105
+msgid "Urgent"
+msgstr ""
+
+#: inc/export-csv-tasks.php:111 inc/export-csv-tasks.php:119
+msgid "Yes"
+msgstr ""
+
+#: inc/export-csv-tasks.php:113 inc/export-csv-tasks.php:115
+#: inc/export-csv-tasks.php:121 inc/export-csv-tasks.php:123
+msgid "No"
+msgstr ""
+
+#: inc/export-csv-tasks.php:127 report.php:675
+msgid "Complete"
+msgstr ""
+
+#: inc/export-csv-tasks.php:129 report.php:675
+msgid "In progress"
+msgstr ""
+
+#: inc/export-csv-tasks.php:131 report.php:675
+msgid "Not started"
+msgstr ""
+
+#: inc/export-csv-tasks.php:133 report.php:675
+msgid "On hold"
+msgstr ""
+
+#: inc/export-csv-tasks.php:135 report.php:675
+msgid "Incomplete"
+msgstr ""
+
+#: inc/export-csv-tasks.php:160
+msgid "Task ID"
+msgstr ""
+
+#: inc/export-csv-tasks.php:161
+msgid "Task name"
+msgstr ""
+
+#: inc/export-csv-tasks.php:162 report.php:344
+msgid "Job #"
+msgstr ""
+
+#: inc/export-csv-tasks.php:163
+msgid "Owner"
+msgstr ""
+
+#: inc/export-csv-tasks.php:164
+msgid "Description"
+msgstr ""
+
+#: inc/export-csv-tasks.php:165 report.php:341
+msgid "Status"
+msgstr ""
+
+#: inc/export-csv-tasks.php:166
+msgid "Start date"
+msgstr ""
+
+#: inc/export-csv-tasks.php:167
+msgid "Due date"
+msgstr ""
+
+#: inc/export-csv-tasks.php:168 report.php:373 report.php:580
+msgid "Time"
+msgstr ""
+
+#: inc/export-csv-tasks.php:169
+msgid "Priority"
+msgstr ""
+
+#: inc/export-csv-tasks.php:170 report.php:335
+msgid "Progress"
+msgstr ""
+
+#: inc/export-csv-tasks.php:171
+msgid "Privacy"
+msgstr ""
+
+#: inc/export-csv-tasks.php:172
+msgid "Milestone"
+msgstr ""
+
+#: inc/export-csv-tasks.php:173
+msgid "Relation"
+msgstr ""
+
+#: inc/export-csv-tasks.php:176
+msgid "Tasks for "
+msgstr ""
+
+#: inc/tasks-complete.php:77
+msgid "%"
+msgstr ""
+
+#: inc/tasks-complete.php:79
+msgid "Private task"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:54
+msgid "View details"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:77
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:214
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:216
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:218
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:224
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr ""
+
+#: report.php:250
+msgid "No tasks to export"
+msgstr ""
+
+#: report.php:274 report.php:969 wproject-reports-pro.php:204
+msgid "Summary"
+msgstr ""
+
+#: report.php:277 report.php:972 wproject-reports-pro.php:207
+msgid "Time & Costs"
+msgstr ""
+
+#: report.php:280
+msgid "Tasks Chart"
+msgstr ""
+
+#: report.php:283 report.php:769 wproject-reports-pro.php:216
+msgid "Project Team"
+msgstr ""
+
+#: report.php:306
+msgid "Project Manager"
+msgstr ""
+
+#: report.php:318
+msgid "Brief Description"
+msgstr ""
+
+#: report.php:325
+msgid "Full Description"
+msgstr ""
+
+#: report.php:333
+msgid "Details"
+msgstr ""
+
+#: report.php:338
+msgid "Tasks complete"
+msgstr ""
+
+#: report.php:348
+msgid "Start & Due dates"
+msgstr ""
+
+#: report.php:349
+msgid "No start date"
+msgstr ""
+
+#: report.php:349
+msgid "No due date"
+msgstr ""
+
+#: report.php:352 report.php:409
+msgid "Budget"
+msgstr ""
+
+#: report.php:375
+msgid ""
+"Time charts can not be displayed because this project does not have both a "
+"time budget and an hourly rate specified."
+msgstr ""
+
+#: report.php:378
+msgid "Time allocated"
+msgstr ""
+
+#: report.php:379
+msgid "hrs"
+msgstr ""
+
+#: report.php:382
+msgid "Time used"
+msgstr ""
+
+#: report.php:404
+msgid "Hourly rate"
+msgstr ""
+
+#: report.php:416 report.php:495 report.php:506
+msgid "Materials"
+msgstr ""
+
+#: report.php:435
+msgid "Materials Total"
+msgstr ""
+
+#: report.php:469
+msgid "Project Total"
+msgstr ""
+
+#: report.php:475
+msgid "over budget by"
+msgstr ""
+
+#: report.php:480
+msgid "under budget by"
+msgstr ""
+
+#: report.php:496 report.php:506
+msgid "Budget remaining"
+msgstr ""
+
+#: report.php:497 report.php:506
+msgid "Cost so far"
+msgstr ""
+
+#: report.php:574
+msgid "Most Time Logged"
+msgstr ""
+
+#: report.php:578
+msgid "Contributer"
+msgstr ""
+
+#: report.php:579
+msgid "Task"
+msgstr ""
+
+#: report.php:621
+msgid "More than project time logged"
+msgstr ""
+
+#: report.php:624
+#, php-format
+msgid "Makes up %1$s%% of the project time"
+msgstr ""
+
+#: report.php:675
+msgid "To do"
+msgstr ""
+
+#: report.php:675
+msgid "Blocked"
+msgstr ""
+
+#: report.php:677 report.php:975
+msgid "Tasks"
+msgstr ""
+
+#: report.php:865
+#, php-format
+msgid ""
+"You need to enable some inclusions in the <a href=\"%1$s\">settings</a>."
+msgstr ""
+
+#: report.php:896
+msgid "Access to reports is restricted to Project Managers and Administrators."
+msgstr ""
+
+#: report.php:919
+msgid "Go to project"
+msgstr ""
+
+#: report.php:920
+msgid "Edit project"
+msgstr ""
+
+#: report.php:921
+msgid "Export Tasks to CSV"
+msgstr ""
+
+#: report.php:922
+msgid "Print"
+msgstr ""
+
+#: report.php:930 report.php:939
+msgid "More Reports"
+msgstr ""
+
+#: report.php:970
+msgid ""
+"A summary of the current project status and the project manager responsible. "
+"If the project is late, the due date will be highlighted in red."
+msgstr ""
+
+#: report.php:973
+msgid ""
+"A breakdown of the current running project costs, including calculated time "
+"spent and materials."
+msgstr ""
+
+#: report.php:976
+msgid ""
+"A chart indicating the current status of all tasks and any blocked tasks (if "
+"any)."
+msgstr ""
+
+#: report.php:978
+msgid "Project team"
+msgstr ""
+
+#: report.php:979
+msgid "The team members involved in the project."
+msgstr ""
+
+#: reports-pro-license.php:4
+msgid "Reports Pro License"
+msgstr ""
+
+#: reports-pro-license.php:6
+msgid "Please activate your license to get access to updates and support."
+msgstr ""
+
+#: reports-pro-license.php:38 reports-pro-license.php:99
+#: reports-pro-license.php:166 wproject-reports-pro.php:45
+msgid "Unexpected Error! The query returned with an error."
+msgstr ""
+
+#: reports-pro-license.php:64
+msgid "Invalid license key"
+msgstr ""
+
+#: reports-pro-license.php:67
+msgid "Your license is activate."
+msgstr ""
+
+#: reports-pro-license.php:119
+msgid "Something went wrong. Please check your key and try again."
+msgstr ""
+
+#: reports-pro-license.php:124
+msgid "The license key has been deactivated for this domain"
+msgstr ""
+
+#: reports-pro-license.php:128
+msgid "The license key on this domain is already inactive"
+msgstr ""
+
+#: reports-pro-license.php:137
+msgid "License key"
+msgstr ""
+
+#: reports-pro-license.php:143
+msgid "Activate"
+msgstr ""
+
+#: reports-pro-license.php:144
+msgid "Deactivate"
+msgstr ""
+
+#: reports-pro-license.php:180
+msgid "License status"
+msgstr ""
+
+#: reports-pro-license.php:181
+msgid "Active"
+msgstr ""
+
+#: reports-pro-license.php:181
+msgid "Configure Reports Pro"
+msgstr ""
+
+#: reports-pro-license.php:182
+msgid "Licensesd to"
+msgstr ""
+
+#: reports-pro-license.php:184
+msgid "Licenses used"
+msgstr ""
+
+#: reports-pro-license.php:185
+msgid "Max allowed"
+msgstr ""
+
+#: reports-pro-license.php:186
+msgid "Licensed domains"
+msgstr ""
+
+#: reports-pro-license.php:191
+msgid "Support expiry"
+msgstr ""
+
+#: reports-pro-license.php:205
+msgid "Your support license has expired."
+msgstr ""
+
+#: reports-pro-license.php:206
+#, php-format
+msgid ""
+"For continued support and updates, <a href=\"%1$s\" target=\"_blank\" rel="
+"\"noopener\">renew your license today</a>."
+msgstr ""
+
+#: reports-pro-license.php:214
+msgid "This license key has been blocked."
+msgstr ""
+
+#: reports-pro-license.php:215
+#, php-format
+msgid ""
+"If you believe this should not have happened, please <a href=\"%1$s\" target="
+"\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+
+#: reports-pro-license.php:223
+msgid "This license key is pending server side acknowledgment."
+msgstr ""
+
+#: reports-pro-license.php:224
+#, php-format
+msgid ""
+"If you are still waiting for your license to be acknowledged, please <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+
+#: wproject-reports-pro.php:89 wproject-reports-pro.php:100
+#: wproject-reports-pro.php:147 wproject-reports-pro.php:165
+msgid "Reports Pro"
+msgstr ""
+
+#: wproject-reports-pro.php:138
+msgid "Save Settings"
+msgstr ""
+
+#: wproject-reports-pro.php:140
+msgid "Activate License Key"
+msgstr ""
+
+#: wproject-reports-pro.php:147
+msgid "Check for update"
+msgstr ""
+
+#: wproject-reports-pro.php:149
+#, php-format
+msgid ""
+"Please <a href=\"%1$s\" rel=\"noopener\">activate your license key</a> to "
+"unlock Reports Pro."
+msgstr ""
+
+#: wproject-reports-pro.php:158
+#, php-format
+msgid ""
+"wProject Reports Pro requires at least wProject %1$s. <a href=\"%2$s\" rel="
+"\"noopener\">Update now your theme now</a>."
+msgstr ""
+
+#: wproject-reports-pro.php:166
+msgid "What's new?"
+msgstr ""
+
+#: wproject-reports-pro.php:167
+msgid "Read the FAQ"
+msgstr ""
+
+#: wproject-reports-pro.php:168
+msgid "Support"
+msgstr ""
+
+#: wproject-reports-pro.php:176
+msgid "Report access"
+msgstr ""
+
+#: wproject-reports-pro.php:177
+msgid "Who can access reports."
+msgstr ""
+
+#: wproject-reports-pro.php:184
+msgid "Project managers and administrators only"
+msgstr ""
+
+#: wproject-reports-pro.php:187
+msgid "Everyone"
+msgstr ""
+
+#: wproject-reports-pro.php:196
+msgid "Inclusions"
+msgstr ""
+
+#: wproject-reports-pro.php:197
+msgid "What to include in reports."
+msgstr ""
+
+#: wproject-reports-pro.php:207 wproject-reports-pro.php:210
+msgid "Time needs to be enabled first."
+msgstr ""
+
+#: wproject-reports-pro.php:210
+msgid "Top time logged"
+msgstr ""
+
+#: wproject-reports-pro.php:213
+msgid "Task Status"
+msgstr ""
+
+#: wproject-reports-pro.php:230
+msgid "Most time logged limit"
+msgstr ""
+
+#: wproject-reports-pro.php:231
+msgid "How many logged times to show (default is 10)."
+msgstr ""
+
+#: wproject-reports-pro.php:247
+msgid "Task chart style"
+msgstr ""
+
+#: wproject-reports-pro.php:248
+msgid "How the task chart is displayed."
+msgstr ""
+
+#: wproject-reports-pro.php:255
+msgid "Bars (default)"
+msgstr ""
+
+#: wproject-reports-pro.php:258
+msgid "Curves"
+msgstr ""
+
+#: wproject-reports-pro.php:261
+msgid "Lines"
+msgstr ""
+
+#: wproject-reports-pro.php:270
+msgid "Pie chart style"
+msgstr ""
+
+#: wproject-reports-pro.php:271
+msgid "How pie charts are displayed."
+msgstr ""
+
+#: wproject-reports-pro.php:278
+msgid "Pie (default)"
+msgstr ""
+
+#: wproject-reports-pro.php:281
+msgid "Donut"
+msgstr ""
+
+#: wproject-reports-pro.php:325
+msgid "Report"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Reports Pro for wProject"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://rocketapps.com.au/product/reports-pro/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Generate and download reports for wProject."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Rocket Apps"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://rocketapps.com.au"
+msgstr ""

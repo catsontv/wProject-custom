@@ -1,0 +1,374 @@
+.status-box {
+
+    margin: 25px 0;
+    @include flex-wrap;
+    flex-wrap: wrap;
+    width: calc(100% + 10px);
+
+
+    .stats, 
+    .project-team {
+        width: 50%;
+    }
+
+    .stats {
+        @include flex-wrap;
+        flex-wrap: wrap;
+
+        &.full-width {
+            width: 100%;
+        }
+
+        div {
+            padding: 20px 20px 35px 20px;
+            display: flex;
+            background: #fff;
+            margin: 0 10px 10px 0;
+            font-size: 1.3em;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            width: 100%;
+
+            @include breakpoint(md) {
+                width: calc(25% - 10px);
+            }
+        }
+
+        span {
+            font-weight: bold;
+            color: $orange;
+            padding: 5px;
+            border-radius: 5px;
+            min-width: 23px;
+            background: rgba($orange, .1);
+            text-align: center;
+        }
+
+        span, 
+        strong {
+            z-index: 10;
+        }
+
+        .value {
+            position: relative;
+            
+            &::after {
+                content: '';
+                display: block;
+                width: 0px;
+                height: 0px;
+                border-radius: 100%;
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                background: $red;
+                transition: all 1s ease-in-out;
+                opacity: 0;
+            }
+        }
+
+        .draw-attention {
+            &::after {
+                width: 50px;
+                height: 50px;
+                top: calc(50% - 25px);
+                left:  calc(50% - 25px);
+                opacity: 1;
+                animation-name: fader;
+                animation-duration: 1s;
+            }
+
+            @keyframes fader {
+                from {
+                    opacity: 1;
+                }
+                to {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    .fill-container {
+        width: calc(100% - 40px);
+        display: block;
+        height: 5px;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1;
+        background: rgba($lavender, .1);
+        border-radius: 100em;
+    }
+
+    .fill {
+        height: 5px;
+        background: rgba($lavender, 1);
+        //border-right: solid 3px rgba($lavender, .5);
+        // border-top-right-radius: 5px;
+        // border-bottom-right-radius: 5px;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        border-radius: 100em;
+    }
+}
+
+/* Dashboard chart */
+.projects-chart {
+
+    $chart_radius: 5px;    
+    padding: 25px;
+    background: #fff;
+    height: 285px;
+    margin: 25px 0;
+    @include scroll-bar-horizontal;
+    width: 100%;
+
+    .projects-chart-container {
+        
+        @include flex-wrap;
+        flex-flow: wrap-reverse;
+        justify-content: space-between;
+        height: 100%;
+        
+    
+        &.space-evenly {
+            justify-content: space-evenly; 
+        }
+    }
+
+    .project-bar {
+        display: block;
+        position: relative;;
+        @include flex-wrap;
+        align-items: end;
+        color: #fff;
+        font-size: 1.3em;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+
+        @include breakpoint(md) { 
+            font-size: 1.2em;
+        }
+
+        &:hover {
+            .progress {
+                filter: contrast(1.2);
+            }
+
+            .details {
+                display: block;
+            }
+        }
+
+        .project-name {
+            padding: 10px;
+            position: absolute;
+            z-index: 9;
+            font-weight: 600;
+            text-align: center;
+            user-select: none;
+            width: 100%;
+        }
+
+        .details {
+            display: none;
+            padding: 0 20px 25px 20px;
+            background: #fff;
+            max-height: 100%;
+            position: fixed;
+            top: 60px;
+            left: 25px;
+            width: calc(100% - 50px);
+            box-shadow: 0 0 50px 0 rgba(0,0,0,.3);
+            z-index: 99999;
+            color: $dark;
+            border-radius: 15px;
+
+            @include breakpoint(md) { 
+                padding: 10px 20px;
+                position: absolute;
+                top: auto;
+                left: 100%;
+                bottom: 0;
+                width: 320px;
+                border-radius: $chart_radius;
+                @include left-arrow;
+            }
+
+            .mobile-title {
+                display: block;
+                width: calc(100% + 40px);
+                margin: 0 0 15px -20px;
+                background: red;
+                padding: 20px;
+                color: #fff;
+                line-height: 1.3em;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+
+            dl {
+                display: flex;
+                flex-flow: wrap;
+
+                dt, dd {
+                    width: 50%;
+                    padding: 6px 0;
+                    border-bottom: solid 1px rgba($dark, .1);
+                    font-size: 1em;
+                }
+
+                dt {
+                    font-weight: 600;
+                }
+
+                .no-border {
+                    border: 0;
+                }
+
+                .overdue {
+                    color: $tomato;
+                }
+            }
+        }
+
+        &.flip-details {
+            .details {
+                
+
+                @include breakpoint(md) { 
+                    left: auto;
+                    right: 100%;
+
+                    &::before {
+                        left: auto;
+                        right: -10px;
+                        transform: rotate(180deg);
+                    }
+                }
+
+                
+            }
+        }
+
+        em {
+            display: block;
+            width: 100%;
+        }
+
+        svg {
+            position: absolute;
+            z-index: 9;
+            stroke: #fff;
+            width: 15px;
+            height: 15px;
+            top: 13px;
+            left: calc(50% - 10px);
+        }
+
+        .pc-complete {
+            width: 100%;
+            position: absolute;
+            z-index: 9;
+            top: 15px;
+            left: 0;
+            text-align: center;
+            font-weight: 600;
+            color: $dark;
+            user-select: none;
+        }
+
+        .progress {
+            opacity: 1;
+            border-top-left-radius: $chart_radius;
+            border-top-right-radius: $chart_radius;
+            filter: contrast(.9);
+        }
+
+        .remaining {
+            opacity: .2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-top-left-radius: $chart_radius;
+            border-top-right-radius: $chart_radius;
+        }
+
+        .actions {
+            @include flex-wrap;
+            margin: 10px 0 0 0;
+
+            a {
+                display: block;
+                font-size: .95em;
+                width: calc(33.3333% - 5px);
+                user-select: none;
+
+                &:nth-child(2) {
+                    margin: 0 5px;
+                }
+
+                &:hover {
+                    color: $dark;
+                }
+            }
+        }
+
+    }    
+
+}
+
+
+#no-data {
+    display: none;
+    padding: 15px 15px 15px 65px;
+    background: #fff;
+    align-items: center;
+    position: relative;
+
+    svg {
+        margin: 0 5px 0 0;
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 47px;
+        padding: 14px;
+        stroke: $lavender;
+        background: rgba($lavender, .2);
+    }
+
+    a {
+        text-decoration: underline;
+        color: $blue;
+    }
+}
+
+.page-home {
+
+    .stats {
+        justify-content: space-between;
+        div {
+            width: 100%;
+            margin: 0 0 10px 0;
+            min-height: 60px;
+
+            @include breakpoint(md) {
+                width: calc(50% - 5px);
+            }
+
+            @media only screen and (min-width: 1400px) {
+                width: calc(25% - 10px);
+            }
+        }
+    }
+}

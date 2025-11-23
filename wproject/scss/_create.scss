@@ -1,0 +1,49 @@
+.create {
+
+    user-select: none;
+
+    ul {
+
+        border-left: solid 1px rgba($medium-dark, .1);
+        @include flex-wrap;
+        flex-wrap: wrap;
+        width: 100%;
+    
+        li {
+            width: 50%;
+            font-size: 1.3em;
+            //text-transform: uppercase;
+            font-weight: $main-bold;
+            position: relative;
+            border-right: solid 1px rgba($medium-dark, .1);
+            border-bottom: solid 1px rgba($medium-dark, .1);
+            background: rgba($medium-dark, .035);
+    
+            &:hover {
+                background: #fff;
+
+                svg {
+                    stroke: $blue;
+                }
+            }
+    
+            a {
+                display: block;
+                padding: 13px 5px 11px 5px;
+                text-align: center;
+                position: relative;
+            }
+    
+            svg {
+                display: block;
+                height: 16px;
+                margin: 0 auto 5px auto;
+            }
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+    }
+}

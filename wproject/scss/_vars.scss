@@ -1,0 +1,35 @@
+// Colour
+$dark:                      #5b606c;
+$medium-dark:               #737989;
+$lavender:                  #607ae3;
+$pink:                      #9c27b0;
+$grape:                     #1f264c;
+$dark-grape:                #13172d;
+$orange:                    #ff9800;
+$green:                     #8bc34a;
+$blue:                      #00bcd4;
+$red:                       #f44336;
+$tomato:                    #ff5722;
+$faint:                     #e5e6e9;
+$light-grey:                #f1f1f1;
+$faint-blue:                rgba($blue, .1);
+$yellow:                    #ffeb3b;
+
+// Typography
+$main:                      'Quicksand', sans-serif;
+$main-medium:               500;
+$main-bold:                 700;
+
+// FX
+$shadow:                    5px 5px 30px 0 rgba(0,0,0,.1);
+$shadow-darker:             10px 10px 50px 0 rgba(0,0,0,.3);
+$trans:			            all .25s ease-in-out;
+$trans_slow:                all .6s ease-in-out;
+$trans_slowest:             all 2s ease-in-out;
+$tiny:                      2px;
+$corner-minor:              3px;
+$corner-major:              6px;
+$corner-max:                15px;
+$pill:                      100em;
+$padder-desktop:            35px;
+$padder-mobile:             25px;

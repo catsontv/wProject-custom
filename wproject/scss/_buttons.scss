@@ -1,0 +1,30 @@
+.btn-light {
+    display: block;
+    border: solid 1px rgba($dark, .4);
+    background: #fff;
+    color: $medium-dark;
+    font-size: 1.1em;
+    font-weight: $main-medium;
+    padding: 6px 8px 6px 8px;
+    border-radius: 100em;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    font-style: normal;
+    cursor: pointer;
+    text-decoration: none !important;
+
+    &.round {
+        border-radius: $pill;
+    }
+
+    &:hover {
+        background: rgba($dark, .1);
+    }
+}
+
+p {
+    .btn-light {
+        font-size: .75em;
+    }
+}

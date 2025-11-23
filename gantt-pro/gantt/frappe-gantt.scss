@@ -1,0 +1,703 @@
+
+$dark:                      #5b606c;
+$medium-dark:               #737989;
+$bar-color:					#4f2865 !default;
+$bar-stroke:				#8D99A6 !default;
+$border-color:				#e0e0e0 !default;
+$light-bg:					#f5f5f5 !default;
+$light-border-color: 		#ebeff2 !default;
+$light-yellow: 				#ffeb3b !default;
+$text-muted: 				#666 !default;
+$text-light: 				#555 !default;
+$text-color: 				#333 !default;
+$handle-color:				#607d8b !default;
+$shadow:                    5px 5px 30px 0 rgba(0,0,0,.1);
+
+$orange:                    #ff9800;
+$green:                     #8bc34a;
+$blue:                      #00bcd4;
+$red:                       #f44336;
+$tomato:                    #ff5722;
+
+// Breakpoints
+@mixin breakpoint($point) {
+    @if $point == xs {
+        @media (min-width: 420px) { @content; }
+    } @else if $point == sm {
+        @media (min-width: 640px) { @content; }
+    } @else if $point == md {
+        @media (min-width: 960px)  { @content; }
+    } @else if $point == lg {
+        @media (min-width: 1100px)  { @content; }
+    } @else if $point == xl {
+        @media (min-width: 1600px)  { @content; }
+    } @else if $point == ipad-landscape {
+        @media (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { @content; }
+    } @else if $point == ipad-portrait {
+        @media (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { @content; }
+    }
+}
+
+// Clearfix
+@mixin clear {
+    &:before,
+    &:after {
+        display: table;
+        content: '';
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin scroll-bar-light {
+
+	&::-webkit-scrollbar {
+        height: 8px;
+		width: 8px;
+        background: #f1f1f1;
+        border-radius: 6px;
+	}
+	
+	&::-webkit-scrollbar-thumb {
+	  background-color: rgba($bar-stroke, 1);
+	  border-radius: 6px;
+	}
+}
+
+@mixin overflow-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.btn-group {
+	text-align: right;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	&.fixed-height {
+		button,
+		span {
+			border-radius: 3px;
+		}
+	}
+
+	button,
+	span {
+		height: 28px;
+        margin: 0 0 0 -1px;
+        border: none !important;
+	}
+
+    button {
+        
+        border-radius: 0;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+
+		&.rounded {
+			border-radius: 3px;
+		}
+    }
+
+	svg {
+		width: 15px;
+		height: 15px;
+	}
+
+	.btn-light {
+		user-select: none;
+		outline: 0;
+		background: none !important;
+		padding: 6px 12px;
+		font-size: 1.2em;
+		
+		&.active,
+		&:hover {
+			background: #fff !important;
+			color: $blue !important;
+			pointer-events: all;
+
+			em {
+				margin: 0;
+			}
+	
+			svg {
+				stroke: $blue;
+			}
+		}
+	
+		&.active {
+			pointer-events: none;
+		}
+	}
+}
+
+.gantt {
+
+	user-select: none;
+
+    // .no-tasks {
+    //     display: none;
+    // }
+
+	.date {
+		font-weight: bold;
+	}
+
+	.grid-background {
+		fill: none;
+	}
+	.grid-header {
+		fill: none;
+		stroke: $border-color;
+		stroke-width: 1.4;
+	}
+	.grid-row {
+		fill: #ffffff;
+		
+		&:nth-child(1) {
+			margin: 10px 0 0 0;
+		}
+	}
+	.grid-row:nth-child(even) {
+		fill: $light-bg;
+	}
+	.row-line {
+		//stroke: $light-border-color;
+		stroke: none;
+	}
+	.tick {
+		stroke: $border-color;
+		stroke-width: 0.2;
+		&.thick {
+			stroke-width: 0.4;
+		}
+	}
+	.today-highlight {
+		fill: rgba($light-yellow, .35);
+		opacity: 0.5;
+	}
+
+	.arrow {
+		fill: none;
+		stroke: #aaa;
+		stroke-width: 1;
+	}
+
+	.bar {
+		//fill: $bar-color;
+		stroke: $bar-stroke;
+		stroke-width: 0;
+		transition: stroke-width .3s ease;
+		user-select: none;
+	}
+	.bar-progress {
+		fill: $blue;
+	}
+	.bar-invalid {
+		fill: transparent;
+		stroke: $bar-stroke;
+		stroke-width: 1;
+		stroke-dasharray: 5;
+
+		&~.bar-label {
+			fill: $text-light;
+		}
+	}
+	.bar-label {
+		fill: #fff;
+		dominant-baseline: central;
+		text-anchor: middle;
+		font-size: 1.2em;
+		font-weight: 500;
+
+		&.big {
+			fill: $text-light;
+			text-anchor: start;
+		}
+	}
+
+	.handle {
+		fill: #fff;
+		cursor: ew-resize;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity .3s ease;
+		stroke: #000;
+		stroke-width: 1;
+
+		&.progress {
+			fill: #fff;
+			// stroke: #000;
+			// stroke-width: 1;
+		}
+	}
+
+	.bar-wrapper {
+		cursor: pointer;
+		outline: none;
+
+		&:hover {
+			.bar {
+				fill: lighten($bar-color, 5);
+			}
+
+			.bar-progress {
+				fill: lighten($blue, 5);
+			}
+
+			.handle {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+
+		&.active {
+			.bar {
+				fill: lighten($bar-color, 5);
+			}
+
+			.bar-progress {
+				fill: lighten($blue, 5);
+			}
+		}
+
+		&.low {
+			background: $blue;
+
+			.bar-progress {
+				fill: lighten($blue, 5);
+			}
+		}
+		&.normal {
+			background: $green;
+
+			.bar-progress {
+				fill: lighten($green, 5);
+			}
+		}
+		&.high {
+			background: $orange;
+
+			.bar-progress {
+				fill: lighten($orange, 5);
+			}
+		}
+		&.urgent {
+			background: $tomato;
+
+			.bar-progress {
+				fill: lighten($tomato, 5);
+			}
+		}
+
+        .letter-avatar {
+            display: none !important;
+        }
+	}
+
+	.subtask {
+		pointer-events: none;
+		
+		.bar-group {
+
+			.bar,
+			.bar-progress {
+				display: none;
+			}
+
+			.bar-label {
+				img {
+					display: none;
+				}
+				
+				&.big {
+					left: -260px;
+				}
+			}
+		}
+
+		.handle-group {
+			display: none;
+		}
+
+		.bar {
+			fill: none;
+		}
+
+		.bar-label {
+			fill: $text-light;
+		}
+	}
+
+	.lower-text, .upper-text {
+		font-size: 1.2em;
+		text-anchor: middle;
+	}
+	.upper-text {
+		fill: $text-light;
+	}
+	.lower-text {
+		fill: #929090;
+	}
+
+	.hide {
+		display: none;
+	}
+}
+
+.update-gantt-pro-form {
+    position: relative;
+	margin: 0;
+
+    @include breakpoint(md) {
+        margin: 25px 0;
+    }
+
+	&.full-screen {
+		position: fixed;
+		background: #fff;
+		top: 60px;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 9999999999999;
+		margin: 0;
+
+        @include breakpoint(md) {
+            top: 0;
+        }
+
+		.hide-gantt {
+			display: none;
+		}
+
+		.gantt-container {
+			height: calc(100% - 60px);
+            position: absolute;
+            top: 60px;
+            height: calc(100% - 145px);
+            padding: 0 !important;
+            width: calc(100% - 50px);
+
+            @include breakpoint(md) {
+                position: relative;
+                height: calc(100% - 40px);
+                top: unset;
+                padding: unset !important;
+                width: unset;
+            }
+		}
+
+		.gantt-task-list {
+			overflow: auto;
+			height: calc(100% - 130px);
+			@include scroll-bar-light;
+		}
+
+		.gantt-target {
+			height: calc(100% - 25px);
+			//overflow: hidden;
+			margin: 0;
+			padding: 0 25px 15px 25px;
+
+            @include breakpoint(md) {
+                padding: 25px 25px 15px 25px;
+				overflow: hidden;
+            }
+
+			h1 {
+				display: block;
+                font-size: 2em;
+
+                @include breakpoint(md) {
+                    font-size: 3em;
+                }
+			}
+		}
+
+		.btn-group {
+			margin: 0;
+			position: absolute;
+			top: 25px;
+			right: 25px;
+		}
+
+		.gantt-task-list {
+			padding: 50px 0 0 0;
+			top: 80px;
+		}
+
+		.popup-wrapper {
+			margin: 0;
+		}
+	}
+}
+
+.remove-fixed-height.full-screen {
+	.gantt-target {
+		height: calc(100% - 60px);
+		max-height: 100% !important;
+	}
+}
+
+.show-gantt {
+	&:hover {
+		svg {
+			stroke: #fff;
+		}
+	}
+}
+
+.gantt-target {
+    padding: 25px;
+    background: #fff;
+	@include overflow-scroll;
+	@include scroll-bar-light;
+
+	h1 {
+		display: none;
+	}
+}
+
+.gantt-container {
+	position: relative;
+	overflow: auto;
+    font-size: 1em;
+    @include scroll-bar-light;
+
+	.popup-wrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+        display: none;
+		
+        @include breakpoint(md) {
+            display: block;
+        }
+
+		.details-container {
+			background: #fff;
+			border: solid 1px rgba($dark, .3);
+			padding: 15px 15px 15px 65px;
+			color: $dark;
+			border-radius: 2px;
+			font-size: 1em;
+			width: 300px;
+			box-shadow: $shadow;
+			position: absolute;
+			left: -10px;
+			top: 17px;
+            border-radius: 5px !important;
+
+			&.compact {
+				left: -260px;
+				top: 17px;
+			}
+			&.comfortable { // default
+				left: -260px;
+				top: 17px;
+			}
+			&.big {
+				left: -260px;
+				top: 17px;
+			}
+
+			&::before {
+				content: '';
+				display: block;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 18px 18px 0 0;
+				border-color: #747faf transparent transparent transparent;
+				position: absolute;
+				top: -1px;
+				left: -1px;
+
+			}
+
+			.title {
+				font-weight: bold;
+			}
+	
+			p {
+				display: block;
+				margin: 5px 0;
+				font-size: 1.2em;
+                word-break: break-word;
+	
+				&:first-child {
+					margin: 0 0 10px 0;
+				}
+	
+				&:last-child {
+					margin: 5px 0 0 0;
+				}
+	
+				span {
+					display: inline-block;
+					width: 40%;
+				}
+
+				em {
+					font-style: normal;
+					font-weight: normal;
+					margin: 10px 0;
+					display: block;
+					font-size: .9em;
+				}
+
+				.avatar,
+                .letter-avatar {
+					display: block;
+					width: 35px;
+					height: 35px;
+					position: absolute;
+					top: 15px;
+					left: 15px;
+				}
+
+                .letter-avatar {
+                    font-size: 1em;
+                }
+			}
+
+			.btn {
+				font-size: 1em;
+				margin: 10px 5px 0 0;
+                display: inline-block;
+			}
+
+		}
+
+		.pointer {
+			position: absolute;
+			height: 5px;
+			transform: rotateZ(135deg);
+			border: 5px solid transparent;
+			border-top-color: rgba($dark, 0.8);
+
+			display: none !important;
+		}
+	}
+}
+
+.project-task-list-on {
+	.popup-wrapper {
+		margin: 0 0 0 235px;
+	}
+}
+
+.gantt-pro-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(#fff, .75);
+    z-index: 99999;
+    display: none;
+
+    &.show {
+        display: block;
+    }
+
+    img {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        display: block;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        z-index: 999999;
+    }
+}
+
+
+.gantt-task-list {
+    padding: 75px 0 0 0;
+    width: 260px;
+    box-sizing: border-box;
+    background: #fff;
+    position: absolute;
+    top: 28px;
+    z-index: 99;
+    border-right: solid 2px #f1f1f1;
+    
+    //box-shadow: 3px 3px 30px 0 rgba(0, 0, 0, 0.1);
+
+    li {
+        font-size: 1.2em;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+		display: flex;
+    	align-items: center;
+
+        &:nth-child(even) {
+            background: #f6f6f6;
+        }
+
+		svg {
+			width: 11px;
+			height: 11px;
+			stroke: $green;
+			margin: 0 4px 0 0;
+			float: left;
+		}
+    }
+
+	a {
+		display: block;
+	}
+
+	.low {
+		a:hover {
+			color: $blue;
+		}
+	}
+	.normal {
+		a:hover {
+			color: $green;
+		}
+	}
+	.high {
+		a:hover {
+			color: $orange;
+		}
+	}
+	.urgent {
+		a:hover {
+			color: $tomato;
+		}
+	}
+
+	.gantt-subtask-list {
+		margin: 0 0 0 20px;
+		opacity: .85;
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+		font-weight: 500;
+	}
+}
+
+.gantt-update-notice {
+	color: #ff0000;
+	font-weight: 500;
+	margin: 20px 0;
+	font-size: 1.3em;
+    display: flex;
+	flex-flow: wrap;
+	align-items: center;
+
+	svg {
+		width: 13px;
+		height: 13px;
+		margin: 0 3px 0 0;
+	}
+}

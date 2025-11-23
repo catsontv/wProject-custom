@@ -1,0 +1,50 @@
+.pages-nav {
+
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: calc(100% - 60px);
+    height: 100%;
+    padding: $padder-mobile;
+    background: #fff;
+    @include overflow-scroll;
+    transition: $trans;
+
+    @include breakpoint(md) {
+        transition: $trans;
+        width: 300px;
+        height: 100%;
+        padding: $padder-desktop;
+        left: -300px;
+    }
+
+    &.open {
+        left: 0;
+        box-shadow: $shadow;
+    }
+
+    li {
+        font-size: 1.5em;
+        line-height: 1.2em;
+
+        &:hover {
+
+            &:after {
+                content: '';
+                width: calc(100% + 20px);
+                position: absolute;
+                bottom: 0;
+                left: -10px;
+                height: 100%;
+                background: rgba($dark, .05);
+                border-top-left-radius: 4px;
+                z-index: -1;
+            }
+        }
+
+        a {
+            padding: 7px 0;
+        }
+    }
+}

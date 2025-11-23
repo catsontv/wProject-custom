@@ -1,0 +1,51 @@
+.priority {
+
+    &::before {
+        content: '';
+        display: block;
+        width: 3px;
+        height: calc(100% + 1px);
+        position: absolute;
+        top: -1px;
+        left: 0;
+        background: $green;
+    }
+
+    &.low {
+        &::before,
+        .new {
+            background: $blue;
+        }
+        a:hover {
+            color: $blue;
+        }
+        
+    }
+    &.normal {
+        &::before,
+        .new {
+            background: $green;
+        }
+        a:hover {
+            color: $green;
+        }
+    }
+    &.high {
+        &::before,
+        .new {
+            background: $orange;
+        }
+        a:hover {
+            color: $orange;
+        }
+    }
+    &.urgent {
+        &::before,
+        .new {
+            background: $red;
+        }
+        a:hover {
+            color: $red;
+        }
+    }
+}

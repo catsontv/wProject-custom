@@ -1,0 +1,344 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Clients Pro for wProject\n"
+"POT-Creation-Date: 2023-01-23 11:10+0800\n"
+"PO-Revision-Date: 2023-01-23 11:10+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wproject-clients-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: clients-pro-license.php:4
+msgid "Clients Pro License"
+msgstr ""
+
+#: clients-pro-license.php:6
+msgid "Please activate your license to get access to updates and support."
+msgstr ""
+
+#: clients-pro-license.php:39 clients-pro-license.php:100
+#: clients-pro-license.php:167 wproject-clients-pro.php:45
+msgid "Unexpected Error! The query returned with an error."
+msgstr ""
+
+#: clients-pro-license.php:65
+msgid "Invalid license key"
+msgstr ""
+
+#: clients-pro-license.php:68
+msgid "Your license is activate."
+msgstr ""
+
+#: clients-pro-license.php:120
+msgid "Something went wrong. Please check your key and try again."
+msgstr ""
+
+#: clients-pro-license.php:125
+msgid "The license key has been deactivated for this domain"
+msgstr ""
+
+#: clients-pro-license.php:129
+msgid "The license key on this domain is already inactive"
+msgstr ""
+
+#: clients-pro-license.php:138
+msgid "License key"
+msgstr ""
+
+#: clients-pro-license.php:144
+msgid "Activate"
+msgstr ""
+
+#: clients-pro-license.php:145
+msgid "Deactivate"
+msgstr ""
+
+#: clients-pro-license.php:181
+msgid "License status"
+msgstr ""
+
+#: clients-pro-license.php:182
+msgid "Active"
+msgstr ""
+
+#: clients-pro-license.php:182
+msgid "Configure Clients Pro"
+msgstr ""
+
+#: clients-pro-license.php:183
+msgid "Licensesd to"
+msgstr ""
+
+#: clients-pro-license.php:185
+msgid "Licenses used"
+msgstr ""
+
+#: clients-pro-license.php:186
+msgid "Max allowed"
+msgstr ""
+
+#: clients-pro-license.php:187
+msgid "Licensed domains"
+msgstr ""
+
+#: clients-pro-license.php:192
+msgid "Support expiry"
+msgstr ""
+
+#: clients-pro-license.php:206
+msgid "Your support license has expired."
+msgstr ""
+
+#: clients-pro-license.php:207
+#, php-format
+msgid ""
+"For continued support and updates, <a href=\"%1$s\" target=\"_blank\" rel="
+"\"noopener\">renew your license today</a>."
+msgstr ""
+
+#: clients-pro-license.php:215
+msgid "This license key has been blocked."
+msgstr ""
+
+#: clients-pro-license.php:216
+#, php-format
+msgid ""
+"If you believe this should not have happened, please <a href=\"%1$s\" target="
+"\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+
+#: clients-pro-license.php:224
+msgid "This license key is pending server side acknowledgment."
+msgstr ""
+
+#: clients-pro-license.php:225
+#, php-format
+msgid ""
+"If you are still waiting for your license to be acknowledged, please <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+
+#: inc/avatar.php:44
+msgid "You only have 1 task to do."
+msgstr ""
+
+#: inc/avatar.php:49
+msgid "You have"
+msgstr ""
+
+#: inc/avatar.php:49
+msgid "tasks to do."
+msgstr ""
+
+#: inc/avatar.php:54
+msgid "No tasks for you yet."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:54
+msgid "View details"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:77
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:214
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:216
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:218
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Plugin/Ui.php:224
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p11/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr ""
+
+#: wproject-clients-pro.php:125 wproject-clients-pro.php:136
+#: wproject-clients-pro.php:188 wproject-clients-pro.php:206
+msgid "Clients Pro"
+msgstr ""
+
+#: wproject-clients-pro.php:179
+msgid "Save Settings"
+msgstr ""
+
+#: wproject-clients-pro.php:181
+msgid "Activate License Key"
+msgstr ""
+
+#: wproject-clients-pro.php:188
+msgid "Check for update"
+msgstr ""
+
+#: wproject-clients-pro.php:190
+#, php-format
+msgid ""
+"Please <a href=\"%1$s\" rel=\"noopener\">activate your license key</a> to "
+"unlock Clients Pro."
+msgstr ""
+
+#: wproject-clients-pro.php:199
+#, php-format
+msgid ""
+"wProject Clients Pro requires at least wProject %1$s. <a href=\"%2$s\" rel="
+"\"noopener\">Update now</a>."
+msgstr ""
+
+#: wproject-clients-pro.php:207
+msgid "What's new?"
+msgstr ""
+
+#: wproject-clients-pro.php:208
+msgid "Read the FAQ"
+msgstr ""
+
+#: wproject-clients-pro.php:209
+msgid "Support"
+msgstr ""
+
+#: wproject-clients-pro.php:217
+msgid "Project access"
+msgstr ""
+
+#: wproject-clients-pro.php:218
+msgid "Which projects can clients access on the front-end?"
+msgstr ""
+
+#: wproject-clients-pro.php:225
+msgid "Limited (default - only projects they have tasks in)"
+msgstr ""
+
+#: wproject-clients-pro.php:228
+msgid "Unlimited (access all projects)"
+msgstr ""
+
+#: wproject-clients-pro.php:237
+msgid "Capability"
+msgstr ""
+
+#: wproject-clients-pro.php:238
+msgid "What can clients do on the front-end?"
+msgstr ""
+
+#: wproject-clients-pro.php:245
+msgid "Create and edit their own tasks"
+msgstr ""
+
+#: wproject-clients-pro.php:248
+msgid "Create tasks for other users"
+msgstr ""
+
+#: wproject-clients-pro.php:251
+msgid "Comment on tasks (if comments are enabled on tasks)"
+msgstr ""
+
+#: wproject-clients-pro.php:254
+msgid "Comment on pages (if comments are enabled on pages)"
+msgstr ""
+
+#: wproject-clients-pro.php:257
+msgid "View project info"
+msgstr ""
+
+#: wproject-clients-pro.php:260
+msgid "View the team page"
+msgstr ""
+
+#: wproject-clients-pro.php:263
+msgid "View tasks owned by other users"
+msgstr ""
+
+#: wproject-clients-pro.php:267
+msgid "Access"
+msgstr ""
+
+#: wproject-clients-pro.php:267
+msgid "Pages"
+msgstr ""
+
+#: wproject-clients-pro.php:276
+msgid "Kanban board interaction"
+msgstr ""
+
+#: wproject-clients-pro.php:278
+msgid "How much control do clients have over the Kanban board?"
+msgstr ""
+
+#: wproject-clients-pro.php:281
+msgid "The Kanban board needs to be enabled for this to work."
+msgstr ""
+
+#: wproject-clients-pro.php:290
+msgid "None (read-only)"
+msgstr ""
+
+#: wproject-clients-pro.php:293
+msgid "Basic (can only drag and drop their own tasks)"
+msgstr ""
+
+#: wproject-clients-pro.php:296
+msgid "Full control (can drag and drop any task)"
+msgstr ""
+
+#: wproject-clients-pro.php:343
+msgid "Dashboard"
+msgstr ""
+
+#: wproject-clients-pro.php:344
+#, php-format
+msgid "Welcome %1$s"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Clients Pro for wProject"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://rocketapps.com.au/product/clients-pro/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Allow clients limited access to participate in specific projects."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Rocket Apps"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://rocketapps.com.au"
+msgstr ""

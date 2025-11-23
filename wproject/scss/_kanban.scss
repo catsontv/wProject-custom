@@ -1,0 +1,634 @@
+.kanban {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999;
+    padding: 25px 0 25px 25px;
+    background: $light-grey;
+    transition: $trans_slow;
+    opacity: 0;
+
+    @include breakpoint(md) {
+        padding: 45px 65px 45px 70px;
+    }
+
+    @include breakpoint(ipad-landscape) {
+        padding: 25px;
+    }
+
+    &.show {
+        bottom: 0;
+        opacity: 1;
+
+        .close {
+            display: block;
+        }
+    }
+
+    &.kanban-card-colours {
+        background: #fff;
+    }
+
+    .kanban-container {
+        
+        @include overflow-scroll;
+        @include scroll-bar;
+        height: calc(100% - 85px);
+        padding: 0 50px 0 0;
+
+        @include breakpoint(md) {
+            @include flex-wrap;
+            height: calc(100% - 60px);
+            padding: 0;
+        }
+    }
+
+    h1 {
+        display: block;
+        width: 100%;
+        font-size: 2.6em;
+        margin: 0 0 25px 0;
+        user-select: none;
+
+        @include breakpoint(md) {
+            font-size: 4em;
+        }
+
+        @include breakpoint(ipad-landscape) {
+            font-size: 3em;
+        }
+    }
+
+    .close {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: none;
+
+        @include breakpoint(md) {
+            top: 25px;
+            right: 50px;
+        }
+
+        svg {
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+        }
+    }
+
+    section {
+        display: block;
+        width: 100%;
+        padding: 0 0 25px 0;
+
+        @include breakpoint(md) {
+            width: 25%;
+            padding: 0 25px 0 0;
+        }
+
+        @include breakpoint(ipad-landscape) {
+            padding: 0 10px 0 0;
+        }
+
+        
+        .box {
+            width: 100%;
+            @include overflow-scroll;
+            @include scroll-bar-light;
+            height: calc(100% - 60px);
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+
+            @media screen and (min-width: 2400px) {
+                display: flex;
+                flex-flow: wrap;
+                align-content: flex-start;
+            }
+
+            &.reverse {
+                flex-flow: wrap-reverse;
+                justify-content: flex-start;
+                align-content: flex-end;
+            }
+
+        }
+
+        // &:last-child {
+        //     padding: 0;
+
+        //     .ui-state-default {
+        //         margin: 0 0 10px 0;
+        //         width: 100%;
+        //     }
+        // }
+    }
+
+    h3 {
+        margin: 0 0 20px 0;
+        padding: 0 0 15px 0;
+        font-size: 2em;
+        user-select: none;
+        position: relative;
+        width: calc(100% - 10px);
+        border-bottom: solid 2px rgba($dark, .1);
+
+        span {
+            color: $pink;
+        }
+
+        .kanban-column-reverse {
+            display: flex;
+            width: 26px;
+            height: 26px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            justify-content: center;
+            align-items: center;
+            transition: all .25s ease-in-out;
+
+            svg {
+                width: 12px;
+                height: 14px;
+                stroke: $dark;
+                stroke-width: 3px;
+                opacity: .3;
+            }
+
+            &.active {
+                transform: rotate(180deg);
+
+                svg {
+                    opacity: 1;
+                    stroke: $orange;
+                }
+            }
+
+            &:hover {
+                svg {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .ui-state-default {
+        padding: 25px 25px 65px 25px; 
+        background: #fff;
+        margin: 0 0 2px 0;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        cursor: pointer;
+        position: relative;
+        font-size: 1.3em;
+        user-select: none;
+
+        @include breakpoint(md) {
+            width: calc(100% - 10px);
+        }
+
+        @include breakpoint(ipad-landscape) {
+            padding: 15px 40px 15px 40px;
+            min-height: 50px;
+            width: calc(100% - 25px);
+        }
+
+        @media screen and (min-width: 2400px) {
+            width: calc(50% - 10px);
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+
+        &.ui-sortable-helper {
+            box-shadow: 5px 5px 20px 0 rgba(0,0,0,.25);
+        }
+
+        p {
+            font-size: 1em;
+            margin: 15px 0 0 0;
+            hyphens: auto;
+            word-break: break-word;
+        }
+
+        .checked {
+            stroke: $green;
+        }
+
+        .avatar {
+            display: block;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+
+            @include breakpoint(ipad-landscape) {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .letter-avatar {
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .kanban-task-overdue {
+            color: $tomato;
+            display: flex;
+            align-items: center;
+            font-weight: $main-medium;
+            margin: 10px 0 0 0;
+
+            .overdue  {
+                width: 15px;
+                height: 15px;
+                stroke: $tomato;
+                margin: 0 3px 0 0;
+            }
+        }
+
+        .comment-count {
+            position: absolute;
+            bottom: 15px;
+            right: 25px;
+            font-style: normal;
+            display: flex;
+            align-items: flex-end;
+            font-weight: $main-medium;
+            opacity: .7;
+
+            svg {
+                width: 12px;
+                height: 12px;
+                stroke: $dark;
+                stroke-width: 2px;
+            }
+        }
+
+        a {
+            font-size: 1.1em;
+            font-weight: $main-bold;
+
+            &:hover {
+                color: $dark;
+            }
+        }
+
+        span {
+            display: block;
+            margin: 10px 0 0 0;
+            font-size: 1em;
+        }
+
+        em {
+            display: block;
+            margin: 4px 0;
+            font-style: normal;
+            opacity: .85;
+        }
+
+        .kanban-title {
+            display: block;
+            width: calc(100% - 40px);
+            font-size: 1.2em;
+        }
+
+        .kanban-task-relation {
+            background: rgba($dark, .1);
+        }
+
+        .full-spin {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            position: relative;
+            top: 2px;
+            animation: rotate 6s linear infinite;
+            background: #fff;
+            border-radius: 100%;
+        }
+
+        .pcc {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            margin: 0;
+            opacity: .7;
+
+            svg {
+                width: 15px !important;
+                height: 15px !important;
+                stroke: $green;
+                stroke-width: 2.5px;
+            }
+        }
+
+        .btn-light {
+            width: fit-content;
+            font-size: .75em;
+            padding: 4px 7px;
+
+            &.priority-low {
+                border: solid 1px $blue !important;
+                color: $blue !important;
+            }
+            &.priority-normal {
+                border: solid 1px $green !important;
+                color: $green !important;
+            }
+            &.priority-high {
+                border: solid 1px $orange !important;
+                color: $orange !important;
+            }
+            &.priority-urgent {
+                border: solid 1px $tomato !important;
+                color: $tomato !important;
+            }
+        }
+    }
+
+    // .undraggable {
+    //     pointer-events: none;
+    //     cursor: not-allowed;
+
+    //     &:hover {
+    //         filter: grayscale(100%);
+    //         opacity: .6;
+    //     }
+    // }
+
+    .kanban-card-lower {
+        display: block;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: calc(100% - 3px);
+        position: absolute;
+        bottom: 0;
+        left: 3px;
+        padding: 10px 25px;
+        background: #fff;
+        font-weight: bold;
+        border-top: solid 1px #f1f1f1;
+
+        em {
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            width: calc(100% - 60px);
+        }
+
+        img {
+            margin: 0 5px 0 0;
+        }
+    }
+
+    .kanban-context-label {
+
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+
+        span {
+            display: inline-block !important;
+            padding: 5px 10px;
+            border-radius: 100em;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: .9em !important;
+            margin: 0;
+
+        }
+        
+    }
+
+    &.comfortable {
+        .ui-state-default {
+            margin: 0 0 10px 0;
+            @media screen and (min-width: 2400px) {
+                margin: 0 10px 10px 0;
+            }
+        }
+    }
+    &.loose {
+        .ui-state-default {
+            margin: 0 0 20px 0;
+        }
+    }
+    &.tight {
+        .ui-state-default {
+            margin: 0 0 2px 0;
+        }
+    }
+
+    &.kanban-card-colours {
+        
+        .ui-state-default {
+            background: rgba($green, .2);
+            border-radius: 5px;
+
+            &::before {
+                display: none;
+            }
+
+            svg {
+                stroke: $dark;
+            }
+        }
+        .low {
+            background: rgba($blue, .3);
+        }
+        .normal {
+            background: rgba($green, .3);
+        }
+        .high {
+            background: rgba($orange, .3);
+        }
+        .urgent {
+            background: rgba($tomato, .3);
+        }
+
+        .kanban-card-lower {
+
+            background: rgba($dark, .04) !important;
+            left: 0;
+            width: 100%;
+            border: none;
+    
+            em {
+                margin: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+    
+            img {
+                margin: 0 5px 0 0;
+            }
+        }
+    }
+}
+
+.ui-droppable-active {
+    border: dashed 2px rgba($dark, .3);
+    border-radius: 5px;
+
+    @include breakpoint(md) {
+        border: none;
+    }
+}
+
+
+#complete {
+    .overdue {
+        display: none;
+    }
+    .avatar {
+        filter: grayscale(100%);
+    }
+    .ui-state-default {
+        &::before {
+            filter: grayscale(100%);
+        }
+    }
+}
+
+
+.kanban-filter {
+    
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    display: none;
+
+    &.show {
+        display: flex;
+    }
+
+    @include breakpoint(md) {
+        display: block;
+        left: auto;
+        right: -40px;
+        top: 150px;
+        width: 40px;
+        height: calc(100% - 140px);
+        justify-content: center;
+
+        &.show {
+            display: block;
+            right: 0;
+        }
+    }
+
+    @include breakpoint(ipad-landscape) {
+        top: 120px;
+    }
+
+    li {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        @include flex-wrap;
+        justify-content: center;
+        align-items: center;
+
+        &:nth-child(1) {
+            border-top-left-radius: 5px;
+        }
+        &:last-child {
+            border-top-right-radius: 5px;
+        }
+
+        @include breakpoint(md) {
+            width: 40px;
+            height: 40px;
+            
+
+            &:last-child {
+                border-bottom-left-radius: 5px;
+                border-top-right-radius: 0;
+            }
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            stroke: $dark;
+        }
+    }
+    .overdue,
+    .all,
+    .comms,
+    .descs,
+    .your-tasks, 
+    .timing {
+        background: rgba($dark, .12);
+    }
+
+    .overdue {
+        // svg {
+        //     stroke: $tomato;
+        // }
+    }
+    .all,
+    .comms,
+    .descs,
+    .your-tasks, 
+    .timing {
+        svg {
+            stroke: $dark;
+        }
+    }
+
+    .low {
+        background: $blue;
+    }
+    .normal {
+        background: $green;
+    }
+    .high {
+        background: $orange;
+    }
+    .urgent {
+        background: $tomato;
+    }
+
+    .comms,
+    .overdue,
+    .all,
+    .descs,
+    .your-tasks, 
+    .timing {
+        &.selected {
+            background: $dark;
+            svg {
+                stroke: #fff;
+            }
+        }
+    }
+    
+
+    .low,
+    .normal,
+    .high,
+    .urgent {
+        svg {
+            display: none;
+        }
+
+        &.show-icon {
+            svg {
+                display: block;
+            }
+        }
+    }
+}

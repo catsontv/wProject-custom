@@ -1,0 +1,528 @@
+
+.project {
+
+    .status-box {
+        width: 100%;
+
+        .stats {
+            width: 100%;
+            background: #fff;
+
+            @include breakpoint(md) {
+                width: 50%;
+            }
+
+            div {   
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+
+                @include breakpoint(md) {
+                    width: 50%;
+                }
+
+                &:nth-child(1) {
+                    background: rgba($lavender, .16);
+                }
+                &:nth-child(2) {
+                    background: rgba($lavender, .12);
+                }
+                &:nth-child(3) {
+                    background: rgba($lavender, .08);
+                }
+                &:nth-child(4) {
+                    background: rgba($lavender, .04);
+                }
+            }
+
+            .value {
+                background: rgba($lavender, .1);
+                color: $lavender;
+            }
+        }
+    
+        .project-description {
+            width: calc(100% - 60px);
+        }
+    }
+    
+
+    
+
+    .project-status {
+        background: #fff;
+        padding: 20px;
+        border-radius: 2px;
+        border-left: solid 3px $tomato;
+        margin: 25px 0;
+        @include flex-wrap;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+            margin: 0 10px 0 0;
+            stroke: $tomato;
+        }
+
+        a {
+            color: $dark;
+            text-decoration: underline;
+        }
+    }
+
+    .project-team {
+
+        @include flex-wrap;
+        flex-wrap: wrap;
+        z-index: 999;
+        position: relative;
+        padding: 20px;
+        width: 100%;
+        background: #fff;
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+
+        @include breakpoint(md) {
+            width: 50%;
+        }
+
+        @media only screen and (max-width: 1360px) {
+            padding: 15px;
+        }
+
+        li {
+            margin: 0 5px 0 0;
+            position: relative;
+            list-style: none;
+
+            &:hover {
+                .pop {
+                    display: block;
+                }
+            }
+        }
+
+        img,
+        .letter-avatar {
+            display: block;
+            width: 45px;
+            height: 45px;
+            margin: 0 5px 5px 0;
+            border-radius: 10px;
+
+            @include breakpoint(md) {
+                width: 35px;
+                height: 35px;
+                margin: 0;
+            }
+        }
+
+        .letter-avatar {
+            display: flex;
+            font-style: normal;
+            font-size: 1.35em;
+            font-weight: 500;
+        }
+
+        .pm {
+
+            // .avatar {
+            //     border: solid 2px #9c27b0;
+            // }
+    
+            .pop {
+                background: #9c27b0;
+    
+                &::before {
+                    border-color: #9c27b0 transparent transparent transparent;
+                }
+            }
+        }
+    
+    }
+
+}
+
+.pop {
+    display: none;
+    padding: 10px;
+    background: $lavender;
+    box-shadow: $shadow;
+    position: absolute;
+    width: 140px;
+    left: calc(50% - 70px);
+    bottom: 43px;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    font-weight: $main-bold;
+    text-align: center;
+    color: #fff;
+    @include bottom-arrow;
+
+    &::before {
+        border-color: $lavender transparent transparent transparent;
+    }
+
+    small {
+        display: block;
+        font-size: .8em;
+        font-weight: normal;
+    }
+}
+
+
+
+.project-details {
+    position: fixed;
+    top: 60px;
+    right: -500px;
+    width: 100%;
+    background: #fff;
+    padding: $padder-desktop;
+    height: calc(100% - 50px);
+    z-index: 99999;
+    transition: $trans;
+    box-shadow: $shadow;
+    opacity: 0;
+    overflow: auto;
+    @include scroll-bar;
+
+    @include breakpoint(md) {
+        width: 500px;
+        top: 50px;
+    }
+
+    &.move {
+        right: 0;
+        opacity: 1;
+    }
+
+    .close-project-details.top-right {
+        position: fixed;
+        top: 75px;
+        right: 25px;
+
+        @include breakpoint(md) {
+            top: 83px;
+            right: 35px;
+        }
+    }
+
+    h2 {
+        color: $grape;
+        max-width: calc(100% - 25px);
+    }
+
+    h3 {
+        font-size: 1.5em;
+        margin: 25px 0 0 0;
+    }
+
+    .full-description {
+        margin: 20px 0;
+
+        p {
+            border: none;
+            display: block;
+
+            a:hover {
+                color: $blue;
+            }
+        }
+    }
+
+    .materials-window {
+        border-top: solid 1px $faint;
+        
+        h3 {
+
+        }
+
+        p {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        div {
+            margin: 10px 0;
+            max-height: 250px;
+            display: block;
+            overflow: auto;
+            @include scroll-bar;
+        }
+    }
+
+    .milestones-window {
+
+        ul {
+            margin: 10px 0;
+        }
+
+        li {
+            font-size: 1.4em;
+            line-height: 1.3em;
+            padding: 10px 0;
+            border-bottom: solid 1px $faint;
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 14px;
+                height: 14px;
+                margin: 0 5px 0 0;
+            }
+        }
+
+        .complete {
+            text-decoration: line-through;
+        }
+
+        .milestone-bar {
+            display: block;
+            width: 100%;
+            height: 5px;
+            border-radius: 100em;
+            background: $faint;
+            margin: 15px 0 10px 0;
+            position: relative;
+
+            div {
+                display: block;
+                height: 5px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: $lavender;
+                border-radius: 100em;
+            }
+        }
+    }
+
+
+    p {
+        display: flex;
+        border-bottom : solid 1px $faint;
+        margin: 0;
+        padding: 10px 0;
+        align-items: center;
+        font-size: 1.4em;
+
+        &:last-child {
+            margin: 0;
+        }
+
+        strong,
+        span {
+            display: flex;
+            width: 50%;
+        }
+
+        span {
+            svg,
+            img {
+                height: 18px;
+                width: 18px;
+                padding: 3px;
+                stroke: $blue;
+                stroke-width: 2.5px;
+                background: rgba($blue, .1);
+                border-radius: 5px;
+                margin: 0 5px 0 0;
+
+                &.avatar {
+                    padding: 0;
+                    // height: 21px;
+                    // width: 21px;
+                }
+            }
+
+            
+        }
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}
+
+.web-page-url {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    font-size: 1.4em;
+    margin: 20px 0;
+    background: rgba($blue, .05);
+    position: relative;
+    border-radius: 5px;
+
+    a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 10px 10px 10px 44px;
+        display: block;
+        width: 100%;
+
+        &:hover {
+            color: $blue;
+        }
+    }
+
+    span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 34px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba($blue, .1);
+        border-radius: 5px;
+    }
+
+    svg {
+        width: 14px;
+        height: 14px;
+        stroke-width: 2.5px;
+        stroke: $blue;
+    }
+}
+
+
+.main-progress {
+    display: block;
+    width: 100%;
+    height: 5px;
+    background: #fff;
+    margin: 25px 0;
+    @include pill;
+    position: relative;
+
+    div,
+    .in-progress-progress {
+        height: 5px;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: $lavender;
+        z-index: 99;
+        @include pill;
+        transition: $trans_slowest;
+    }
+
+    .in-progress-progress {
+        background: rgba(#ff8ffd, .8);
+        z-index: 1000;
+        transition: none;
+
+        /* Makes the target easier to hover */
+        &::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            top: -15px;
+        }
+
+        &:hover {
+            .contain {
+                display: block;
+            }
+        }
+
+        i {
+            font-style: normal;
+        }
+ 
+        .contain {
+            font-size: 1.4em;
+            font-weight: 600;
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            min-width: 80px;
+            max-width: 110px;
+            bottom: 12px;
+            @include bottom-arrow;
+            left: 50%;
+            transform: translate(-50%, 0);
+            box-shadow: $shadow;
+            display: none;
+            transition: $trans_slowest;
+
+            &.show {
+                display: block;
+            }
+        }
+
+        .count {
+        }
+
+        .percent {
+        }
+
+        sup {
+            position: relative;
+            top: -2px;
+        }
+
+        small {
+            display: block;
+            font-size: .75em;
+            margin: 3px 0 0 0;
+            font-weight: normal;
+        }
+    }
+
+    span {
+        font-size: 2em;
+        font-weight: $main-bold;
+        position: absolute;
+        right: 0;
+        top: -25px;
+
+        @include breakpoint(md) {
+            font-size: 2.5em;
+            top: -35px;
+            bottom: auto;
+        }
+    }
+    
+}
+
+
+.project-finished {
+    margin: 20px 0;
+    
+    p {
+        @include flex-wrap;
+        align-items: center;
+        margin: 0;
+        color: #00b540;
+        font-weight: $main-bold;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    svg {
+        stroke: #00b540;
+        width: 16px;
+        height: 16px;
+        margin: 0 5px 0 0;
+    }
+}

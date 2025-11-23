@@ -1,0 +1,1 @@
+jQuery('.colour-picker').wpColorPicker();

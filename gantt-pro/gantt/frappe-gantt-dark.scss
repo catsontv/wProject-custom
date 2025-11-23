@@ -1,0 +1,184 @@
+$dark:                      #0d101a;
+$lavender:                  #607ae3;
+$light-yellow: 				#ffeb3b !default;
+$purple:                    #42549d;
+$orange:                    #ff9800;
+$green:                     #8bc34a;
+$blue:                      #00bcd4;
+$red:                       #f44336;
+$tomato:                    #ff5722;
+
+@mixin glow-30 {
+    box-shadow: 0 0 30px rgba($purple, .3) !important;
+}
+@mixin glow-60 {
+    box-shadow: 5px 5px 60px $purple !important;
+}
+
+@mixin scroll-bar {
+    &::-webkit-scrollbar {
+        background: rgba($dark, .2);
+	}
+
+	&::-webkit-scrollbar-thumb {
+        background-color: rgba($dark, .5);
+	}
+}
+
+@mixin scroll-bar-dark {
+    &::-webkit-scrollbar {
+        background: rgba($dark, 0);
+	}
+
+	&::-webkit-scrollbar-thumb {
+        background-color: rgba($lavender, .3);
+	}
+}
+
+
+.gantt-target,
+.gantt-task-list {
+    background: $dark;
+}
+
+.update-gantt-pro-form {
+
+	&.full-screen {
+		background: $dark;
+    }
+}
+
+.gantt-target {
+    @include scroll-bar-dark;
+}
+
+.gantt-task-list {
+    border-right: solid 2px rgba($lavender, .1);
+
+    li {
+
+        color: #5b606c;
+
+        &:nth-child(even) {
+            background: rgba($lavender, .05);
+        }
+
+        a {
+            color: rgba($lavender, .6);
+        }
+    }
+}
+
+
+.gantt-container {
+    
+    @include scroll-bar-dark;
+
+	.popup-wrapper {
+		.details-container {
+			background: #fff;
+        }
+    }
+
+    .details-container {
+        background: $dark !important;
+        @include glow-60;
+    }
+}
+
+.gantt {
+    .grid-header {
+		stroke: rgba($lavender, .1);
+	}
+    .tick {
+		stroke: rgba($lavender, .1);
+	}
+	.today-highlight {
+		fill: rgba($lavender, .1);
+	}
+	.grid-row {
+		fill: $dark;
+    }
+    .grid-row:nth-child(even) {
+		fill: rgba($lavender, .05);
+	}
+    .row-line {
+		stroke: none;
+	}
+    .arrow {
+		//stroke: rgba($lavender, .3);
+        stroke: #29345f;
+	}
+
+    .bar-label {
+        fill: rgba(#fff, .5);   
+    }
+
+    .bar-wrapper {
+
+        &:hover {
+            .bar-progress {
+                fill: rgba($blue, .3);
+            }
+        }
+        
+        .bar-progress {
+            fill: rgba($blue, .3);
+        }
+
+        &.low {
+            background: rgba($blue, .3);
+    
+            .bar-progress {
+                fill: rgba($blue, .3);
+            }
+        }
+        &.normal {
+            background: $green;
+    
+            .bar-progress {
+                fill: rgba($green, .3);
+            }
+        }
+        &.high {
+            background: $orange;
+    
+            .bar-progress {
+                fill: rgba($orange, .3);
+            }
+        }
+        &.urgent {
+            background: $tomato;
+    
+            .bar-progress {
+                fill: rgba($tomato, .3);
+            }
+        }
+    }
+}
+
+
+.update-gantt-pro-form {
+	&.full-screen {
+		.gantt-task-list {
+			@include scroll-bar-dark;
+		}
+    }
+}
+
+
+.btn-group .btn-light.active {
+    background: rgba($blue, .1) !important;
+    em {
+        margin: 0;
+    }
+}
+.btn-group .btn-light:hover {
+    background: $dark !important;
+}
+
+
+.gantt-pro-mask {
+    background: rgba($dark, .7);
+}
+

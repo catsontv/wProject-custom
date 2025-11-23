@@ -1,0 +1,309 @@
+.team-grid {
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+    width: auto;
+
+    li {
+        width: 100%;
+        padding: 25px 25px 60px 25px;
+        margin: 0 0 1px 0;
+        overflow: hidden;
+        position: relative;
+        background: #fff;
+
+        @include breakpoint(md) {
+            width: calc(25% - 1px);
+            margin: 0 1px 1px 0;
+        }
+
+        @include breakpoint(ipad-landscape) {
+            width: calc(33.33333% - 1px);
+            padding: 15px 15px 60px 15px;
+        }
+
+        &:hover {
+            background: rgba($blue, .03);
+            .btn-light {
+                border: solid 1px $blue;
+                color: $blue;
+            }
+        }
+
+        div {
+            position: relative;
+            z-index: 10;
+        }
+
+        .avatar {
+            display: block;
+            width: 90px;
+            height: 90px;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        strong {
+            display: block;
+            font-size: 1.5em;
+            margin: 15px 0 10px 0;
+        }
+
+        .title {
+            margin: 0 0 15px 0;
+        }
+
+        span {
+            display: block;
+            font-size: 1.4em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        svg {
+            width: 14px;
+            margin: 0 4px 0 0;
+            stroke: $blue;
+        }
+
+        .title {
+            margin: 0 0 15px 0;
+        }
+
+        .tag {
+            font-size: 1.3em;
+            a {
+                @include pill;
+                color: $blue;;
+                background: rgba($blue, .1);
+                padding: 8px 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: $main-bold;
+
+                &::before {
+                    content: '';
+                    display: block;
+                    border-radius: 100%;
+                    width: 8px;
+                    height: 8px;
+                    background: $blue;
+                    margin: 0 5px 0 0;
+                }
+            }
+        }
+
+        .btn-light {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            background: #fff;
+
+            @include breakpoint(ipad-landscape) {
+                left: 15px;
+            }
+        }
+    }
+
+    .avatar-box {
+        position: relative;
+        display: block;
+    }
+
+    .status-text {
+        display: inline-block;
+        padding: 10px;
+        font-size: 1.15em;
+        background: #fff;
+        border-radius: 100em;
+        box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
+        position: absolute;
+        top: -10px;
+        left: 50px;
+        font-weight: bold;
+        @include bottom-arrow;
+        text-align: center;
+        z-index: 99;
+
+        &::before {
+            left: 20px;
+        }
+    }
+}
+
+.team-grid-home {
+    
+    margin: 35px 0;
+
+    li {
+        width: calc(50% - 2px);
+        padding: 25px;
+        margin: 0 1px 1px 0;
+
+        @include breakpoint(md) {
+            width: 180px;
+        }
+
+        a {
+            width: 100%;
+            @include flex-wrap;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+
+            strong {
+                margin: 15px 0 0 0;
+                display: block;
+                width: 100%;
+                text-align: center;
+                font-size: 1.3em;
+            }
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+        }
+    } 
+}
+
+
+.profile {
+    background: #fff;
+    padding: $padder-mobile;
+
+    @include breakpoint(md) {
+        padding: $padder-desktop;
+        @include flex-wrap;
+    }
+
+    @include breakpoint(ipad-landscape) {
+        padding: 25px;
+    }
+
+    small {
+        font-size: 1.2em;
+        font-weight: $main-bold;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+        position: relative;
+        margin: 25px 0;
+        color: $blue;
+
+        span {
+            padding: 5px 5px 5px 0;
+            background: #fff;
+            display: inline;
+            z-index: 9;
+        }
+
+        &::after {
+            content: '';
+            display: block;
+            
+            @include vertical-align;
+            width: 100%;
+            border-bottom: solid 1px #ccc;;
+        }
+    }
+
+    .pic {
+        
+        width: 50%;
+        margin: 0 0 25px 0;
+
+        @include breakpoint(md) {
+            width: 270px;
+            margin: 0;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .letter-avatar {
+            display: flex;
+            width: 150px;
+            height: 150px;
+            font-size: 4em;     
+            
+            @include breakpoint(md) {
+                width: 270px;
+                height: 270px;
+                font-size: 7em;     
+            }
+        }
+    }
+
+    .details {
+        width: 100%;
+
+        @include breakpoint(md) {
+            padding: 0 0 0 $padder-desktop;
+            width: calc(100% - 270px);
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+
+            li {
+                font-size: 1.5em;
+                margin: 15px 0;
+                display: flex;
+
+                svg {
+                    height: 15px;
+                }
+
+                span {
+                    display: inline-block;
+                    width: 180px;
+                    font-weight: $main-bold;
+                }
+
+                &:last-child {
+                    margin: 15px 0 0 0;
+                }
+            }
+        }
+
+        p {
+            line-height: 1.3em;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .pinned-tasks {
+        li {
+            position: relative;
+            border-bottom: solid rgba($dark, .1);
+            margin: 0 !important;
+
+            &:last-child {
+                border: none;
+            }
+
+            a {
+                display: block;
+                padding: 7px 0;
+            }
+
+            .del {
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+}

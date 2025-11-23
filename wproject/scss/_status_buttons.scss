@@ -1,0 +1,65 @@
+.status {
+    padding: 7px 10px;
+    text-align: center;
+    display: flex;
+    @include pill;
+    align-items: center;
+    justify-content: start;
+    width: fit-content;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: .75em;
+    color: $dark;
+    font-style: normal;
+    //background: rgba($dark, .075);
+
+    svg {
+        width: 13px;
+        stroke-width: 3px;
+        margin: 0 3px 0 0;
+    }
+
+    &.in-progress,
+    &.on-hold,
+    &.complete,
+    &.not-started,
+    &.incomplete {
+        svg {
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+    &.in-progress {
+        color: $pink;
+        background: rgba($pink, .075);
+
+        svg {
+            color: $pink;
+        }
+    }
+    &.on-hold {
+        color: $dark;
+        background: rgba($dark, .075);
+
+        svg {
+            color: $dark;
+        }
+    }
+    &.complete {
+        color: $green;
+        background: rgba($green, .075);
+
+        svg {
+            color: $green;
+        }
+    }
+    &.not-started {
+        color: $dark;
+        background: rgba($dark, .075);
+    }
+    &.incomplete {
+        color: $blue;
+        background: rgba($blue, .075);
+    }
+}

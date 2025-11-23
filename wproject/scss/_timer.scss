@@ -1,0 +1,195 @@
+.timer-ui {
+    display: block;
+    padding: 25px;
+    background: rgba(#ffeb3b, .25);
+    overflow: hidden;
+    user-select: none;
+    position: relative;
+
+    @include breakpoint(md) {
+        padding: 25px 25px 20px 25px;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        filter: grayscale(100%);
+        opacity: .3;
+    }
+
+    .timer-start {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 15px 0 0 0;
+        justify-content: center;
+
+        button.disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+            opacity: .2;
+        }
+    }
+    .timer-stop {
+        margin: 15px 0 0 0;
+
+        .timer {
+
+            button {
+                display: flex;
+                align-items: center;
+            }
+
+            span {
+                display: block;
+                width: 13px;
+                height: 13px;
+                background: #fff url('images/clock.svg');
+                background-size: contain;
+                cursor: pointer;
+                justify-content: center;
+                margin: 0 5px 0 0;
+            
+                @keyframes rotate {
+                    to { 
+                        transform: rotate(360deg); 
+                    }
+                }
+            
+                &.running {
+                    animation: rotate 6s linear infinite;
+                }
+            }
+        }
+    }
+
+    p {
+        margin: 0 0 0 5px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        font-size: 1.25em;
+
+        &:first-child {
+            margin: 0;
+        }
+
+        button,
+        &.add-time span {
+            padding: 6px 12px;
+            margin: 0;
+            background: none;
+            border: none;
+            font-weight: $main-bold;
+            border-radius: 100em;
+            text-transform: uppercase;
+        }
+
+        button {
+            border: solid 2px $lavender;
+            color: $lavender;
+        }
+
+        &.add-time {
+
+            &.active {
+
+                // position: relative;
+
+                // &:after {
+                //     content: '';
+                //     display: block;
+                //     width: 1px;
+                //     height: 20px;
+                //     position: absolute;
+                //     top: 0;
+                //     left: 0;
+                //     border-right: solid 3px $blue;
+                // }
+
+                svg {
+                    transform: rotate(45deg);
+                }
+            }
+
+            span {
+                border: solid 2px $blue;
+                color: $blue;
+                display: flex;
+                align-items: center;
+                width: 34px;
+                height: 34px;
+                padding: 0;
+                justify-content: center;
+                
+                svg {
+                    width: 18px;
+                    height: 18px;
+                    stroke: $blue;
+                    transition: $trans;
+                }
+            }
+        }
+    }
+
+    .task-time {
+        position: relative;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        color: $lavender;
+
+        &.fade {
+            //opacity: .2;
+        }
+
+        em {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 3.5em;
+            color: $dark;
+        }
+    }
+}
+
+
+.add-missed-time {
+    width: 100%;
+    padding: 20px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    input {
+        font-size: 1.3em;
+        padding: 0 5px;
+        margin: 0 5px;
+        height: 32px;
+        border: solid 1px rgba($orange, .2);
+        border-radius: 3px;
+        width: calc(50% - 15px);
+    }
+
+    input[type="date"] {
+        width: calc(100% - 17px);
+        margin: 10px 5px 0 5px;
+    }
+
+    button {
+        font-size: 1.3em;
+        padding: 6px 14px;
+        margin: 20px auto 0 auto;
+        height: 34px;
+        border: solid 2px $blue;
+        color: $blue;
+        border-radius: 100em;
+        text-transform: uppercase;
+        font-weight: $main-bold;
+        display: block;
+        background: none;
+    }
+}

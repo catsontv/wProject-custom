@@ -1,0 +1,559 @@
+.middle {
+    position: relative;
+
+    @include breakpoint(md) {
+        width: calc(100% - 600px);
+        padding: 100px $padder-desktop $padder-desktop $padder-desktop;
+        margin: 0 0 0 300px;
+        transition: $trans;
+
+        @include breakpoint(ipad-landscape) {
+            padding: 70px 25px 25px 25px;
+        }
+
+        &.wide {
+            width: calc(100% - 300px);
+        }
+
+        &.repos {
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    @include breakpoint(ipad-landscape) {
+        width: calc(100% - 250px);
+        margin: 0 0 0 250px;
+        
+        &.wide {
+            width: calc(100% - 250px);
+        }
+    }
+
+    .project-description {
+        margin: 0 0 40px 0;
+    }
+
+    &.greyscale {
+        filter: grayscale(100%);
+    }
+
+    .page-content { 
+
+        margin: 0 0 20px 0;
+
+        p {
+            line-height: 1.4em;
+        }
+        
+        ul {
+            margin: 25px;
+        
+            li {
+                font-size: 1.4em;
+                line-height: 1.4em;
+                margin: 3px 0;
+                list-style-type: disc;
+            }
+        }
+        
+        a {
+            text-decoration: underline;
+        }
+    }
+
+    h1.spacer {
+        margin: 50px 0 25px 0;
+    }
+
+}
+
+.waiting-notification {
+    padding: 15px 20px;
+    background: #fff;
+    display: flex;
+
+    p {
+        margin: 0 !important;
+    }
+
+    svg {
+        width: 15px;
+        height: 15px;
+        margin: 0 10px 0 0;
+        stroke: $tomato;
+    }
+
+    label {
+        margin: 0 0 0 10px;
+        padding: 3px 8px 2px 8px;
+        border: solid 1px #ccc;
+        text-transform: uppercase;
+        font-size: .9em;
+        display: inline-block;
+        border-radius: 3px;
+        cursor: pointer;
+        font-weight: 500;
+
+        input {
+            display: none;
+        }
+
+        &:hover {
+            &.approve {
+                background: rgba($green, .15);
+            }
+            &.decline {
+                background: rgba($tomato, .15);
+            }
+        }
+
+        &.approve {
+            border: solid 1px $green;
+            color: $green;
+        }
+        &.decline {
+            border: solid 1px $tomato;
+            color: $tomato;
+        }
+    }
+
+    .message {
+        padding: 3px 6px 2px 6px;
+        border: solid 1px rgba($red, .1);
+        background: rgba($red, .05);
+        font-size: .85em;
+        text-transform: uppercase;
+        display: inline-block;
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+    }
+
+    &.decided {
+        border-left: solid 3px $green;
+    }
+    &.waiting {
+        border-left: solid 3px $tomato;
+    }
+
+    .radio:before,
+    .radio:after {
+        display: none;
+    }
+}
+
+
+
+.project-progress-chart {
+    margin: 0;
+    position: relative;
+    width: 100%;
+    z-index: 9999;
+    margin: 25px 0;
+    user-select: none;
+    z-index: 0;
+
+    @include breakpoint(md) {
+        margin: 25px 0;
+    }
+
+    &.no-projects {
+        height: auto;
+        padding: 25px;
+        background: #fff;
+
+        p {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+            margin: 0 5px 0 0;
+        }
+    }
+
+    @include breakpoint(md) {
+        &.projects-5 {
+            section .the-project {
+                width: 16.6666%;
+            }
+        }
+        &.projects-4 {
+            section .the-project {
+                width: 25%;
+            }
+        }
+        &.projects-3 {
+            section .the-project {
+                width: 33.3333%;
+            }
+        }
+        &.projects-2 {
+            section .the-project {
+                width: 50%;
+            }
+        }
+        &.projects-1 {
+            section .the-project {
+                width: 100%;
+            }
+        }
+    }
+
+    section {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        flex-direction: row;
+        align-items: center;
+
+        .the-project {
+            margin: 10px 0;
+            width: 50%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            overflow: hidden;
+            transition: $trans;
+
+            @include breakpoint(md) {
+                width: 20%;
+            }
+
+            span {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.8em;
+                width: 100px;
+                height: 100px;
+                z-index: 10;
+                border-radius: 100em;
+                text-align: center;  
+                position: relative;  
+                
+                &::after {
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    z-index: -1;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: 100%;
+                    opacity: .2;
+                }
+
+                strong {
+                    position: relative;
+                    width: 100%;
+                    top: -10px;
+                }
+
+                sup {
+                    font-size: .7em;
+                    position: absolute;
+                    top: 6px;
+                }
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                &.a-e {
+                    color: darken(#7bc8a4, 20%);
+                    background: rgba(#7bc8a4, .2);
+                    border: solid 0 rgba(#7bc8a4, .02);
+
+                    svg {
+                        stroke: #7bc8a4;
+                    }
+                }
+                &.f-j {
+                    color: darken(#f16745, 20%);
+                    background: rgba(#f16745, .2);
+                    border: solid 0 rgba(#f16745, .02);
+
+                    svg {
+                        stroke: #f16745;
+                    }
+                }
+                &.k-o {
+                    color: darken(#ffc65d, 20%);
+                    background: rgba(#ffc65d, .2);
+                    border: solid 0 rgba(#ffc65d, .02);
+
+                    svg {
+                        stroke: #ffc65d;
+                    }
+                }
+                &.p-t {
+                    color: darken(#4cc3d9, 20%);
+                    background: rgba(#4cc3d9, .2);
+                    border: solid 0 rgba(#4cc3d9, .02);
+
+                    svg {
+                        stroke: #4cc3d9;
+                    }
+                }
+                &.u-z {
+                    color: darken(#90a9e6, 20%);
+                    background: rgba(#90a9e6, .2);
+                    border: solid 0 rgba(#90a9e6, .02);
+
+                    svg {
+                        stroke: #90a9e6;
+                    }
+                }
+            }
+
+            em {
+                font-style: normal;
+                font-size: 1.15em;
+                font-weight: $main-medium;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 100%;
+                font-weight: 600;
+                color: rgba($dark, 1);
+                position: absolute;
+                left: 0;
+                bottom: 35px;
+                text-align: center;
+                z-index: 99;
+                display: block;
+                min-height: 13px;
+            }
+        }
+
+        .project-info {
+            position: absolute;
+            padding: 0 15px 10px 15px;
+            background: #fff;
+            box-shadow: 5px 5px 20px rgba($dark, .3);
+            z-index: 999;
+            @include bottom-arrow;
+            width: 270px;
+            left: calc(50% - 135px);
+            display: none;
+            z-index: 99999;
+            display: none;
+
+            h3 {
+                margin: 0 0 10px 0;
+                background: $lavender;
+                color: #fff;
+                padding: 10px 55px 10px 15px;
+                line-height: 1.2em;
+                width: calc(100% + 30px);
+                position: relative;
+                left: -15px;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+
+                span {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: auto;
+                    //width: 40px;
+                    width: auto;
+                    height: 100%;
+                    background: rgba($grape, .3);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0 8px;
+                    border-top: none;
+                    border-top-left-radius: 2px;
+                    border-top-right-radius: 2px;
+                }
+            }
+
+            p {
+                margin: 0;
+                font-size: 1.2em;
+                border-bottom: solid 1px rgba($dark, .1);
+                padding: 5px 0;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+                
+                strong {
+                    display: inline-block;
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+
+.wproject-dashboard-widget {
+    padding: 20px;
+    background: #fff;
+    margin: 35px 0;
+}
+
+
+
+.latest-activity {
+    font-size: 1.4em;
+
+    @include breakpoint(ipad-landscape) {
+        padding: 0;
+    }
+
+    ul {
+        width: 100%;
+
+        @include breakpoint(md) {
+            padding: 0;
+            display: flex;
+            flex-flow: wrap;
+            width: calc(100% + 25px);
+        }
+    }
+
+    li {
+        @include flex-wrap;
+        background: #fff;
+        padding: 25px 40px 50px 25px;
+        width: calc(25% - 25px);
+        position: relative;
+        border-bottom: solid 1px #f1f1f1;
+        margin: 0 25px 25px 0;
+        border-radius: 2px;
+
+        @include breakpoint(md) {
+            border-right: solid 1px #f1f1f1;
+        }
+
+        @media only screen and (max-width: 1700px) {
+            width: calc(33.33333% - 25px);
+        }
+
+        @media only screen and (max-width: 1500px) {
+            width: calc(50% - 25px);
+        }
+
+        @media only screen and (max-width: 1360px) {
+            width: 100%;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            //background: rgba(#fff, .7);
+            box-shadow: $shadow;
+            svg {
+                opacity: 1;
+            }
+        }
+
+        .project-name {
+            display: block;
+            margin: 10px 0 10px 0;
+            font-size: .95em;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        svg {
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            stroke: $dark;
+            opacity: .3;
+            cursor: text;
+        }
+
+        .task-name {
+            display: block;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        em {
+            font-size: .8em;
+            font-style: normal;
+            display: block;
+            font-weight: bold;
+            opacity: .5;
+        }
+
+        &.complete {
+
+            .task-name {
+                text-decoration: line-through;
+                color: rgba($dark, .5);
+            }
+
+            em {
+                color: $green;
+                opacity: 1;
+            }
+
+            svg {
+                stroke: $green;
+                opacity: 1;
+            }
+        }
+    }
+
+    .latest-01 {
+
+    }
+
+    strong {
+        display: block;
+        font-size: .85em;
+        color: $lavender;
+    }
+
+    img,
+    .letter-avatar {
+        width: 28px;
+        height: 28px;
+        margin: 0 10px 0 0;
+        border-radius: $corner-major;
+    }
+
+    .letter-avatar {
+        display: flex;
+        font-size: .8em;
+        font-weight: 500;
+    }
+
+    .activity-content {
+        width: calc(100% - 38px);
+
+        .task-name {
+            margin: 10px 0;
+        }
+
+        .status {
+            font-size: .65em;
+            position: absolute;
+            bottom: 25px;
+            left: 63px;
+        }
+    }
+
+}

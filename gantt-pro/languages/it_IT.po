@@ -1,0 +1,489 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gantt Pro for wProject\n"
+"POT-Creation-Date: 2021-04-30 21:51+0800\n"
+"PO-Revision-Date: 2022-11-18 17:58+0100\n"
+"Last-Translator: \n"
+"Language-Team: Rocket Apps <support@rocketapps.com.au>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wproject-gantt-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: gantt-pro-license.php:4 wproject-gantt-pro.php:44
+msgid "Gantt Pro License"
+msgstr "Licenza Gantt Pro"
+
+#: gantt-pro-license.php:6
+msgid "Please activate your license to get access to updates and support."
+msgstr "Attivare la licenza per accedere agli aggiornamenti e al supporto."
+
+#: gantt-pro-license.php:38 gantt-pro-license.php:99 gantt-pro-license.php:166
+msgid "Unexpected Error! The query returned with an error."
+msgstr "Errore imprevisto! La query ha restituito un errore."
+
+#: gantt-pro-license.php:64
+msgid "Invalid license key"
+msgstr "Chiave di licenza non valida"
+
+#: gantt-pro-license.php:67
+msgid "Your license is activate."
+msgstr "La licenza è attivata."
+
+#: gantt-pro-license.php:119
+msgid "Something went wrong. Please check your key and try again."
+msgstr "Qualcosa è andato storto. Controlla la chiave e riprova."
+
+#: gantt-pro-license.php:124
+msgid "The license key has been deactivated for this domain"
+msgstr "La chiave di licenza è stata disattivata per questo dominio"
+
+#: gantt-pro-license.php:128
+msgid "The license key on this domain is already inactive"
+msgstr "La chiave di licenza su questo dominio è già inattiva"
+
+#: gantt-pro-license.php:137
+msgid "License key"
+msgstr "Chiave della licenza"
+
+#: gantt-pro-license.php:143
+msgid "Activate"
+msgstr "Attiva"
+
+#: gantt-pro-license.php:144
+msgid "Deactivate"
+msgstr "Disattiva"
+
+#: gantt-pro-license.php:180
+msgid "License status"
+msgstr "Stato della licenza"
+
+#: gantt-pro-license.php:181
+msgid "Active"
+msgstr "Attivo"
+
+#: gantt-pro-license.php:181
+msgid "Configure Gantt Pro"
+msgstr "Configurare Gantt Pro"
+
+#: gantt-pro-license.php:182
+msgid "Licensesd to"
+msgstr "Licenze a"
+
+#: gantt-pro-license.php:184
+msgid "Licenses used"
+msgstr "Licenze utilizzate"
+
+#: gantt-pro-license.php:185
+msgid "Max allowed"
+msgstr "Numero massimo consentito"
+
+#: gantt-pro-license.php:186
+msgid "Licensed domains"
+msgstr "Domini concessi in licenza"
+
+#: gantt-pro-license.php:191
+msgid "Support expiry"
+msgstr "Scadenza del supporto"
+
+#: gantt-pro-license.php:205
+msgid "Your support license has expired."
+msgstr "La licenza di supporto è scaduta."
+
+#: gantt-pro-license.php:206
+#, php-format
+msgid ""
+"For continued support and updates, <a href=\"%1$s\" target=\"_blank\" rel="
+"\"noopener\">renew your license today</a>."
+msgstr ""
+"Per supporto e aggiornamenti continui, <a href=\"%1$s\" target=\"_blank\" "
+"rel=\"noopener\">rinnova la tua licenza oggi stesso</a>."
+
+#: gantt-pro-license.php:214
+msgid "This license key has been blocked."
+msgstr "Questa chiave di licenza è stata bloccata."
+
+#: gantt-pro-license.php:215
+#, php-format
+msgid ""
+"If you believe this should not have happened, please <a href=\"%1$s\" target="
+"\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+"Se ritieni che ciò non sarebbe dovuto accadere, ti preghiamo di <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">contattarci</a>."
+
+#: gantt-pro-license.php:223
+msgid "This license key is pending server side acknowledgment."
+msgstr "Questa chiave di licenza è in attesa di riconoscimento lato server."
+
+#: gantt-pro-license.php:224
+#, php-format
+msgid ""
+"If you are still waiting for your license to be acknowledged, please <a href="
+"\"%1$s\" target=\"_blank\" rel=\"noopener\">make contact</a>."
+msgstr ""
+"Se stai ancora aspettando che la tua licenza venga riconosciuta, ti "
+"preghiamo di <a href=\"%1$s\" target=\"_blank\" rel=\"noopener"
+"\">contattarci</a>."
+
+#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:54
+msgid "View details"
+msgstr "Vedi dettagli"
+
+#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:77
+#, php-format
+msgid "More information about %s"
+msgstr "Più informazioni su %s"
+
+#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr "Controlla gli aggiornamenti"
+
+#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:213
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr "Il plugin %s è aggiornato."
+
+#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:215
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr "È disponibile una nuova versione del plugin %s."
+
+#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:217
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+"Non è stato possibile determinare se è disponibile un aggiornamento di %s."
+
+#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:223
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr "Stato del controllo aggiornamenti sconosciuto \"%s\""
+
+#: plugin-update-checker/Puc/v4p9/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr "La cronologia degli aggiornamenti non è disponibile."
+
+#: wproject-gantt-pro.php:56 wproject-gantt-pro.php:97
+#, fuzzy
+msgid "Gantt Pro"
+msgstr "Gantt Pro"
+
+#: wproject-gantt-pro.php:88
+msgid "Save Settings"
+msgstr "Salva Impostazioni"
+
+#: wproject-gantt-pro.php:90
+msgid "Activate License Key"
+msgstr "Attiva la chiave di licenza"
+
+#: wproject-gantt-pro.php:100
+#, fuzzy, php-format
+msgid ""
+"Please <a href=\"%1$s\" rel=\"noopener\">activate your license key</a> to "
+"unlock Gantt Pro."
+msgstr ""
+"Si <a href=\"%1$s\" rel=\"noopener\">prega di attivare la chiave di licenza</"
+"a> per sbloccare Gantt Pro."
+
+#: wproject-gantt-pro.php:105
+msgid "Show the Gantt chart"
+msgstr "Visualizzare il diagramma di Gantt"
+
+#: wproject-gantt-pro.php:106
+msgid "Show the Gantt chart at these locations."
+msgstr "Mostra il diagramma di Gantt in queste posizioni."
+
+#: wproject-gantt-pro.php:113
+msgid "Dashboard"
+msgstr "Bacheca"
+
+#: wproject-gantt-pro.php:116
+#, fuzzy
+msgid "Individual projects"
+msgstr "Progetti individuali"
+
+#: wproject-gantt-pro.php:119
+#, fuzzy
+msgid "Projects page"
+msgstr "Tutta la pagina dei progetti"
+
+#: wproject-gantt-pro.php:128
+msgid "Initial Gantt scale (tasks)"
+msgstr "Scala di Gantt iniziale (attività)"
+
+#: wproject-gantt-pro.php:129
+msgid "The initial scale when the Gantt chart contains tasks."
+msgstr "Scala iniziale quando il diagramma di Gantt contiene attività."
+
+#: wproject-gantt-pro.php:136 wproject-gantt-pro.php:159
+msgid "Days"
+msgstr "Giorni"
+
+#: wproject-gantt-pro.php:139 wproject-gantt-pro.php:162
+msgid "Weeks"
+msgstr "Settimane"
+
+#: wproject-gantt-pro.php:142 wproject-gantt-pro.php:165
+msgid "Months"
+msgstr "Mesi"
+
+#: wproject-gantt-pro.php:151
+msgid "Initial Gantt scale (projects)"
+msgstr "Scala di Gantt iniziale (progetti)"
+
+#: wproject-gantt-pro.php:152
+msgid "The initial scale when the Gantt chart contains projects."
+msgstr "Scala iniziale quando il diagramma di Gantt contiene progetti."
+
+#: wproject-gantt-pro.php:174
+msgid "Order"
+msgstr "Ordine"
+
+#: wproject-gantt-pro.php:175
+msgid "The order to return tasks and projects."
+msgstr "Ordine di restituzione di attività e progetti."
+
+#: wproject-gantt-pro.php:182
+msgid "Alphabetical (default)"
+msgstr "Ordine alfabetico (impostazione predefinita)"
+
+#: wproject-gantt-pro.php:185
+msgid "Start date"
+msgstr "Data di inizio"
+
+#: wproject-gantt-pro.php:195
+msgid "Popup trigger"
+msgstr "Trigger popup"
+
+#: wproject-gantt-pro.php:196
+msgid "How popups are triggered in the Gantt chart."
+msgstr "Come vengono attivati i popup nel diagramma di Gantt."
+
+#: wproject-gantt-pro.php:203
+msgid "On mouse over (default)"
+msgstr "Al passaggio del mouse (impostazione predefinita)"
+
+#: wproject-gantt-pro.php:206
+msgid "Disabled"
+msgstr "Disabilitato"
+
+#: wproject-gantt-pro.php:215
+msgid "Show subtasks"
+msgstr "Mostra sottoattività"
+
+#: wproject-gantt-pro.php:216
+msgid "Show subtasks below the main tasks."
+msgstr "Mostra le sottoattività sotto le attività principali."
+
+#: wproject-gantt-pro.php:223 wproject-gantt-pro.php:240
+msgid "Enable"
+msgstr "Abilita"
+
+#: wproject-gantt-pro.php:232
+msgid "Show project / task list"
+msgstr "Mostra progetto / elenco attività"
+
+#: wproject-gantt-pro.php:233
+msgid "Show the project / task names docked to the left of the Gantt chart."
+msgstr ""
+"Mostra i nomi dei progetti / attività ancorati a sinistra del diagramma di "
+"Gantt."
+
+#: wproject-gantt-pro.php:249
+msgid "Bar height"
+msgstr "Altezza barra"
+
+#: wproject-gantt-pro.php:250
+msgid "The height of the Gantt bars. Default is 20."
+msgstr "L'altezza delle barre di Gantt. Il valore predefinito è 20."
+
+#: wproject-gantt-pro.php:266
+msgid "Bar spacing"
+msgstr "Distanza tra le barre"
+
+#: wproject-gantt-pro.php:267
+msgid "The spacing between Gantt bars. Default is 10."
+msgstr "La spaziatura tra le barre di Gantt. Il valore predefinito è 10."
+
+#: wproject-gantt-pro.php:283
+msgid "Primary bar colour"
+msgstr "Colore barra primaria"
+
+#: wproject-gantt-pro.php:284
+msgid ""
+"The colour of the primary Gantt bars. If not specified, the priority colour "
+"will be displayed."
+msgstr ""
+"Il colore delle barre di Gantt primarie. Se non specificato, verrà "
+"visualizzato il colore di priorità."
+
+#: wproject-gantt-pro.php:300
+msgid "Secondary bar colour"
+msgstr "Colore barra secondaria"
+
+#: wproject-gantt-pro.php:301
+msgid "The colour of the secondary Gantt bars. Deafult is 747faf."
+msgstr "Il colore delle barre di Gantt secondarie. Deafult è 747faf."
+
+#: wproject-gantt-pro.php:393
+msgid ""
+"The Gantt chart was modified. Please refresh this page to see the latest "
+"Kanban board."
+msgstr ""
+"Il diagramma di Gantt è stato modificato. Aggiorna questa pagina per vedere "
+"l'ultima bacheca Kanban."
+
+#: wproject-gantt-pro.php:443 wproject-gantt-pro.php:764
+#: wproject-gantt-pro.php:1043 wproject-gantt-pro.php:1386
+msgid "Day"
+msgstr "Giorno"
+
+#: wproject-gantt-pro.php:444 wproject-gantt-pro.php:764
+#: wproject-gantt-pro.php:1044 wproject-gantt-pro.php:1386
+msgid "Week"
+msgstr "Settimana"
+
+#: wproject-gantt-pro.php:445 wproject-gantt-pro.php:764
+#: wproject-gantt-pro.php:1045 wproject-gantt-pro.php:1386
+msgid "Month"
+msgstr "Mese"
+
+#: wproject-gantt-pro.php:446 wproject-gantt-pro.php:764
+#: wproject-gantt-pro.php:1046 wproject-gantt-pro.php:1386
+msgid "Year"
+msgstr "Anno"
+
+#: wproject-gantt-pro.php:482 wproject-gantt-pro.php:1087
+msgid "January"
+msgstr "Gennaio"
+
+#: wproject-gantt-pro.php:483 wproject-gantt-pro.php:1088
+msgid "February"
+msgstr "Febbraio"
+
+#: wproject-gantt-pro.php:484 wproject-gantt-pro.php:1089
+msgid "March"
+msgstr "Marzo"
+
+#: wproject-gantt-pro.php:485 wproject-gantt-pro.php:1090
+msgid "April"
+msgstr "Aprile"
+
+#: wproject-gantt-pro.php:486 wproject-gantt-pro.php:1091
+msgid "May"
+msgstr "Maggio"
+
+#: wproject-gantt-pro.php:487 wproject-gantt-pro.php:1092
+msgid "June"
+msgstr "Giugno"
+
+#: wproject-gantt-pro.php:488 wproject-gantt-pro.php:1093
+msgid "July"
+msgstr "Luglio"
+
+#: wproject-gantt-pro.php:489 wproject-gantt-pro.php:1094
+msgid "August"
+msgstr "Agosto"
+
+#: wproject-gantt-pro.php:490 wproject-gantt-pro.php:1095
+msgid "September"
+msgstr "Settembre"
+
+#: wproject-gantt-pro.php:491 wproject-gantt-pro.php:1096
+msgid "October"
+msgstr "Ottobre"
+
+#: wproject-gantt-pro.php:492 wproject-gantt-pro.php:1097
+msgid "November"
+msgstr "Novembre"
+
+#: wproject-gantt-pro.php:493 wproject-gantt-pro.php:1098
+msgid "December"
+msgstr "Dicembre"
+
+#: wproject-gantt-pro.php:779 wproject-gantt-pro.php:1401
+msgid "Start"
+msgstr "Inizio"
+
+#: wproject-gantt-pro.php:780 wproject-gantt-pro.php:1402
+msgid "Due"
+msgstr "Scadenza"
+
+#: wproject-gantt-pro.php:781 wproject-gantt-pro.php:1403
+msgid "Progress"
+msgstr "Progresso"
+
+#: wproject-gantt-pro.php:782 wproject-gantt-pro.php:1404
+msgid "Edit task"
+msgstr "Modifica Attività"
+
+#: wproject-gantt-pro.php:1059
+msgid "Projects I manage"
+msgstr "Progetti che gestisco"
+
+#: wproject-gantt-pro.php:1266
+msgid "In progress"
+msgstr "In corso"
+
+#: wproject-gantt-pro.php:1269
+msgid "Planning"
+msgstr "Pianificazione"
+
+#: wproject-gantt-pro.php:1272
+msgid "Proposed"
+msgstr "Proposto"
+
+#: wproject-gantt-pro.php:1275
+msgid "Setting up"
+msgstr "Installando"
+
+#: wproject-gantt-pro.php:1278
+msgid "Archived"
+msgstr "Archiviato"
+
+#: wproject-gantt-pro.php:1281
+msgid "Cancelled"
+msgstr "Annullato"
+
+#: wproject-gantt-pro.php:1284
+msgid "Complete"
+msgstr "Completato"
+
+#: wproject-gantt-pro.php:1528
+msgid "Gantt"
+msgstr "Visualizzare il diagramma di Gantt"
+
+#. Plugin Name of the plugin/theme
+msgid "Gantt Pro for wProject"
+msgstr "Gantt Pro per wProject"
+
+#. Plugin URI of the plugin/theme
+msgid "https://rocketapps.com.au/product/wproject-gantt-pro/"
+msgstr "https://rocketapps.com.au/product/wproject-gantt-pro/"
+
+#. Description of the plugin/theme
+msgid "Advanced Gantt chart with drag and drop interface."
+msgstr "Diagramma di Gantt avanzato con interfaccia drag and drop."
+
+#. Author of the plugin/theme
+msgid "Rocket Apps"
+msgstr "Applicazioni Rocket"
+
+#. Author URI of the plugin/theme
+msgid "https://rocketapps.com.au"
+msgstr "https://rocketapps.com.au"

@@ -1,0 +1,372 @@
+.notifications,
+.work-in-progress,
+.comments,
+.my-follows {
+
+    @include fixed-mobile;
+    top: 60px;
+    height: calc(100% - 260px);
+    width: 100%;
+    display: none;
+
+    @include breakpoint(md) {
+        @include remove-fixed;
+        max-height: calc(100% - 50px);
+        overflow: auto;
+        position: fixed;
+        top: 50px;
+        background: #fff;
+        width: 300px !important;
+        right: 0;
+        box-shadow: $shadow;
+        display: none;
+        cursor: text;
+        border-bottom-left-radius: $corner-minor;
+        @include scroll-bar-blue;
+    }
+
+    //@include top-arrow;
+
+    h3 {
+        padding: 16px 15px 14px 15px;
+        margin: 0;
+        border-bottom: solid 1px $faint;
+        @include flex-wrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: #fff;
+        z-index: 99;
+
+        @include breakpoint(md) {
+            padding: 11px 15px 9px 15px;
+            width: 300px;
+            position: fixed;
+        }
+
+        svg {
+            padding: 2px;
+            filter: grayscale(100%);
+
+            &:hover {
+                filter: grayscale(0);
+            }
+        }
+    }
+
+    div {
+        font-size: 1.4em;
+        line-height: 1.2em;
+        border-bottom: solid 1px $faint;
+        padding: 20px;
+        margin: 0;
+        position: relative;
+
+        // &:nth-child(even) {
+        //     background: #f1f1f1
+        // }
+
+        p {
+            display: block;
+            line-height: 1.3em;
+        }
+        a {
+            display: inline;
+            text-decoration: underline;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        &:hover {
+            background: rgba($faint, .5);
+        }
+
+        &.letter-avatar {
+            pointer-events: none;
+        }
+    }
+
+    
+}
+
+.notifications,
+.work-in-progress {
+    div {
+        margin: 0 !important;
+        line-height: 1.3em;
+        position: relative;
+
+        &.message-01 {
+            @include breakpoint(md) {
+                margin: 34px 0 0 0 !important;
+            }
+        }
+
+        form {
+            &.updating {
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: .85;
+                    background: #fff;
+                    background-size: 30px 30px;
+                    z-index: 9;
+                }
+                &::before {
+                    content: '';
+                    background: url('images/spinner.svg') no-repeat center;
+                    background-size: 30px 30px;
+                    width: 30px;
+                    height: 30px;
+                    position: absolute;
+                    top: calc(50% - 15px);
+                    left: calc(50% - 15px);
+                    z-index: 10;
+                }
+            }
+        }
+        
+        strong {
+            display: block;
+            font-size: .8em;
+            margin: 0 0 5px 0;
+            color: $blue;
+            width: calc(100% - 25px);
+        }
+
+        a {
+            text-decoration: underline;
+            display: inline !important;
+        }
+
+        small {
+            font-size: 1em;
+            margin: 15px 0;
+            display: block;
+        }
+
+        .btn-light {
+            text-decoration: none;
+            font-size: .9em;
+            display: block !important;
+            text-align: center;
+            width: 100%;
+            margin: 15px 0 0 0;
+        }
+
+        button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 0;
+            outline: 0;
+            z-index: 9;
+
+            &:hover {
+                svg {
+                    stroke: $pink;
+                    opacity: 1;
+                }
+            }
+
+            svg {
+                width: 20px;
+                height: 20px;
+                padding: 2px;
+                opacity: .5;
+            }
+        }
+
+        &:hover {
+            button {
+                display: block;
+            }
+        }
+    }
+}
+
+.work-in-progress,
+.work-in-progress.dropdown {
+    div {
+        
+
+        @include breakpoint(md) {
+            margin: 34px 0 0 0 !important;
+        }
+    }
+}
+
+.comments,
+.my-follows {
+
+    z-index: 9999;
+    height: calc(100% - 260px);
+    @include scroll-bar-blue;
+    overflow: auto;
+
+    @include breakpoint(md) {
+        height: 100%;
+        //height: auto;
+    }
+
+    // h3 {
+    //     position: fixed;
+    //     width: 300px;
+    //     top: 50px;
+    //     background: #fff;
+    //     z-index: 99;
+    // }
+
+    div {
+        padding: 0;
+
+        &.follow-01,
+        &.comment-01 {
+            
+            @include breakpoint(md) {
+                margin: 34px 0 0 0 !important;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            padding: 20px 20px 20px 60px;
+        }
+
+        strong {
+            margin: 0;
+            display: block;
+
+            span {
+                font-size: .8em;
+                line-height: 1.2em;
+                display: block;
+                text-decoration: none;
+                color: $blue;
+                margin: 4px 0 0 0;
+            }
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    img,
+    .letter-avatar {
+        display: block;
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+        position: absolute;
+        top: 15px;
+        left: 14px;
+        font-size: 1em;
+        font-weight: 500;
+    }
+}
+
+@import 'scss/status_buttons';
+
+.my-follows {
+
+    div {
+
+        &.updating {
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: .85;
+                background: #fff;
+                background-size: 30px 30px;
+                z-index: 9;
+            }
+            &::before {
+                content: '';
+                background: url('images/spinner.svg') no-repeat center;
+                background-size: 30px 30px;
+                width: 30px;
+                height: 30px;
+                position: absolute;
+                top: calc(50% - 15px);
+                left: calc(50% - 15px);
+                z-index: 10;
+            }
+        }
+
+        &.overdue {
+            background: rgba($tomato, .05);
+
+            .message-date {
+                color: $tomato;
+                font-weight: bold;
+            }
+        }
+
+        &:hover {
+            strong,
+            p {
+                color: $dark;
+            }
+        }
+        
+        a {
+            padding: 15px 0 15px 60px;
+            width: calc(100% - 40px);
+            border-radius: 0;
+            display: block !important;
+        }
+
+        .status {
+           padding: 4px 8px; 
+           font-size: .65em;
+        }
+
+        .complete {
+            svg {
+                stroke: $green !important;
+            }
+        }
+    }
+
+    p {
+        margin: 10px 0;
+        font-size: 1em;
+    }
+
+    .unfollow {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+
+        svg {
+            stroke: $blue;
+            fill: $blue;
+        }
+
+        &:hover {
+            svg {
+                stroke: #ccc;
+                fill: none;
+            }
+        }
+    }   
+}
