@@ -22,7 +22,7 @@ function wp_calendar_pro_textdomain() {
 add_action( 'plugins_loaded', 'wp_calendar_pro_textdomain' );
 
 /* Constants */
-define('CALENDAR_PRO_VERSION', '1.0.0');
+define('CALENDAR_PRO_VERSION', '1.0.1');
 define('CALENDAR_PRO_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 define('CALENDAR_PRO_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 
