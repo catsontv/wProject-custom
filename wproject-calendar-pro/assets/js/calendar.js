@@ -500,7 +500,7 @@
         showCalendarModal: function() {
             $('#calendar-id').val('');
             $('#calendar-form').trigger('reset');
-            $('#calendar-modal').show();
+            $('#calendar-modal').addClass('active');
             $('#calendar-name').focus();
         },
 
@@ -508,7 +508,7 @@
          * Hide calendar modal
          */
         hideCalendarModal: function() {
-            $('#calendar-modal').hide();
+            $('#calendar-modal').removeClass('active');
             $('#calendar-form').trigger('reset');
         },
 
