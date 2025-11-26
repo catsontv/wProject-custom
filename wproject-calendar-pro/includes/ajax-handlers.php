@@ -22,6 +22,7 @@ function calendar_ajaxStatus($status, $message, $data = array()) {
         'data'    => $data
     );
     wp_send_json($response);
+    exit; // Explicit exit for clarity
 }
 
 /* Get calendar events */
@@ -36,6 +37,10 @@ function calendar_pro_get_events() {
     $end_date = isset( $_POST['end'] ) ? sanitize_text_field( $_POST['end'] ) : null;
 
     if ( $calendar_id ) {
+        // Check if user has access to this calendar
+        if ( ! WProject_Calendar_Manager::user_can_access_calendar( $calendar_id, get_current_user_id() ) ) {
+            calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+        }
         $events = WProject_Event_Manager::get_calendar_events( $calendar_id, $start_date, $end_date );
     } else {
         $events = WProject_Event_Manager::get_user_events( get_current_user_id(), $start_date, $end_date );
@@ -57,8 +62,15 @@ function calendar_pro_create_event() {
         calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
     }
 
+    $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+    
+    // Check if user can create events in this calendar
+    if ( ! WProject_Calendar_Manager::user_can_access_calendar( $calendar_id, get_current_user_id() ) ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+    }
+
     $event_data = array(
-        'calendar_id'      => isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0,
+        'calendar_id'      => $calendar_id,
         'title'            => isset( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '',
         'description'      => isset( $_POST['description'] ) ? wp_kses_post( $_POST['description'] ) : '',
         'location'         => isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '',
@@ -101,6 +113,20 @@ function calendar_pro_update_event() {
     }
 
     $event_id = isset( $_POST['event_id'] ) ? (int) $_POST['event_id'] : 0;
+    
+    // Check event ownership or edit permission
+    $event = WProject_Event_Manager::get_event( $event_id );
+    if ( ! $event ) {
+        calendar_ajaxStatus( 'error', __( 'Event not found.', 'wproject-calendar-pro' ) );
+    }
+    
+    $current_user = get_current_user_id();
+    $can_edit = ( $event->owner_id == $current_user ) || 
+                WProject_Event_Manager::user_can_edit_event( $event_id, $current_user );
+    
+    if ( ! $can_edit ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+    }
 
     $event_data = array();
 
@@ -150,6 +176,21 @@ function calendar_pro_delete_event() {
     }
 
     $event_id = isset( $_POST['event_id'] ) ? (int) $_POST['event_id'] : 0;
+    
+    // Check event ownership
+    $event = WProject_Event_Manager::get_event( $event_id );
+    if ( ! $event ) {
+        calendar_ajaxStatus( 'error', __( 'Event not found.', 'wproject-calendar-pro' ) );
+    }
+    
+    $current_user = get_current_user_id();
+    // Only owner or calendar owner can delete
+    $calendar = WProject_Calendar_Manager::get_calendar( $event->calendar_id );
+    $can_delete = ( $event->owner_id == $current_user ) || ( $calendar && $calendar->owner_id == $current_user );
+    
+    if ( ! $can_delete ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+    }
 
     if ( WProject_Event_Manager::delete_event( $event_id ) ) {
         calendar_ajaxStatus( 'success', __( 'Event deleted successfully', 'wproject-calendar-pro' ) );
@@ -163,6 +204,11 @@ add_action( 'wp_ajax_calendar_pro_create_calendar', 'calendar_pro_create_calenda
 function calendar_pro_create_calendar() {
     if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' ) ) {
         calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
+    }
+
+    // Verify user has calendar creation capability (logged in users can create calendars)
+    if ( ! is_user_logged_in() ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
     }
 
     $calendar_data = array(
@@ -191,6 +237,16 @@ function calendar_pro_update_calendar() {
     }
 
     $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+    
+    // Check calendar ownership
+    $calendar = WProject_Calendar_Manager::get_calendar( $calendar_id );
+    if ( ! $calendar ) {
+        calendar_ajaxStatus( 'error', __( 'Calendar not found.', 'wproject-calendar-pro' ) );
+    }
+    
+    if ( $calendar->owner_id != get_current_user_id() ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+    }
 
     $calendar_data = array();
 
@@ -222,6 +278,16 @@ function calendar_pro_delete_calendar() {
     }
 
     $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+    
+    // Check calendar ownership
+    $calendar = WProject_Calendar_Manager::get_calendar( $calendar_id );
+    if ( ! $calendar ) {
+        calendar_ajaxStatus( 'error', __( 'Calendar not found.', 'wproject-calendar-pro' ) );
+    }
+    
+    if ( $calendar->owner_id != get_current_user_id() ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+    }
 
     if ( WProject_Calendar_Manager::delete_calendar( $calendar_id ) ) {
         calendar_ajaxStatus( 'success', __( 'Calendar deleted successfully', 'wproject-calendar-pro' ) );
@@ -255,6 +321,17 @@ function calendar_pro_share_calendar() {
     }
 
     $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+    
+    // Check calendar ownership
+    $calendar = WProject_Calendar_Manager::get_calendar( $calendar_id );
+    if ( ! $calendar ) {
+        calendar_ajaxStatus( 'error', __( 'Calendar not found.', 'wproject-calendar-pro' ) );
+    }
+    
+    if ( $calendar->owner_id != get_current_user_id() ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+    }
+    
     $user_ids = isset( $_POST['user_ids'] ) && is_array( $_POST['user_ids'] ) ? array_map( 'intval', $_POST['user_ids'] ) : array();
     $permission = isset( $_POST['permission'] ) ? sanitize_text_field( $_POST['permission'] ) : 'view';
 

@@ -149,6 +149,38 @@ class WProject_Calendar_Manager {
     }
 
     /**
+     * Check if user can access calendar
+     *
+     * @param int $calendar_id Calendar ID
+     * @param int $user_id User ID
+     * @return bool True if user can access
+     */
+    public static function user_can_access_calendar( $calendar_id, $user_id ) {
+        global $wpdb;
+        
+        $calendar = self::get_calendar( $calendar_id );
+        if ( ! $calendar ) {
+            return false;
+        }
+        
+        // Owner can always access
+        if ( $calendar->owner_id == $user_id ) {
+            return true;
+        }
+        
+        // Check shared access
+        $table_shares = $wpdb->prefix . 'wproject_calendar_sharing';
+        $has_access = $wpdb->get_var( $wpdb->prepare(
+            "SELECT id FROM $table_shares 
+             WHERE calendar_id = %d AND shared_with_user_id = %d",
+            $calendar_id,
+            $user_id
+        ) );
+        
+        return (bool) $has_access;
+    }
+
+    /**
      * Share calendar with user
      *
      * @param int $calendar_id Calendar ID

@@ -179,21 +179,27 @@ class WProject_Event_Manager {
 
         $table_events = $wpdb->prefix . 'wproject_events';
 
-        $where = $wpdb->prepare( "calendar_id = %d", $calendar_id );
-
         if ( $start_date && $end_date ) {
-            $where .= $wpdb->prepare(
-                " AND ((start_datetime >= %s AND start_datetime <= %s) OR (end_datetime >= %s AND end_datetime <= %s))",
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT * FROM $table_events 
+                 WHERE calendar_id = %d 
+                 AND ((start_datetime >= %s AND start_datetime <= %s) 
+                      OR (end_datetime >= %s AND end_datetime <= %s))
+                 ORDER BY start_datetime ASC",
+                $calendar_id,
                 $start_date,
                 $end_date,
                 $start_date,
                 $end_date
-            );
+            ) );
+        } else {
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT * FROM $table_events 
+                 WHERE calendar_id = %d 
+                 ORDER BY start_datetime ASC",
+                $calendar_id
+            ) );
         }
-
-        $events = $wpdb->get_results(
-            "SELECT * FROM $table_events WHERE $where ORDER BY start_datetime ASC"
-        );
 
         return $events;
     }
@@ -217,29 +223,35 @@ class WProject_Event_Manager {
         $table_calendars = $wpdb->prefix . 'wproject_calendars';
         $table_attendees = $wpdb->prefix . 'wproject_event_attendees';
 
-        $where = "1=1";
-
         if ( $start_date && $end_date ) {
-            $where .= $wpdb->prepare(
-                " AND ((e.start_datetime >= %s AND e.start_datetime <= %s) OR (e.end_datetime >= %s AND e.end_datetime <= %s))",
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT DISTINCT e.*, c.name as calendar_name, c.color as calendar_color
+                FROM $table_events e
+                INNER JOIN $table_calendars c ON e.calendar_id = c.id
+                LEFT JOIN $table_attendees a ON e.id = a.event_id
+                WHERE (c.owner_id = %d OR a.user_id = %d)
+                AND ((e.start_datetime >= %s AND e.start_datetime <= %s) 
+                     OR (e.end_datetime >= %s AND e.end_datetime <= %s))
+                ORDER BY e.start_datetime ASC",
+                $user_id,
+                $user_id,
                 $start_date,
                 $end_date,
                 $start_date,
                 $end_date
-            );
+            ) );
+        } else {
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT DISTINCT e.*, c.name as calendar_name, c.color as calendar_color
+                FROM $table_events e
+                INNER JOIN $table_calendars c ON e.calendar_id = c.id
+                LEFT JOIN $table_attendees a ON e.id = a.event_id
+                WHERE (c.owner_id = %d OR a.user_id = %d)
+                ORDER BY e.start_datetime ASC",
+                $user_id,
+                $user_id
+            ) );
         }
-
-        // Get events from owned calendars and events where user is attendee
-        $events = $wpdb->get_results( $wpdb->prepare(
-            "SELECT DISTINCT e.*, c.name as calendar_name, c.color as calendar_color
-            FROM $table_events e
-            INNER JOIN $table_calendars c ON e.calendar_id = c.id
-            LEFT JOIN $table_attendees a ON e.id = a.event_id
-            WHERE $where AND (c.owner_id = %d OR a.user_id = %d)
-            ORDER BY e.start_datetime ASC",
-            $user_id,
-            $user_id
-        ) );
 
         return $events;
     }
@@ -257,23 +269,61 @@ class WProject_Event_Manager {
 
         $table_events = $wpdb->prefix . 'wproject_events';
 
-        $where = $wpdb->prepare( "project_id = %d", $project_id );
-
         if ( $start_date && $end_date ) {
-            $where .= $wpdb->prepare(
-                " AND ((start_datetime >= %s AND start_datetime <= %s) OR (end_datetime >= %s AND end_datetime <= %s))",
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT * FROM $table_events 
+                 WHERE project_id = %d 
+                 AND ((start_datetime >= %s AND start_datetime <= %s) 
+                      OR (end_datetime >= %s AND end_datetime <= %s))
+                 ORDER BY start_datetime ASC",
+                $project_id,
                 $start_date,
                 $end_date,
                 $start_date,
                 $end_date
-            );
+            ) );
+        } else {
+            $events = $wpdb->get_results( $wpdb->prepare(
+                "SELECT * FROM $table_events 
+                 WHERE project_id = %d 
+                 ORDER BY start_datetime ASC",
+                $project_id
+            ) );
         }
 
-        $events = $wpdb->get_results(
-            "SELECT * FROM $table_events WHERE $where ORDER BY start_datetime ASC"
-        );
-
         return $events;
+    }
+
+    /**
+     * Check if user can edit event
+     *
+     * @param int $event_id Event ID
+     * @param int $user_id User ID
+     * @return bool True if user can edit
+     */
+    public static function user_can_edit_event( $event_id, $user_id ) {
+        global $wpdb;
+        
+        $event = self::get_event( $event_id );
+        if ( ! $event ) {
+            return false;
+        }
+        
+        // Owner can always edit
+        if ( $event->owner_id == $user_id ) {
+            return true;
+        }
+        
+        // Check attendee edit permission
+        $table_attendees = $wpdb->prefix . 'wproject_event_attendees';
+        $can_edit = $wpdb->get_var( $wpdb->prepare(
+            "SELECT can_edit FROM $table_attendees 
+             WHERE event_id = %d AND user_id = %d AND can_edit = 1",
+            $event_id,
+            $user_id
+        ) );
+        
+        return (bool) $can_edit;
     }
 
     /**
