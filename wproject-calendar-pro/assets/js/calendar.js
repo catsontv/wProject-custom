@@ -14,6 +14,7 @@
 
         calendar: null,
         currentCalendarId: null,
+        currentEditingCalendarId: null,
 
         /**
          * Initialize calendar
@@ -21,6 +22,7 @@
         init: function() {
             this.bindEvents();
             this.initializeCalendar();
+            this.autoSelectDefaultCalendar();
         },
 
         /**
@@ -32,6 +34,11 @@
             // Calendar selector change
             $(document).on('change', '#calendar-selector', function() {
                 self.currentCalendarId = $(this).val();
+                if (self.currentCalendarId) {
+                    $('.btn-manage-calendar').show();
+                } else {
+                    $('.btn-manage-calendar').hide();
+                }
                 self.refreshEvents();
             });
 
@@ -39,6 +46,22 @@
             $(document).on('click', '.btn-new-event', function(e) {
                 e.preventDefault();
                 self.showEventModal();
+            });
+
+            // Calendar management buttons
+            $(document).on('click', '.btn-new-calendar', function(e) {
+                e.preventDefault();
+                self.showCalendarModal();
+            });
+
+            $(document).on('click', '.btn-manage-calendar', function(e) {
+                e.preventDefault();
+                self.showCalendarModal(self.currentCalendarId);
+            });
+
+            $(document).on('click', '.btn-save-calendar', function(e) {
+                e.preventDefault();
+                self.saveCalendar();
             });
 
             // Save event
@@ -79,8 +102,25 @@
             $(document).on('click', '.calendar-color-option', function() {
                 $('.calendar-color-option').removeClass('selected');
                 $(this).addClass('selected');
-                $('#event-color').val($(this).data('color'));
+                var colorField = $(this).closest('.calendar-color-picker').find('input[type="hidden"]');
+                if (colorField.length) {
+                    colorField.val($(this).data('color'));
+                }
             });
+        },
+
+        /**
+         * Auto-select default calendar
+         */
+        autoSelectDefaultCalendar: function() {
+            var $selector = $('#calendar-selector');
+            var $defaultOption = $selector.find('option[data-default="1"]').first();
+            
+            if ($defaultOption.length) {
+                $selector.val($defaultOption.val());
+                this.currentCalendarId = $defaultOption.val();
+                $('.btn-manage-calendar').show();
+            }
         },
 
         /**
@@ -190,6 +230,169 @@
         },
 
         /**
+         * Show calendar management modal
+         */
+        showCalendarModal: function(calendarId) {
+            var self = this;
+            var modal = $('#calendar-management-modal');
+
+            // Reset form
+            $('#calendar-form')[0].reset();
+            $('#calendar-form-id').val('');
+            $('.calendar-color-option').first().click();
+            this.currentEditingCalendarId = null;
+
+            if (calendarId) {
+                // Edit mode - load calendar data
+                this.currentEditingCalendarId = calendarId;
+                $('#calendar-modal-title').text('Edit Calendar');
+
+                $.ajax({
+                    url: calendar_inputs.ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'calendar_pro_get_calendar',
+                        nonce: calendar_inputs.nonce,
+                        calendar_id: calendarId
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            var cal = response.data.calendar;
+                            $('#calendar-form-id').val(cal.id);
+                            $('#calendar-name').val(cal.name);
+                            $('#calendar-description').val(cal.description);
+                            $('#calendar-visibility').val(cal.visibility);
+                            
+                            // Select color
+                            $('.calendar-color-option[data-color="' + cal.color + '"]').click();
+                        }
+                    }
+                });
+            } else {
+                // Create mode
+                $('#calendar-modal-title').text('New Calendar');
+            }
+
+            modal.addClass('active');
+            $('#calendar-name').focus();
+
+            // Refresh feather icons if available
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        },
+
+        /**
+         * Save calendar
+         */
+        saveCalendar: function() {
+            var self = this;
+            var calendarId = $('#calendar-form-id').val();
+            var isEdit = calendarId !== '';
+
+            var calendarData = {
+                action: isEdit ? 'calendar_pro_update_calendar' : 'calendar_pro_create_calendar',
+                nonce: calendar_inputs.nonce,
+                name: $('#calendar-name').val().trim(),
+                description: $('#calendar-description').val().trim(),
+                color: $('#calendar-color-value').val(),
+                visibility: $('#calendar-visibility').val()
+            };
+
+            if (isEdit) {
+                calendarData.calendar_id = calendarId;
+            }
+
+            // Validation
+            if (!calendarData.name) {
+                alert('Please enter a calendar name');
+                $('#calendar-name').focus();
+                return;
+            }
+
+            // Show loading
+            $('.btn-save-calendar').prop('disabled', true).text('Saving...');
+
+            $.ajax({
+                url: calendar_inputs.ajaxurl,
+                type: 'POST',
+                data: calendarData,
+                success: function(response) {
+                    if (response.status === 'success') {
+                        self.closeModal();
+                        self.refreshCalendarList();
+                        self.showNotification(
+                            isEdit ? 'Calendar updated successfully' : 'Calendar created successfully',
+                            'success'
+                        );
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert('An error occurred. Please try again.');
+                },
+                complete: function() {
+                    $('.btn-save-calendar').prop('disabled', false).text('Save Calendar');
+                }
+            });
+        },
+
+        /**
+         * Refresh calendar list in dropdown
+         */
+        refreshCalendarList: function() {
+            var self = this;
+
+            $.ajax({
+                url: calendar_inputs.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'calendar_pro_get_user_calendars',
+                    nonce: calendar_inputs.nonce
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var $selector = $('#calendar-selector');
+                        var currentValue = $selector.val();
+
+                        // Rebuild dropdown
+                        $selector.empty();
+                        $selector.append('<option value="">All Calendars</option>');
+
+                        // Add user's calendars
+                        $.each(response.data.user_calendars, function(i, calendar) {
+                            var isDefault = calendar.is_default == 1 ? ' data-default="1"' : '';
+                            $selector.append(
+                                '<option value="' + calendar.id + '"' + isDefault + '>' + 
+                                calendar.name + 
+                                '</option>'
+                            );
+                        });
+
+                        // Add shared calendars
+                        $.each(response.data.shared_calendars, function(i, calendar) {
+                            $selector.append(
+                                '<option value="' + calendar.id + '">' + 
+                                calendar.name + ' (Shared)' +
+                                '</option>'
+                            );
+                        });
+
+                        // Restore selection or auto-select default
+                        if (currentValue) {
+                            $selector.val(currentValue);
+                        } else {
+                            self.autoSelectDefaultCalendar();
+                        }
+
+                        self.refreshEvents();
+                    }
+                }
+            });
+        },
+
+        /**
          * Show event modal
          */
         showEventModal: function(selectInfo) {
@@ -200,6 +403,12 @@
             $('#event-id').val('');
             $('.event-type-option').first().click();
             $('.calendar-color-option').first().click();
+
+            // Auto-set calendar from dropdown or default
+            var selectedCalendar = this.currentCalendarId || $('#calendar-selector').val();
+            if (selectedCalendar) {
+                $('#event-calendar').val(selectedCalendar);
+            }
 
             // Set dates if creating from selection
             if (selectInfo) {
@@ -251,7 +460,7 @@
             var eventData = {
                 action: isEdit ? 'calendar_pro_update_event' : 'calendar_pro_create_event',
                 nonce: calendar_inputs.nonce,
-                calendar_id: self.currentCalendarId || $('#calendar-selector').val(),
+                calendar_id: $('#event-calendar').val() || self.currentCalendarId || $('#calendar-selector').val(),
                 title: $('#event-title').val(),
                 description: $('#event-description').val(),
                 location: $('#event-location').val(),
@@ -272,6 +481,11 @@
             // Validation
             if (!eventData.title) {
                 alert('Please enter an event title');
+                return;
+            }
+
+            if (!eventData.calendar_id) {
+                alert('Please select a calendar');
                 return;
             }
 

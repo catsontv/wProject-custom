@@ -39,15 +39,35 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
             <h2><?php _e( 'Calendar', 'wproject-calendar-pro' ); ?></h2>
 
             <?php if ( ! empty( $all_calendars ) ) : ?>
-            <div class="calendar-selector">
+            <div class="calendar-selector-wrapper">
                 <select id="calendar-selector">
                     <option value=""><?php _e( 'All Calendars', 'wproject-calendar-pro' ); ?></option>
                     <?php foreach ( $all_calendars as $calendar ) : ?>
-                        <option value="<?php echo esc_attr( $calendar->id ); ?>">
+                        <option value="<?php echo esc_attr( $calendar->id ); ?>"
+                                <?php echo isset($calendar->is_default) && $calendar->is_default ? 'data-default="1"' : ''; ?>>
                             <?php echo esc_html( $calendar->name ); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
+                
+                <!-- Calendar management buttons -->
+                <button class="btn btn-icon btn-new-calendar" title="<?php esc_attr_e( 'New Calendar', 'wproject-calendar-pro' ); ?>">
+                    <i data-feather="plus-circle"></i>
+                </button>
+                
+                <button class="btn btn-icon btn-manage-calendar" 
+                        title="<?php esc_attr_e( 'Manage Calendar', 'wproject-calendar-pro' ); ?>"
+                        style="display: none;">
+                    <i data-feather="settings"></i>
+                </button>
+            </div>
+            <?php else : ?>
+            <div class="no-calendars-notice">
+                <p><?php _e( 'You don\'t have any calendars yet.', 'wproject-calendar-pro' ); ?></p>
+                <button class="btn btn-primary btn-new-calendar">
+                    <i data-feather="plus"></i>
+                    <?php _e( 'Create Your First Calendar', 'wproject-calendar-pro' ); ?>
+                </button>
             </div>
             <?php endif; ?>
         </div>
@@ -74,6 +94,9 @@ include CALENDAR_PRO_PLUGIN_PATH . 'templates/event-form.php';
 
 // Include event detail modal
 include CALENDAR_PRO_PLUGIN_PATH . 'templates/event-detail.php';
+
+// Include calendar management modal
+include CALENDAR_PRO_PLUGIN_PATH . 'templates/calendar-management-modal.php';
 ?>
 
 <script>

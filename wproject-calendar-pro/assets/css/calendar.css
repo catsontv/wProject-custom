@@ -62,6 +62,46 @@
 }
 
 /* ========================================
+   Calendar Selector Wrapper
+   ======================================== */
+
+.calendar-selector-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#calendar-selector {
+    min-width: 200px;
+}
+
+.btn-icon {
+    padding: 8px;
+    min-width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* No calendars notice */
+.no-calendars-notice {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.no-calendars-notice p {
+    margin-bottom: 15px;
+    color: #999;
+}
+
+/* ========================================
    Calendar Toolbar
    ======================================== */
 
@@ -345,11 +385,13 @@
    Form Elements
    ======================================== */
 
-.calendar-form-group {
+.calendar-form-group,
+.form-row {
     margin-bottom: 20px;
 }
 
-.calendar-form-group label {
+.calendar-form-group label,
+.form-row label {
     display: block;
     font-weight: 700;
     color: #5b606c;
@@ -357,12 +399,22 @@
     font-size: 1.3em;
 }
 
+.form-row .required {
+    color: #f44336;
+}
+
 .calendar-form-group input[type="text"],
 .calendar-form-group input[type="email"],
 .calendar-form-group input[type="url"],
 .calendar-form-group input[type="datetime-local"],
 .calendar-form-group textarea,
-.calendar-form-group select {
+.calendar-form-group select,
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="url"],
+.form-row input[type="datetime-local"],
+.form-row textarea,
+.form-row select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -372,7 +424,8 @@
     color: #5b606c;
 }
 
-.calendar-form-group textarea {
+.calendar-form-group textarea,
+.form-row textarea {
     min-height: 100px;
     resize: vertical;
 }
@@ -387,26 +440,35 @@
     margin-top: 5px;
 }
 
-/* Color Picker */
+/* Calendar color picker */
 .calendar-color-picker {
     display: flex;
+    flex-direction: column;
     gap: 10px;
+}
+
+.calendar-color-options {
+    display: flex;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
 .calendar-color-option {
-    width: 40px;
-    height: 40px;
-    border-radius: 3px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     cursor: pointer;
     border: 3px solid transparent;
     transition: all 0.2s ease;
 }
 
-.calendar-color-option:hover,
-.calendar-color-option.selected {
-    border-color: #5b606c;
+.calendar-color-option:hover {
     transform: scale(1.1);
+}
+
+.calendar-color-option.selected {
+    border-color: #fff;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 /* ========================================
