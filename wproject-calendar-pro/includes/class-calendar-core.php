@@ -46,6 +46,9 @@ class WProject_Calendar_Core {
     private function init_hooks() {
         add_action( 'init', array( $this, 'register_post_types' ) );
         add_action( 'init', array( $this, 'register_taxonomies' ) );
+        
+        // Auto-create calendar for new users
+        add_action( 'user_register', array( $this, 'create_user_default_calendar' ), 10, 1 );
     }
 
     /**
@@ -182,7 +185,7 @@ class WProject_Calendar_Core {
     }
 
     /**
-     * Create default calendars for existing users
+     * Create default calendars for existing users (runs on activation)
      */
     private static function create_default_calendars() {
         global $wpdb;
@@ -221,6 +224,107 @@ class WProject_Calendar_Core {
                 );
             }
         }
+    }
+
+    /**
+     * Create default calendar for a newly registered user
+     *
+     * @param int $user_id User ID
+     * @return int|false Calendar ID or false on failure
+     */
+    public function create_user_default_calendar( $user_id ) {
+        global $wpdb;
+
+        // Skip for client role
+        $user = get_userdata( $user_id );
+        if ( ! $user || in_array( 'client', $user->roles ) ) {
+            return false;
+        }
+
+        $table_calendars = $wpdb->prefix . 'wproject_calendars';
+
+        // Check if user already has a default calendar
+        $has_default = $wpdb->get_var( $wpdb->prepare(
+            "SELECT COUNT(*) FROM $table_calendars WHERE owner_id = %d AND is_default = 1",
+            $user_id
+        ) );
+
+        if ( $has_default ) {
+            return false;
+        }
+
+        $calendar_name = sprintf( __( '%s\'s Calendar', 'wproject-calendar-pro' ), $user->display_name );
+
+        $result = $wpdb->insert(
+            $table_calendars,
+            array(
+                'name'        => $calendar_name,
+                'description' => __( 'Default calendar', 'wproject-calendar-pro' ),
+                'color'       => '#00bcd4',
+                'owner_id'    => $user_id,
+                'is_default'  => 1,
+                'visibility'  => 'private',
+                'created_at'  => current_time( 'mysql' ),
+                'updated_at'  => current_time( 'mysql' )
+            ),
+            array( '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' )
+        );
+
+        if ( $result ) {
+            do_action( 'calendar_pro_default_calendar_created', $wpdb->insert_id, $user_id );
+            return $wpdb->insert_id;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create missing default calendars for existing users
+     * 
+     * Run this once to fix users created after plugin activation
+     *
+     * @return array Results array with counts
+     */
+    public static function create_missing_default_calendars() {
+        global $wpdb;
+
+        $table_calendars = $wpdb->prefix . 'wproject_calendars';
+        
+        $users = get_users( array(
+            'fields' => array( 'ID' ),
+            'role__not_in' => array( 'client' )
+        ) );
+
+        $created = 0;
+        $skipped = 0;
+        $errors = 0;
+
+        foreach ( $users as $user ) {
+            // Check if user has any calendar
+            $has_calendar = $wpdb->get_var( $wpdb->prepare(
+                "SELECT COUNT(*) FROM $table_calendars WHERE owner_id = %d",
+                $user->ID
+            ) );
+
+            if ( ! $has_calendar ) {
+                $instance = self::get_instance();
+                $result = $instance->create_user_default_calendar( $user->ID );
+                if ( $result ) {
+                    $created++;
+                } else {
+                    $errors++;
+                }
+            } else {
+                $skipped++;
+            }
+        }
+
+        return array(
+            'created' => $created,
+            'skipped' => $skipped,
+            'errors'  => $errors,
+            'total'   => count( $users )
+        );
     }
 
     /**

@@ -296,6 +296,47 @@ function calendar_pro_delete_calendar() {
     }
 }
 
+/* Get user's calendars */
+add_action( 'wp_ajax_calendar_pro_get_user_calendars', 'calendar_pro_get_user_calendars' );
+function calendar_pro_get_user_calendars() {
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' ) ) {
+        calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
+    }
+
+    $user_calendars = WProject_Calendar_Core::get_user_calendars( get_current_user_id() );
+    $shared_calendars = WProject_Calendar_Core::get_shared_calendars( get_current_user_id() );
+
+    calendar_ajaxStatus( 'success', __( 'Calendars retrieved', 'wproject-calendar-pro' ), array(
+        'user_calendars' => $user_calendars,
+        'shared_calendars' => $shared_calendars
+    ) );
+}
+
+/* Get calendar details */
+add_action( 'wp_ajax_calendar_pro_get_calendar', 'calendar_pro_get_calendar' );
+function calendar_pro_get_calendar() {
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' ) ) {
+        calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
+    }
+
+    $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+
+    // Check if user can access this calendar
+    if ( ! WProject_Calendar_Manager::user_can_access_calendar( $calendar_id, get_current_user_id() ) ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied.', 'wproject-calendar-pro' ) );
+    }
+
+    $calendar = WProject_Calendar_Manager::get_calendar( $calendar_id );
+
+    if ( $calendar ) {
+        calendar_ajaxStatus( 'success', __( 'Calendar retrieved', 'wproject-calendar-pro' ), array(
+            'calendar' => $calendar
+        ) );
+    } else {
+        calendar_ajaxStatus( 'error', __( 'Calendar not found.', 'wproject-calendar-pro' ) );
+    }
+}
+
 /* Update attendee status */
 add_action( 'wp_ajax_calendar_pro_update_attendee_status', 'calendar_pro_update_attendee_status' );
 function calendar_pro_update_attendee_status() {
