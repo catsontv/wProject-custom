@@ -47,6 +47,8 @@ class WProject_Event_Manager {
             'visibility'          => 'private',
             'reminder_enabled'    => 0,
             'reminder_minutes'    => 15,
+            'categories'          => '',
+            'timezone'            => 'UTC',
             'created_at'          => current_time( 'mysql' ),
             'updated_at'          => current_time( 'mysql' )
         );
@@ -54,7 +56,12 @@ class WProject_Event_Manager {
         $event_data = wp_parse_args( $event_data, $defaults );
 
         // Validate required fields
-        if ( empty( $event_data['calendar_id'] ) || empty( $event_data['title'] ) ) {
+        if ( empty( $event_data['calendar_id'] ) ) {
+            error_log( '[Calendar Pro] Event creation failed: Missing calendar_id' );
+            return false;
+        }
+        if ( empty( $event_data['title'] ) ) {
+            error_log( '[Calendar Pro] Event creation failed: Missing title' );
             return false;
         }
 
@@ -64,27 +71,28 @@ class WProject_Event_Manager {
             array(
                 '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%s',
                 '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%s',
-                '%s', '%s', '%d', '%d', '%s', '%s'
+                '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s'
             )
         );
 
-        if ( $result ) {
-            $event_id = $wpdb->insert_id;
-
-            // Schedule reminder if enabled
-            if ( $event_data['reminder_enabled'] ) {
-                self::schedule_reminder( $event_id, $event_data['owner_id'] );
-            }
-
-            // Add owner as attendee
-            self::add_attendee( $event_id, $event_data['owner_id'], 'accepted', 1 );
-
-            do_action( 'calendar_pro_event_created', $event_id, $event_data );
-
-            return $event_id;
+        if ( ! $result ) {
+            error_log( '[Calendar Pro] Event insert failed: ' . $wpdb->last_error );
+            return false;
         }
 
-        return false;
+        $event_id = $wpdb->insert_id;
+
+        // Schedule reminder if enabled
+        if ( $event_data['reminder_enabled'] ) {
+            self::schedule_reminder( $event_id, $event_data['owner_id'] );
+        }
+
+        // Add owner as attendee
+        self::add_attendee( $event_id, $event_data['owner_id'], 'accepted', 1 );
+
+        do_action( 'calendar_pro_event_created', $event_id, $event_data );
+
+        return $event_id;
     }
 
     /**

@@ -41,6 +41,7 @@ class WProject_Calendar_Manager {
 
         // Validate required fields
         if ( empty( $calendar_data['name'] ) ) {
+            error_log( '[Calendar Pro] Calendar creation failed: Missing calendar name' );
             return false;
         }
 
@@ -52,10 +53,12 @@ class WProject_Calendar_Manager {
 
         if ( $result ) {
             $calendar_id = $wpdb->insert_id;
+            error_log( '[Calendar Pro] Calendar created successfully: ID=' . $calendar_id . ', Name=' . $calendar_data['name'] );
             do_action( 'calendar_pro_calendar_created', $calendar_id, $calendar_data );
             return $calendar_id;
         }
 
+        error_log( '[Calendar Pro] Calendar insert failed: ' . $wpdb->last_error );
         return false;
     }
 
@@ -83,10 +86,12 @@ class WProject_Calendar_Manager {
         );
 
         if ( $result !== false ) {
+            error_log( '[Calendar Pro] Calendar updated successfully: ID=' . $calendar_id );
             do_action( 'calendar_pro_calendar_updated', $calendar_id, $calendar_data );
             return true;
         }
 
+        error_log( '[Calendar Pro] Calendar update failed for ID=' . $calendar_id . ': ' . $wpdb->last_error );
         return false;
     }
 
@@ -102,6 +107,7 @@ class WProject_Calendar_Manager {
         // Prevent deletion of default calendars
         $calendar = WProject_Calendar_Core::get_user_default_calendar();
         if ( $calendar && $calendar->id == $calendar_id && $calendar->is_default ) {
+            error_log( '[Calendar Pro] Calendar deletion blocked: Cannot delete default calendar ID=' . $calendar_id );
             return false;
         }
 
@@ -122,10 +128,12 @@ class WProject_Calendar_Manager {
         $result = $wpdb->delete( $table_calendars, array( 'id' => $calendar_id ), array( '%d' ) );
 
         if ( $result ) {
+            error_log( '[Calendar Pro] Calendar deleted successfully: ID=' . $calendar_id );
             do_action( 'calendar_pro_calendar_deleted', $calendar_id );
             return true;
         }
 
+        error_log( '[Calendar Pro] Calendar delete failed for ID=' . $calendar_id . ': ' . $wpdb->last_error );
         return false;
     }
 
@@ -170,13 +178,16 @@ class WProject_Calendar_Manager {
 
         if ( $existing ) {
             // Update permission
-            $wpdb->update(
+            $update_result = $wpdb->update(
                 $table_sharing,
                 array( 'permission' => $permission ),
                 array( 'id' => $existing ),
                 array( '%s' ),
                 array( '%d' )
             );
+            if ( $update_result !== false ) {
+                error_log( '[Calendar Pro] Calendar share permission updated: Calendar ID=' . $calendar_id . ', User ID=' . $user_id . ', Permission=' . $permission );
+            }
             return $existing;
         }
 
@@ -193,10 +204,12 @@ class WProject_Calendar_Manager {
         );
 
         if ( $result ) {
+            error_log( '[Calendar Pro] Calendar shared successfully: Calendar ID=' . $calendar_id . ', User ID=' . $user_id . ', Permission=' . $permission );
             do_action( 'calendar_pro_calendar_shared', $wpdb->insert_id, $calendar_id, $user_id, $permission );
             return $wpdb->insert_id;
         }
 
+        error_log( '[Calendar Pro] Calendar share failed: Calendar ID=' . $calendar_id . ', User ID=' . $user_id . ', Error=' . $wpdb->last_error );
         return false;
     }
 
@@ -220,13 +233,16 @@ class WProject_Calendar_Manager {
 
         if ( $existing ) {
             // Update permission
-            $wpdb->update(
+            $update_result = $wpdb->update(
                 $table_sharing,
                 array( 'permission' => $permission ),
                 array( 'id' => $existing ),
                 array( '%s' ),
                 array( '%d' )
             );
+            if ( $update_result !== false ) {
+                error_log( '[Calendar Pro] Team calendar share permission updated: Calendar ID=' . $calendar_id . ', Permission=' . $permission );
+            }
             return $existing;
         }
 
@@ -243,10 +259,12 @@ class WProject_Calendar_Manager {
         );
 
         if ( $result ) {
+            error_log( '[Calendar Pro] Calendar shared with team successfully: Calendar ID=' . $calendar_id . ', Permission=' . $permission );
             do_action( 'calendar_pro_calendar_shared_team', $wpdb->insert_id, $calendar_id, $permission );
             return $wpdb->insert_id;
         }
 
+        error_log( '[Calendar Pro] Team calendar share failed for ID=' . $calendar_id . ': ' . $wpdb->last_error );
         return false;
     }
 

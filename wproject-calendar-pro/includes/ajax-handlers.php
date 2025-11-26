@@ -110,6 +110,8 @@ function calendar_pro_create_event() {
     $event_id = WProject_Event_Manager::create_event( $event_data );
 
     if ( $event_id ) {
+        error_log( '[Calendar Pro AJAX] Event created successfully: Event ID=' . $event_id . ', Title=' . $event_data['title'] );
+
         // Add attendees if provided
         $attendees = isset( $_POST['attendees'] ) ? $_POST['attendees'] : array();
         if ( is_string( $attendees ) ) {
@@ -129,6 +131,7 @@ function calendar_pro_create_event() {
             'event' => WProject_Event_Manager::to_fullcalendar_format( $event )
         ) );
     } else {
+        error_log( '[Calendar Pro AJAX] Event creation failed - check class-event-manager.php debug.log for details. Data: ' . json_encode( $event_data ) );
         calendar_ajaxStatus( 'error', __( 'Failed to create event', 'wproject-calendar-pro' ) );
     }
     return;
@@ -204,6 +207,8 @@ function calendar_pro_update_event() {
     }
 
     if ( WProject_Event_Manager::update_event( $event_id, $event_data ) ) {
+        error_log( '[Calendar Pro AJAX] Event updated successfully: Event ID=' . $event_id );
+
         // Update attendees if provided
         $attendees = isset( $_POST['attendees'] ) ? $_POST['attendees'] : array();
         if ( is_string( $attendees ) ) {
@@ -235,6 +240,7 @@ function calendar_pro_update_event() {
             'event' => WProject_Event_Manager::to_fullcalendar_format( $event )
         ) );
     } else {
+        error_log( '[Calendar Pro AJAX] Event update failed for Event ID=' . $event_id . ' - check class-event-manager.php debug.log for details' );
         calendar_ajaxStatus( 'error', __( 'Failed to update event', 'wproject-calendar-pro' ) );
     }
     return;
@@ -261,8 +267,10 @@ function calendar_pro_delete_event() {
     }
 
     if ( WProject_Event_Manager::delete_event( $event_id ) ) {
+        error_log( '[Calendar Pro AJAX] Event deleted successfully: Event ID=' . $event_id );
         calendar_ajaxStatus( 'success', __( 'Event deleted successfully', 'wproject-calendar-pro' ) );
     } else {
+        error_log( '[Calendar Pro AJAX] Event delete failed for Event ID=' . $event_id );
         calendar_ajaxStatus( 'error', __( 'Failed to delete event', 'wproject-calendar-pro' ) );
     }
     return;
@@ -296,10 +304,12 @@ function calendar_pro_create_calendar() {
     $calendar_id = WProject_Calendar_Manager::create_calendar( $calendar_data );
 
     if ( $calendar_id ) {
+        error_log( '[Calendar Pro AJAX] Calendar created successfully: Calendar ID=' . $calendar_id . ', Name=' . $calendar_data['name'] );
         calendar_ajaxStatus( 'success', __( 'Calendar created successfully', 'wproject-calendar-pro' ), array(
             'calendar_id' => $calendar_id
         ) );
     } else {
+        error_log( '[Calendar Pro AJAX] Calendar creation failed - check class-calendar-manager.php debug.log for details. Data: ' . json_encode( $calendar_data ) );
         calendar_ajaxStatus( 'error', __( 'Failed to create calendar', 'wproject-calendar-pro' ) );
     }
     return;
@@ -341,8 +351,10 @@ function calendar_pro_update_calendar() {
     }
 
     if ( WProject_Calendar_Manager::update_calendar( $calendar_id, $calendar_data ) ) {
+        error_log( '[Calendar Pro AJAX] Calendar updated successfully: Calendar ID=' . $calendar_id );
         calendar_ajaxStatus( 'success', __( 'Calendar updated successfully', 'wproject-calendar-pro' ) );
     } else {
+        error_log( '[Calendar Pro AJAX] Calendar update failed for Calendar ID=' . $calendar_id );
         calendar_ajaxStatus( 'error', __( 'Failed to update calendar', 'wproject-calendar-pro' ) );
     }
     return;
@@ -369,8 +381,10 @@ function calendar_pro_delete_calendar() {
     }
 
     if ( WProject_Calendar_Manager::delete_calendar( $calendar_id ) ) {
+        error_log( '[Calendar Pro AJAX] Calendar deleted successfully: Calendar ID=' . $calendar_id );
         calendar_ajaxStatus( 'success', __( 'Calendar deleted successfully', 'wproject-calendar-pro' ) );
     } else {
+        error_log( '[Calendar Pro AJAX] Calendar delete failed for Calendar ID=' . $calendar_id );
         calendar_ajaxStatus( 'error', __( 'Failed to delete calendar', 'wproject-calendar-pro' ) );
     }
     return;
@@ -401,11 +415,14 @@ function calendar_pro_share_calendar() {
     if ( $user_id ) {
         $share_id = WProject_Calendar_Manager::share_calendar( $calendar_id, $user_id, $permission );
         if ( $share_id ) {
+            error_log( '[Calendar Pro AJAX] Calendar shared successfully: Calendar ID=' . $calendar_id . ', User ID=' . $user_id . ', Permission=' . $permission );
             calendar_ajaxStatus( 'success', __( 'Calendar shared successfully', 'wproject-calendar-pro' ) );
         } else {
+            error_log( '[Calendar Pro AJAX] Calendar share failed: Calendar ID=' . $calendar_id . ', User ID=' . $user_id );
             calendar_ajaxStatus( 'error', __( 'Failed to share calendar', 'wproject-calendar-pro' ) );
         }
     } else {
+        error_log( '[Calendar Pro AJAX] Share calendar called with invalid User ID' );
         calendar_ajaxStatus( 'error', __( 'Invalid user ID', 'wproject-calendar-pro' ) );
     }
     return;

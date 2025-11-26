@@ -173,6 +173,37 @@ class WProject_Calendar_Core {
 
         /* Create default calendar for existing users */
         self::create_default_calendars();
+
+        /* Add missing columns for v1.0.1 */
+        self::add_missing_columns();
+    }
+
+    /**
+     * Add missing columns for event categories and timezone - v1.0.1 migration
+     */
+    public static function add_missing_columns() {
+        global $wpdb;
+
+        $table_events = $wpdb->prefix . 'wproject_events';
+        $charset_collate = $wpdb->get_charset_collate();
+
+        // Check if categories column exists
+        $columns = $wpdb->get_results( "DESCRIBE $table_events" );
+        $column_names = wp_list_pluck( $columns, 'Field' );
+
+        // Add categories column if missing
+        if ( ! in_array( 'categories', $column_names ) ) {
+            $wpdb->query( "ALTER TABLE $table_events ADD COLUMN categories VARCHAR(255) DEFAULT '' AFTER color" );
+            error_log( '[Calendar Pro] Added categories column to ' . $table_events );
+        }
+
+        // Add timezone column if missing
+        if ( ! in_array( 'timezone', $column_names ) ) {
+            $wpdb->query( "ALTER TABLE $table_events ADD COLUMN timezone VARCHAR(100) DEFAULT 'UTC' AFTER categories" );
+            error_log( '[Calendar Pro] Added timezone column to ' . $table_events );
+        }
+
+        update_option( 'calendar_pro_db_version', '1.0.1' );
     }
 
     /**
