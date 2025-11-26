@@ -100,8 +100,10 @@ include CALENDAR_PRO_PLUGIN_PATH . 'templates/calendar-management-modal.php';
 ?>
 
 <script>
-// Initialize Feather icons
-if (typeof feather !== 'undefined') {
-    feather.replace();
-}
+// Initialize Feather icons when DOM is ready
+jQuery(document).ready(function($) {
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+});
 </script>

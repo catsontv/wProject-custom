@@ -18,6 +18,10 @@ $meeting_color = isset($options['calendar_meeting_color']) ? $options['calendar_
 $deadline_color = isset($options['calendar_deadline_color']) ? $options['calendar_deadline_color'] : '#ff5722';
 $default_reminder = isset($options['calendar_default_reminder']) ? $options['calendar_default_reminder'] : '15';
 $enable_reminders = isset($options['calendar_enable_reminders']) ? $options['calendar_enable_reminders'] : false;
+
+// Get user's calendars for dropdown
+$user_calendars = WProject_Calendar_Core::get_user_calendars();
+$shared_calendars = WProject_Calendar_Core::get_shared_calendars();
 ?>
 
 <div id="event-modal" class="calendar-modal">
@@ -34,6 +38,32 @@ $enable_reminders = isset($options['calendar_enable_reminders']) ? $options['cal
                 <div class="calendar-form-group">
                     <label for="event-title"><?php _e( 'Title', 'wproject-calendar-pro' ); ?> *</label>
                     <input type="text" id="event-title" name="title" required>
+                </div>
+
+                <div class="calendar-form-group">
+                    <label for="event-calendar"><?php _e( 'Calendar', 'wproject-calendar-pro' ); ?> *</label>
+                    <select id="event-calendar" name="calendar_id" required>
+                        <?php if ( ! empty( $user_calendars ) ) : ?>
+                            <optgroup label="<?php esc_attr_e( 'My Calendars', 'wproject-calendar-pro' ); ?>">
+                                <?php foreach ( $user_calendars as $calendar ) : ?>
+                                    <option value="<?php echo esc_attr( $calendar->id ); ?>"
+                                            <?php echo isset($calendar->is_default) && $calendar->is_default ? 'data-default="1"' : ''; ?>>
+                                        <?php echo esc_html( $calendar->name ); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </optgroup>
+                        <?php endif; ?>
+                        
+                        <?php if ( ! empty( $shared_calendars ) ) : ?>
+                            <optgroup label="<?php esc_attr_e( 'Shared Calendars', 'wproject-calendar-pro' ); ?>">
+                                <?php foreach ( $shared_calendars as $calendar ) : ?>
+                                    <option value="<?php echo esc_attr( $calendar->id ); ?>">
+                                        <?php echo esc_html( $calendar->name ); ?> (<?php _e( 'Shared', 'wproject-calendar-pro' ); ?>)
+                                    </option>
+                                <?php endforeach; ?>
+                            </optgroup>
+                        <?php endif; ?>
+                    </select>
                 </div>
 
                 <div class="calendar-form-group">
