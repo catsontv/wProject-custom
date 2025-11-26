@@ -48,8 +48,14 @@
                 self.showEventModal();
             });
 
-            // Save calendar
+            // Save calendar (button click)
             $(document).on('click', '#calendar-form .btn-primary', function(e) {
+                e.preventDefault();
+                self.saveCalendar();
+            });
+
+            // Prevent calendar form submission
+            $(document).on('submit', '#calendar-form', function(e) {
                 e.preventDefault();
                 self.saveCalendar();
             });

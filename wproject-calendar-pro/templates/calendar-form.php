@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <button type="button" class="btn btn-secondary" id="calendar-form-cancel">
                     <?php _e( 'Cancel', 'wproject-calendar-pro' ); ?>
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary">
                     <?php _e( 'Create Calendar', 'wproject-calendar-pro' ); ?>
                 </button>
             </div>
