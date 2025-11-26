@@ -38,6 +38,7 @@
             // New calendar button
             $(document).on('click', '.btn-new-calendar', function(e) {
                 e.preventDefault();
+                console.log('New calendar button clicked');
                 self.showCalendarModal();
             });
 
@@ -71,21 +72,24 @@
             $(document).on('click', '.btn-edit-event', function(e) {
                 e.preventDefault();
                 var eventId = $('#detail-event-id').val();
+                console.log('Edit button clicked, Event ID:', eventId);
                 if (eventId) {
                     self.closeModal();
                     self.editEvent(eventId);
+                } else {
+                    console.log('ERROR: No event ID found');
                 }
             });
 
             // Close calendar modal
-            $(document).on('click', '#calendar-modal .modal-close, #calendar-form-cancel', function(e) {
+            $(document).on('click', '#calendar-modal .calendar-modal-close, #calendar-form-cancel', function(e) {
                 e.preventDefault();
                 self.hideCalendarModal();
             });
 
-            // Close event/calendar modals by clicking outside
-            $(document).on('click', '.modal-overlay', function(e) {
-                if ($(e.target).hasClass('modal-overlay')) {
+            // Close calendar modal by clicking outside
+            $(document).on('click', '.calendar-modal', function(e) {
+                if ($(e.target).hasClass('calendar-modal') && $(e.target).attr('id') === 'calendar-modal') {
                     self.hideCalendarModal();
                 }
             });
@@ -380,6 +384,8 @@
         editEvent: function(eventId) {
             var self = this;
 
+            console.log('editEvent called with ID:', eventId);
+
             $.ajax({
                 url: calendar_inputs.ajaxurl,
                 type: 'POST',
@@ -389,8 +395,10 @@
                     event_id: eventId
                 },
                 success: function(response) {
+                    console.log('editEvent AJAX success:', response);
                     if (response.status === 'success' && response.data.event) {
                         var event = response.data.event;
+                        console.log('Event data loaded:', event);
 
                         // Populate form fields
                         $('#event-id').val(event.id);
@@ -421,13 +429,16 @@
                         // Update button text
                         $('.btn-save-event').text('Update Event');
 
+                        console.log('Showing event modal for editing');
                         // Show event form modal for editing
                         self.showEventModal();
                     } else {
+                        console.error('Response error:', response.message);
                         alert(response.message || 'Failed to load event');
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error('editEvent AJAX error:', xhr, status, error);
                     alert('An error occurred. Please try again.');
                 }
             });
@@ -498,9 +509,12 @@
          * Show calendar creation modal
          */
         showCalendarModal: function() {
+            console.log('showCalendarModal called');
             $('#calendar-id').val('');
             $('#calendar-form').trigger('reset');
+            console.log('Adding active class to #calendar-modal');
             $('#calendar-modal').addClass('active');
+            console.log('Modal classes:', $('#calendar-modal').attr('class'));
             $('#calendar-name').focus();
         },
 
