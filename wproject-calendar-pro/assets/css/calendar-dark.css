@@ -1,0 +1,257 @@
+/**
+ * Calendar Pro Dark Mode Styles
+ *
+ * Follows wProject dark mode design patterns
+ *
+ * @package wProject Calendar Pro
+ * @since 1.0.0
+ */
+
+/* ========================================
+   Dark Mode Overrides
+   ======================================== */
+
+.calendar-pro-wrapper {
+    background: #2a2d35;
+    box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.3);
+}
+
+.calendar-pro-wrapper h2 {
+    color: #e0e0e0;
+}
+
+/* ========================================
+   Toolbar
+   ======================================== */
+
+.calendar-toolbar .btn {
+    background: #363940;
+    color: #e0e0e0;
+}
+
+.calendar-toolbar .btn:hover {
+    background: #00bcd4;
+    color: #fff;
+}
+
+.calendar-toolbar .btn-primary {
+    background: #00bcd4;
+    color: #fff;
+}
+
+.calendar-toolbar .btn-primary:hover {
+    background: #0097a7;
+}
+
+/* ========================================
+   Calendar Selector
+   ======================================== */
+
+.calendar-selector select {
+    background: #363940;
+    color: #e0e0e0;
+    border-color: #4a4d55;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23e0e0e0" d="M6 9L1 4h10z"/></svg>');
+}
+
+/* ========================================
+   View Switcher
+   ======================================== */
+
+.view-switcher {
+    background: #363940;
+}
+
+.view-switcher .btn {
+    color: #e0e0e0;
+}
+
+.view-switcher .btn.active {
+    background: #00bcd4;
+    color: #fff;
+}
+
+.view-switcher .btn:hover:not(.active) {
+    background: rgba(0, 188, 212, 0.2);
+}
+
+/* ========================================
+   FullCalendar Dark Mode
+   ======================================== */
+
+.fc {
+    color: #e0e0e0;
+}
+
+.fc-toolbar-title {
+    color: #e0e0e0 !important;
+}
+
+.fc-button {
+    background: #363940 !important;
+    color: #e0e0e0 !important;
+}
+
+.fc-button:hover {
+    background: #00bcd4 !important;
+    color: #fff !important;
+}
+
+.fc-button-primary:not(:disabled).fc-button-active {
+    background: #00bcd4 !important;
+    color: #fff !important;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+    border-color: #4a4d55;
+}
+
+.fc-day-today {
+    background: rgba(0, 188, 212, 0.1) !important;
+}
+
+.fc-col-header-cell {
+    background: #363940;
+    color: #e0e0e0;
+}
+
+.fc-daygrid-day-number {
+    color: #e0e0e0;
+}
+
+.fc-list-event:hover td {
+    background: rgba(0, 188, 212, 0.1) !important;
+}
+
+.fc-daygrid-event-harness .fc-event {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   Modal
+   ======================================== */
+
+.calendar-modal {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.calendar-modal-content {
+    background: #2a2d35;
+    box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.5);
+}
+
+.calendar-modal-header {
+    border-bottom-color: #4a4d55;
+}
+
+.calendar-modal-header h3 {
+    color: #e0e0e0;
+}
+
+.calendar-modal-close {
+    color: #e0e0e0;
+}
+
+.calendar-modal-close:hover {
+    color: #ff5722;
+}
+
+.calendar-modal-footer {
+    border-top-color: #4a4d55;
+}
+
+/* ========================================
+   Form Elements
+   ======================================== */
+
+.calendar-form-group label {
+    color: #e0e0e0;
+}
+
+.calendar-form-group input[type="text"],
+.calendar-form-group input[type="email"],
+.calendar-form-group input[type="url"],
+.calendar-form-group input[type="datetime-local"],
+.calendar-form-group textarea,
+.calendar-form-group select {
+    background: #363940;
+    border-color: #4a4d55;
+    color: #e0e0e0;
+}
+
+.calendar-form-group input::placeholder,
+.calendar-form-group textarea::placeholder {
+    color: #999;
+}
+
+.calendar-form-group .sublabel {
+    color: #999;
+}
+
+/* ========================================
+   Event Type Selector
+   ======================================== */
+
+.event-type-option {
+    border-color: #4a4d55;
+    color: #e0e0e0;
+}
+
+.event-type-option:hover,
+.event-type-option.selected {
+    border-color: #00bcd4;
+    background: rgba(0, 188, 212, 0.2);
+}
+
+/* ========================================
+   Event Details
+   ======================================== */
+
+.event-detail {
+    border-bottom-color: #4a4d55;
+}
+
+.event-detail-label,
+.event-detail-value {
+    color: #e0e0e0;
+}
+
+/* ========================================
+   Attendees
+   ======================================== */
+
+.attendee-item {
+    background: #363940;
+}
+
+.attendee-name {
+    color: #e0e0e0;
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+
+.btn-secondary {
+    background: #363940;
+    color: #e0e0e0;
+}
+
+.btn-secondary:hover {
+    background: #4a4d55;
+}
+
+/* ========================================
+   Loading/Empty State
+   ======================================== */
+
+.calendar-loading,
+.calendar-empty {
+    color: #999;
+}
+
+.calendar-loading::after {
+    border-color: #4a4d55;
+    border-top-color: #00bcd4;
+}
