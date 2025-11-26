@@ -67,6 +67,16 @@
                 }
             });
 
+            // Edit event
+            $(document).on('click', '.btn-edit-event', function(e) {
+                e.preventDefault();
+                var eventId = $('#detail-event-id').val();
+                if (eventId) {
+                    self.closeModal();
+                    self.editEvent(eventId);
+                }
+            });
+
             // Close calendar modal
             $(document).on('click', '#calendar-modal .modal-close, #calendar-form-cancel', function(e) {
                 e.preventDefault();
@@ -225,6 +235,7 @@
             $('#event-id').val('');
             $('.event-type-option').first().click();
             $('.calendar-color-option').first().click();
+            $('.btn-save-event').text('Save Event'); // Reset button text
 
             // Set dates if creating from selection
             if (selectInfo) {
@@ -253,6 +264,7 @@
 
             // Store event ID for actions
             modal.data('event-id', event.id);
+            $('#detail-event-id').val(event.id);
 
             // Show modal
             modal.addClass('active');
@@ -287,7 +299,10 @@
                 color: $('#event-color').val(),
                 reminder_enabled: $('#reminder-enabled').is(':checked') ? 1 : 0,
                 reminder_minutes: $('#reminder-minutes').val(),
-                visibility: $('#event-visibility').val()
+                visibility: $('#event-visibility').val(),
+                categories: $('#event-categories').val() || '',
+                timezone: $('#event-timezone').val() || 'UTC',
+                attendees: $('#event-attendees').val() || []
             };
 
             if (isEdit) {
@@ -351,6 +366,65 @@
                         self.showNotification('Event deleted successfully', 'success');
                     } else {
                         alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        },
+
+        /**
+         * Edit event - Fetch and populate form with event data
+         */
+        editEvent: function(eventId) {
+            var self = this;
+
+            $.ajax({
+                url: calendar_inputs.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'calendar_pro_get_event',
+                    nonce: calendar_inputs.nonce,
+                    event_id: eventId
+                },
+                success: function(response) {
+                    if (response.status === 'success' && response.data.event) {
+                        var event = response.data.event;
+
+                        // Populate form fields
+                        $('#event-id').val(event.id);
+                        $('#event-title').val(event.title);
+                        $('#event-description').val(event.description);
+                        $('#event-location').val(event.location);
+                        $('#event-start').val(self.formatDateTimeLocal(event.start_datetime));
+                        $('#event-end').val(self.formatDateTimeLocal(event.end_datetime));
+                        $('#event-all-day').prop('checked', event.all_day == 1);
+                        $('#event-type').val(event.event_type);
+                        $('#event-color').val(event.color);
+                        $('#event-visibility').val(event.visibility);
+                        $('#reminder-enabled').prop('checked', event.reminder_enabled == 1);
+                        $('#reminder-minutes').val(event.reminder_minutes);
+
+                        // Populate advanced fields
+                        $('#event-categories').val(event.categories || '');
+                        $('#event-timezone').val(event.timezone || 'UTC');
+
+                        // Set attendees if available
+                        if (response.data.attendees && response.data.attendees.length > 0) {
+                            var attendeeIds = response.data.attendees.map(function(a) { return a.user_id; });
+                            $('#event-attendees').val(attendeeIds);
+                        } else {
+                            $('#event-attendees').val([]);
+                        }
+
+                        // Update button text
+                        $('.btn-save-event').text('Update Event');
+
+                        // Show event form modal for editing
+                        self.showEventModal();
+                    } else {
+                        alert(response.message || 'Failed to load event');
                     }
                 },
                 error: function() {

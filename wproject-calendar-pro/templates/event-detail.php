@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div id="event-detail-modal" class="calendar-modal">
     <div class="calendar-modal-content">
+        <input type="hidden" id="detail-event-id" value="">
         <div class="calendar-modal-header">
             <h3 id="detail-title"></h3>
             <button class="calendar-modal-close">&times;</button>
@@ -46,6 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <div class="calendar-modal-footer">
             <button class="btn btn-danger btn-delete-event"><?php _e( 'Delete', 'wproject-calendar-pro' ); ?></button>
+            <button class="btn btn-primary btn-edit-event"><?php _e( 'Edit', 'wproject-calendar-pro' ); ?></button>
             <button class="btn btn-secondary btn-cancel"><?php _e( 'Close', 'wproject-calendar-pro' ); ?></button>
         </div>
     </div>

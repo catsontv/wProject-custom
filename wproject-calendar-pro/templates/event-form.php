@@ -123,6 +123,67 @@ $enable_reminders = isset($options['calendar_enable_reminders']) ? $options['cal
                     </select>
                 </div>
 
+                <!-- Advanced Fields: Categories -->
+                <div class="calendar-form-group">
+                    <label for="event-categories"><?php _e( 'Categories', 'wproject-calendar-pro' ); ?></label>
+                    <input
+                        type="text"
+                        id="event-categories"
+                        name="categories"
+                        placeholder="<?php esc_attr_e( 'e.g., Work, Personal, Important (comma separated)', 'wproject-calendar-pro' ); ?>"
+                        maxlength="255"
+                    >
+                    <small><?php _e( 'Add multiple categories separated by commas for easy filtering', 'wproject-calendar-pro' ); ?></small>
+                </div>
+
+                <!-- Advanced Fields: Timezone -->
+                <div class="calendar-form-group">
+                    <label for="event-timezone"><?php _e( 'Timezone', 'wproject-calendar-pro' ); ?></label>
+                    <select id="event-timezone" name="timezone">
+                        <option value="UTC">UTC (Coordinated Universal Time)</option>
+                        <optgroup label="<?php esc_attr_e( 'Americas', 'wproject-calendar-pro' ); ?>">
+                            <option value="America/New_York">Eastern Time (ET)</option>
+                            <option value="America/Chicago">Central Time (CT)</option>
+                            <option value="America/Denver">Mountain Time (MT)</option>
+                            <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                        </optgroup>
+                        <optgroup label="<?php esc_attr_e( 'Europe', 'wproject-calendar-pro' ); ?>">
+                            <option value="Europe/London">London (GMT)</option>
+                            <option value="Europe/Paris">Central European Time (CET)</option>
+                            <option value="Europe/Berlin">Berlin (CEST)</option>
+                            <option value="Europe/Istanbul">Istanbul (EET)</option>
+                        </optgroup>
+                        <optgroup label="<?php esc_attr_e( 'Asia', 'wproject-calendar-pro' ); ?>">
+                            <option value="Asia/Dubai">Dubai (GST)</option>
+                            <option value="Asia/Kolkata">India (IST)</option>
+                            <option value="Asia/Bangkok">Bangkok (ICT)</option>
+                            <option value="Asia/Singapore">Singapore (SGT)</option>
+                            <option value="Asia/Hong_Kong">Hong Kong (HKT)</option>
+                            <option value="Asia/Tokyo">Tokyo (JST)</option>
+                            <option value="Australia/Sydney">Sydney (AEDT)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- Advanced Fields: Attendees/Guests -->
+                <div class="calendar-form-group">
+                    <label for="event-attendees"><?php _e( 'Add Guests/Attendees', 'wproject-calendar-pro' ); ?></label>
+                    <select id="event-attendees" name="attendees[]" multiple class="calendar-attendees-select">
+                        <?php
+                        $users = get_users( array(
+                            'fields' => array( 'ID', 'display_name', 'user_email' ),
+                            'role__not_in' => array( 'client' )
+                        ) );
+                        if ( ! empty( $users ) ) {
+                            foreach ( $users as $user ) {
+                                echo '<option value="' . esc_attr( $user->ID ) . '">' . esc_html( $user->display_name ) . ' (' . esc_html( $user->user_email ) . ')</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                    <small><?php _e( 'Hold Ctrl/Cmd to select multiple attendees. They will receive email invitations.', 'wproject-calendar-pro' ); ?></small>
+                </div>
+
             </form>
         </div>
 

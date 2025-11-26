@@ -102,16 +102,25 @@ function calendar_pro_create_event() {
         'task_id'          => isset( $_POST['task_id'] ) ? (int) $_POST['task_id'] : null,
         'visibility'       => isset( $_POST['visibility'] ) ? sanitize_text_field( $_POST['visibility'] ) : 'private',
         'reminder_enabled' => isset( $_POST['reminder_enabled'] ) ? 1 : 0,
-        'reminder_minutes' => isset( $_POST['reminder_minutes'] ) ? (int) $_POST['reminder_minutes'] : 15
+        'reminder_minutes' => isset( $_POST['reminder_minutes'] ) ? (int) $_POST['reminder_minutes'] : 15,
+        'categories'       => isset( $_POST['categories'] ) ? sanitize_text_field( $_POST['categories'] ) : '',
+        'timezone'         => isset( $_POST['timezone'] ) ? sanitize_text_field( $_POST['timezone'] ) : 'UTC'
     );
 
     $event_id = WProject_Event_Manager::create_event( $event_data );
 
     if ( $event_id ) {
         // Add attendees if provided
-        if ( isset( $_POST['attendees'] ) && is_array( $_POST['attendees'] ) ) {
-            foreach ( $_POST['attendees'] as $user_id ) {
-                WProject_Event_Manager::add_attendee( $event_id, (int) $user_id, 'pending', false );
+        $attendees = isset( $_POST['attendees'] ) ? $_POST['attendees'] : array();
+        if ( is_string( $attendees ) ) {
+            $attendees = explode( ',', $attendees );
+        }
+        if ( is_array( $attendees ) && ! empty( $attendees ) ) {
+            foreach ( $attendees as $user_id ) {
+                $user_id = (int) $user_id;
+                if ( $user_id > 0 ) {
+                    WProject_Event_Manager::add_attendee( $event_id, $user_id, 'pending', false );
+                }
             }
         }
 
@@ -176,8 +185,51 @@ function calendar_pro_update_event() {
     if ( isset( $_POST['status'] ) ) {
         $event_data['status'] = sanitize_text_field( $_POST['status'] );
     }
+    if ( isset( $_POST['visibility'] ) ) {
+        $event_data['visibility'] = sanitize_text_field( $_POST['visibility'] );
+    }
+    if ( isset( $_POST['reminder_enabled'] ) ) {
+        $event_data['reminder_enabled'] = 1;
+    } else {
+        $event_data['reminder_enabled'] = 0;
+    }
+    if ( isset( $_POST['reminder_minutes'] ) ) {
+        $event_data['reminder_minutes'] = (int) $_POST['reminder_minutes'];
+    }
+    if ( isset( $_POST['categories'] ) ) {
+        $event_data['categories'] = sanitize_text_field( $_POST['categories'] );
+    }
+    if ( isset( $_POST['timezone'] ) ) {
+        $event_data['timezone'] = sanitize_text_field( $_POST['timezone'] );
+    }
 
     if ( WProject_Event_Manager::update_event( $event_id, $event_data ) ) {
+        // Update attendees if provided
+        $attendees = isset( $_POST['attendees'] ) ? $_POST['attendees'] : array();
+        if ( is_string( $attendees ) ) {
+            $attendees = explode( ',', $attendees );
+        }
+        if ( is_array( $attendees ) && ! empty( $attendees ) ) {
+            // Get current attendees
+            $current_attendees = WProject_Event_Manager::get_event_attendees( $event_id );
+            $current_ids = wp_list_pluck( $current_attendees, 'user_id' );
+
+            // Add new attendees
+            foreach ( $attendees as $user_id ) {
+                $user_id = (int) $user_id;
+                if ( $user_id > 0 && ! in_array( $user_id, $current_ids ) ) {
+                    WProject_Event_Manager::add_attendee( $event_id, $user_id, 'pending', false );
+                }
+            }
+
+            // Remove attendees not in the list (except the event owner)
+            $event = WProject_Event_Manager::get_event( $event_id );
+            foreach ( $current_ids as $user_id ) {
+                if ( $user_id !== (int) $event->owner_id && ! in_array( $user_id, array_map( 'intval', $attendees ) ) ) {
+                    WProject_Event_Manager::remove_attendee( $event_id, $user_id );
+                }
+            }
+        }
         $event = WProject_Event_Manager::get_event( $event_id );
         calendar_ajaxStatus( 'success', __( 'Event updated successfully', 'wproject-calendar-pro' ), array(
             'event' => WProject_Event_Manager::to_fullcalendar_format( $event )
@@ -382,5 +434,48 @@ function calendar_pro_get_user_calendars() {
     $calendars = WProject_Calendar_Manager::get_accessible_calendars( $user_id );
 
     calendar_ajaxStatus( 'success', __( 'Calendars retrieved', 'wproject-calendar-pro' ), $calendars );
+    return;
+}
+
+/**
+ * Get single event for editing
+ * Security: Only returns event if user can access it
+ */
+add_action( 'wp_ajax_calendar_pro_get_event', 'calendar_pro_get_event' );
+function calendar_pro_get_event() {
+    // Verify nonce
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' ) ) {
+        calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    $event_id = isset( $_POST['event_id'] ) ? (int) $_POST['event_id'] : 0;
+
+    if ( ! $event_id ) {
+        calendar_ajaxStatus( 'error', __( 'Invalid event ID.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    // Check user can access this event
+    if ( ! WProject_Calendar_Permissions::user_can_access_event( $event_id ) ) {
+        calendar_ajaxStatus( 'error', __( 'Access denied.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    // Get event
+    $event = WProject_Event_Manager::get_event( $event_id );
+
+    if ( ! $event ) {
+        calendar_ajaxStatus( 'error', __( 'Event not found.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    // Get attendees
+    $attendees = WProject_Event_Manager::get_event_attendees( $event_id );
+
+    calendar_ajaxStatus( 'success', __( 'Event retrieved', 'wproject-calendar-pro' ), array(
+        'event' => $event,
+        'attendees' => $attendees
+    ) );
     return;
 }
