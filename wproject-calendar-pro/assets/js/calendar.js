@@ -233,18 +233,21 @@
          */
         showEventModal: function(selectInfo) {
             var modal = $('#event-modal');
+            var isEditing = $('#event-id').val() !== '';
 
-            // Reset form
-            $('#event-form')[0].reset();
-            $('#event-id').val('');
-            $('.event-type-option').first().click();
-            $('.calendar-color-option').first().click();
-            $('.btn-save-event').text('Save Event'); // Reset button text
+            // Only reset form if creating new event (not editing)
+            if (!isEditing) {
+                $('#event-form')[0].reset();
+                $('#event-id').val('');
+                $('.event-type-option').first().click();
+                $('.calendar-color-option').first().click();
+                $('.btn-save-event').text('Save Event'); // Reset button text
 
-            // Set dates if creating from selection
-            if (selectInfo) {
-                $('#event-start').val(this.formatDateTimeLocal(selectInfo.start));
-                $('#event-end').val(this.formatDateTimeLocal(selectInfo.end));
+                // Set dates if creating from selection
+                if (selectInfo) {
+                    $('#event-start').val(this.formatDateTimeLocal(selectInfo.start));
+                    $('#event-end').val(this.formatDateTimeLocal(selectInfo.end));
+                }
             }
 
             // Show modal
@@ -536,6 +539,8 @@
             var color = $('#calendar-color').val();
             var visibility = $('#calendar-visibility').val();
 
+            console.log('Saving calendar:', {name: name, description: description, color: color, visibility: visibility});
+
             if (!name) {
                 alert('Please enter a calendar name');
                 return;
@@ -550,19 +555,32 @@
                 visibility: visibility
             };
 
-            $.post(calendar_inputs.ajaxurl, data, function(response) {
-                if (response.status === 'success') {
-                    self.showNotification('Calendar created successfully!', 'success');
-                    self.hideCalendarModal();
-                    // Reload page to show new calendar
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
-                } else {
-                    self.showNotification(response.message || 'Failed to create calendar', 'error');
+            console.log('Sending AJAX data:', data);
+            console.log('AJAX URL:', calendar_inputs.ajaxurl);
+
+            $.ajax({
+                url: calendar_inputs.ajaxurl,
+                type: 'POST',
+                data: data,
+                success: function(response) {
+                    console.log('Calendar save AJAX success:', response);
+                    if (response.status === 'success') {
+                        self.showNotification('Calendar created successfully!', 'success');
+                        self.hideCalendarModal();
+                        // Reload page to show new calendar
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        console.error('Response status not success:', response.message);
+                        self.showNotification(response.message || 'Failed to create calendar', 'error');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Calendar save AJAX error:', xhr.status, error);
+                    console.error('Response text:', xhr.responseText);
+                    self.showNotification('An error occurred. Please check the console for details.', 'error');
                 }
-            }).fail(function() {
-                self.showNotification('An error occurred. Please try again.', 'error');
             });
         }
     };
