@@ -49,7 +49,7 @@
             });
 
             // Save calendar
-            $(document).on('submit', '#calendar-form', function(e) {
+            $(document).on('click', '#calendar-form .btn-primary', function(e) {
                 e.preventDefault();
                 self.saveCalendar();
             });
