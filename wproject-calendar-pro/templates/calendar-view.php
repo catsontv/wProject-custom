@@ -53,6 +53,10 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
         </div>
 
         <div class="calendar-header-right">
+            <button class="btn btn-secondary btn-new-calendar">
+                <i data-feather="plus"></i>
+                <?php _e( 'New Calendar', 'wproject-calendar-pro' ); ?>
+            </button>
             <button class="btn btn-primary btn-new-event">
                 <i data-feather="plus"></i>
                 <?php _e( 'New Event', 'wproject-calendar-pro' ); ?>
@@ -69,6 +73,9 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
 </div>
 
 <?php
+// Include calendar creation modal
+include CALENDAR_PRO_PLUGIN_PATH . 'templates/calendar-form.php';
+
 // Include event modal
 include CALENDAR_PRO_PLUGIN_PATH . 'templates/event-form.php';
 

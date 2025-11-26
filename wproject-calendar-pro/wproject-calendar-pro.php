@@ -115,6 +115,7 @@ add_action( 'admin_enqueue_scripts', 'calendar_pro_admin_scripts' );
 require_once( CALENDAR_PRO_PLUGIN_PATH . 'includes/class-calendar-core.php' );
 require_once( CALENDAR_PRO_PLUGIN_PATH . 'includes/class-event-manager.php' );
 require_once( CALENDAR_PRO_PLUGIN_PATH . 'includes/class-calendar-manager.php' );
+require_once( CALENDAR_PRO_PLUGIN_PATH . 'includes/class-permissions.php' );
 require_once( CALENDAR_PRO_PLUGIN_PATH . 'includes/class-recurring-events.php' );
 require_once( CALENDAR_PRO_PLUGIN_PATH . 'includes/class-reminders.php' );
 require_once( CALENDAR_PRO_PLUGIN_PATH . 'includes/class-sharing.php' );

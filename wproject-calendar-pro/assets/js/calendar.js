@@ -35,10 +35,22 @@
                 self.refreshEvents();
             });
 
+            // New calendar button
+            $(document).on('click', '.btn-new-calendar', function(e) {
+                e.preventDefault();
+                self.showCalendarModal();
+            });
+
             // New event button
             $(document).on('click', '.btn-new-event', function(e) {
                 e.preventDefault();
                 self.showEventModal();
+            });
+
+            // Save calendar
+            $(document).on('submit', '#calendar-form', function(e) {
+                e.preventDefault();
+                self.saveCalendar();
             });
 
             // Save event
@@ -55,13 +67,26 @@
                 }
             });
 
-            // Close modal
-            $(document).on('click', '.calendar-modal-close, .btn-cancel', function(e) {
+            // Close calendar modal
+            $(document).on('click', '#calendar-modal .modal-close, #calendar-form-cancel', function(e) {
+                e.preventDefault();
+                self.hideCalendarModal();
+            });
+
+            // Close event/calendar modals by clicking outside
+            $(document).on('click', '.modal-overlay', function(e) {
+                if ($(e.target).hasClass('modal-overlay')) {
+                    self.hideCalendarModal();
+                }
+            });
+
+            // Close event modal
+            $(document).on('click', '.calendar-modal-close, .btn-cancel:not(#calendar-form-cancel)', function(e) {
                 e.preventDefault();
                 self.closeModal();
             });
 
-            // Click outside modal to close
+            // Click outside event modal to close
             $(document).on('click', '.calendar-modal', function(e) {
                 if ($(e.target).hasClass('calendar-modal')) {
                     self.closeModal();
@@ -393,6 +418,64 @@
             var d = new Date(date);
             d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
             return d.toISOString().slice(0, 16);
+        },
+
+        /**
+         * Show calendar creation modal
+         */
+        showCalendarModal: function() {
+            $('#calendar-id').val('');
+            $('#calendar-form').trigger('reset');
+            $('#calendar-modal').show();
+            $('#calendar-name').focus();
+        },
+
+        /**
+         * Hide calendar modal
+         */
+        hideCalendarModal: function() {
+            $('#calendar-modal').hide();
+            $('#calendar-form').trigger('reset');
+        },
+
+        /**
+         * Save calendar
+         */
+        saveCalendar: function() {
+            var self = this;
+            var name = $('#calendar-name').val().trim();
+            var description = $('#calendar-description').val().trim();
+            var color = $('#calendar-color').val();
+            var visibility = $('#calendar-visibility').val();
+
+            if (!name) {
+                alert('Please enter a calendar name');
+                return;
+            }
+
+            var data = {
+                action: 'calendar_pro_create_calendar',
+                nonce: calendar_inputs.nonce,
+                name: name,
+                description: description,
+                color: color,
+                visibility: visibility
+            };
+
+            $.post(calendar_inputs.ajaxurl, data, function(response) {
+                if (response.status === 'success') {
+                    self.showNotification('Calendar created successfully!', 'success');
+                    self.hideCalendarModal();
+                    // Reload page to show new calendar
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    self.showNotification(response.message || 'Failed to create calendar', 'error');
+                }
+            }).fail(function() {
+                self.showNotification('An error occurred. Please try again.', 'error');
+            });
         }
     };
 
