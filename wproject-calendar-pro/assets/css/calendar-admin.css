@@ -1,0 +1,312 @@
+/**
+ * Calendar Pro Admin Styles
+ *
+ * Styles for license page and admin interface
+ *
+ * @package wProject Calendar Pro
+ * @since 1.0.0
+ */
+
+/* ========================================
+   License Page
+   ======================================== */
+
+.toplevel_page_wproject-calendar-pro #wpwrap {
+    background: #f3f3f3;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form {
+    max-width: 600px;
+    padding: 25px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.05);
+    margin: 25px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    color: #5b606c;
+    margin: 0 0 20px 0;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    color: #5b606c;
+    margin: 20px 0 10px 0;
+    font-size: 1.4em;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form .pill {
+    padding: 3px 10px;
+    display: inline-block;
+    border-radius: 13px;
+    text-transform: uppercase;
+    font-size: .85em;
+    color: #fff;
+    background: #8bc34a;
+    font-weight: bold;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form label {
+    font-weight: 700;
+    color: #5b606c;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form input[type="text"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form .button {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form .button-primary {
+    background: #00bcd4;
+    border-color: #00bcd4;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form .button-primary:hover {
+    background: #0097a7;
+    border-color: #0097a7;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form hr {
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.toplevel_page_wproject-calendar-pro #wpwrap form p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+/* Notices */
+.toplevel_page_wproject-calendar-pro .notice {
+    margin: 15px 0;
+    padding: 10px 15px;
+    border-left: 4px solid #00bcd4;
+    background: #f0fcff;
+}
+
+.toplevel_page_wproject-calendar-pro .notice-error {
+    border-left-color: #ff5722;
+    background: #fff5f5;
+}
+
+.toplevel_page_wproject-calendar-pro .notice-success {
+    border-left-color: #8bc34a;
+    background: #f5fff5;
+}
+
+/* ========================================
+   Settings Page Integration
+   ======================================== */
+
+.wproject-wrap .calendar-notice {
+    margin: 20px 0 !important;
+    padding: 10px !important;
+    background: #fff5e6;
+    border-left: 4px solid #ff9800;
+}
+
+/* Color Picker */
+.wp-picker-container {
+    display: inline-block;
+}
+
+.wp-picker-input-wrap {
+    margin-top: 5px;
+}
+
+/* Plugin Dashboard in Settings */
+.wproject-plugin-dashboard {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.wproject-plugin-dashboard h2 {
+    margin: 0 0 15px 0;
+    font-size: 1.6em;
+}
+
+.wproject-plugin-dashboard .wproject-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #00bcd4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    margin: 5px 5px 5px 0;
+    font-size: 1.2em;
+    transition: all 0.2s ease;
+}
+
+.wproject-plugin-dashboard .wproject-button:hover {
+    background: #0097a7;
+    color: #fff;
+}
+
+.wproject-plugin-dashboard .wproject-update-button {
+    background: #9c27b0;
+}
+
+.wproject-plugin-dashboard .wproject-update-button:hover {
+    background: #7b1fa2;
+}
+
+/* Settings Form Layout */
+.settings-div.calendar-pro .fleft {
+    float: left;
+    width: 40%;
+    padding-right: 20px;
+}
+
+.settings-div.calendar-pro .fright {
+    float: right;
+    width: 60%;
+}
+
+.settings-div.calendar-pro .fleft p {
+    margin: 0;
+}
+
+.settings-div.calendar-pro .fleft p span {
+    display: block;
+    color: #999;
+    font-size: 0.9em;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+.settings-div.calendar-pro .fright ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.settings-div.calendar-pro .fright ul li {
+    margin: 8px 0;
+}
+
+.settings-div.calendar-pro .fright input[type="checkbox"],
+.settings-div.calendar-pro .fright input[type="radio"] {
+    margin-right: 8px;
+}
+
+.settings-div.calendar-pro .fright select,
+.settings-div.calendar-pro .fright input[type="number"] {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.settings-div.calendar-pro .fright .sublabel {
+    display: block;
+    margin: 10px 0 5px 0;
+    font-size: 1.2em;
+    color: #5b606c;
+}
+
+.settings-div.calendar-pro .fright .colour-picker {
+    width: auto !important;
+}
+
+.settings-div.calendar-pro hr {
+    clear: both;
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.settings-div.calendar-pro h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #5b606c;
+}
+
+.settings-div.calendar-pro h3 span {
+    font-size: 0.7em;
+    color: #999;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.settings-div.calendar-pro h3 .update-check {
+    float: right;
+    font-size: 0.6em;
+    color: #00bcd4;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.settings-div.calendar-pro h3 .update-check:hover {
+    text-decoration: underline;
+}
+
+.settings-div.calendar-pro h4.warning {
+    background: #fff5e6;
+    padding: 10px 15px;
+    border-left: 4px solid #ff9800;
+    margin: 20px 0;
+}
+
+.settings-div.calendar-pro h4.warning a {
+    color: #ff9800;
+}
+
+/* wProject Notice Box */
+.wproject-notice {
+    background: #fff5e6;
+    padding: 15px;
+    border-left: 4px solid #ff9800;
+    margin: 20px 0;
+}
+
+.wproject-notice strong {
+    color: #5b606c;
+}
+
+.wproject-notice a {
+    color: #ff9800;
+    text-decoration: none;
+}
+
+.wproject-notice a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 960px) {
+    .settings-div.calendar-pro .fleft,
+    .settings-div.calendar-pro .fright {
+        float: none;
+        width: 100%;
+        padding: 0;
+    }
+
+    .settings-div.calendar-pro .fleft {
+        margin-bottom: 15px;
+    }
+}
