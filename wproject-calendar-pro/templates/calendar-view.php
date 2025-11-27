@@ -53,9 +53,9 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
         </div>
 
         <div class="calendar-header-right">
-            <button class="btn btn-secondary btn-manage-calendars">
+            <button class="btn btn-secondary btn-manage-calendars" style="display: inline-block !important;">
                 <i data-feather="settings"></i>
-                <?php _e( 'Manage Calendars', 'wproject-calendar-pro' ); ?>
+                <span><?php _e( 'Manage Calendars', 'wproject-calendar-pro' ); ?></span>
             </button>
             <button class="btn btn-secondary btn-new-calendar">
                 <i data-feather="plus"></i>
