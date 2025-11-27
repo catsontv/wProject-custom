@@ -208,6 +208,16 @@ class WProject_Task_Calendar_Integration {
         $task_status = get_post_meta( $task_id, 'task_status', true );
         $task_priority = get_post_meta( $task_id, 'task_priority', true );
 
+        // Get task's project (tasks can belong to projects via taxonomy)
+        $project_id = null;
+        $task_projects = get_the_terms( $task_id, 'project' );
+        if ( $task_projects && ! is_wp_error( $task_projects ) ) {
+            // Use first project if task belongs to multiple
+            $project = reset( $task_projects );
+            $project_id = $project->term_id;
+            error_log( '[Calendar Pro] Task belongs to project: ' . $project->name . ' (ID: ' . $project_id . ')' );
+        }
+
         error_log( '[Calendar Pro] Task details - Title: ' . $task->post_title . ', Start: ' . $task_start_date . ', End: ' . $task_end_date );
 
         // Determine event color based on priority
@@ -230,6 +240,7 @@ class WProject_Task_Calendar_Integration {
             'event_type'     => 'task',
             'color'          => $event_color,
             'task_id'        => $task_id,
+            'project_id'     => $project_id,  // CRITICAL: Set project from task
             'status'         => $task_status === 'complete' ? 'completed' : 'confirmed',
             'visibility'     => 'private'
         );
@@ -291,6 +302,15 @@ class WProject_Task_Calendar_Integration {
             $task_status = get_post_meta( $task_id, 'task_status', true );
             $task_priority = get_post_meta( $task_id, 'task_priority', true );
 
+            // Get task's project (in case it changed)
+            $project_id = null;
+            $task_projects = get_the_terms( $task_id, 'project' );
+            if ( $task_projects && ! is_wp_error( $task_projects ) ) {
+                $project = reset( $task_projects );
+                $project_id = $project->term_id;
+                error_log( '[Calendar Pro] Updating event with project: ' . $project->name . ' (ID: ' . $project_id . ')' );
+            }
+
             // Determine event color based on priority
             $color_map = array(
                 'low'    => '#4caf50',
@@ -308,6 +328,7 @@ class WProject_Task_Calendar_Integration {
                 'start_datetime' => $task_start_date ? $task_start_date . ' 09:00:00' : null,
                 'end_datetime'   => $task_end_date ? $task_end_date . ' 17:00:00' : null,
                 'color'          => $event_color,
+                'project_id'     => $project_id,  // CRITICAL: Sync project from task
                 'status'         => $task_status === 'complete' ? 'completed' : 'confirmed'
             );
 
