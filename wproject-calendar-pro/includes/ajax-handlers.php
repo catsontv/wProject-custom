@@ -543,7 +543,7 @@ function calendar_pro_get_calendar_event_count() {
     }
 
     global $wpdb;
-    $table_name = $wpdb->prefix . 'wpc_events';
+    $table_name = $wpdb->prefix . 'wproject_events';
 
     $count = $wpdb->get_var( $wpdb->prepare(
         "SELECT COUNT(*) FROM $table_name WHERE calendar_id = %d",
@@ -595,9 +595,9 @@ function calendar_pro_delete_calendar_with_options() {
     }
 
     $user_id = get_current_user_id();
-    $events_table = $wpdb->prefix . 'wpc_events';
-    $attendees_table = $wpdb->prefix . 'wpc_event_attendees';
-    $calendars_table = $wpdb->prefix . 'wpc_calendars';
+    $events_table = $wpdb->prefix . 'wproject_events';
+    $attendees_table = $wpdb->prefix . 'wproject_event_attendees';
+    $calendars_table = $wpdb->prefix . 'wproject_calendars';
 
     if ( $delete_option === 'transfer' ) {
         // Get user's default calendar
@@ -663,7 +663,7 @@ function calendar_pro_delete_calendar_with_options() {
     }
 
     // Delete calendar shares
-    $shares_table = $wpdb->prefix . 'wpc_calendar_shares';
+    $shares_table = $wpdb->prefix . 'wproject_calendar_sharing';
     $wpdb->delete( $shares_table, array( 'calendar_id' => $calendar_id ), array( '%d' ) );
 
     // Delete the calendar
