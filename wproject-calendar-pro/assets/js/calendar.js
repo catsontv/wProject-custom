@@ -545,7 +545,11 @@
             var color = $('#calendar-color').val();
             var visibility = $('#calendar-visibility').val();
 
-            console.log('Saving calendar:', {name: name, description: description, color: color, visibility: visibility});
+            console.log('=== CALENDAR SAVE DEBUG START ===');
+            console.log('Calendar inputs object:', calendar_inputs);
+            console.log('Nonce value:', calendar_inputs.nonce);
+            console.log('AJAX URL:', calendar_inputs.ajaxurl);
+            console.log('Form values:', {name: name, description: description, color: color, visibility: visibility});
 
             if (!name) {
                 alert('Please enter a calendar name');
@@ -561,31 +565,50 @@
                 visibility: visibility
             };
 
-            console.log('Sending AJAX data:', data);
-            console.log('AJAX URL:', calendar_inputs.ajaxurl);
+            console.log('AJAX data being sent:', JSON.stringify(data, null, 2));
 
             $.ajax({
                 url: calendar_inputs.ajaxurl,
                 type: 'POST',
                 data: data,
+                beforeSend: function(xhr) {
+                    console.log('AJAX request starting...');
+                },
                 success: function(response) {
-                    console.log('Calendar save AJAX success:', response);
+                    console.log('AJAX success - Response:', response);
+                    console.log('Response type:', typeof response);
+                    console.log('Response status:', response.status);
+
                     if (response.status === 'success') {
                         self.showNotification('Calendar created successfully!', 'success');
                         self.hideCalendarModal();
-                        // Reload page to show new calendar
                         setTimeout(function() {
                             location.reload();
                         }, 1000);
                     } else {
-                        console.error('Response status not success:', response.message);
-                        self.showNotification(response.message || 'Failed to create calendar', 'error');
+                        console.error('Server returned error:', response.message);
+                        alert('Error: ' + (response.message || 'Failed to create calendar'));
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Calendar save AJAX error:', xhr.status, error);
-                    console.error('Response text:', xhr.responseText);
-                    self.showNotification('An error occurred. Please check the console for details.', 'error');
+                    console.error('=== AJAX ERROR ===');
+                    console.error('HTTP Status:', xhr.status);
+                    console.error('Status Text:', xhr.statusText);
+                    console.error('Error:', error);
+                    console.error('Response Text:', xhr.responseText);
+                    console.error('Response Headers:', xhr.getAllResponseHeaders());
+
+                    try {
+                        var parsedResponse = JSON.parse(xhr.responseText);
+                        console.error('Parsed error response:', parsedResponse);
+                    } catch(e) {
+                        console.error('Could not parse response as JSON');
+                    }
+
+                    alert('AJAX Error ' + xhr.status + ': ' + error + '\nCheck browser console for details.');
+                },
+                complete: function() {
+                    console.log('=== CALENDAR SAVE DEBUG END ===');
                 }
             });
         }

@@ -282,14 +282,31 @@ function calendar_pro_delete_event() {
  */
 add_action( 'wp_ajax_calendar_pro_create_calendar', 'calendar_pro_create_calendar' );
 function calendar_pro_create_calendar() {
+    error_log( '=== CALENDAR CREATION AJAX CALLED ===' );
+    error_log( 'POST data: ' . print_r( $_POST, true ) );
+    error_log( 'User ID: ' . get_current_user_id() );
+    error_log( 'Is user logged in: ' . ( is_user_logged_in() ? 'YES' : 'NO' ) );
+
     // Verify nonce
-    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' ) ) {
-        calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
+    if ( ! isset( $_POST['nonce'] ) ) {
+        error_log( '[Calendar Pro] NONCE NOT SET in POST data' );
+        calendar_ajaxStatus( 'error', __( 'Nonce not provided.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    error_log( '[Calendar Pro] Nonce received: ' . $_POST['nonce'] );
+
+    $nonce_check = wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' );
+    error_log( '[Calendar Pro] Nonce verification result: ' . ( $nonce_check ? 'PASS' : 'FAIL' ) );
+
+    if ( ! $nonce_check ) {
+        calendar_ajaxStatus( 'error', __( 'Nonce check failed. Please refresh the page and try again.', 'wproject-calendar-pro' ) );
         return;
     }
 
     // Check user is logged in
     if ( ! is_user_logged_in() ) {
+        error_log( '[Calendar Pro] USER NOT LOGGED IN' );
         calendar_ajaxStatus( 'error', __( 'You must be logged in to create a calendar.', 'wproject-calendar-pro' ) );
         return;
     }
@@ -300,6 +317,8 @@ function calendar_pro_create_calendar() {
         'color'       => isset( $_POST['color'] ) ? sanitize_hex_color( $_POST['color'] ) : '#00bcd4',
         'visibility'  => isset( $_POST['visibility'] ) ? sanitize_text_field( $_POST['visibility'] ) : 'private'
     );
+
+    error_log( '[Calendar Pro] Sanitized calendar data: ' . json_encode( $calendar_data ) );
 
     $calendar_id = WProject_Calendar_Manager::create_calendar( $calendar_data );
 
@@ -312,6 +331,8 @@ function calendar_pro_create_calendar() {
         error_log( '[Calendar Pro AJAX] Calendar creation failed - check class-calendar-manager.php debug.log for details. Data: ' . json_encode( $calendar_data ) );
         calendar_ajaxStatus( 'error', __( 'Failed to create calendar', 'wproject-calendar-pro' ) );
     }
+
+    error_log( '=== CALENDAR CREATION AJAX END ===' );
     return;
 }
 

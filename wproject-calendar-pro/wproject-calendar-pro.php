@@ -3,7 +3,7 @@
 Plugin Name:    Calendar Pro for wProject
 Plugin URI:     https://rocketapps.com.au/product/calendar-pro/
 Description:    Advanced calendar and event management for wProject with recurring events, reminders, and team collaboration.
-Version:        1.0.0
+Version:        1.0.2
 Author:         Rocket Apps
 Author URI:     https://rocketapps.com.au
 Text Domain:    wproject-calendar-pro
@@ -22,7 +22,7 @@ function wp_calendar_pro_textdomain() {
 add_action( 'plugins_loaded', 'wp_calendar_pro_textdomain' );
 
 /* Constants */
-define('CALENDAR_PRO_VERSION', '1.0.1');
+define('CALENDAR_PRO_VERSION', '1.0.2');
 define('CALENDAR_PRO_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 define('CALENDAR_PRO_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 
