@@ -44,10 +44,14 @@ function calendar_pro_get_events() {
     $start_date = isset( $_POST['start'] ) ? sanitize_text_field( $_POST['start'] ) : null;
     $end_date = isset( $_POST['end'] ) ? sanitize_text_field( $_POST['end'] ) : null;
 
+    error_log( '[Calendar Pro] Get events - calendar_id: ' . $calendar_id . ', project_id: ' . $project_id );
+
     // Priority: project_id filter > calendar_id filter > all user events
     if ( $project_id ) {
         // Filter by project - show events assigned to this project
+        error_log( '[Calendar Pro] Filtering by project_id: ' . $project_id );
         $events = WProject_Event_Manager::get_project_events( $project_id, $start_date, $end_date );
+        error_log( '[Calendar Pro] Found ' . count( $events ) . ' events for project ' . $project_id );
     } elseif ( $calendar_id ) {
         // Check user can access this calendar
         if ( ! WProject_Calendar_Permissions::user_can_access_calendar( $calendar_id ) ) {
