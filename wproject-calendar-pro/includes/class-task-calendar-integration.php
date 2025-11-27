@@ -120,40 +120,58 @@ class WProject_Task_Calendar_Integration {
      * Handle task save (create or update)
      */
     public static function handle_task_save( $post_id, $post, $update ) {
+        error_log( '=== TASK SAVE HANDLER CALLED ===' );
+        error_log( 'Post ID: ' . $post_id );
+        error_log( 'Post Type: ' . $post->post_type );
+        error_log( 'Is Update: ' . ( $update ? 'YES' : 'NO' ) );
+
         // Avoid autosaves and revisions
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+            error_log( 'Skipping: AUTOSAVE' );
             return;
         }
 
         // Check if this is a task post type
         if ( $post->post_type !== 'task' ) {
+            error_log( 'Skipping: Not a task post type' );
             return;
         }
 
         // Check user permissions
         if ( ! current_user_can( 'edit_post', $post_id ) ) {
+            error_log( 'Skipping: No permission' );
             return;
         }
 
         // Get calendar ID from POST
         $calendar_id = isset( $_POST['task_calendar_id'] ) ? (int) $_POST['task_calendar_id'] : 0;
+        error_log( 'Calendar ID from POST: ' . $calendar_id );
+        error_log( 'POST data: ' . print_r( $_POST, true ) );
 
         // Get existing event ID
         $event_id = get_post_meta( $post_id, 'task_calendar_event_id', true );
+        error_log( 'Existing Event ID: ' . ( $event_id ? $event_id : 'NONE' ) );
 
         // Determine action
-        if ( $update && $event_id ) {
-            // Update existing event
-            self::update_calendar_event_from_task( $post_id );
-        } else if ( $calendar_id && ! $event_id ) {
+        if ( $calendar_id && ! $event_id ) {
             // Create new event
+            error_log( 'ACTION: Creating new calendar event' );
             self::create_calendar_event_from_task( $post_id );
+        } else if ( $update && $event_id && $calendar_id ) {
+            // Update existing event
+            error_log( 'ACTION: Updating existing calendar event' );
+            self::update_calendar_event_from_task( $post_id );
         } else if ( ! $calendar_id && $event_id ) {
             // Remove calendar association
+            error_log( 'ACTION: Removing calendar event' );
             WProject_Event_Manager::delete_event( $event_id );
             delete_post_meta( $post_id, 'task_calendar_event_id' );
             delete_post_meta( $post_id, 'task_calendar_id' );
+        } else {
+            error_log( 'ACTION: No action taken (calendar_id=' . $calendar_id . ', event_id=' . $event_id . ')' );
         }
+
+        error_log( '=== TASK SAVE HANDLER END ===' );
     }
 
     /**
@@ -163,10 +181,14 @@ class WProject_Task_Calendar_Integration {
      * @param array $task_data Task data
      */
     public static function create_calendar_event_from_task( $task_id, $task_data = array() ) {
+        error_log( '[Calendar Pro] create_calendar_event_from_task called for task ' . $task_id );
+
         // Get calendar ID from POST or task meta
         $calendar_id = isset( $_POST['task_calendar_id'] ) ? (int) $_POST['task_calendar_id'] : 0;
+        error_log( '[Calendar Pro] Calendar ID: ' . $calendar_id );
 
         if ( ! $calendar_id ) {
+            error_log( '[Calendar Pro] No calendar ID, skipping event creation' );
             return;
         }
 
@@ -176,6 +198,7 @@ class WProject_Task_Calendar_Integration {
         // Get task details
         $task = get_post( $task_id );
         if ( ! $task ) {
+            error_log( '[Calendar Pro] Task not found' );
             return;
         }
 
@@ -184,6 +207,8 @@ class WProject_Task_Calendar_Integration {
         $task_end_date = get_post_meta( $task_id, 'task_end_date', true );
         $task_status = get_post_meta( $task_id, 'task_status', true );
         $task_priority = get_post_meta( $task_id, 'task_priority', true );
+
+        error_log( '[Calendar Pro] Task details - Title: ' . $task->post_title . ', Start: ' . $task_start_date . ', End: ' . $task_end_date );
 
         // Determine event color based on priority
         $color_map = array(
@@ -209,15 +234,17 @@ class WProject_Task_Calendar_Integration {
             'visibility'     => 'private'
         );
 
+        error_log( '[Calendar Pro] Event data: ' . json_encode( $event_data ) );
+
         // Create the event
         $event_id = WProject_Event_Manager::create_event( $event_data );
 
         if ( $event_id ) {
             // Store event ID in task meta for future updates
             update_post_meta( $task_id, 'task_calendar_event_id', $event_id );
-            error_log( '[Calendar Pro] Created calendar event ' . $event_id . ' for task ' . $task_id );
+            error_log( '[Calendar Pro] SUCCESS: Created calendar event ' . $event_id . ' for task ' . $task_id );
         } else {
-            error_log( '[Calendar Pro] Failed to create calendar event for task ' . $task_id );
+            error_log( '[Calendar Pro] ERROR: Failed to create calendar event for task ' . $task_id );
         }
     }
 
