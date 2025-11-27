@@ -30,15 +30,25 @@ $fullcalendar_view = isset($view_map[$default_view]) ? $view_map[$default_view] 
 $user_calendars = WProject_Calendar_Core::get_user_calendars();
 $shared_calendars = WProject_Calendar_Core::get_shared_calendars();
 $all_calendars = array_merge($user_calendars, $shared_calendars);
+
+// Check if we're in project context (variables set by calendar_pro_display_project())
+$is_project_context = isset($project_id) && $project_id !== null;
 ?>
 
 <div class="calendar-pro-wrapper">
 
     <div class="calendar-header">
         <div class="calendar-header-left">
-            <h2><?php _e( 'Calendar', 'wproject-calendar-pro' ); ?></h2>
+            <h2>
+                <?php _e( 'Calendar', 'wproject-calendar-pro' ); ?>
+                <?php if ( $is_project_context ) : ?>
+                    <span class="project-context-indicator" style="font-size: 0.85em; color: #666; font-weight: normal;">
+                        &mdash; <?php echo esc_html( $project_name ); ?>
+                    </span>
+                <?php endif; ?>
+            </h2>
 
-            <?php if ( ! empty( $all_calendars ) ) : ?>
+            <?php if ( ! $is_project_context && ! empty( $all_calendars ) ) : ?>
             <div class="calendar-selector">
                 <select id="calendar-selector">
                     <option value=""><?php _e( 'All Calendars', 'wproject-calendar-pro' ); ?></option>
@@ -48,6 +58,11 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
                         </option>
                     <?php endforeach; ?>
                 </select>
+            </div>
+            <?php elseif ( $is_project_context ) : ?>
+            <div class="project-calendar-info" style="padding: 8px 12px; background: #e3f2fd; border-radius: 4px; font-size: 0.9em;">
+                <i data-feather="filter" style="width: 14px; height: 14px;"></i>
+                <?php _e( 'Showing events for this project only', 'wproject-calendar-pro' ); ?>
             </div>
             <?php endif; ?>
         </div>
@@ -117,7 +132,11 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
     <div id="calendar-pro"
          data-default-view="<?php echo esc_attr( $fullcalendar_view ); ?>"
          data-week-start="<?php echo esc_attr( $week_start ); ?>"
-         data-time-format="<?php echo esc_attr( $time_format ); ?>">
+         data-time-format="<?php echo esc_attr( $time_format ); ?>"
+         <?php if ( $is_project_context ) : ?>
+         data-project-id="<?php echo esc_attr( $project_id ); ?>"
+         data-project-name="<?php echo esc_attr( $project_name ); ?>"
+         <?php endif; ?>>
     </div>
 
 </div>

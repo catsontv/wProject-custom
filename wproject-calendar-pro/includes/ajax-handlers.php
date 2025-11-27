@@ -40,10 +40,15 @@ function calendar_pro_get_events() {
     }
 
     $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+    $project_id = isset( $_POST['project_id'] ) ? (int) $_POST['project_id'] : 0;
     $start_date = isset( $_POST['start'] ) ? sanitize_text_field( $_POST['start'] ) : null;
     $end_date = isset( $_POST['end'] ) ? sanitize_text_field( $_POST['end'] ) : null;
 
-    if ( $calendar_id ) {
+    // Priority: project_id filter > calendar_id filter > all user events
+    if ( $project_id ) {
+        // Filter by project - show events assigned to this project
+        $events = WProject_Event_Manager::get_project_events( $project_id, $start_date, $end_date );
+    } elseif ( $calendar_id ) {
         // Check user can access this calendar
         if ( ! WProject_Calendar_Permissions::user_can_access_calendar( $calendar_id ) ) {
             calendar_ajaxStatus( 'error', __( 'Access denied.', 'wproject-calendar-pro' ) );
