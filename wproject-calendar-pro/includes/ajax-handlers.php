@@ -82,6 +82,10 @@ function calendar_pro_create_event() {
 
     $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
 
+    error_log( '[CREATE EVENT] Calendar ID received: ' . var_export( $calendar_id, true ) );
+    error_log( '[CREATE EVENT] POST calendar_id raw: ' . var_export( $_POST['calendar_id'] ?? 'NOT SET', true ) );
+    error_log( '[CREATE EVENT] POST data: ' . json_encode( $_POST ) );
+
     // Check user can create event in this calendar
     if ( ! WProject_Calendar_Permissions::user_can_create_event( $calendar_id ) ) {
         calendar_ajaxStatus( 'error', __( 'Permission denied. You cannot create events in this calendar.', 'wproject-calendar-pro' ) );

@@ -294,6 +294,7 @@
          * Show event modal
          */
         showEventModal: function(selectInfo) {
+            var self = this;
             var modal = $('#event-modal');
             var isEditing = $('#event-id').val() !== '';
 
@@ -304,6 +305,12 @@
                 $('.event-type-option').first().click();
                 $('.calendar-color-option').first().click();
                 $('.btn-save-event').text('Save Event'); // Reset button text
+
+                // Set calendar from current selection
+                var selectedCalendar = self.currentCalendarId || $('#calendar-selector').val();
+                if (selectedCalendar && selectedCalendar !== '') {
+                    $('#event-calendar-id').val(selectedCalendar);
+                }
 
                 // Set dates if creating from selection
                 if (selectInfo) {
@@ -354,10 +361,19 @@
             var eventId = $('#event-id').val();
             var isEdit = eventId !== '';
 
+            // Determine calendar_id - prefer event form selector if exists, then current calendar, then main selector
+            var calendarId = $('#event-calendar-id').val() || self.currentCalendarId || $('#calendar-selector').val();
+
+            console.log('[SAVE EVENT] Debug calendar_id assignment:');
+            console.log('  - Event form selector value:', $('#event-calendar-id').val());
+            console.log('  - self.currentCalendarId:', self.currentCalendarId);
+            console.log('  - Main selector value:', $('#calendar-selector').val());
+            console.log('  - Final calendar_id:', calendarId);
+
             var eventData = {
                 action: isEdit ? 'calendar_pro_update_event' : 'calendar_pro_create_event',
                 nonce: calendar_inputs.nonce,
-                calendar_id: self.currentCalendarId || $('#calendar-selector').val(),
+                calendar_id: calendarId,
                 title: $('#event-title').val(),
                 description: $('#event-description').val(),
                 location: $('#event-location').val(),
@@ -381,6 +397,12 @@
             // Validation
             if (!eventData.title) {
                 alert('Please enter an event title');
+                return;
+            }
+
+            // Validate calendar_id
+            if (!calendarId || calendarId === '') {
+                alert('Please select a calendar for this event');
                 return;
             }
 
@@ -467,6 +489,7 @@
 
                         // Populate form fields
                         $('#event-id').val(event.id);
+                        $('#event-calendar-id').val(event.calendar_id);
                         $('#event-title').val(event.title);
                         $('#event-description').val(event.description);
                         $('#event-location').val(event.location);

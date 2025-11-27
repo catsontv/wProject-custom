@@ -32,6 +32,20 @@ $enable_reminders = isset($options['calendar_enable_reminders']) ? $options['cal
                 <input type="hidden" id="event-id" name="event_id" value="">
 
                 <div class="calendar-form-group">
+                    <label for="event-calendar-id"><?php _e( 'Calendar', 'wproject-calendar-pro' ); ?> *</label>
+                    <select id="event-calendar-id" name="calendar_id" required>
+                        <?php
+                        $user_calendars = WProject_Calendar_Core::get_user_calendars();
+                        if ( ! empty( $user_calendars ) ) {
+                            foreach ( $user_calendars as $calendar ) {
+                                echo '<option value="' . esc_attr( $calendar->id ) . '">' . esc_html( $calendar->name ) . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <div class="calendar-form-group">
                     <label for="event-title"><?php _e( 'Title', 'wproject-calendar-pro' ); ?> *</label>
                     <input type="text" id="event-title" name="title" required>
                 </div>
