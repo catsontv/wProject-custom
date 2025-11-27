@@ -126,6 +126,62 @@
                 $(this).addClass('selected');
                 $('#event-color').val($(this).data('color'));
             });
+
+            // Manage calendars button
+            $(document).on('click', '.btn-manage-calendars', function(e) {
+                e.preventDefault();
+                self.toggleManagementPanel();
+            });
+
+            // Close management panel
+            $(document).on('click', '.btn-close-panel', function(e) {
+                e.preventDefault();
+                self.hideManagementPanel();
+            });
+
+            // Delete calendar button
+            $(document).on('click', '.btn-delete-calendar', function(e) {
+                e.preventDefault();
+                var calendarId = $(this).data('calendar-id');
+                var calendarName = $(this).data('calendar-name');
+                self.showDeleteCalendarModal(calendarId, calendarName);
+            });
+
+            // Delete option change
+            $(document).on('change', 'input[name="delete_option"]', function() {
+                var option = $(this).val();
+                if (option === 'delete_all') {
+                    $('.calendar-delete-confirmation').show();
+                    $('#delete-calendar-confirm').prop('disabled', !$('#delete-confirmation-check').is(':checked'));
+                } else {
+                    $('.calendar-delete-confirmation').hide();
+                    $('#delete-calendar-confirm').prop('disabled', false);
+                }
+            });
+
+            // Delete confirmation checkbox
+            $(document).on('change', '#delete-confirmation-check', function() {
+                var isChecked = $(this).is(':checked');
+                $('#delete-calendar-confirm').prop('disabled', !isChecked);
+            });
+
+            // Cancel delete
+            $(document).on('click', '#delete-calendar-cancel', function(e) {
+                e.preventDefault();
+                self.hideDeleteCalendarModal();
+            });
+
+            // Confirm delete
+            $(document).on('click', '#delete-calendar-confirm', function(e) {
+                e.preventDefault();
+                self.deleteCalendar();
+            });
+
+            // Close delete modal
+            $(document).on('click', '#calendar-delete-modal .calendar-modal-close', function(e) {
+                e.preventDefault();
+                self.hideDeleteCalendarModal();
+            });
         },
 
         /**
@@ -609,6 +665,126 @@
                 },
                 complete: function() {
                     console.log('=== CALENDAR SAVE DEBUG END ===');
+                }
+            });
+        },
+
+        /**
+         * Toggle management panel
+         */
+        toggleManagementPanel: function() {
+            var panel = $('#calendar-management-panel');
+            if (panel.is(':visible')) {
+                this.hideManagementPanel();
+            } else {
+                panel.slideDown(300);
+                // Reinitialize feather icons for dynamically shown content
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            }
+        },
+
+        /**
+         * Hide management panel
+         */
+        hideManagementPanel: function() {
+            $('#calendar-management-panel').slideUp(300);
+        },
+
+        /**
+         * Show delete calendar modal
+         */
+        showDeleteCalendarModal: function(calendarId, calendarName) {
+            var self = this;
+
+            $('#delete-calendar-id').val(calendarId);
+            $('#delete-calendar-name').text(calendarName);
+
+            // Reset form state
+            $('input[name="delete_option"][value="transfer"]').prop('checked', true);
+            $('#delete-confirmation-check').prop('checked', false);
+            $('.calendar-delete-confirmation').hide();
+            $('#delete-calendar-confirm').prop('disabled', false);
+
+            // Get event count for this calendar
+            $.ajax({
+                url: calendar_inputs.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'calendar_pro_get_calendar_event_count',
+                    nonce: calendar_inputs.nonce,
+                    calendar_id: calendarId
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var count = response.data.count;
+                        var countText = count === 0
+                            ? 'This calendar has no events.'
+                            : count === 1
+                                ? 'This calendar has 1 event.'
+                                : 'This calendar has ' + count + ' events.';
+                        $('#delete-calendar-event-count').text(countText);
+                    }
+                },
+                error: function() {
+                    $('#delete-calendar-event-count').text('');
+                }
+            });
+
+            $('#calendar-delete-modal').addClass('active');
+        },
+
+        /**
+         * Hide delete calendar modal
+         */
+        hideDeleteCalendarModal: function() {
+            $('#calendar-delete-modal').removeClass('active');
+        },
+
+        /**
+         * Delete calendar
+         */
+        deleteCalendar: function() {
+            var self = this;
+            var calendarId = $('#delete-calendar-id').val();
+            var deleteOption = $('input[name="delete_option"]:checked').val();
+            var calendarName = $('#delete-calendar-name').text();
+
+            if (!calendarId) {
+                return;
+            }
+
+            // Disable button during deletion
+            $('#delete-calendar-confirm').prop('disabled', true).text('Deleting...');
+
+            $.ajax({
+                url: calendar_inputs.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'calendar_pro_delete_calendar_with_options',
+                    nonce: calendar_inputs.nonce,
+                    calendar_id: calendarId,
+                    delete_option: deleteOption
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        self.hideDeleteCalendarModal();
+                        self.showNotification('Calendar deleted successfully', 'success');
+
+                        // Reload page after short delay
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        alert(response.message || 'Failed to delete calendar');
+                        $('#delete-calendar-confirm').prop('disabled', false).text('Delete Calendar');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Delete calendar error:', xhr.responseText);
+                    alert('An error occurred while deleting the calendar. Please try again.');
+                    $('#delete-calendar-confirm').prop('disabled', false).text('Delete Calendar');
                 }
             });
         }

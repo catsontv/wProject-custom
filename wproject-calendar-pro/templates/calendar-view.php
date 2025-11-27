@@ -53,6 +53,10 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
         </div>
 
         <div class="calendar-header-right">
+            <button class="btn btn-secondary btn-manage-calendars">
+                <i data-feather="settings"></i>
+                <?php _e( 'Manage Calendars', 'wproject-calendar-pro' ); ?>
+            </button>
             <button class="btn btn-secondary btn-new-calendar">
                 <i data-feather="plus"></i>
                 <?php _e( 'New Calendar', 'wproject-calendar-pro' ); ?>
@@ -61,6 +65,52 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
                 <i data-feather="plus"></i>
                 <?php _e( 'New Event', 'wproject-calendar-pro' ); ?>
             </button>
+        </div>
+    </div>
+
+    <!-- Calendar Management Panel -->
+    <div id="calendar-management-panel" class="calendar-management-panel" style="display: none;">
+        <div class="management-panel-header">
+            <h3><?php _e( 'My Calendars', 'wproject-calendar-pro' ); ?></h3>
+            <button class="btn-close-panel" aria-label="Close">&times;</button>
+        </div>
+        <div class="management-panel-body">
+            <?php if ( ! empty( $user_calendars ) ) : ?>
+                <div class="calendars-list">
+                    <?php foreach ( $user_calendars as $calendar ) :
+                        $is_default = ( $calendar->name === 'Personal' || $calendar->is_default == 1 );
+                    ?>
+                        <div class="calendar-item" data-calendar-id="<?php echo esc_attr( $calendar->id ); ?>">
+                            <div class="calendar-info">
+                                <span class="calendar-color" style="background-color: <?php echo esc_attr( $calendar->color ); ?>"></span>
+                                <div class="calendar-details">
+                                    <strong><?php echo esc_html( $calendar->name ); ?></strong>
+                                    <?php if ( $is_default ) : ?>
+                                        <span class="calendar-badge"><?php _e( 'Default', 'wproject-calendar-pro' ); ?></span>
+                                    <?php endif; ?>
+                                    <?php if ( $calendar->description ) : ?>
+                                        <p class="calendar-description"><?php echo esc_html( $calendar->description ); ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="calendar-actions">
+                                <?php if ( ! $is_default ) : ?>
+                                    <button class="btn btn-sm btn-delete-calendar"
+                                            data-calendar-id="<?php echo esc_attr( $calendar->id ); ?>"
+                                            data-calendar-name="<?php echo esc_attr( $calendar->name ); ?>">
+                                        <i data-feather="trash-2"></i>
+                                        <?php _e( 'Delete', 'wproject-calendar-pro' ); ?>
+                                    </button>
+                                <?php else : ?>
+                                    <span class="calendar-note"><?php _e( 'Cannot delete default calendar', 'wproject-calendar-pro' ); ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else : ?>
+                <p class="no-calendars"><?php _e( 'You don\'t have any calendars yet.', 'wproject-calendar-pro' ); ?></p>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -75,6 +125,9 @@ $all_calendars = array_merge($user_calendars, $shared_calendars);
 <?php
 // Include calendar creation modal
 include CALENDAR_PRO_PLUGIN_PATH . 'templates/calendar-form.php';
+
+// Include calendar delete modal
+include CALENDAR_PRO_PLUGIN_PATH . 'templates/calendar-delete-modal.php';
 
 // Include event modal
 include CALENDAR_PRO_PLUGIN_PATH . 'templates/event-form.php';

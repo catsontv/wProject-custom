@@ -517,3 +517,158 @@ function calendar_pro_get_event() {
     ) );
     return;
 }
+
+/**
+ * Get calendar event count
+ * Security: Only returns count if user can access calendar
+ */
+add_action( 'wp_ajax_calendar_pro_get_calendar_event_count', 'calendar_pro_get_calendar_event_count' );
+function calendar_pro_get_calendar_event_count() {
+    // Verify nonce
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' ) ) {
+        calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+
+    // Check user can access this calendar
+    if ( ! WProject_Calendar_Permissions::user_can_access_calendar( $calendar_id ) ) {
+        calendar_ajaxStatus( 'error', __( 'Access denied.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'wpc_events';
+
+    $count = $wpdb->get_var( $wpdb->prepare(
+        "SELECT COUNT(*) FROM $table_name WHERE calendar_id = %d AND status != 'deleted'",
+        $calendar_id
+    ) );
+
+    calendar_ajaxStatus( 'success', __( 'Event count retrieved', 'wproject-calendar-pro' ), array(
+        'count' => (int) $count
+    ) );
+    return;
+}
+
+/**
+ * Delete calendar with options (transfer or delete events)
+ * Security: Only calendar owner can delete
+ */
+add_action( 'wp_ajax_calendar_pro_delete_calendar_with_options', 'calendar_pro_delete_calendar_with_options' );
+function calendar_pro_delete_calendar_with_options() {
+    // Verify nonce
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'calendar_inputs' ) ) {
+        calendar_ajaxStatus( 'error', __( 'Nonce check failed.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    $calendar_id = isset( $_POST['calendar_id'] ) ? (int) $_POST['calendar_id'] : 0;
+    $delete_option = isset( $_POST['delete_option'] ) ? sanitize_text_field( $_POST['delete_option'] ) : 'transfer';
+
+    // Check user can delete this calendar
+    if ( ! WProject_Calendar_Permissions::user_can_delete_calendar( $calendar_id ) ) {
+        calendar_ajaxStatus( 'error', __( 'Permission denied. Only calendar owner can delete.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    global $wpdb;
+
+    // Get calendar info
+    $calendar = WProject_Calendar_Manager::get_calendar( $calendar_id );
+    if ( ! $calendar ) {
+        calendar_ajaxStatus( 'error', __( 'Calendar not found.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    // Prevent deletion of default calendar
+    if ( $calendar->name === 'Personal' || $calendar->is_default == 1 ) {
+        calendar_ajaxStatus( 'error', __( 'Cannot delete default calendar.', 'wproject-calendar-pro' ) );
+        return;
+    }
+
+    $user_id = get_current_user_id();
+    $events_table = $wpdb->prefix . 'wpc_events';
+    $attendees_table = $wpdb->prefix . 'wpc_event_attendees';
+    $calendars_table = $wpdb->prefix . 'wpc_calendars';
+
+    if ( $delete_option === 'transfer' ) {
+        // Get user's default calendar
+        $default_calendar = $wpdb->get_row( $wpdb->prepare(
+            "SELECT * FROM $calendars_table WHERE owner_id = %d AND (name = 'Personal' OR is_default = 1) LIMIT 1",
+            $user_id
+        ) );
+
+        // If no default calendar exists, create one
+        if ( ! $default_calendar ) {
+            $wpdb->insert(
+                $calendars_table,
+                array(
+                    'name' => 'Personal',
+                    'description' => 'Personal calendar',
+                    'color' => '#00bcd4',
+                    'owner_id' => $user_id,
+                    'visibility' => 'private',
+                    'is_default' => 1,
+                    'created_at' => current_time( 'mysql' )
+                ),
+                array( '%s', '%s', '%s', '%d', '%s', '%d', '%s' )
+            );
+            $default_calendar_id = $wpdb->insert_id;
+        } else {
+            $default_calendar_id = $default_calendar->id;
+        }
+
+        // Transfer all events to default calendar
+        $updated = $wpdb->update(
+            $events_table,
+            array( 'calendar_id' => $default_calendar_id ),
+            array( 'calendar_id' => $calendar_id ),
+            array( '%d' ),
+            array( '%d' )
+        );
+
+        error_log( '[Calendar Pro] Transferred ' . $updated . ' events from calendar ' . $calendar_id . ' to default calendar ' . $default_calendar_id );
+    } else {
+        // Delete all events and related data
+        $event_ids = $wpdb->get_col( $wpdb->prepare(
+            "SELECT id FROM $events_table WHERE calendar_id = %d",
+            $calendar_id
+        ) );
+
+        if ( ! empty( $event_ids ) ) {
+            $placeholders = implode( ',', array_fill( 0, count( $event_ids ), '%d' ) );
+
+            // Delete attendees
+            $wpdb->query( $wpdb->prepare(
+                "DELETE FROM $attendees_table WHERE event_id IN ($placeholders)",
+                $event_ids
+            ) );
+
+            // Delete events
+            $wpdb->query( $wpdb->prepare(
+                "DELETE FROM $events_table WHERE calendar_id = %d",
+                $calendar_id
+            ) );
+
+            error_log( '[Calendar Pro] Deleted ' . count( $event_ids ) . ' events and attendees from calendar ' . $calendar_id );
+        }
+    }
+
+    // Delete calendar shares
+    $shares_table = $wpdb->prefix . 'wpc_calendar_shares';
+    $wpdb->delete( $shares_table, array( 'calendar_id' => $calendar_id ), array( '%d' ) );
+
+    // Delete the calendar
+    $deleted = $wpdb->delete( $calendars_table, array( 'id' => $calendar_id ), array( '%d' ) );
+
+    if ( $deleted ) {
+        error_log( '[Calendar Pro] Calendar deleted successfully: Calendar ID=' . $calendar_id . ', Option=' . $delete_option );
+        calendar_ajaxStatus( 'success', __( 'Calendar deleted successfully', 'wproject-calendar-pro' ) );
+    } else {
+        error_log( '[Calendar Pro] Calendar deletion failed: Calendar ID=' . $calendar_id );
+        calendar_ajaxStatus( 'error', __( 'Failed to delete calendar', 'wproject-calendar-pro' ) );
+    }
+    return;
+}
