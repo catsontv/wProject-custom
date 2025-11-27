@@ -58,6 +58,19 @@ class WProject_Task_Calendar_Integration {
         if ( empty( $user_calendars ) ) {
             return;
         }
+
+        // Auto-select default calendar if task doesn't have one
+        if ( empty( $task_calendar_id ) ) {
+            foreach ( $user_calendars as $calendar ) {
+                if ( $calendar->name === 'Personal' || $calendar->is_default == 1 ) {
+                    $task_calendar_id = $calendar->id;
+                    break;
+                }
+            }
+            if ( empty( $task_calendar_id ) ) {
+                $task_calendar_id = $user_calendars[0]->id;
+            }
+        }
         ?>
         <script type="text/javascript">
         jQuery(document).ready(function($) {
@@ -72,7 +85,7 @@ class WProject_Task_Calendar_Integration {
                     '<option value="<?php echo esc_js( $calendar->id ); ?>" <?php echo $task_calendar_id == $calendar->id ? 'selected' : ''; ?>><?php echo esc_js( $calendar->name ); ?></option>' +
                     <?php endforeach; ?>
                     '</select>' +
-                    '<p style="font-size: 0.9em; color: #666; margin: 5px 0 0 0;"><?php _e( 'Optionally sync this task to a calendar as an event', 'wproject-calendar-pro' ); ?></p>' +
+                    '<p style="font-size: 0.9em; color: #666; margin: 5px 0 0 0;"><?php _e( 'Task will be synced to calendar with project assignment', 'wproject-calendar-pro' ); ?></p>' +
                     '</li>';
 
                 statusField.after(calendarHTML);
@@ -92,6 +105,21 @@ class WProject_Task_Calendar_Integration {
         if ( empty( $user_calendars ) ) {
             return; // Don't show selector if no calendars
         }
+
+        // Auto-select default calendar if none selected
+        if ( empty( $selected_calendar_id ) ) {
+            // Find default (Personal) calendar or use first calendar
+            foreach ( $user_calendars as $calendar ) {
+                if ( $calendar->name === 'Personal' || $calendar->is_default == 1 ) {
+                    $selected_calendar_id = $calendar->id;
+                    break;
+                }
+            }
+            // If no default found, use first calendar
+            if ( empty( $selected_calendar_id ) && ! empty( $user_calendars ) ) {
+                $selected_calendar_id = $user_calendars[0]->id;
+            }
+        }
         ?>
         <fieldset class="calendar-integration">
             <legend><?php _e( 'Calendar', 'wproject-calendar-pro' ); ?></legend>
@@ -108,7 +136,7 @@ class WProject_Task_Calendar_Integration {
                         <?php endforeach; ?>
                     </select>
                     <p class="field-description">
-                        <?php _e( 'Optionally sync this task to a calendar as an event', 'wproject-calendar-pro' ); ?>
+                        <?php _e( 'Task will be synced to selected calendar with project assignment', 'wproject-calendar-pro' ); ?>
                     </p>
                 </li>
             </ul>
