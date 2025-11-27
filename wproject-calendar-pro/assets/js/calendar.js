@@ -708,6 +708,7 @@
             $('#delete-calendar-confirm').prop('disabled', false);
 
             // Get event count for this calendar
+            console.log('[DELETE MODAL] Fetching event count for calendar:', calendarId);
             $.ajax({
                 url: calendar_inputs.ajaxurl,
                 type: 'POST',
@@ -717,17 +718,23 @@
                     calendar_id: calendarId
                 },
                 success: function(response) {
+                    console.log('[DELETE MODAL] Event count response:', response);
                     if (response.status === 'success') {
                         var count = response.data.count;
+                        console.log('[DELETE MODAL] Event count:', count);
                         var countText = count === 0
                             ? 'This calendar has no events.'
                             : count === 1
                                 ? 'This calendar has 1 event.'
                                 : 'This calendar has ' + count + ' events.';
                         $('#delete-calendar-event-count').text(countText);
+                    } else {
+                        console.error('[DELETE MODAL] Error response:', response.message);
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error('[DELETE MODAL] AJAX error:', xhr.status, error);
+                    console.error('[DELETE MODAL] Response text:', xhr.responseText);
                     $('#delete-calendar-event-count').text('');
                 }
             });
