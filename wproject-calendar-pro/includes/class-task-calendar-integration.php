@@ -306,14 +306,24 @@ class WProject_Task_Calendar_Integration {
     /**
      * Delete calendar event from task
      *
-     * @param int $task_id Task ID
+     * @param int $post_id Post ID
      */
-    public static function delete_calendar_event_from_task( $task_id ) {
-        $event_id = get_post_meta( $task_id, 'task_calendar_event_id', true );
+    public static function delete_calendar_event_from_task( $post_id ) {
+        // Only process if this is a task post type
+        $post = get_post( $post_id );
+        if ( ! $post || $post->post_type !== 'task' ) {
+            return;
+        }
+
+        $event_id = get_post_meta( $post_id, 'task_calendar_event_id', true );
 
         if ( $event_id ) {
             WProject_Event_Manager::delete_event( $event_id );
-            error_log( '[Calendar Pro] Deleted calendar event ' . $event_id . ' for deleted task ' . $task_id );
+            error_log( '[Calendar Pro] Deleted calendar event ' . $event_id . ' for deleted task ' . $post_id );
+
+            // Clean up meta
+            delete_post_meta( $post_id, 'task_calendar_event_id' );
+            delete_post_meta( $post_id, 'task_calendar_id' );
         }
     }
 }

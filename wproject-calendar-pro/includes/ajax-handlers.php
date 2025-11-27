@@ -542,9 +542,11 @@ function calendar_pro_get_calendar_event_count() {
     $table_name = $wpdb->prefix . 'wpc_events';
 
     $count = $wpdb->get_var( $wpdb->prepare(
-        "SELECT COUNT(*) FROM $table_name WHERE calendar_id = %d AND status != 'deleted'",
+        "SELECT COUNT(*) FROM $table_name WHERE calendar_id = %d",
         $calendar_id
     ) );
+
+    error_log( "[Calendar Pro] Event count for calendar {$calendar_id}: {$count}" );
 
     calendar_ajaxStatus( 'success', __( 'Event count retrieved', 'wproject-calendar-pro' ), array(
         'count' => (int) $count
