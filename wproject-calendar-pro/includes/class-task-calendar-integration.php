@@ -236,14 +236,28 @@ class WProject_Task_Calendar_Integration {
         $task_status = get_post_meta( $task_id, 'task_status', true );
         $task_priority = get_post_meta( $task_id, 'task_priority', true );
 
-        // Get task's project (tasks can belong to projects via taxonomy)
+        // Get task's project - try POST first, then saved taxonomy
         $project_id = null;
-        $task_projects = get_the_terms( $task_id, 'project' );
-        if ( $task_projects && ! is_wp_error( $task_projects ) ) {
-            // Use first project if task belongs to multiple
-            $project = reset( $task_projects );
-            $project_id = $project->term_id;
-            error_log( '[Calendar Pro] Task belongs to project: ' . $project->name . ' (ID: ' . $project_id . ')' );
+
+        // Method 1: Get from POST data (when creating new task)
+        if ( isset( $_POST['task_project'] ) && ! empty( $_POST['task_project'] ) ) {
+            $project_id = (int) $_POST['task_project'];
+            error_log( '[Calendar Pro] Got project from POST: ' . $project_id );
+        }
+        // Method 2: Get from saved taxonomy (when editing existing task)
+        else {
+            $task_projects = get_the_terms( $task_id, 'project' );
+            if ( $task_projects && ! is_wp_error( $task_projects ) ) {
+                $project = reset( $task_projects );
+                $project_id = $project->term_id;
+                error_log( '[Calendar Pro] Got project from taxonomy: ' . $project->name . ' (ID: ' . $project_id . ')' );
+            }
+        }
+
+        if ( $project_id ) {
+            error_log( '[Calendar Pro] Task assigned to project ID: ' . $project_id );
+        } else {
+            error_log( '[Calendar Pro] WARNING: Task has no project assignment!' );
         }
 
         error_log( '[Calendar Pro] Task details - Title: ' . $task->post_title . ', Start: ' . $task_start_date . ', End: ' . $task_end_date );
@@ -330,13 +344,22 @@ class WProject_Task_Calendar_Integration {
             $task_status = get_post_meta( $task_id, 'task_status', true );
             $task_priority = get_post_meta( $task_id, 'task_priority', true );
 
-            // Get task's project (in case it changed)
+            // Get task's project - try POST first, then saved taxonomy
             $project_id = null;
-            $task_projects = get_the_terms( $task_id, 'project' );
-            if ( $task_projects && ! is_wp_error( $task_projects ) ) {
-                $project = reset( $task_projects );
-                $project_id = $project->term_id;
-                error_log( '[Calendar Pro] Updating event with project: ' . $project->name . ' (ID: ' . $project_id . ')' );
+
+            // Method 1: Get from POST data (when editing task)
+            if ( isset( $_POST['task_project'] ) && ! empty( $_POST['task_project'] ) ) {
+                $project_id = (int) $_POST['task_project'];
+                error_log( '[Calendar Pro] Got project from POST for update: ' . $project_id );
+            }
+            // Method 2: Get from saved taxonomy
+            else {
+                $task_projects = get_the_terms( $task_id, 'project' );
+                if ( $task_projects && ! is_wp_error( $task_projects ) ) {
+                    $project = reset( $task_projects );
+                    $project_id = $project->term_id;
+                    error_log( '[Calendar Pro] Got project from taxonomy for update: ' . $project->name . ' (ID: ' . $project_id . ')' );
+                }
             }
 
             // Determine event color based on priority
