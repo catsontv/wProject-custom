@@ -81,6 +81,13 @@ Contacts Pro is a comprehensive contact and company management plugin for wProje
 - **Feather Icons**: Consistent icon library with wProject theme
 - **Customizable Columns**: Configure which columns display in contact list
 
+### Data Persistence & Safety
+- **Update-Safe**: All contact data persists through plugin updates
+- **Deactivation-Safe**: Data remains intact when plugin is deactivated
+- **Uninstall-Safe**: Data is preserved even if plugin is deleted
+- **Manual Control**: Data is only removed through explicit database cleanup (see Uninstall section)
+- **No Automatic Deletion**: Plugin never deletes your contact data automatically
+
 ### Security & Permissions
 - **Role-Based Access Control**: Respects wProject user roles (Admin, PM, Team Member, Observer)
 - **Sensitive Data Protection**: ID/Passport fields visible only to Admins and Project Managers
@@ -119,6 +126,7 @@ Plugins → Add New → Upload Plugin → Choose wproject-contacts-pro.zip
 1. Navigate to **Plugins** in WordPress admin
 2. Find **wProject Contacts Pro**
 3. Click **Activate**
+4. Database tables are created automatically on first activation
 
 ### Step 3: Configure Settings
 
@@ -165,7 +173,7 @@ wproject-contacts-pro/
 ├── wproject-contacts-pro.php       # Main plugin file
 ├── README.md                       # This file
 ├── DEVELOPMENT-PLAN.md             # Development roadmap
-├── uninstall.php                   # Cleanup on uninstall
+├── uninstall.php                   # Optional cleanup (disabled by default)
 ├── admin/
 │   ├── settings.php               # Plugin settings page
 │   ├── company-admin.php          # Company CRUD interface
@@ -356,6 +364,177 @@ register_taxonomy('contact_tag', null, [
 ]);
 ```
 
+## Data Persistence Policy
+
+### Philosophy
+
+**Your contact data is valuable and permanent.** Unlike typical WordPress plugins that delete data on uninstall, wProject Contacts Pro treats your contact database as a core business asset that should never be automatically deleted.
+
+### What This Means
+
+✅ **Data persists through:**
+- Plugin updates (all versions)
+- Plugin deactivation
+- Plugin deletion/uninstall
+- WordPress updates
+- Theme changes
+- Server migrations (if database is preserved)
+
+❌ **Data is NEVER automatically deleted by:**
+- Clicking "Deactivate"
+- Clicking "Delete" in plugin list
+- Running WordPress uninstaller
+- Updating to new version
+
+### Why This Approach?
+
+1. **Accidental Protection**: Prevents catastrophic data loss from accidental plugin deletion
+2. **Business Continuity**: Your contacts remain safe during system maintenance
+3. **Migration Friendly**: Simplifies moving between servers/hosts
+4. **Upgrade Safe**: Eliminates fear of losing data during updates
+5. **Explicit Control**: You decide when and how to remove data
+
+### How to Remove Data (If Needed)
+
+If you genuinely need to delete all contact data, see the "Manual Data Removal" section under Uninstall below.
+
+## Uninstall
+
+### Option 1: Deactivate (Recommended)
+
+**Effect:** Plugin functionality disabled, all data preserved
+
+1. Go to **Plugins → Installed Plugins**
+2. Find **wProject Contacts Pro**
+3. Click **Deactivate**
+4. ✅ All companies, contacts, and relationships remain in database
+5. ✅ Reactivating restores full functionality immediately
+6. ✅ No data export needed
+
+**When to use:** Temporarily disable plugin, troubleshoot conflicts, or prepare for upgrade
+
+### Option 2: Delete Plugin (Data Still Preserved)
+
+**Effect:** Plugin files removed, all data preserved
+
+1. Deactivate the plugin (see Option 1)
+2. Click **Delete** on plugin row
+3. Confirm deletion
+4. ✅ Plugin files removed from server
+5. ✅ All database tables remain intact
+6. ✅ All contact data preserved
+7. ✅ Can reinstall plugin anytime to restore functionality
+
+**When to use:** Clean up unused plugins while keeping data for future use
+
+### Option 3: Manual Data Removal (Permanent Deletion)
+
+⚠️ **DANGER ZONE - IRREVERSIBLE OPERATION**
+
+**Effect:** ALL contact data permanently deleted
+
+**⚠️ WARNING:** This action:
+- Deletes ALL companies, contacts, emails, phones, social profiles
+- Removes ALL project/task/event relationships
+- Deletes ALL contact tags
+- Removes ALL contact photos from media library
+- CANNOT be undone
+- Backup is your ONLY recovery option
+
+**Prerequisites:**
+1. **BACKUP FIRST** - Export all contacts to CSV (Contacts → Export CSV → All Contacts)
+2. Verify backup file contains all data
+3. Store backup in safe location (offsite recommended)
+4. Deactivate and delete the plugin
+5. Ensure you have database access (phpMyAdmin or similar)
+
+**Manual Deletion Process:**
+
+1. **Access Database** via phpMyAdmin or command line
+
+2. **Select Your WordPress Database** (usually prefixed with `wp_`)
+
+3. **Run SQL Cleanup Queries:**
+
+```sql
+-- ============================================
+-- wProject Contacts Pro - MANUAL DATA REMOVAL
+-- ============================================
+-- WARNING: THIS PERMANENTLY DELETES ALL DATA
+-- BACKUP FIRST - CANNOT BE UNDONE
+-- ============================================
+
+-- Step 1: Drop relationship tables (no foreign key constraints)
+DROP TABLE IF EXISTS wp_wproject_contact_events;
+DROP TABLE IF EXISTS wp_wproject_contact_tasks;
+DROP TABLE IF EXISTS wp_wproject_contact_projects;
+
+-- Step 2: Drop dependent tables
+DROP TABLE IF EXISTS wp_wproject_contact_socials;
+DROP TABLE IF EXISTS wp_wproject_contact_phones;
+DROP TABLE IF EXISTS wp_wproject_contact_emails;
+
+-- Step 3: Drop main contacts table
+DROP TABLE IF EXISTS wp_wproject_contacts;
+
+-- Step 4: Drop companies table
+DROP TABLE IF EXISTS wp_wproject_companies;
+
+-- Step 5: Remove plugin options
+DELETE FROM wp_options WHERE option_name LIKE 'wproject_contacts_pro_%';
+
+-- Step 6: Remove contact tags taxonomy
+DELETE tt FROM wp_term_taxonomy tt
+WHERE tt.taxonomy = 'contact_tag';
+
+DELETE t FROM wp_terms t
+WHERE NOT EXISTS (
+    SELECT 1 FROM wp_term_taxonomy tt 
+    WHERE tt.term_id = t.term_id
+);
+
+-- Step 7: Remove contact photos from uploads
+-- (Manual step - see below)
+```
+
+4. **Remove Contact Photos** (if any were uploaded):
+   - Navigate to `wp-content/uploads/contacts-pro/`
+   - Delete the entire `contacts-pro` folder
+   - Or via FTP/File Manager
+
+5. **Verify Deletion:**
+
+```sql
+-- Check if tables still exist (should return 0 rows)
+SHOW TABLES LIKE 'wp_wproject_contact%';
+SHOW TABLES LIKE 'wp_wproject_companies';
+
+-- Check if options remain (should return 0 rows)
+SELECT * FROM wp_options WHERE option_name LIKE 'wproject_contacts_pro_%';
+
+-- Check if taxonomy remains (should return 0 rows)
+SELECT * FROM wp_term_taxonomy WHERE taxonomy = 'contact_tag';
+```
+
+6. **Confirm Backup:**
+   - Open CSV export file
+   - Verify all contacts are present
+   - Store backup securely
+
+**Recovery:**
+- If you deleted data by mistake, restore from backup CSV immediately
+- Reinstall plugin
+- Use CSV Import to restore contacts
+- Relationships will need manual re-linking
+
+### Summary Table
+
+| Action | Plugin Active | Plugin Files | Database Tables | Contact Data |
+|--------|---------------|--------------|-----------------|-------------|
+| **Deactivate** | ❌ No | ✅ Yes | ✅ Yes | ✅ Preserved |
+| **Delete Plugin** | ❌ No | ❌ No | ✅ Yes | ✅ Preserved |
+| **Manual SQL Cleanup** | ❌ No | ❌ No | ❌ No | ❌ **DELETED** |
+
 ## AJAX Endpoints
 
 ### Company Operations
@@ -390,242 +569,6 @@ register_taxonomy('contact_tag', null, [
 - `contacts_pro_export_csv` - Export contacts to CSV
 - `contacts_pro_export_vcard` - Export contact as vCard
 - `contacts_pro_validate_import` - Preview import before execution
-
-## UI Components
-
-### Contact List Page
-
-**Location:** `/contacts` (accessible via main navigation menu)
-
-**Features:**
-- Tabbed view: All Contacts | By Company | By Tag
-- Search bar with real-time filtering
-- Column headers with sorting (click to sort)
-- Configurable column visibility
-- Bulk actions (export, tag, delete)
-- Add New Company/Contact buttons
-- Pagination (25, 50, 100 per page)
-
-**Default Columns:**
-1. Contact Photo (avatar)
-2. Contact Name (First Last)
-3. Company Name (clickable)
-4. Role/Title
-5. Primary Email (clickable mailto:)
-6. Primary Phone (clickable tel:)
-7. Tags (colored chips)
-8. Linked Projects (count)
-9. Quick Actions (icon buttons)
-
-### Contact Detail Slide-in Panel
-
-**Trigger:** Click contact name anywhere in wProject
-
-**Sections:**
-1. **Header**
-   - Contact photo
-   - Full name
-   - Company name (clickable)
-   - Role & Department
-   - Close button (X)
-
-2. **Contact Information**
-   - All emails with labels and preferred flag
-   - All phones with labels and preferred flag
-   - Social profile icons (clickable)
-   - ID/Passport (if user has permission)
-
-3. **Quick Actions Bar**
-   - Email, Call, Create Task, Create Project, Edit, Delete
-
-4. **Activity Timeline**
-   - Tabbed view: All | Projects | Tasks | Events
-   - Chronological list with icons
-   - Links to related items
-   - Empty state if no activities
-
-5. **Tags & Notes**
-   - Tag chips (removable)
-   - Add tag dropdown
-   - Notes text area (editable inline)
-
-### Add/Edit Company Modal
-
-**Form Fields:**
-- Company Name* (required, text)
-- Website (URL with validation)
-- Main Phone (tel with formatting)
-- Main Email (email with validation)
-- Company Type (dropdown: Client, Vendor, Partner, Other)
-- Company Logo (image upload, 200x200px recommended)
-- Notes (textarea)
-
-**Validation:**
-- Company name uniqueness check
-- URL format validation
-- Email format validation
-- Phone format validation (international support)
-
-**Actions:**
-- Save Company (primary button)
-- Cancel (secondary button)
-
-### Add/Edit Contact Modal
-
-**Form Fields:**
-- First Name* (required, text)
-- Last Name* (required, text)
-- Company* (required, dropdown with search)
-- Role (dropdown with custom option)
-- Department (text)
-- Photo (image upload or Gravatar email)
-
-**Repeatable Fields:**
-- Emails (label dropdown + email input + preferred checkbox + remove button)
-- Cell Phones (label dropdown + phone input + preferred checkbox + remove button)
-- Local Phones (label dropdown + phone input + preferred checkbox + remove button)
-- [+ Add Email / + Add Cell Phone / + Add Local Phone buttons]
-
-**Social Profiles:**
-- LinkedIn URL
-- Twitter/X URL
-- Facebook URL
-
-**Additional Fields:**
-- ID Number (text, admin/PM only)
-- Passport Number (text, admin/PM only)
-- Tags (multi-select with autocomplete)
-- Notes (textarea)
-
-**Validation:**
-- Required fields check
-- Email format validation for all emails
-- Phone format validation for all phones
-- URL format validation for social profiles
-- At least one email required
-- At least one phone recommended (warning, not error)
-
-**Actions:**
-- Save Contact (primary button)
-- Save & Add Another (secondary button)
-- Cancel (tertiary button)
-
-## Integration with wProject Features
-
-### Projects Integration
-
-**Project Detail Page:**
-- New "Contacts" section/panel
-- Shows all linked contacts with photos and roles
-- "Add Contact" button opens contact selector modal
-- Click contact name opens detail slide-in panel
-- Remove icon (X) to unlink contact from project
-
-**Project Creation:**
-- Optional "Link Contacts" field in new project form
-- Multi-select dropdown to choose contacts
-- Contacts can be added/edited after project creation
-
-**Project List:**
-- New column option: "Contacts" (shows contact count)
-- Tooltip on hover shows contact names
-
-### Tasks Integration
-
-**Task Form (Create/Edit):**
-- New "External Contact" field
-- Single-select dropdown (one contact per task in V1)
-- Shows contact photo + name + company
-- Optional: Send notification to contact checkbox
-
-**Task Detail View:**
-- Contact info displayed below task description
-- Contact photo + name (clickable to detail panel)
-- Company name
-- Quick actions: Email, Call
-
-**Task List:**
-- New column option: "Contact" (shows contact name)
-- Icon indicates if task has linked contact
-
-### Calendar Integration
-
-**Event Form (Create/Edit):**
-- Existing "Attendees" field (team members)
-- New "External Contacts" field below attendees
-- Multi-select dropdown for contacts
-- Shows contact photo + name + company
-- "Send invitation email" checkbox (per contact)
-
-**Event Detail View:**
-- Separate sections:
-  - Team Attendees (existing)
-  - External Contacts (new)
-- Contact RSVP status (if they responded)
-- Contact photos in row
-- Click contact opens detail panel
-
-**Calendar View:**
-- Event tooltip shows team attendees + external contacts
-- Contact icon indicates external attendees present
-
-## Settings & Configuration
-
-**Location:** wProject → Pro Addons → Contacts Pro
-
-### General Settings
-
-- **Default Company Type:** Client | Vendor | Partner | Other
-- **Require Photo Upload:** Yes | No (default: No)
-- **Gravatar Fallback:** Yes | No (default: Yes)
-- **ID/Passport Visibility:** Admins Only | Admins & PMs | All Users
-
-### Column Visibility
-
-- **Contact List Columns:** (checkboxes)
-  - ✓ Contact Photo
-  - ✓ Contact Name
-  - ✓ Company Name
-  - ✓ Role/Title
-  - ✓ Primary Email
-  - ✓ Primary Phone
-  - ✓ Tags
-  - ✓ Linked Projects
-  - ✓ Quick Actions
-  - ☐ Department
-  - ☐ All Emails
-  - ☐ All Phones
-  - ☐ Social Profiles
-  - ☐ Date Added
-  - ☐ Last Modified
-
-### Role Configuration
-
-- **Predefined Roles:** (editable list)
-  - CEO, CTO, CFO, COO
-  - President, Vice President
-  - Director, Manager, Supervisor
-  - Project Manager, Team Lead
-  - Developer, Designer, Analyst
-  - Consultant, Contractor
-  - Client Contact, Vendor Contact
-  - (+ Add Custom Role)
-
-### Notification Settings
-
-- **Notify when contact linked to project:** Yes | No
-- **Notify when contact linked to task:** Yes | No
-- **Notify when contact added to event:** Yes | No
-- **Notification Sender Name:** (text field)
-- **Notification Sender Email:** (email field)
-
-### Import/Export Settings
-
-- **CSV Field Delimiter:** , | ; | | (tab)
-- **CSV Text Qualifier:** " | '
-- **Prevent Duplicate Imports:** Yes | No
-- **Duplicate Detection Field:** Email | Phone | ID Number | Passport
-- **Import Batch Size:** 50 | 100 | 250 | 500
 
 ## User Permissions
 
@@ -664,172 +607,6 @@ register_taxonomy('contact_tag', null, [
 - Cannot create/edit/delete
 - Cannot link contacts
 - No notifications
-
-## Email Notifications
-
-### Contact Linked to Project
-
-**Triggered:** When contact is added to a project
-
-**Sent to:** Project Manager
-
-**Subject:** [wProject] Contact added to [Project Name]
-
-**Body Template:**
-```
-Hi [PM Name],
-
-[Contact Name] from [Company Name] has been linked to the project "[Project Name]".
-
-Contact Details:
-Email: [Primary Email]
-Phone: [Primary Phone]
-Role: [Role]
-
-View Project: [Project URL]
-View Contact: [Contact Detail URL]
-
----
-[Site Name]
-```
-
-### Contact Linked to Task
-
-**Triggered:** When contact is added to a task
-
-**Sent to:** Task owner
-
-**Subject:** [wProject] Contact added to task: [Task Name]
-
-**Body Template:**
-```
-Hi [Task Owner Name],
-
-[Contact Name] from [Company Name] has been linked to your task "[Task Name]".
-
-Contact Details:
-Email: [Primary Email]
-Phone: [Primary Phone]
-
-View Task: [Task URL]
-View Contact: [Contact Detail URL]
-
----
-[Site Name]
-```
-
-### Contact Added to Event
-
-**Triggered:** When contact is invited to calendar event
-
-**Sent to:** Contact (if email exists) + Event creator
-
-**Subject:** [wProject] Event Invitation: [Event Title]
-
-**Body Template (to Contact):**
-```
-Hi [Contact Name],
-
-You've been invited to the following event:
-
-Event: [Event Title]
-Date: [Event Date]
-Time: [Start Time] - [End Time] ([Timezone])
-Location: [Location]
-
-[Event Description]
-
-RSVP:
-[Accept Link] [Decline Link] [Tentative Link]
-
-View Event: [Event URL]
-
----
-[Site Name]
-```
-
-## Quick Start Guide
-
-### Scenario 1: Client Management
-
-1. **Create Client Company**
-   - Navigate to Contacts → Add New Company
-   - Enter: "Acme Corporation"
-   - Type: Client
-   - Website: https://acme.com
-   - Main Email: info@acme.com
-   - Save
-
-2. **Add Client Contacts**
-   - Click "Acme Corporation" → Add Contact
-   - First: John | Last: Doe
-   - Role: CEO
-   - Email: john@acme.com (Work, Preferred)
-   - Cell: +1-555-0101 (Mobile, Preferred)
-   - LinkedIn: https://linkedin.com/in/johndoe
-   - Save
-
-3. **Link to Project**
-   - Open existing project (or create new)
-   - Scroll to Contacts section
-   - Click "Add Contact"
-   - Select: John Doe (Acme Corporation)
-   - Save
-
-4. **Create Task for Client**
-   - Create new task in project
-   - Select client's project
-   - External Contact: John Doe
-   - Check "Send notification to contact"
-   - Save
-
-### Scenario 2: Vendor Management
-
-1. **Create Vendor Company**
-   - Contacts → Add New Company
-   - Enter: "Design Studio LLC"
-   - Type: Vendor
-   - Main Phone: +1-555-0200
-   - Save
-
-2. **Add Vendor Contacts**
-   - Add primary contact (Account Manager)
-   - Add secondary contact (Creative Director)
-   - Tag both with: "Design", "External"
-
-3. **Schedule Meeting**
-   - Calendar → New Event
-   - Event Type: Meeting
-   - Attendees: (select team members)
-   - External Contacts: (select vendor contacts)
-   - Send invitations: ✓
-   - Save
-
-### Scenario 3: Bulk Import Contacts
-
-1. **Prepare CSV File**
-   - Required columns: company_name, first_name, last_name
-   - Optional: email, phone, role, department, etc.
-   - Example:
-     ```
-     company_name,first_name,last_name,email,phone,role
-     "Acme Corp",John,Doe,john@acme.com,555-0101,CEO
-     "Acme Corp",Jane,Smith,jane@acme.com,555-0102,CFO
-     ```
-
-2. **Import via UI**
-   - Contacts → Import CSV
-   - Upload file
-   - Map columns to fields
-   - Preview import
-   - Execute import
-   - Review results
-
-3. **Verify Import**
-   - Check contact list
-   - Verify company grouping
-   - Check for duplicates
-   - Fix any issues
 
 ## Troubleshooting
 
@@ -913,7 +690,15 @@ If Clients Pro plugin is installed, clients can view contacts linked to their pr
 
 ### What happens if I deactivate the plugin?
 
-Data remains in the database. Reactivating the plugin restores all functionality. To completely remove data, use the uninstall process (see below).
+Data remains in the database. Reactivating the plugin restores all functionality immediately. Nothing is lost.
+
+### What happens if I delete the plugin?
+
+Data STILL remains in the database. This is intentional to prevent accidental data loss. See the Uninstall section for details.
+
+### How do I completely remove all contact data?
+
+See "Option 3: Manual Data Removal" in the Uninstall section. This requires manual SQL queries and is intentionally difficult to prevent accidental deletion.
 
 ### Can I customize which fields are required?
 
@@ -921,57 +706,11 @@ Not in V1. Required fields are: company_name (for companies), first_name, last_n
 
 ### How do I backup my contacts?
 
-Use CSV Export to create a backup file. Store it securely offsite. For complete backup, include database tables (see Database Schema section).
+Use CSV Export to create a backup file. Store it securely offsite. For complete backup, include database tables (see Database Schema section) in your WordPress database backup.
 
-## Uninstall
+### Will my contacts survive a WordPress migration?
 
-### Option 1: Deactivate Only (Keeps Data)
-
-1. Go to Plugins → Installed Plugins
-2. Find wProject Contacts Pro
-3. Click "Deactivate"
-4. Data remains in database
-5. Reactivating restores full functionality
-
-### Option 2: Complete Removal (Deletes Data)
-
-⚠️ **WARNING:** This permanently deletes all companies, contacts, and relationships. Export your data first!
-
-1. **Export all contacts to CSV** (Contacts → Export CSV → All Contacts)
-2. Deactivate the plugin
-3. Click "Delete" on plugin row
-4. Confirm deletion
-5. Plugin runs `uninstall.php` which:
-   - Drops all custom database tables
-   - Deletes all contact/company post types (if used)
-   - Removes contact_tag taxonomy and terms
-   - Deletes all plugin options from wp_options
-   - Removes uploaded contact photos from media library
-
-### Manual Cleanup (if uninstall fails)
-
-Run these SQL queries in phpMyAdmin:
-
-```sql
--- Drop all Contacts Pro tables
-DROP TABLE IF EXISTS wp_wproject_contact_events;
-DROP TABLE IF EXISTS wp_wproject_contact_tasks;
-DROP TABLE IF EXISTS wp_wproject_contact_projects;
-DROP TABLE IF EXISTS wp_wproject_contact_socials;
-DROP TABLE IF EXISTS wp_wproject_contact_phones;
-DROP TABLE IF EXISTS wp_wproject_contact_emails;
-DROP TABLE IF EXISTS wp_wproject_contacts;
-DROP TABLE IF EXISTS wp_wproject_companies;
-
--- Remove plugin options
-DELETE FROM wp_options WHERE option_name LIKE 'wproject_contacts_pro_%';
-
--- Remove taxonomy (terms and relationships)
-DELETE FROM wp_term_taxonomy WHERE taxonomy = 'contact_tag';
-DELETE FROM wp_terms WHERE term_id IN (
-    SELECT term_id FROM wp_term_taxonomy WHERE taxonomy = 'contact_tag'
-);
-```
+Yes, as long as your database is migrated. Contact data is stored in custom database tables that move with your WordPress database.
 
 ## Roadmap
 
