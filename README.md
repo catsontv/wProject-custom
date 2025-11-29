@@ -2,7 +2,7 @@
 
 ## Overview
 
-wProject Custom is a comprehensive WordPress-based project management system that provides task management, team collaboration, time tracking, and client management capabilities. The system consists of a core theme and multiple pro plugins that extend functionality.
+wProject Custom is a comprehensive WordPress-based project management system that provides task management, team collaboration, time tracking, client management, and calendar scheduling capabilities. The system consists of a core theme and multiple pro plugins that extend functionality.
 
 ## Project Structure
 
@@ -20,7 +20,8 @@ wProject-custom/
 │   └── style.css              # Main stylesheet
 ├── clients-pro/               # Client management plugin
 ├── gantt-pro/                 # Gantt chart visualization plugin
-└── reports-pro/               # Reporting and analytics plugin
+├── reports-pro/               # Reporting and analytics plugin
+└── wproject-calendar-pro/     # Calendar and event management plugin
 ```
 
 ## Core Theme: wProject
@@ -145,6 +146,172 @@ wProject-custom/
 
 **Main File:** `reports-pro/wproject-reports-pro.php`
 
+### 4. Calendar Pro Plugin
+**Purpose:** Team calendar with event scheduling and collaboration
+
+**Version:** 1.0.1  
+**Main File:** `wproject-calendar-pro/wproject-calendar-pro.php`
+
+**Core Features:**
+
+#### Event Management
+- Create, edit, and delete events with comprehensive details
+- Drag and drop events to reschedule them
+- All-day event support
+- Event types: Event, Meeting, Deadline, Reminder
+- Color-coded events for easy visual scanning
+- Rich text descriptions with full formatting
+- Location field for meetings and appointments
+- Custom categories with comma-separated tags
+
+#### Multiple Calendars
+- Create unlimited personal calendars
+- Each calendar has a unique name and color
+- 16+ color options with visual picker
+- Easy calendar switching via dropdown selector
+- View all calendars at once or individually
+- New users get automatic personal calendar on registration
+
+#### Recurring Events
+- Daily recurring (every day or every N days)
+- Weekly recurring with specific days of the week
+- Monthly recurring on specific dates
+- Yearly recurring for annual events
+- Custom patterns like "every 4th Wednesday"
+- Set recurrence end date or occurrence limit
+- Modify recurring patterns while editing events
+
+#### Calendar Sharing & Permissions
+- Share calendars with specific users or entire team
+- Control permissions: View-only or Edit access
+- See shared calendars from other team members
+- Unshare calendars anytime
+- Permission validation on all operations
+- Three visibility levels:
+  - Private: Only owner and attendees can view
+  - Team: Visible to all team members
+  - Public: Visible to everyone
+
+#### Event Reminders
+- Email reminders sent before events start
+- Customizable reminder timing:
+  - 5 minutes before
+  - 15 minutes before
+  - 30 minutes before
+  - 1 hour before
+  - 2 hours before
+  - 1 day before
+- Toggle reminders per event
+- Background scheduler with hourly cron job
+- Sent status tracking to prevent duplicates
+- All attendees receive reminder notifications
+
+#### Attendee Management
+- Invite team members to events
+- Multiple attendee selection support
+- Email invitations sent automatically
+- RSVP tracking with four statuses:
+  - Pending
+  - Accepted
+  - Declined
+  - Tentative
+- Attendee status displayed in event details
+- RSVP buttons included in email invitations
+
+#### Timezone Support
+- Timezone selector for international scheduling
+- Supports 20+ timezones worldwide
+- Covered regions:
+  - Americas: Eastern, Central, Mountain, Pacific
+  - Europe: London, Paris, Berlin, Istanbul
+  - Asia: Dubai, India, Bangkok, Singapore, Hong Kong, Tokyo, Sydney
+- Automatic time conversion for attendees in different zones
+- Default timezone: UTC
+
+#### Calendar Views
+- Month view: See all days of the month at once
+- Week view: Detailed hourly breakdown of the week
+- Day view: Single day with detailed schedule
+- List view: Upcoming events displayed as a chronological list
+- Quick view switching with toolbar buttons
+- Responsive design on all devices
+
+#### Trash & Recovery
+- Soft delete puts events in trash instead of permanent deletion
+- Restore deleted events within retention period
+- Permanent delete after configurable days
+- Separate trash interface for easy management
+- All event details preserved when restored
+
+#### Security Features
+- Only calendar owners can delete calendars
+- Attendees cannot edit events unless given permission
+- Private events only visible to owner and attendees
+- Team events visible to team members only
+- Nonce verification for CSRF protection
+- SQL injection protection with prepared statements
+- Permission validation on all operations
+
+**Database Tables:**
+- `wp_wproject_calendars` - Calendar management
+- `wp_wproject_events` - Event data and details
+- `wp_wproject_event_attendees` - RSVP tracking
+- `wp_wproject_calendar_sharing` - Calendar permissions
+- `wp_wproject_event_reminders` - Reminder scheduling
+- `wp_wproject_recurring_rules` - Recurring event patterns
+- `wp_wproject_trash` - Soft-deleted items
+
+**Quick Start Guide:**
+
+1. **Activate Plugin:**
+   - Go to WordPress Plugins page
+   - Find "Calendar Pro"
+   - Click "Activate"
+   - A default calendar is automatically created
+
+2. **Create Your First Event:**
+   - Navigate to Calendar page
+   - Click "New Event" button
+   - Fill in title (required)
+   - Set date and time
+   - Add description, location (optional)
+   - Select event type and color
+   - Choose visibility level
+   - Click "Save Event"
+
+3. **Create Additional Calendars:**
+   - Click "New Calendar" button
+   - Name it (e.g., "Work", "Personal", "Team")
+   - Choose a color from the picker
+   - Set visibility (Private/Team/Public)
+   - Click "Create Calendar"
+   - Switch between calendars using the dropdown
+
+4. **Invite Team Members:**
+   - Create or edit an event
+   - Scroll to "Add Guests/Attendees" section
+   - Hold Ctrl/Cmd and click to select multiple team members
+   - Save event
+   - Invitations are sent automatically via email
+   - Attendees can RSVP from their email
+
+5. **Share Your Calendar:**
+   - Go to Calendar Settings
+   - Click "Share" on your calendar
+   - Select users to share with
+   - Choose permission level (View or Edit)
+   - Click "Share"
+
+**Use Cases:**
+- Team meeting scheduling
+- Project deadline tracking
+- Client appointment management
+- Personal task reminders
+- Department event coordination
+- Cross-timezone team collaboration
+- Recurring team standups
+- Project milestone tracking
+
 ## Technical Architecture
 
 ### WordPress Integration
@@ -171,6 +338,15 @@ wProject-custom/
    - Stores time tracking entries
    - Links to tasks and users
    - Tracks start/stop times
+
+2. **Calendar Tables** (Calendar Pro)
+   - `wp_wproject_calendars` - Calendar definitions
+   - `wp_wproject_events` - Event entries
+   - `wp_wproject_event_attendees` - Attendance tracking
+   - `wp_wproject_calendar_sharing` - Sharing permissions
+   - `wp_wproject_event_reminders` - Scheduled reminders
+   - `wp_wproject_recurring_rules` - Recurrence patterns
+   - `wp_wproject_trash` - Deleted items
 
 ### Theme Functions
 
@@ -217,6 +393,17 @@ Handles real-time updates for:
 - File uploads
 - Task assignments
 - Project updates
+
+**Calendar Pro AJAX Endpoints:**
+- `calendar_pro_create_event` - Create new event
+- `calendar_pro_update_event` - Edit existing event
+- `calendar_pro_delete_event` - Delete/trash event
+- `calendar_pro_get_event` - Fetch event details
+- `calendar_pro_create_calendar` - Create new calendar
+- `calendar_pro_update_calendar` - Edit calendar
+- `calendar_pro_delete_calendar` - Delete calendar
+- `calendar_pro_share_calendar` - Share calendar with users
+- `calendar_pro_get_user_calendars` - List user's calendars
 
 ### Security Features
 
@@ -500,6 +687,7 @@ function wProject() {
    clients-pro/
    gantt-pro/
    reports-pro/
+   wproject-calendar-pro/
    ```
 
 4. **Activate Plugins:**
@@ -522,6 +710,11 @@ function wProject() {
    - Assign project manager
    - Set timeline and budget
 
+8. **Start Using Calendar (if Calendar Pro is activated):**
+   - Navigate to Calendar page
+   - Your personal calendar is automatically created
+   - Click "New Event" to schedule your first event
+
 ## Development
 
 ### File Organization
@@ -536,6 +729,17 @@ wproject/
 │   └── functions-task.php  # Task-specific functions
 ├── inc/                    # Template includes
 └── js/                     # Custom JavaScript
+```
+
+**Calendar Pro Development:**
+```
+wproject-calendar-pro/
+├── wproject-calendar-pro.php  # Main plugin file
+├── admin/                     # Admin interface files
+├── includes/                  # Core functionality
+├── templates/                 # Template files
+├── assets/                    # CSS and JavaScript
+└── uninstall.php             # Cleanup on uninstall
 ```
 
 ### Adding Custom Functionality
@@ -657,6 +861,18 @@ if(current_user_can('administrator')) {
 - Clear navigation cache
 - Verify taxonomy relationships
 
+**5. Calendar Events Not Appearing**
+- Verify calendar is selected in dropdown
+- Check event dates are within visible range
+- Verify user has permission to view calendar
+- Check if calendar is shared properly
+
+**6. Reminders Not Sending**
+- Verify WordPress cron is running
+- Check email configuration
+- Verify reminder time is set correctly
+- Check event has "Enable Reminders" checked
+
 ## Support & Resources
 
 ### Documentation
@@ -675,7 +891,15 @@ if(current_user_can('administrator')) {
 
 ## Changelog
 
-### Version 5.7.2 (Current)
+### Calendar Pro v1.0.1
+- Added event editing functionality
+- Added category support for events
+- Added timezone selector with 20+ timezones
+- Added attendee/guest management
+- Added RSVP tracking
+- Security fixes and improvements
+
+### Theme Version 5.7.2 (Current)
 - Bug fixes and performance improvements
 - Enhanced security measures
 - Improved mobile responsiveness
@@ -712,6 +936,7 @@ This is a custom implementation. For feature requests or bug reports:
 
 ---
 
-**Last Updated:** November 23, 2025  
-**Documentation Version:** 1.0  
-**Theme Version:** 5.7.2
+**Last Updated:** November 29, 2025  
+**Documentation Version:** 1.1  
+**Theme Version:** 5.7.2  
+**Calendar Pro Version:** 1.0.1
