@@ -1,0 +1,36 @@
+/**
+ * wProject Contacts Pro - Admin Styles
+ * Phase 1: Basic admin styling
+ */
+
+/* Admin notices */
+.wproject-contacts-admin-notice {
+    padding: 12px 16px;
+    margin: 20px 0;
+    border-left: 4px solid #0073aa;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.wproject-contacts-admin-notice.error {
+    border-left-color: #dc3232;
+}
+
+.wproject-contacts-admin-notice.success {
+    border-left-color: #46b450;
+}
+
+/* Settings page */
+.wproject-contacts-settings {
+    max-width: 800px;
+    margin: 20px 0;
+}
+
+.wproject-contacts-settings h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.wproject-contacts-settings table {
+    margin-top: 20px;
+}
