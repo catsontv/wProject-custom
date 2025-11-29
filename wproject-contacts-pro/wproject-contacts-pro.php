@@ -197,6 +197,9 @@ class WProject_Contacts_Pro {
             die(__('wProject Contacts Pro requires PHP 8.0 or higher.', 'wproject-contacts-pro'));
         }
         
+        // Load database class for activation
+        require_once WPROJECT_CONTACTS_PRO_PATH . 'includes/class-database.php';
+        
         // Create database tables
         WProject_Contacts_Database::create_tables();
         
