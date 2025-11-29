@@ -2,7 +2,7 @@
 /**
  * Template for displaying contacts page
  *
- * This template should be loaded via the page template or through wProject's template system
+ * This template follows wProject's page structure
  */
 
 if (!defined('ABSPATH')) {
@@ -21,9 +21,19 @@ if (!in_array($user_role, array('administrator', 'project_manager', 'team_member
 get_header();
 ?>
 
-<div class="wproject-contacts-page">
-    <div class="contacts-header">
+<div class="container">
+
+    <?php get_template_part('inc/left'); ?>
+
+    <!--/ Start Section /-->
+    <section class="middle contacts">
+
         <h1><?php _e('Contacts', 'wproject-contacts-pro'); ?></h1>
+
+        <?php do_action('page_start'); ?>
+
+        <div class="wproject-contacts-page">
+    <div class="contacts-header">
         <div class="contacts-actions">
             <button id="add-contact-btn" class="button button-primary">
                 <i data-feather="user-plus"></i>
@@ -144,7 +154,16 @@ get_header();
                 </form>
             </div>
         </div>
-    </div>
+        </div>
+
+        <?php do_action('page_end'); ?>
+
+    </section>
+    <!--/ End Section /-->
+
+    <?php get_template_part('inc/right'); ?>
+    <?php get_template_part('inc/help'); ?>
+
 </div>
 
 <?php get_footer(); ?>

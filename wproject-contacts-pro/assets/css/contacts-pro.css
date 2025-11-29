@@ -123,16 +123,11 @@
 
 .contacts-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 30px;
     flex-wrap: wrap;
     gap: 15px;
-}
-
-.contacts-header h1 {
-    margin: 0;
-    font-size: 28px;
 }
 
 .contacts-actions {
