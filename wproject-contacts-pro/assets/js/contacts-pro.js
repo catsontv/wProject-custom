@@ -241,14 +241,35 @@
          * Submit contact form
          */
         submitContactForm: function($form) {
+            const email = $form.find('[name="email"]').val();
+            const phone = $form.find('[name="phone"]').val();
+            const position = $form.find('[name="position"]').val();
+
             const formData = {
                 first_name: $form.find('[name="first_name"]').val(),
                 last_name: $form.find('[name="last_name"]').val(),
-                email: $form.find('[name="email"]').val(),
-                phone: $form.find('[name="phone"]').val(),
                 company_id: $form.find('[name="company_id"]').val(),
-                position: $form.find('[name="position"]').val()
+                role: position // PHP expects 'role' not 'position'
             };
+
+            // PHP expects emails as an array
+            if (email) {
+                formData.emails = [{
+                    email: email,
+                    label: 'work',
+                    is_preferred: 1
+                }];
+            }
+
+            // PHP expects phones as an array
+            if (phone) {
+                formData.phones = [{
+                    phone_number: phone,
+                    phone_type: 'work',
+                    label: 'work',
+                    is_preferred: 1
+                }];
+            }
 
             const submitBtn = $form.find('[type="submit"]');
             const originalText = submitBtn.text();
@@ -277,11 +298,11 @@
          */
         submitCompanyForm: function($form) {
             const formData = {
-                name: $form.find('[name="name"]').val(),
-                website: $form.find('[name="website"]').val(),
-                phone: $form.find('[name="phone"]').val(),
-                email: $form.find('[name="email"]').val(),
-                address: $form.find('[name="address"]').val()
+                company_name: $form.find('[name="name"]').val(),
+                company_website: $form.find('[name="website"]').val(),
+                company_phone: $form.find('[name="phone"]').val(),
+                company_email: $form.find('[name="email"]').val(),
+                company_notes: $form.find('[name="address"]').val()
             };
 
             const submitBtn = $form.find('[type="submit"]');
