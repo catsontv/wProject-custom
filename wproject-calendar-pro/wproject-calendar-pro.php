@@ -175,6 +175,16 @@ function calendar_pro_display_project() {
     $calendar_show_project = isset($options['calendar_show_project']) ? $options['calendar_show_project'] : '';
 
     if ( $calendar_show_project ) {
+        // Detect current project context
+        $current_project = get_queried_object();
+        $project_id = null;
+        $project_name = null;
+
+        if ( $current_project && isset( $current_project->term_id ) && $current_project->taxonomy === 'project' ) {
+            $project_id = $current_project->term_id;
+            $project_name = $current_project->name;
+        }
+
         include CALENDAR_PRO_PLUGIN_PATH . 'templates/calendar-view.php';
     }
 }

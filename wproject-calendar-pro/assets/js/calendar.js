@@ -14,6 +14,8 @@
 
         calendar: null,
         currentCalendarId: null,
+        currentProjectId: null,
+        currentProjectName: null,
 
         /**
          * Initialize calendar
@@ -200,6 +202,13 @@
             var weekStart = parseInt(calendarEl.dataset.weekStart) || 0;
             var timeFormat = calendarEl.dataset.timeFormat || '24';
 
+            // Check for project context
+            if (calendarEl.dataset.projectId) {
+                self.currentProjectId = parseInt(calendarEl.dataset.projectId);
+                self.currentProjectName = calendarEl.dataset.projectName || '';
+                console.log('[Calendar] Project context detected:', self.currentProjectId, self.currentProjectName);
+            }
+
             var timeFormatString = timeFormat === '12' ? 'h:mm a' : 'HH:mm';
 
             this.calendar = new FullCalendar.Calendar(calendarEl, {
@@ -258,16 +267,24 @@
         loadEvents: function(info, successCallback, failureCallback) {
             var self = this;
 
+            var requestData = {
+                action: 'calendar_pro_get_events',
+                nonce: calendar_inputs.nonce,
+                calendar_id: self.currentCalendarId,
+                start: info.startStr,
+                end: info.endStr
+            };
+
+            // Add project_id if in project context
+            if (self.currentProjectId) {
+                requestData.project_id = self.currentProjectId;
+                console.log('[Calendar] Loading events for project:', self.currentProjectId);
+            }
+
             $.ajax({
                 url: calendar_inputs.ajaxurl,
                 type: 'POST',
-                data: {
-                    action: 'calendar_pro_get_events',
-                    nonce: calendar_inputs.nonce,
-                    calendar_id: self.currentCalendarId,
-                    start: info.startStr,
-                    end: info.endStr
-                },
+                data: requestData,
                 success: function(response) {
                     if (response.status === 'success') {
                         successCallback(response.data);
@@ -389,6 +406,12 @@
                 timezone: $('#event-timezone').val() || 'UTC',
                 attendees: $('#event-attendees').val() || []
             };
+
+            // Auto-assign project_id if in project context
+            if (self.currentProjectId) {
+                eventData.project_id = self.currentProjectId;
+                console.log('[Calendar] Auto-assigning event to project:', self.currentProjectId);
+            }
 
             if (isEdit) {
                 eventData.event_id = eventId;
