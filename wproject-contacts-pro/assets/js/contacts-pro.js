@@ -142,12 +142,288 @@
     window.wpContactsProAjax = ContactsAjax;
     
     /**
+     * Modal Handler
+     */
+    const ModalHandler = {
+        open: function(modalId) {
+            $('#' + modalId).fadeIn(300);
+            $('body').addClass('wpc-modal-open');
+        },
+
+        close: function(modalId) {
+            $('#' + modalId).fadeOut(300);
+            $('body').removeClass('wpc-modal-open');
+        },
+
+        closeAll: function() {
+            $('.wpc-modal').fadeOut(300);
+            $('body').removeClass('wpc-modal-open');
+        }
+    };
+
+    /**
+     * Contacts Page Handler
+     */
+    const ContactsPage = {
+
+        /**
+         * Initialize
+         */
+        init: function() {
+            this.bindEvents();
+            this.loadContacts();
+            this.loadCompanies();
+        },
+
+        /**
+         * Bind events
+         */
+        bindEvents: function() {
+            // Add Contact button
+            $(document).on('click', '#add-contact-btn', function(e) {
+                e.preventDefault();
+                ModalHandler.open('add-contact-modal');
+            });
+
+            // Add Company button
+            $(document).on('click', '#add-company-btn', function(e) {
+                e.preventDefault();
+                ModalHandler.open('add-company-modal');
+            });
+
+            // Close modal buttons
+            $(document).on('click', '.wpc-modal-close', function(e) {
+                e.preventDefault();
+                const modalId = $(this).data('modal');
+                ModalHandler.close(modalId);
+            });
+
+            // Close modal on outside click
+            $(document).on('click', '.wpc-modal', function(e) {
+                if ($(e.target).hasClass('wpc-modal')) {
+                    ModalHandler.closeAll();
+                }
+            });
+
+            // Add Contact form submission
+            $(document).on('submit', '#add-contact-form', function(e) {
+                e.preventDefault();
+                ContactsPage.submitContactForm($(this));
+            });
+
+            // Add Company form submission
+            $(document).on('submit', '#add-company-form', function(e) {
+                e.preventDefault();
+                ContactsPage.submitCompanyForm($(this));
+            });
+
+            // Search
+            $(document).on('input', '#contacts-search', function() {
+                const query = $(this).val();
+                ContactsPage.searchContacts(query);
+            });
+
+            // Filter tabs
+            $(document).on('click', '.filter-tab', function() {
+                $('.filter-tab').removeClass('active');
+                $(this).addClass('active');
+                const filter = $(this).data('filter');
+                ContactsPage.filterContacts(filter);
+            });
+        },
+
+        /**
+         * Submit contact form
+         */
+        submitContactForm: function($form) {
+            const formData = {
+                first_name: $form.find('[name="first_name"]').val(),
+                last_name: $form.find('[name="last_name"]').val(),
+                email: $form.find('[name="email"]').val(),
+                phone: $form.find('[name="phone"]').val(),
+                company_id: $form.find('[name="company_id"]').val(),
+                position: $form.find('[name="position"]').val()
+            };
+
+            const submitBtn = $form.find('[type="submit"]');
+            const originalText = submitBtn.text();
+
+            ContactsAjax.createContact(formData, {
+                beforeSend: function() {
+                    submitBtn.prop('disabled', true).text('Adding...');
+                },
+                success: function(data) {
+                    alert('Contact added successfully!');
+                    $form[0].reset();
+                    ModalHandler.close('add-contact-modal');
+                    ContactsPage.loadContacts();
+                },
+                error: function(message) {
+                    alert('Error: ' + message);
+                },
+                complete: function() {
+                    submitBtn.prop('disabled', false).text(originalText);
+                }
+            });
+        },
+
+        /**
+         * Submit company form
+         */
+        submitCompanyForm: function($form) {
+            const formData = {
+                name: $form.find('[name="name"]').val(),
+                website: $form.find('[name="website"]').val(),
+                phone: $form.find('[name="phone"]').val(),
+                email: $form.find('[name="email"]').val(),
+                address: $form.find('[name="address"]').val()
+            };
+
+            const submitBtn = $form.find('[type="submit"]');
+            const originalText = submitBtn.text();
+
+            ContactsAjax.createCompany(formData, {
+                beforeSend: function() {
+                    submitBtn.prop('disabled', true).text('Adding...');
+                },
+                success: function(data) {
+                    alert('Company added successfully!');
+                    $form[0].reset();
+                    ModalHandler.close('add-company-modal');
+                    ContactsPage.loadContacts();
+                    ContactsPage.loadCompanies();
+                },
+                error: function(message) {
+                    alert('Error: ' + message);
+                },
+                complete: function() {
+                    submitBtn.prop('disabled', false).text(originalText);
+                }
+            });
+        },
+
+        /**
+         * Load contacts
+         */
+        loadContacts: function() {
+            ContactsAjax.listContacts({}, {
+                success: function(data) {
+                    ContactsPage.renderContacts(data.contacts || []);
+                },
+                error: function(message) {
+                    $('#contacts-grid').html('<p>Error loading contacts: ' + message + '</p>');
+                }
+            });
+        },
+
+        /**
+         * Load companies for dropdown
+         */
+        loadCompanies: function() {
+            ContactsAjax.listCompanies({}, {
+                success: function(data) {
+                    const companies = data.companies || [];
+                    const $select = $('#contact-company');
+                    $select.find('option:not(:first)').remove();
+                    companies.forEach(function(company) {
+                        $select.append('<option value="' + company.id + '">' + company.name + '</option>');
+                    });
+                }
+            });
+        },
+
+        /**
+         * Render contacts
+         */
+        renderContacts: function(contacts) {
+            const $grid = $('#contacts-grid');
+            $grid.empty();
+
+            if (contacts.length === 0) {
+                $grid.html('<p class="no-contacts">No contacts found. Click "Add Contact" to get started.</p>');
+                return;
+            }
+
+            contacts.forEach(function(contact) {
+                const html = ContactsPage.renderContactCard(contact);
+                $grid.append(html);
+            });
+
+            // Re-initialize feather icons if available
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        },
+
+        /**
+         * Render contact card
+         */
+        renderContactCard: function(contact) {
+            const name = contact.first_name + ' ' + contact.last_name;
+            const email = contact.email || 'No email';
+            const phone = contact.phone || 'No phone';
+            const position = contact.position || '';
+            const company = contact.company_name || '';
+
+            return `
+                <div class="contact-card" data-id="${contact.id}">
+                    <div class="contact-avatar">
+                        <i data-feather="user"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>${name}</h3>
+                        ${position ? '<p class="contact-position">' + position + '</p>' : ''}
+                        ${company ? '<p class="contact-company">' + company + '</p>' : ''}
+                        <p class="contact-email"><i data-feather="mail"></i> ${email}</p>
+                        <p class="contact-phone"><i data-feather="phone"></i> ${phone}</p>
+                    </div>
+                    <div class="contact-actions">
+                        <button class="edit-contact" data-id="${contact.id}">
+                            <i data-feather="edit"></i>
+                        </button>
+                        <button class="delete-contact" data-id="${contact.id}">
+                            <i data-feather="trash-2"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        },
+
+        /**
+         * Search contacts
+         */
+        searchContacts: function(query) {
+            if (!query) {
+                this.loadContacts();
+                return;
+            }
+
+            ContactsAjax.searchContacts(query, {
+                success: function(data) {
+                    ContactsPage.renderContacts(data.contacts || []);
+                }
+            });
+        },
+
+        /**
+         * Filter contacts
+         */
+        filterContacts: function(filter) {
+            // This will be implemented in a future phase
+            console.log('Filtering by: ' + filter);
+        }
+    };
+
+    /**
      * Initialize on document ready
      */
     $(document).ready(function() {
         console.log('wProject Contacts Pro initialized');
-        
-        // Add any initialization code here
+
+        // Initialize contacts page if we're on it
+        if ($('.wproject-contacts-page').length) {
+            ContactsPage.init();
+        }
     });
     
 })(jQuery);

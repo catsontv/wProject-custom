@@ -114,10 +114,344 @@
     object-fit: cover;
 }
 
+/* Contacts Page */
+.wproject-contacts-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contacts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.contacts-header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.contacts-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.contacts-actions button i {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Filters */
+.contacts-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-tab {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-tab.active {
+    background: #0073aa;
+    color: #fff;
+    border-color: #0073aa;
+}
+
+.filter-tab:hover:not(.active) {
+    border-color: #0073aa;
+}
+
+.search-box {
+    position: relative;
+    flex: 0 0 300px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 35px 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: #999;
+}
+
+/* Contacts Grid */
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.contact-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    position: relative;
+    transition: box-shadow 0.2s;
+}
+
+.contact-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card .contact-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-card .contact-avatar i {
+    width: 30px;
+    height: 30px;
+    color: #666;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-info h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+}
+
+.contact-info p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.contact-info p i {
+    width: 14px;
+    height: 14px;
+    color: #999;
+}
+
+.contact-position {
+    font-weight: 600;
+    color: #333 !important;
+}
+
+.contact-company {
+    color: #0073aa !important;
+}
+
+.contact-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.contact-actions button {
+    background: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.contact-actions button:hover {
+    background: #f0f0f0;
+}
+
+.contact-actions button i {
+    width: 16px;
+    height: 16px;
+    color: #666;
+}
+
+.contact-actions .delete-contact:hover i {
+    color: #d00;
+}
+
+.no-contacts {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    grid-column: 1 / -1;
+}
+
+/* Modals */
+.wpc-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.wpc-modal-content {
+    background-color: #fff;
+    margin: 50px auto;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.wpc-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+.wpc-modal-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.wpc-modal-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.wpc-modal-close:hover {
+    background: #f0f0f0;
+}
+
+.wpc-modal-close i {
+    width: 24px;
+    height: 24px;
+    color: #666;
+}
+
+.wpc-modal-body {
+    padding: 25px;
+}
+
+.wpc-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #0073aa;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+body.wpc-modal-open {
+    overflow: hidden;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .contacts-button {
         padding: 8px 16px;
         font-size: 13px;
+    }
+
+    .contacts-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contacts-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        flex: 1 1 100%;
+    }
+
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wpc-modal-content {
+        margin: 20px;
+        width: calc(100% - 40px);
+    }
+
+    .filter-tabs {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .filter-tab {
+        flex: 1;
+        text-align: center;
     }
 }
