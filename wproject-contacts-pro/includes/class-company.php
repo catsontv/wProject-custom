@@ -68,14 +68,39 @@ class WProject_Company {
             'company_type' => !empty($data['company_type']) ? sanitize_text_field($data['company_type']) : 'client',
             'company_logo_url' => !empty($data['company_logo_url']) ? esc_url_raw($data['company_logo_url']) : null,
             'company_notes' => !empty($data['company_notes']) ? wp_kses_post($data['company_notes']) : null,
+            'company_abn' => !empty($data['company_abn']) ? sanitize_text_field($data['company_abn']) : null,
+            'address_street' => !empty($data['address_street']) ? sanitize_text_field($data['address_street']) : null,
+            'address_line2' => !empty($data['address_line2']) ? sanitize_text_field($data['address_line2']) : null,
+            'address_city' => !empty($data['address_city']) ? sanitize_text_field($data['address_city']) : null,
+            'address_state' => !empty($data['address_state']) ? sanitize_text_field($data['address_state']) : null,
+            'address_country' => !empty($data['address_country']) ? sanitize_text_field($data['address_country']) : null,
+            'address_postcode' => !empty($data['address_postcode']) ? sanitize_text_field($data['address_postcode']) : null,
+            'contact_name' => !empty($data['contact_name']) ? sanitize_text_field($data['contact_name']) : null,
+            'contact_title' => !empty($data['contact_title']) ? sanitize_text_field($data['contact_title']) : null,
+            'contact_email' => !empty($data['contact_email']) ? sanitize_email($data['contact_email']) : null,
+            'contact_mobile' => !empty($data['contact_mobile']) ? sanitize_text_field($data['contact_mobile']) : null,
+            'contact_phone' => !empty($data['contact_phone']) ? sanitize_text_field($data['contact_phone']) : null,
+            'comm_slack' => !empty($data['comm_slack']) ? sanitize_text_field($data['comm_slack']) : null,
+            'comm_teams' => !empty($data['comm_teams']) ? sanitize_text_field($data['comm_teams']) : null,
+            'comm_google_meet' => !empty($data['comm_google_meet']) ? sanitize_text_field($data['comm_google_meet']) : null,
+            'comm_skype' => !empty($data['comm_skype']) ? sanitize_text_field($data['comm_skype']) : null,
+            'comm_other' => !empty($data['comm_other']) ? sanitize_text_field($data['comm_other']) : null,
+            'social_facebook' => !empty($data['social_facebook']) ? esc_url_raw($data['social_facebook']) : null,
+            'social_instagram' => !empty($data['social_instagram']) ? esc_url_raw($data['social_instagram']) : null,
+            'social_twitter' => !empty($data['social_twitter']) ? esc_url_raw($data['social_twitter']) : null,
+            'social_linkedin' => !empty($data['social_linkedin']) ? esc_url_raw($data['social_linkedin']) : null,
+            'social_other' => !empty($data['social_other']) ? esc_url_raw($data['social_other']) : null,
             'created_by' => get_current_user_id(),
         );
-        
+
         // Insert into database
+        $format_array = array_fill(0, count($insert_data), '%s');
+        $format_array[count($insert_data) - 1] = '%d'; // created_by is integer
+
         $result = $wpdb->insert(
             $wpdb->prefix . 'wproject_companies',
             $insert_data,
-            array('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d')
+            $format_array
         );
         
         if ($result === false) {
@@ -137,7 +162,7 @@ class WProject_Company {
         
         // Prepare update data
         $update_data = array();
-        
+
         if (isset($data['company_name'])) {
             $update_data['company_name'] = sanitize_text_field($data['company_name']);
         }
@@ -158,6 +183,72 @@ class WProject_Company {
         }
         if (isset($data['company_notes'])) {
             $update_data['company_notes'] = !empty($data['company_notes']) ? wp_kses_post($data['company_notes']) : null;
+        }
+        if (isset($data['company_abn'])) {
+            $update_data['company_abn'] = !empty($data['company_abn']) ? sanitize_text_field($data['company_abn']) : null;
+        }
+        if (isset($data['address_street'])) {
+            $update_data['address_street'] = !empty($data['address_street']) ? sanitize_text_field($data['address_street']) : null;
+        }
+        if (isset($data['address_line2'])) {
+            $update_data['address_line2'] = !empty($data['address_line2']) ? sanitize_text_field($data['address_line2']) : null;
+        }
+        if (isset($data['address_city'])) {
+            $update_data['address_city'] = !empty($data['address_city']) ? sanitize_text_field($data['address_city']) : null;
+        }
+        if (isset($data['address_state'])) {
+            $update_data['address_state'] = !empty($data['address_state']) ? sanitize_text_field($data['address_state']) : null;
+        }
+        if (isset($data['address_country'])) {
+            $update_data['address_country'] = !empty($data['address_country']) ? sanitize_text_field($data['address_country']) : null;
+        }
+        if (isset($data['address_postcode'])) {
+            $update_data['address_postcode'] = !empty($data['address_postcode']) ? sanitize_text_field($data['address_postcode']) : null;
+        }
+        if (isset($data['contact_name'])) {
+            $update_data['contact_name'] = !empty($data['contact_name']) ? sanitize_text_field($data['contact_name']) : null;
+        }
+        if (isset($data['contact_title'])) {
+            $update_data['contact_title'] = !empty($data['contact_title']) ? sanitize_text_field($data['contact_title']) : null;
+        }
+        if (isset($data['contact_email'])) {
+            $update_data['contact_email'] = !empty($data['contact_email']) ? sanitize_email($data['contact_email']) : null;
+        }
+        if (isset($data['contact_mobile'])) {
+            $update_data['contact_mobile'] = !empty($data['contact_mobile']) ? sanitize_text_field($data['contact_mobile']) : null;
+        }
+        if (isset($data['contact_phone'])) {
+            $update_data['contact_phone'] = !empty($data['contact_phone']) ? sanitize_text_field($data['contact_phone']) : null;
+        }
+        if (isset($data['comm_slack'])) {
+            $update_data['comm_slack'] = !empty($data['comm_slack']) ? sanitize_text_field($data['comm_slack']) : null;
+        }
+        if (isset($data['comm_teams'])) {
+            $update_data['comm_teams'] = !empty($data['comm_teams']) ? sanitize_text_field($data['comm_teams']) : null;
+        }
+        if (isset($data['comm_google_meet'])) {
+            $update_data['comm_google_meet'] = !empty($data['comm_google_meet']) ? sanitize_text_field($data['comm_google_meet']) : null;
+        }
+        if (isset($data['comm_skype'])) {
+            $update_data['comm_skype'] = !empty($data['comm_skype']) ? sanitize_text_field($data['comm_skype']) : null;
+        }
+        if (isset($data['comm_other'])) {
+            $update_data['comm_other'] = !empty($data['comm_other']) ? sanitize_text_field($data['comm_other']) : null;
+        }
+        if (isset($data['social_facebook'])) {
+            $update_data['social_facebook'] = !empty($data['social_facebook']) ? esc_url_raw($data['social_facebook']) : null;
+        }
+        if (isset($data['social_instagram'])) {
+            $update_data['social_instagram'] = !empty($data['social_instagram']) ? esc_url_raw($data['social_instagram']) : null;
+        }
+        if (isset($data['social_twitter'])) {
+            $update_data['social_twitter'] = !empty($data['social_twitter']) ? esc_url_raw($data['social_twitter']) : null;
+        }
+        if (isset($data['social_linkedin'])) {
+            $update_data['social_linkedin'] = !empty($data['social_linkedin']) ? esc_url_raw($data['social_linkedin']) : null;
+        }
+        if (isset($data['social_other'])) {
+            $update_data['social_other'] = !empty($data['social_other']) ? esc_url_raw($data['social_other']) : null;
         }
         
         if (empty($update_data)) {

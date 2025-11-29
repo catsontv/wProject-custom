@@ -221,3 +221,75 @@ class WProject_Contacts_Pro {
 
 // Initialize plugin
 WProject_Contacts_Pro::get_instance();
+
+/**
+ * Integration Hooks
+ */
+
+// Add Contacts Pro menu item to wProject admin
+function wproject_contacts_pro_admin_nav() {
+    ?>
+    <li data="contacts-pro" id="contacts-pro" <?php if(isset($_GET['section']) && $_GET['section'] == 'contacts-pro') { echo 'class="selected"'; } ?>>
+        <img src="<?php echo WPROJECT_CONTACTS_PRO_URL; ?>assets/images/icon.svg" alt="Contacts Pro" />
+        <?php _e('Contacts Pro', 'wproject-contacts-pro'); ?>
+    </li>
+    <?php
+}
+add_action('wproject_admin_pro_nav_start', 'wproject_contacts_pro_admin_nav', 5);
+
+// Add Contacts Pro settings panel to wProject admin
+function wproject_contacts_pro_admin_settings() {
+    require_once WPROJECT_CONTACTS_PRO_PATH . 'admin/admin-settings.php';
+}
+add_action('wproject_admin_settings_div_end', 'wproject_contacts_pro_admin_settings');
+
+// Display contacts page on frontend
+function wproject_contacts_pro_display_page() {
+    if (!function_exists('wProject')) {
+        return;
+    }
+
+    if (is_page('contacts')) {
+        include WPROJECT_CONTACTS_PRO_PATH . 'templates/contacts-list.php';
+    }
+}
+add_action('page_end', 'wproject_contacts_pro_display_page', 5);
+
+// Add Contacts navigation item to main sidebar
+function wproject_contacts_pro_sidebar_nav() {
+    $options = get_option('wproject_contacts_pro_settings');
+    $enable_contacts = isset($options['enable_contacts']) ? $options['enable_contacts'] : 'yes';
+
+    if ($enable_contacts === 'yes') {
+        $contacts_page = get_page_by_path('contacts');
+        if ($contacts_page) {
+            $contacts_url = get_permalink($contacts_page->ID);
+            $current_class = is_page('contacts') ? ' class="selected"' : '';
+            ?>
+            <li<?php echo $current_class; ?>>
+                <a href="<?php echo esc_url($contacts_url); ?>">
+                    <i data-feather="users"></i>
+                    <?php _e('Contacts', 'wproject-contacts-pro'); ?>
+                </a>
+            </li>
+            <?php
+        }
+    }
+}
+add_action('side_nav', 'wproject_contacts_pro_sidebar_nav', 15);
+
+// Add Contact option to CREATE button dropdown
+function wproject_contacts_pro_create_menu() {
+    $options = get_option('wproject_contacts_pro_settings');
+    $enable_contacts = isset($options['enable_contacts']) ? $options['enable_contacts'] : 'yes';
+
+    if ($enable_contacts === 'yes') {
+        ?>
+        <li class="create-contact">
+            <i data-feather="user-plus"></i>
+            <span><?php _e('Contact', 'wproject-contacts-pro'); ?></span>
+        </li>
+        <?php
+    }
+}
+add_action('wproject_create_menu_end', 'wproject_contacts_pro_create_menu', 10);

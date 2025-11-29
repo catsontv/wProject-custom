@@ -22,7 +22,7 @@ class WProject_Contacts_Ajax {
         add_action('wp_ajax_contacts_pro_delete_company', array(__CLASS__, 'delete_company'));
         add_action('wp_ajax_contacts_pro_get_company', array(__CLASS__, 'get_company'));
         add_action('wp_ajax_contacts_pro_list_companies', array(__CLASS__, 'list_companies'));
-        
+
         // Contact endpoints
         add_action('wp_ajax_contacts_pro_create_contact', array(__CLASS__, 'create_contact'));
         add_action('wp_ajax_contacts_pro_update_contact', array(__CLASS__, 'update_contact'));
@@ -30,6 +30,9 @@ class WProject_Contacts_Ajax {
         add_action('wp_ajax_contacts_pro_get_contact', array(__CLASS__, 'get_contact'));
         add_action('wp_ajax_contacts_pro_list_contacts', array(__CLASS__, 'list_contacts'));
         add_action('wp_ajax_contacts_pro_search_contacts', array(__CLASS__, 'search_contacts'));
+
+        // Settings endpoints
+        add_action('wp_ajax_save_contacts_pro_setting', array(__CLASS__, 'save_setting'));
     }
     
     /**
@@ -462,6 +465,47 @@ class WProject_Contacts_Ajax {
                 'contacts' => $contacts,
                 'total' => $result['total'],
             ),
+        ));
+    }
+
+    /**
+     * Save plugin setting
+     */
+    public static function save_setting() {
+        // Verify nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wproject_contacts_pro_settings')) {
+            wp_send_json_error(array(
+                'message' => __('Security check failed.', 'wproject-contacts-pro'),
+            ), 403);
+        }
+
+        // Check admin capability
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array(
+                'message' => __('You do not have permission to perform this action.', 'wproject-contacts-pro'),
+            ), 403);
+        }
+
+        $setting_name = isset($_POST['setting_name']) ? sanitize_text_field($_POST['setting_name']) : '';
+        $setting_value = isset($_POST['setting_value']) ? sanitize_text_field($_POST['setting_value']) : '';
+
+        if (empty($setting_name)) {
+            wp_send_json_error(array(
+                'message' => __('Setting name is required.', 'wproject-contacts-pro'),
+            ));
+        }
+
+        // Get existing settings
+        $options = get_option('wproject_contacts_pro_settings', array());
+
+        // Update the setting
+        $options[$setting_name] = $setting_value;
+
+        // Save to database
+        update_option('wproject_contacts_pro_settings', $options);
+
+        wp_send_json_success(array(
+            'message' => __('Setting saved successfully.', 'wproject-contacts-pro'),
         ));
     }
 }
