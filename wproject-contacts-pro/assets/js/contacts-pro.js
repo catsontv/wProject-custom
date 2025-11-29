@@ -423,18 +423,41 @@
      * Initialize on document ready
      */
     $(document).ready(function() {
-        console.log('wProject Contacts Pro initialized');
-        console.log('jQuery version:', $.fn.jquery);
-        console.log('wpContactsPro config:', wpContactsPro);
-        console.log('Contacts page element found:', $('.wproject-contacts-page').length);
+        try {
+            console.log('=== wProject Contacts Pro Initialization ===');
+            console.log('jQuery version:', $.fn.jquery);
+            console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
 
-        // Initialize contacts page if we're on it
-        if ($('.wproject-contacts-page').length) {
-            console.log('Initializing ContactsPage...');
-            ContactsPage.init();
-            console.log('ContactsPage initialized successfully');
-        } else {
-            console.log('Contacts page element not found - skipping initialization');
+            // Check if wpContactsPro is defined
+            if (typeof wpContactsPro === 'undefined') {
+                console.error('CRITICAL ERROR: wpContactsPro is not defined! Script localization failed.');
+                console.error('This means the AJAX URL and nonce are not available.');
+                return;
+            }
+
+            console.log('wpContactsPro config:', wpContactsPro);
+            console.log('AJAX URL:', wpContactsPro.ajaxurl);
+            console.log('Nonce:', wpContactsPro.nonce);
+
+            // Check for contacts page element
+            const $contactsPage = $('.wproject-contacts-page');
+            console.log('Contacts page element found:', $contactsPage.length);
+
+            if ($contactsPage.length) {
+                console.log('✓ Contacts page detected - initializing...');
+                ContactsPage.init();
+                console.log('✓ ContactsPage initialized successfully');
+            } else {
+                console.log('⚠ Contacts page element not found - skipping initialization');
+                console.log('Looking for: .wproject-contacts-page');
+            }
+
+            console.log('=== Initialization Complete ===');
+        } catch (error) {
+            console.error('❌ FATAL ERROR during initialization:', error);
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+            console.error('Stack trace:', error.stack);
         }
     });
     
