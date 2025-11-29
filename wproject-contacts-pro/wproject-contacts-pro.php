@@ -98,16 +98,25 @@ class WProject_Contacts_Pro {
     public function init() {
         // Load text domain
         load_plugin_textdomain('wproject-contacts-pro', false, dirname(plugin_basename(__FILE__)) . '/languages');
-        
+
         // Include required files
         $this->includes();
-        
+
         // Register taxonomy
         $this->register_taxonomy();
-        
+
         // Enqueue scripts and styles
         add_action('wp_enqueue_scripts', array($this, 'enqueue_assets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
+
+        // Phase 2: Navigation integration
+        add_filter('body_class', array($this, 'add_body_class'));
+        add_action('template_redirect', array($this, 'contacts_page_template'));
+
+        // Phase 2: Settings page
+        if (is_admin()) {
+            require_once WPROJECT_CONTACTS_PRO_PATH . 'admin/settings.php';
+        }
     }
     
     /**
@@ -216,6 +225,46 @@ class WProject_Contacts_Pro {
      */
     public function deactivate() {
         // Do nothing - preserve data
+    }
+
+    /**
+     * Add body class for contacts page
+     */
+    public function add_body_class($classes) {
+        if ($this->is_contacts_page()) {
+            $classes[] = 'contacts-page';
+        }
+        return $classes;
+    }
+
+    /**
+     * Check if current page is contacts page
+     */
+    private function is_contacts_page() {
+        $current_url = trim($_SERVER['REQUEST_URI'], '/');
+        $home_path = trim(parse_url(home_url(), PHP_URL_PATH), '/');
+        if ($home_path) {
+            $current_url = str_replace($home_path, '', $current_url);
+            $current_url = ltrim($current_url, '/');
+        }
+        return (str_starts_with($current_url, 'contacts'));
+    }
+
+    /**
+     * Load contacts page template
+     */
+    public function contacts_page_template() {
+        if ($this->is_contacts_page()) {
+            // Check if user is logged in
+            if (!is_user_logged_in()) {
+                auth_redirect();
+                exit;
+            }
+
+            // Load contacts list template
+            include(WPROJECT_CONTACTS_PRO_PATH . 'templates/contact-list.php');
+            exit;
+        }
     }
 }
 
