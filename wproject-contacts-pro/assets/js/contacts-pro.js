@@ -170,17 +170,22 @@
          * Initialize
          */
         init: function() {
+            console.log('ContactsPage.init() called');
             this.bindEvents();
             this.loadContacts();
             this.loadCompanies();
+            console.log('ContactsPage.init() completed');
         },
 
         /**
          * Bind events
          */
         bindEvents: function() {
+            console.log('Binding events...');
+
             // Add Contact button
             $(document).on('click', '#add-contact-btn', function(e) {
+                console.log('Add Contact button clicked');
                 e.preventDefault();
                 ModalHandler.open('add-contact-modal');
             });
@@ -419,10 +424,17 @@
      */
     $(document).ready(function() {
         console.log('wProject Contacts Pro initialized');
+        console.log('jQuery version:', $.fn.jquery);
+        console.log('wpContactsPro config:', wpContactsPro);
+        console.log('Contacts page element found:', $('.wproject-contacts-page').length);
 
         // Initialize contacts page if we're on it
         if ($('.wproject-contacts-page').length) {
+            console.log('Initializing ContactsPage...');
             ContactsPage.init();
+            console.log('ContactsPage initialized successfully');
+        } else {
+            console.log('Contacts page element not found - skipping initialization');
         }
     });
     

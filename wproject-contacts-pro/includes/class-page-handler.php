@@ -49,10 +49,22 @@ class WProject_Contacts_Page_Handler {
 
         $wpc_page = get_query_var('wpc_page');
 
+        // Check if we're on our custom contacts route
         if ($wpc_page === 'contacts') {
             $custom_template = WPROJECT_CONTACTS_PRO_PATH . 'templates/contacts-page.php';
             if (file_exists($custom_template)) {
                 return $custom_template;
+            }
+        }
+
+        // Check if we're on a WordPress page with slug 'contacts'
+        if (is_page()) {
+            $page = get_post();
+            if ($page && (strtolower($page->post_name) === 'contacts' || strtolower($page->post_title) === 'contacts')) {
+                $custom_template = WPROJECT_CONTACTS_PRO_PATH . 'templates/contacts-page.php';
+                if (file_exists($custom_template)) {
+                    return $custom_template;
+                }
             }
         }
 
