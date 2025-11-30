@@ -579,7 +579,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🚀 NEW VERSION 1.0.4 LOADED - If you see this, the cache is cleared! 🚀');
+            console.log('🚀 VERSION 1.0.5 - FORM ACTION FIX! 🚀');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');

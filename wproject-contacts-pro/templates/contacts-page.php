@@ -72,7 +72,7 @@ get_header();
                 </button>
             </div>
             <div class="wpc-modal-body">
-                <form id="add-contact-form">
+                <form id="add-contact-form" action="javascript:void(0);" method="post">
                     <div class="form-group">
                         <label for="contact-first-name"><?php _e('First Name', 'wproject-contacts-pro'); ?> *</label>
                         <input type="text" id="contact-first-name" name="first_name" required>
@@ -122,7 +122,7 @@ get_header();
                 </button>
             </div>
             <div class="wpc-modal-body">
-                <form id="add-company-form">
+                <form id="add-company-form" action="javascript:void(0);" method="post">
                     <div class="form-group">
                         <label for="company-name"><?php _e('Company Name', 'wproject-contacts-pro'); ?> *</label>
                         <input type="text" id="company-name" name="name" required>
