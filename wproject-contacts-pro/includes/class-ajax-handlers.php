@@ -204,9 +204,9 @@ class WProject_Contacts_Ajax {
      */
     public static function create_contact() {
         self::verify_request('edit_posts');
-        
+
         $data = array(
-            'company_id' => isset($_POST['company_id']) ? intval($_POST['company_id']) : 0,
+            'company_id' => isset($_POST['company_id']) ? intval($_POST['company_id']) : null,
             'first_name' => isset($_POST['first_name']) ? sanitize_text_field($_POST['first_name']) : '',
             'last_name' => isset($_POST['last_name']) ? sanitize_text_field($_POST['last_name']) : '',
             'role' => isset($_POST['role']) ? sanitize_text_field($_POST['role']) : '',

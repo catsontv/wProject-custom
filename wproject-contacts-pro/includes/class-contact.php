@@ -64,7 +64,7 @@ class WProject_Contact {
         try {
             // Prepare insert data
             $insert_data = array(
-                'company_id' => intval($data['company_id']),
+                'company_id' => !empty($data['company_id']) ? intval($data['company_id']) : null,
                 'first_name' => sanitize_text_field($data['first_name']),
                 'last_name' => sanitize_text_field($data['last_name']),
                 'role' => !empty($data['role']) ? sanitize_text_field($data['role']) : null,
@@ -196,8 +196,8 @@ class WProject_Contact {
         try {
             // Prepare update data for main contact
             $update_data = array();
-            
-            if (isset($data['company_id'])) $update_data['company_id'] = intval($data['company_id']);
+
+            if (isset($data['company_id'])) $update_data['company_id'] = !empty($data['company_id']) ? intval($data['company_id']) : null;
             if (isset($data['first_name'])) $update_data['first_name'] = sanitize_text_field($data['first_name']);
             if (isset($data['last_name'])) $update_data['last_name'] = sanitize_text_field($data['last_name']);
             if (isset($data['role'])) $update_data['role'] = !empty($data['role']) ? sanitize_text_field($data['role']) : null;
