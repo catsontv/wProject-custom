@@ -41,11 +41,17 @@
                     }
                 },
                 success: function(response) {
+                    console.log('=== AJAX Response ===');
+                    console.log('Response:', response);
+
                     if (response.success) {
+                        console.log('✓ Success!');
                         if (callbacks.success) {
                             callbacks.success(response.data);
                         }
                     } else {
+                        console.error('✗ Server returned error');
+                        console.error('Error data:', response.data);
                         if (callbacks.error) {
                             callbacks.error(response.data ? response.data.message : 'Unknown error');
                         }
@@ -257,15 +263,57 @@
                 const filter = $(this).data('filter');
                 ContactsPage.filterContacts(filter);
             });
+
+            // Edit contact button
+            $(document).on('click', '.edit-contact', function(e) {
+                e.preventDefault();
+                const contactId = $(this).data('id');
+                console.log('Edit contact clicked:', contactId);
+                alert('Edit functionality will be implemented in Phase 2. Contact ID: ' + contactId);
+                // TODO: Implement edit functionality
+            });
+
+            // Delete contact button
+            $(document).on('click', '.delete-contact', function(e) {
+                e.preventDefault();
+                const contactId = $(this).data('id');
+                console.log('Delete contact clicked:', contactId);
+
+                if (confirm('Are you sure you want to delete this contact?')) {
+                    ContactsAjax.deleteContact(contactId, {
+                        beforeSend: function() {
+                            console.log('Deleting contact:', contactId);
+                        },
+                        success: function(data) {
+                            alert('Contact deleted successfully!');
+                            ContactsPage.loadContacts();
+                        },
+                        error: function(message) {
+                            alert('Error deleting contact: ' + message);
+                        }
+                    });
+                }
+            });
         },
 
         /**
          * Submit contact form
          */
         submitContactForm: function($form) {
+            console.log('=== Submitting Contact Form ===');
+
             const email = $form.find('[name="email"]').val();
             const phone = $form.find('[name="phone"]').val();
             const position = $form.find('[name="position"]').val();
+
+            console.log('Form values:', {
+                email: email,
+                phone: phone,
+                position: position,
+                first_name: $form.find('[name="first_name"]').val(),
+                last_name: $form.find('[name="last_name"]').val(),
+                company_id: $form.find('[name="company_id"]').val()
+            });
 
             const formData = {
                 first_name: $form.find('[name="first_name"]').val(),
@@ -293,6 +341,8 @@
                 }];
             }
 
+            console.log('Final form data to be sent:', formData);
+
             const submitBtn = $form.find('[type="submit"]');
             const originalText = submitBtn.text();
 
@@ -319,6 +369,8 @@
          * Submit company form
          */
         submitCompanyForm: function($form) {
+            console.log('=== Submitting Company Form ===');
+
             const formData = {
                 company_name: $form.find('[name="name"]').val(),
                 company_website: $form.find('[name="website"]').val(),
@@ -326,6 +378,8 @@
                 company_email: $form.find('[name="email"]').val(),
                 company_notes: $form.find('[name="address"]').val()
             };
+
+            console.log('Company form data to be sent:', formData);
 
             const submitBtn = $form.find('[type="submit"]');
             const originalText = submitBtn.text();
@@ -467,7 +521,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🚀 NEW VERSION 1.0.2 LOADED - If you see this, the cache is cleared! 🚀');
+            console.log('🚀 NEW VERSION 1.0.3 LOADED - If you see this, the cache is cleared! 🚀');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
