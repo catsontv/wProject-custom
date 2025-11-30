@@ -194,14 +194,16 @@
      */
     const ContactsPage = {
 
+        currentFilter: 'all', // Track current filter state
+
         /**
          * Initialize
          */
         init: function() {
             console.log('ContactsPage.init() called');
             this.bindEvents();
-            this.loadContacts();
-            this.loadCompanies();
+            this.filterContacts('all'); // Load all by default
+            this.loadCompanies(); // Load companies for dropdown
             console.log('ContactsPage.init() completed');
         },
 
@@ -323,7 +325,7 @@
                         },
                         success: function(data) {
                             alert('Contact deleted successfully!');
-                            ContactsPage.loadContacts();
+                            ContactsPage.filterContacts(ContactsPage.currentFilter);
                         },
                         error: function(message) {
                             alert('Error deleting contact: ' + message);
@@ -411,7 +413,7 @@
                         $('#submit-contact-btn').text('Add Contact');
 
                         ModalHandler.close('add-contact-modal');
-                        ContactsPage.loadContacts();
+                        ContactsPage.filterContacts(ContactsPage.currentFilter);
                     },
                     error: function(message) {
                         alert('Error: ' + message);
@@ -435,7 +437,7 @@
                         $('#submit-contact-btn').text('Add Contact');
 
                         ModalHandler.close('add-contact-modal');
-                        ContactsPage.loadContacts();
+                        ContactsPage.filterContacts(ContactsPage.currentFilter);
                     },
                     error: function(message) {
                         alert('Error: ' + message);
@@ -474,8 +476,8 @@
                     alert('Company added successfully!');
                     $form[0].reset();
                     ModalHandler.close('add-company-modal');
-                    ContactsPage.loadContacts();
-                    ContactsPage.loadCompanies();
+                    ContactsPage.filterContacts(ContactsPage.currentFilter);
+                    ContactsPage.loadCompanies(); // Refresh dropdown
                 },
                 error: function(message) {
                     alert('Error: ' + message);
@@ -574,11 +576,43 @@
         },
 
         /**
+         * Render company card
+         */
+        renderCompanyCard: function(company) {
+            const name = company.company_name || 'Unnamed Company';
+            const email = company.company_email || 'No email';
+            const phone = company.company_phone || 'No phone';
+            const website = company.company_website || '';
+
+            return `
+                <div class="contact-card company-card" data-id="${company.id}" data-type="company">
+                    <div class="contact-avatar">
+                        <i data-feather="briefcase"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>${name}</h3>
+                        ${website ? '<p class="contact-company"><i data-feather="globe"></i> ' + website + '</p>' : ''}
+                        <p class="contact-email"><i data-feather="mail"></i> ${email}</p>
+                        <p class="contact-phone"><i data-feather="phone"></i> ${phone}</p>
+                    </div>
+                    <div class="contact-actions">
+                        <button class="edit-company" data-id="${company.id}">
+                            <i data-feather="edit"></i>
+                        </button>
+                        <button class="delete-company" data-id="${company.id}">
+                            <i data-feather="trash-2"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        },
+
+        /**
          * Search contacts
          */
         searchContacts: function(query) {
             if (!query) {
-                this.loadContacts();
+                this.filterContacts(this.currentFilter); // Reload with current filter
                 return;
             }
 
@@ -590,11 +624,114 @@
         },
 
         /**
-         * Filter contacts
+         * Filter contacts and companies
          */
         filterContacts: function(filter) {
-            // This will be implemented in a future phase
             console.log('Filtering by: ' + filter);
+            this.currentFilter = filter;
+
+            const $grid = $('#contacts-grid');
+            $grid.html('<div class="loading">Loading...</div>');
+
+            if (filter === 'all') {
+                // Load both contacts and companies
+                let contactsData = [];
+                let companiesData = [];
+                let loadedCount = 0;
+
+                ContactsAjax.listContacts({}, {
+                    success: function(data) {
+                        contactsData = data.contacts || [];
+                        loadedCount++;
+                        if (loadedCount === 2) {
+                            ContactsPage.renderAll(contactsData, companiesData);
+                        }
+                    }
+                });
+
+                ContactsAjax.listCompanies({}, {
+                    success: function(data) {
+                        companiesData = data.companies || [];
+                        loadedCount++;
+                        if (loadedCount === 2) {
+                            ContactsPage.renderAll(contactsData, companiesData);
+                        }
+                    }
+                });
+            } else if (filter === 'contacts') {
+                // Load only contacts
+                ContactsAjax.listContacts({}, {
+                    success: function(data) {
+                        ContactsPage.renderContacts(data.contacts || []);
+                    },
+                    error: function(message) {
+                        $grid.html('<p>Error loading contacts: ' + message + '</p>');
+                    }
+                });
+            } else if (filter === 'companies') {
+                // Load only companies
+                ContactsAjax.listCompanies({}, {
+                    success: function(data) {
+                        ContactsPage.renderCompanies(data.companies || []);
+                    },
+                    error: function(message) {
+                        $grid.html('<p>Error loading companies: ' + message + '</p>');
+                    }
+                });
+            }
+        },
+
+        /**
+         * Render all (contacts and companies)
+         */
+        renderAll: function(contacts, companies) {
+            const $grid = $('#contacts-grid');
+            $grid.empty();
+
+            if (contacts.length === 0 && companies.length === 0) {
+                $grid.html('<p class="no-contacts">No contacts or companies found. Click "Add Contact" or "Add Company" to get started.</p>');
+                return;
+            }
+
+            // Render companies first
+            companies.forEach(function(company) {
+                const html = ContactsPage.renderCompanyCard(company);
+                $grid.append(html);
+            });
+
+            // Then render contacts
+            contacts.forEach(function(contact) {
+                const html = ContactsPage.renderContactCard(contact);
+                $grid.append(html);
+            });
+
+            // Re-initialize feather icons if available
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        },
+
+        /**
+         * Render companies only
+         */
+        renderCompanies: function(companies) {
+            const $grid = $('#contacts-grid');
+            $grid.empty();
+
+            if (companies.length === 0) {
+                $grid.html('<p class="no-contacts">No companies found. Click "Add Company" to get started.</p>');
+                return;
+            }
+
+            companies.forEach(function(company) {
+                const html = ContactsPage.renderCompanyCard(company);
+                $grid.append(html);
+            });
+
+            // Re-initialize feather icons if available
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
         }
     };
 
@@ -603,7 +740,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 1.0.7 - CONTACT CREATION FIX! 🎉');
+            console.log('🎉 VERSION 1.0.8 - COMPANIES FILTER NOW WORKS! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
