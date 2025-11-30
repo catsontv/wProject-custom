@@ -256,9 +256,15 @@ class WProject_Contacts_Ajax {
             $data['tags'] = is_array($_POST['tags']) ? array_map('sanitize_text_field', $_POST['tags']) : array();
         }
         
+        // Debug logging
+        error_log('wProject Contacts Pro - AJAX create_contact called');
+        error_log('wProject Contacts Pro - POST data: ' . print_r($_POST, true));
+        error_log('wProject Contacts Pro - Processed data: ' . print_r($data, true));
+
         $contact = WProject_Contact::create($data);
-        
+
         if (is_wp_error($contact)) {
+            error_log('wProject Contacts Pro - WP_Error returned: ' . $contact->get_error_message());
             wp_send_json_error(array(
                 'message' => $contact->get_error_message(),
             ));

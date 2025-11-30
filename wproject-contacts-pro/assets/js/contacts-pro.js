@@ -866,7 +866,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 1.0.10 - FIX EMPTY COMPANY/ROLE + MORE DEBUG! 🎉');
+            console.log('🎉 VERSION 1.0.11 - NULL COMPANY_ID FIX! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');

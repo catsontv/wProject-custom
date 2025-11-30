@@ -83,9 +83,15 @@ class WProject_Contact {
                 $insert_data,
                 array('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d')
             );
-            
+
             if ($result === false) {
-                throw new Exception(__('Failed to create contact.', 'wproject-contacts-pro'));
+                $error_msg = 'Failed to create contact.';
+                if ($wpdb->last_error) {
+                    $error_msg .= ' Database error: ' . $wpdb->last_error;
+                }
+                error_log('wProject Contacts Pro - Create Contact Error: ' . $error_msg);
+                error_log('wProject Contacts Pro - Insert Data: ' . print_r($insert_data, true));
+                throw new Exception(__($error_msg, 'wproject-contacts-pro'));
             }
             
             $contact_id = $wpdb->insert_id;
