@@ -3,7 +3,7 @@
  * Plugin Name: wProject Contacts Pro
  * Plugin URI: https://rocketapps.com.au/wproject-contacts-pro/
  * Description: Comprehensive contact and company management system for wProject theme
- * Version: 1.0.11
+ * Version: 1.0.12
  * Author: Rocket Apps
  * Author URI: https://rocketapps.com.au
  * Text Domain: wproject-contacts-pro
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('WPROJECT_CONTACTS_PRO_VERSION', '1.0.11');
+define('WPROJECT_CONTACTS_PRO_VERSION', '1.0.12');
 define('WPROJECT_CONTACTS_PRO_PATH', plugin_dir_path(__FILE__));
 define('WPROJECT_CONTACTS_PRO_URL', plugin_dir_url(__FILE__));
 define('WPROJECT_CONTACTS_PRO_FILE', __FILE__);
@@ -207,6 +207,9 @@ class WProject_Contacts_Pro {
 
         // Create database tables
         WProject_Contacts_Database::create_tables();
+
+        // Upgrade database schema for existing installations
+        WProject_Contacts_Database::upgrade_schema();
 
         // Flush rewrite rules for contacts page
         WProject_Contacts_Page_Handler::flush_rules();
