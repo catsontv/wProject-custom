@@ -3,7 +3,7 @@
  * Plugin Name: wProject Contacts Pro
  * Plugin URI: https://rocketapps.com.au/wproject-contacts-pro/
  * Description: Comprehensive contact and company management system for wProject theme
- * Version: 1.0.0
+ * Version: 1.0.12
  * Author: Rocket Apps
  * Author URI: https://rocketapps.com.au
  * Text Domain: wproject-contacts-pro
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('WPROJECT_CONTACTS_PRO_VERSION', '1.0.0');
+define('WPROJECT_CONTACTS_PRO_VERSION', '1.0.12');
 define('WPROJECT_CONTACTS_PRO_PATH', plugin_dir_path(__FILE__));
 define('WPROJECT_CONTACTS_PRO_URL', plugin_dir_url(__FILE__));
 define('WPROJECT_CONTACTS_PRO_FILE', __FILE__);
@@ -118,9 +118,13 @@ class WProject_Contacts_Pro {
         require_once WPROJECT_CONTACTS_PRO_PATH . 'includes/class-company.php';
         require_once WPROJECT_CONTACTS_PRO_PATH . 'includes/class-contact.php';
         require_once WPROJECT_CONTACTS_PRO_PATH . 'includes/class-ajax-handlers.php';
-        
-        // Initialize AJAX handlers
+        require_once WPROJECT_CONTACTS_PRO_PATH . 'includes/class-page-handler.php';
+        require_once WPROJECT_CONTACTS_PRO_PATH . 'admin/class-admin.php';
+
+        // Initialize components
         WProject_Contacts_Ajax::init();
+        WProject_Contacts_Page_Handler::init();
+        WProject_Contacts_Admin::init();
     }
     
     /**
@@ -196,16 +200,23 @@ class WProject_Contacts_Pro {
         if (version_compare(PHP_VERSION, '8.0', '<')) {
             die(__('wProject Contacts Pro requires PHP 8.0 or higher.', 'wproject-contacts-pro'));
         }
-        
+
         // Load database class for activation
         require_once WPROJECT_CONTACTS_PRO_PATH . 'includes/class-database.php';
-        
+        require_once WPROJECT_CONTACTS_PRO_PATH . 'includes/class-page-handler.php';
+
         // Create database tables
         WProject_Contacts_Database::create_tables();
-        
+
+        // Upgrade database schema for existing installations
+        WProject_Contacts_Database::upgrade_schema();
+
+        // Flush rewrite rules for contacts page
+        WProject_Contacts_Page_Handler::flush_rules();
+
         // Set version
         update_option('wproject_contacts_pro_version', WPROJECT_CONTACTS_PRO_VERSION);
-        
+
         // Set activation flag for welcome redirect
         set_transient('wproject_contacts_pro_activated', true, 30);
     }

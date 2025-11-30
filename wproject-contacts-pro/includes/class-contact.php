@@ -64,7 +64,7 @@ class WProject_Contact {
         try {
             // Prepare insert data
             $insert_data = array(
-                'company_id' => intval($data['company_id']),
+                'company_id' => !empty($data['company_id']) ? intval($data['company_id']) : null,
                 'first_name' => sanitize_text_field($data['first_name']),
                 'last_name' => sanitize_text_field($data['last_name']),
                 'role' => !empty($data['role']) ? sanitize_text_field($data['role']) : null,
@@ -83,9 +83,15 @@ class WProject_Contact {
                 $insert_data,
                 array('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d')
             );
-            
+
             if ($result === false) {
-                throw new Exception(__('Failed to create contact.', 'wproject-contacts-pro'));
+                $error_msg = 'Failed to create contact.';
+                if ($wpdb->last_error) {
+                    $error_msg .= ' Database error: ' . $wpdb->last_error;
+                }
+                error_log('wProject Contacts Pro - Create Contact Error: ' . $error_msg);
+                error_log('wProject Contacts Pro - Insert Data: ' . print_r($insert_data, true));
+                throw new Exception(__($error_msg, 'wproject-contacts-pro'));
             }
             
             $contact_id = $wpdb->insert_id;
@@ -196,8 +202,8 @@ class WProject_Contact {
         try {
             // Prepare update data for main contact
             $update_data = array();
-            
-            if (isset($data['company_id'])) $update_data['company_id'] = intval($data['company_id']);
+
+            if (isset($data['company_id'])) $update_data['company_id'] = !empty($data['company_id']) ? intval($data['company_id']) : null;
             if (isset($data['first_name'])) $update_data['first_name'] = sanitize_text_field($data['first_name']);
             if (isset($data['last_name'])) $update_data['last_name'] = sanitize_text_field($data['last_name']);
             if (isset($data['role'])) $update_data['role'] = !empty($data['role']) ? sanitize_text_field($data['role']) : null;
@@ -586,10 +592,9 @@ class WProject_Contact {
         if (empty($data['last_name'])) {
             $errors[] = __('Last name is required.', 'wproject-contacts-pro');
         }
-        
-        if (empty($data['company_id'])) {
-            $errors[] = __('Company is required.', 'wproject-contacts-pro');
-        } else {
+
+        // Company is optional, but if provided, validate it exists
+        if (!empty($data['company_id'])) {
             // Check if company exists
             $company = WProject_Company::get($data['company_id']);
             if (is_wp_error($company)) {

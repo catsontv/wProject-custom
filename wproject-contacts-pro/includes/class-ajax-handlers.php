@@ -77,7 +77,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Company created successfully.', 'wproject-contacts-pro'),
-            'data' => $company->to_array(),
+            'company' => $company->to_array(),
         ));
     }
     
@@ -114,7 +114,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Company updated successfully.', 'wproject-contacts-pro'),
-            'data' => $company->to_array(),
+            'company' => $company->to_array(),
         ));
     }
     
@@ -165,9 +165,7 @@ class WProject_Contacts_Ajax {
             ));
         }
         
-        wp_send_json_success(array(
-            'data' => $company->to_array(),
-        ));
+        wp_send_json_success($company->to_array());
     }
     
     /**
@@ -193,13 +191,11 @@ class WProject_Contacts_Ajax {
         }, $result['companies']);
         
         wp_send_json_success(array(
-            'data' => array(
-                'companies' => $companies,
-                'total' => $result['total'],
-                'page' => $result['page'],
-                'per_page' => $result['per_page'],
-                'total_pages' => $result['total_pages'],
-            ),
+            'companies' => $companies,
+            'total' => $result['total'],
+            'page' => $result['page'],
+            'per_page' => $result['per_page'],
+            'total_pages' => $result['total_pages'],
         ));
     }
     
@@ -208,9 +204,9 @@ class WProject_Contacts_Ajax {
      */
     public static function create_contact() {
         self::verify_request('edit_posts');
-        
+
         $data = array(
-            'company_id' => isset($_POST['company_id']) ? intval($_POST['company_id']) : 0,
+            'company_id' => isset($_POST['company_id']) ? intval($_POST['company_id']) : null,
             'first_name' => isset($_POST['first_name']) ? sanitize_text_field($_POST['first_name']) : '',
             'last_name' => isset($_POST['last_name']) ? sanitize_text_field($_POST['last_name']) : '',
             'role' => isset($_POST['role']) ? sanitize_text_field($_POST['role']) : '',
@@ -260,9 +256,15 @@ class WProject_Contacts_Ajax {
             $data['tags'] = is_array($_POST['tags']) ? array_map('sanitize_text_field', $_POST['tags']) : array();
         }
         
+        // Debug logging
+        error_log('wProject Contacts Pro - AJAX create_contact called');
+        error_log('wProject Contacts Pro - POST data: ' . print_r($_POST, true));
+        error_log('wProject Contacts Pro - Processed data: ' . print_r($data, true));
+
         $contact = WProject_Contact::create($data);
-        
+
         if (is_wp_error($contact)) {
+            error_log('wProject Contacts Pro - WP_Error returned: ' . $contact->get_error_message());
             wp_send_json_error(array(
                 'message' => $contact->get_error_message(),
             ));
@@ -270,7 +272,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Contact created successfully.', 'wproject-contacts-pro'),
-            'data' => $contact->to_array(),
+            'contact' => $contact->to_array(),
         ));
     }
     
@@ -348,7 +350,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Contact updated successfully.', 'wproject-contacts-pro'),
-            'data' => $contact->to_array(),
+            'contact' => $contact->to_array(),
         ));
     }
     
@@ -399,9 +401,7 @@ class WProject_Contacts_Ajax {
             ));
         }
         
-        wp_send_json_success(array(
-            'data' => $contact->to_array(),
-        ));
+        wp_send_json_success($contact->to_array());
     }
     
     /**
@@ -427,13 +427,11 @@ class WProject_Contacts_Ajax {
         }, $result['contacts']);
         
         wp_send_json_success(array(
-            'data' => array(
-                'contacts' => $contacts,
-                'total' => $result['total'],
-                'page' => $result['page'],
-                'per_page' => $result['per_page'],
-                'total_pages' => $result['total_pages'],
-            ),
+            'contacts' => $contacts,
+            'total' => $result['total'],
+            'page' => $result['page'],
+            'per_page' => $result['per_page'],
+            'total_pages' => $result['total_pages'],
         ));
     }
     
@@ -458,10 +456,8 @@ class WProject_Contacts_Ajax {
         }, $result['contacts']);
         
         wp_send_json_success(array(
-            'data' => array(
-                'contacts' => $contacts,
-                'total' => $result['total'],
-            ),
+            'contacts' => $contacts,
+            'total' => $result['total'],
         ));
     }
 }

@@ -45,7 +45,7 @@ class WProject_Contacts_Database {
         // Contacts table
         $sql_contacts = "CREATE TABLE {$wpdb->prefix}wproject_contacts (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-            company_id bigint(20) unsigned NOT NULL,
+            company_id bigint(20) unsigned DEFAULT NULL,
             first_name varchar(100) NOT NULL,
             last_name varchar(100) NOT NULL,
             role varchar(100) DEFAULT NULL,
@@ -63,9 +63,9 @@ class WProject_Contacts_Database {
             KEY created_by (created_by),
             KEY full_name (first_name, last_name),
             KEY created_at (created_at),
-            CONSTRAINT fk_contact_company FOREIGN KEY (company_id) 
-                REFERENCES {$wpdb->prefix}wproject_companies(id) 
-                ON DELETE CASCADE
+            CONSTRAINT fk_contact_company FOREIGN KEY (company_id)
+                REFERENCES {$wpdb->prefix}wproject_companies(id)
+                ON DELETE SET NULL
         ) $charset_collate;";
         
         // Contact Emails table
@@ -182,13 +182,57 @@ class WProject_Contacts_Database {
         dbDelta($sql_projects);
         dbDelta($sql_tasks);
         dbDelta($sql_events);
-        
+
         // Create contact-tag term relationships table (uses WP term taxonomy)
         // This is handled by WordPress core when we register the taxonomy
-        
+
         return true;
     }
-    
+
+    /**
+     * Upgrade database schema for existing installations
+     * Called on plugin activation to apply schema changes
+     */
+    public static function upgrade_schema() {
+        global $wpdb;
+
+        // Version 1.0.11: Make company_id nullable
+        $table_name = $wpdb->prefix . 'wproject_contacts';
+
+        // Check if column exists and is NOT NULL
+        $column_info = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT COLUMN_TYPE, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS
+                WHERE TABLE_SCHEMA = %s
+                AND TABLE_NAME = %s
+                AND COLUMN_NAME = 'company_id'",
+                DB_NAME,
+                $table_name
+            )
+        );
+
+        if ($column_info && $column_info->IS_NULLABLE === 'NO') {
+            // Drop foreign key constraint first
+            $wpdb->query("ALTER TABLE {$table_name} DROP FOREIGN KEY fk_contact_company");
+
+            // Modify column to allow NULL
+            $wpdb->query("ALTER TABLE {$table_name} MODIFY COLUMN company_id bigint(20) unsigned DEFAULT NULL");
+
+            // Re-add foreign key constraint (optional, allows NULL)
+            $wpdb->query("
+                ALTER TABLE {$table_name}
+                ADD CONSTRAINT fk_contact_company
+                FOREIGN KEY (company_id)
+                REFERENCES {$wpdb->prefix}wproject_companies(id)
+                ON DELETE SET NULL
+            ");
+
+            error_log('wProject Contacts Pro - Schema upgraded: company_id now allows NULL');
+        }
+
+        return true;
+    }
+
     /**
      * Check if tables exist
      */
