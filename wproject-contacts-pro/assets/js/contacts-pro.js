@@ -220,7 +220,7 @@
                 $('#add-contact-form')[0].reset();
                 $('#add-contact-form').removeData('edit-id');
                 $('#add-contact-modal .wpc-modal-header h2').text('Add Contact');
-                $('#add-contact-form button[type="submit"]').text('Add Contact');
+                $('#submit-contact-btn').text('Add Contact');
 
                 ModalHandler.open('add-contact-modal');
             });
@@ -245,23 +245,21 @@
                 }
             });
 
-            // Add Contact form submission
-            $(document).on('submit', '#add-contact-form', function(e) {
-                console.log('!!! CONTACT FORM SUBMIT EVENT TRIGGERED !!!');
+            // Contact form submit button (BYPASS form submission)
+            $(document).on('click', '#submit-contact-btn', function(e) {
+                console.log('!!! CONTACT SUBMIT BUTTON CLICKED !!!');
                 e.preventDefault();
                 e.stopPropagation();
-                e.stopImmediatePropagation();
-                ContactsPage.submitContactForm($(this));
+                ContactsPage.submitContactForm($('#add-contact-form'));
                 return false;
             });
 
-            // Add Company form submission
-            $(document).on('submit', '#add-company-form', function(e) {
-                console.log('!!! COMPANY FORM SUBMIT EVENT TRIGGERED !!!');
+            // Company form submit button (BYPASS form submission)
+            $(document).on('click', '#submit-company-btn', function(e) {
+                console.log('!!! COMPANY SUBMIT BUTTON CLICKED !!!');
                 e.preventDefault();
                 e.stopPropagation();
-                e.stopImmediatePropagation();
-                ContactsPage.submitCompanyForm($(this));
+                ContactsPage.submitCompanyForm($('#add-company-form'));
                 return false;
             });
 
@@ -301,7 +299,7 @@
 
                         // Change modal title and button text
                         $('#add-contact-modal .wpc-modal-header h2').text('Edit Contact');
-                        $('#add-contact-form button[type="submit"]').text('Update Contact');
+                        $('#submit-contact-btn').text('Update Contact');
 
                         // Open modal
                         ModalHandler.open('add-contact-modal');
@@ -409,7 +407,7 @@
 
                     // Reset modal to create mode
                     $('#add-contact-modal .wpc-modal-header h2').text('Add Contact');
-                    submitBtn.text('Add Contact');
+                    $('#submit-contact-btn').text('Add Contact');
 
                     ModalHandler.close('add-contact-modal');
                     ContactsPage.loadContacts();
@@ -579,7 +577,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🚀 VERSION 1.0.5 - FORM ACTION FIX! 🚀');
+            console.log('🚀 VERSION 1.0.6 - BUTTON CLICK FIX (NO FORM SUBMIT)! 🚀');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');

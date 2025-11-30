@@ -103,7 +103,7 @@ get_header();
                         <button type="button" class="button wpc-modal-close" data-modal="add-contact-modal">
                             <?php _e('Cancel', 'wproject-contacts-pro'); ?>
                         </button>
-                        <button type="submit" class="button button-primary">
+                        <button type="button" id="submit-contact-btn" class="button button-primary">
                             <?php _e('Add Contact', 'wproject-contacts-pro'); ?>
                         </button>
                     </div>
@@ -147,7 +147,7 @@ get_header();
                         <button type="button" class="button wpc-modal-close" data-modal="add-company-modal">
                             <?php _e('Cancel', 'wproject-contacts-pro'); ?>
                         </button>
-                        <button type="submit" class="button button-primary">
+                        <button type="button" id="submit-company-btn" class="button button-primary">
                             <?php _e('Add Company', 'wproject-contacts-pro'); ?>
                         </button>
                     </div>
