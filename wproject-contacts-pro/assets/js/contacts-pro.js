@@ -416,10 +416,19 @@
 
             const formData = {
                 first_name: $form.find('[name="first_name"]').val(),
-                last_name: $form.find('[name="last_name"]').val(),
-                company_id: $form.find('[name="company_id"]').val(),
-                role: position // PHP expects 'role' not 'position'
+                last_name: $form.find('[name="last_name"]').val()
             };
+
+            // Only include company_id if a company is selected
+            const companyId = $form.find('[name="company_id"]').val();
+            if (companyId && companyId !== '') {
+                formData.company_id = companyId;
+            }
+
+            // Only include role if provided
+            if (position && position !== '') {
+                formData.role = position; // PHP expects 'role' not 'position'
+            }
 
             if (isEdit) {
                 formData.id = editId;
@@ -788,6 +797,11 @@
          * Render all (contacts and companies)
          */
         renderAll: function(contacts, companies) {
+            console.log('=== renderAll called ===');
+            console.log('Contacts to render:', contacts.length);
+            console.log('Companies to render:', companies.length);
+            console.log('Companies data:', companies);
+
             const $grid = $('#contacts-grid');
             $grid.empty();
 
@@ -798,6 +812,7 @@
 
             // Render companies first
             companies.forEach(function(company) {
+                console.log('Rendering company:', company);
                 const html = ContactsPage.renderCompanyCard(company);
                 $grid.append(html);
             });
@@ -818,6 +833,10 @@
          * Render companies only
          */
         renderCompanies: function(companies) {
+            console.log('=== renderCompanies called ===');
+            console.log('Companies to render:', companies.length);
+            console.log('Companies data:', companies);
+
             const $grid = $('#contacts-grid');
             $grid.empty();
 
@@ -827,9 +846,13 @@
             }
 
             companies.forEach(function(company) {
+                console.log('Rendering company:', company);
                 const html = ContactsPage.renderCompanyCard(company);
+                console.log('Generated HTML:', html);
                 $grid.append(html);
             });
+
+            console.log('Grid HTML after appending:', $grid.html());
 
             // Re-initialize feather icons if available
             if (typeof feather !== 'undefined') {
@@ -843,7 +866,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 1.0.9 - COMPLETE COMPANY CRUD + DEBUGGING! 🎉');
+            console.log('🎉 VERSION 1.0.10 - FIX EMPTY COMPANY/ROLE + MORE DEBUG! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
