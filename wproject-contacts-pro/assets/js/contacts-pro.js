@@ -230,6 +230,13 @@
             // Add Company button
             $(document).on('click', '#add-company-btn', function(e) {
                 e.preventDefault();
+
+                // Reset form and modal to create mode
+                $('#add-company-form')[0].reset();
+                $('#add-company-form').removeData('edit-id');
+                $('#add-company-modal .wpc-modal-header h2').text('Add Company');
+                $('#submit-company-btn').text('Add Company');
+
                 ModalHandler.open('add-company-modal');
             });
 
@@ -329,6 +336,54 @@
                         },
                         error: function(message) {
                             alert('Error deleting contact: ' + message);
+                        }
+                    });
+                }
+            });
+
+            // Edit company button
+            $(document).on('click', '.edit-company', function(e) {
+                e.preventDefault();
+                const companyId = $(this).data('id');
+                console.log('Edit company clicked:', companyId);
+
+                ContactsAjax.getCompany(companyId, {
+                    success: function(company) {
+                        console.log('Company data loaded for edit:', company);
+                        $('#company-name').val(company.company_name || '');
+                        $('#company-email').val(company.company_email || '');
+                        $('#company-phone').val(company.company_phone || '');
+                        $('#company-website').val(company.company_website || '');
+                        $('#company-notes').val(company.company_notes || '');
+                        $('#add-company-form').data('edit-id', companyId);
+                        $('#add-company-modal .wpc-modal-header h2').text('Edit Company');
+                        $('#submit-company-btn').text('Update Company');
+                        ModalHandler.open('add-company-modal');
+                    },
+                    error: function(message) {
+                        alert('Error loading company: ' + message);
+                    }
+                });
+            });
+
+            // Delete company button
+            $(document).on('click', '.delete-company', function(e) {
+                e.preventDefault();
+                const companyId = $(this).data('id');
+                console.log('Delete company clicked:', companyId);
+
+                if (confirm('Are you sure you want to delete this company?')) {
+                    ContactsAjax.deleteCompany(companyId, {
+                        beforeSend: function() {
+                            console.log('Deleting company:', companyId);
+                        },
+                        success: function(data) {
+                            alert('Company deleted successfully!');
+                            ContactsPage.filterContacts(ContactsPage.currentFilter);
+                            ContactsPage.loadCompanies(); // Refresh dropdown
+                        },
+                        error: function(message) {
+                            alert('Error deleting company: ' + message);
                         }
                     });
                 }
@@ -455,6 +510,11 @@
         submitCompanyForm: function($form) {
             console.log('=== Submitting Company Form ===');
 
+            const editId = $form.data('edit-id');
+            const isEdit = editId ? true : false;
+
+            console.log('Form mode:', isEdit ? 'EDIT (ID: ' + editId + ')' : 'CREATE');
+
             const formData = {
                 company_name: $form.find('[name="name"]').val(),
                 company_website: $form.find('[name="website"]').val(),
@@ -468,24 +528,61 @@
             const submitBtn = $('#submit-company-btn');
             const originalText = submitBtn.text();
 
-            ContactsAjax.createCompany(formData, {
-                beforeSend: function() {
-                    submitBtn.prop('disabled', true).text('Adding...');
-                },
-                success: function(data) {
-                    alert('Company added successfully!');
-                    $form[0].reset();
-                    ModalHandler.close('add-company-modal');
-                    ContactsPage.filterContacts(ContactsPage.currentFilter);
-                    ContactsPage.loadCompanies(); // Refresh dropdown
-                },
-                error: function(message) {
-                    alert('Error: ' + message);
-                },
-                complete: function() {
-                    submitBtn.prop('disabled', false).text(originalText);
-                }
-            });
+            const successMessage = isEdit ? 'Company updated successfully!' : 'Company added successfully!';
+            const loadingText = isEdit ? 'Updating...' : 'Adding...';
+
+            // Call the appropriate method directly to preserve context
+            if (isEdit) {
+                ContactsAjax.updateCompany(editId, formData, {
+                    beforeSend: function() {
+                        submitBtn.prop('disabled', true).text(loadingText);
+                    },
+                    success: function(data) {
+                        alert(successMessage);
+                        $form[0].reset();
+                        $form.removeData('edit-id');
+
+                        // Reset modal to create mode
+                        $('#add-company-modal .wpc-modal-header h2').text('Add Company');
+                        $('#submit-company-btn').text('Add Company');
+
+                        ModalHandler.close('add-company-modal');
+                        ContactsPage.filterContacts(ContactsPage.currentFilter);
+                        ContactsPage.loadCompanies(); // Refresh dropdown
+                    },
+                    error: function(message) {
+                        alert('Error: ' + message);
+                    },
+                    complete: function() {
+                        submitBtn.prop('disabled', false).text(originalText);
+                    }
+                });
+            } else {
+                ContactsAjax.createCompany(formData, {
+                    beforeSend: function() {
+                        submitBtn.prop('disabled', true).text(loadingText);
+                    },
+                    success: function(data) {
+                        alert(successMessage);
+                        $form[0].reset();
+                        $form.removeData('edit-id');
+
+                        // Reset modal to create mode
+                        $('#add-company-modal .wpc-modal-header h2').text('Add Company');
+                        $('#submit-company-btn').text('Add Company');
+
+                        ModalHandler.close('add-company-modal');
+                        ContactsPage.filterContacts(ContactsPage.currentFilter);
+                        ContactsPage.loadCompanies(); // Refresh dropdown
+                    },
+                    error: function(message) {
+                        alert('Error: ' + message);
+                    },
+                    complete: function() {
+                        submitBtn.prop('disabled', false).text(originalText);
+                    }
+                });
+            }
         },
 
         /**
@@ -641,7 +738,9 @@
 
                 ContactsAjax.listContacts({}, {
                     success: function(data) {
+                        console.log('Contacts data received:', data);
                         contactsData = data.contacts || [];
+                        console.log('Contacts array:', contactsData);
                         loadedCount++;
                         if (loadedCount === 2) {
                             ContactsPage.renderAll(contactsData, companiesData);
@@ -651,7 +750,9 @@
 
                 ContactsAjax.listCompanies({}, {
                     success: function(data) {
+                        console.log('Companies data received:', data);
                         companiesData = data.companies || [];
+                        console.log('Companies array:', companiesData);
                         loadedCount++;
                         if (loadedCount === 2) {
                             ContactsPage.renderAll(contactsData, companiesData);
@@ -672,6 +773,8 @@
                 // Load only companies
                 ContactsAjax.listCompanies({}, {
                     success: function(data) {
+                        console.log('Companies-only filter - data received:', data);
+                        console.log('Companies array:', data.companies || []);
                         ContactsPage.renderCompanies(data.companies || []);
                     },
                     error: function(message) {
@@ -740,7 +843,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 1.0.8 - COMPANIES FILTER NOW WORKS! 🎉');
+            console.log('🎉 VERSION 1.0.9 - COMPLETE COMPANY CRUD + DEBUGGING! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');

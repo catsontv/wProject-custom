@@ -586,10 +586,9 @@ class WProject_Contact {
         if (empty($data['last_name'])) {
             $errors[] = __('Last name is required.', 'wproject-contacts-pro');
         }
-        
-        if (empty($data['company_id'])) {
-            $errors[] = __('Company is required.', 'wproject-contacts-pro');
-        } else {
+
+        // Company is optional, but if provided, validate it exists
+        if (!empty($data['company_id'])) {
             // Check if company exists
             $company = WProject_Company::get($data['company_id']);
             if (is_wp_error($company)) {
