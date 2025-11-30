@@ -215,6 +215,13 @@
             $(document).on('click', '#add-contact-btn', function(e) {
                 console.log('Add Contact button clicked');
                 e.preventDefault();
+
+                // Reset form and modal to create mode
+                $('#add-contact-form')[0].reset();
+                $('#add-contact-form').removeData('edit-id');
+                $('#add-contact-modal .wpc-modal-header h2').text('Add Contact');
+                $('#add-contact-form button[type="submit"]').text('Add Contact');
+
                 ModalHandler.open('add-contact-modal');
             });
 
@@ -240,14 +247,22 @@
 
             // Add Contact form submission
             $(document).on('submit', '#add-contact-form', function(e) {
+                console.log('!!! CONTACT FORM SUBMIT EVENT TRIGGERED !!!');
                 e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
                 ContactsPage.submitContactForm($(this));
+                return false;
             });
 
             // Add Company form submission
             $(document).on('submit', '#add-company-form', function(e) {
+                console.log('!!! COMPANY FORM SUBMIT EVENT TRIGGERED !!!');
                 e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
                 ContactsPage.submitCompanyForm($(this));
+                return false;
             });
 
             // Search
@@ -269,8 +284,32 @@
                 e.preventDefault();
                 const contactId = $(this).data('id');
                 console.log('Edit contact clicked:', contactId);
-                alert('Edit functionality will be implemented in Phase 2. Contact ID: ' + contactId);
-                // TODO: Implement edit functionality
+
+                // Load contact data and populate modal
+                ContactsAjax.getContact(contactId, {
+                    success: function(contact) {
+                        // Populate form fields
+                        $('#contact-first-name').val(contact.first_name);
+                        $('#contact-last-name').val(contact.last_name);
+                        $('#contact-email').val(contact.primary_email || '');
+                        $('#contact-phone').val(contact.primary_phone || '');
+                        $('#contact-company').val(contact.company_id);
+                        $('#contact-position').val(contact.role || '');
+
+                        // Store contact ID in form for update
+                        $('#add-contact-form').data('edit-id', contactId);
+
+                        // Change modal title and button text
+                        $('#add-contact-modal .wpc-modal-header h2').text('Edit Contact');
+                        $('#add-contact-form button[type="submit"]').text('Update Contact');
+
+                        // Open modal
+                        ModalHandler.open('add-contact-modal');
+                    },
+                    error: function(message) {
+                        alert('Error loading contact: ' + message);
+                    }
+                });
             });
 
             // Delete contact button
@@ -302,6 +341,11 @@
         submitContactForm: function($form) {
             console.log('=== Submitting Contact Form ===');
 
+            const editId = $form.data('edit-id');
+            const isEdit = editId ? true : false;
+
+            console.log('Form mode:', isEdit ? 'EDIT (ID: ' + editId + ')' : 'CREATE');
+
             const email = $form.find('[name="email"]').val();
             const phone = $form.find('[name="phone"]').val();
             const position = $form.find('[name="position"]').val();
@@ -321,6 +365,10 @@
                 company_id: $form.find('[name="company_id"]').val(),
                 role: position // PHP expects 'role' not 'position'
             };
+
+            if (isEdit) {
+                formData.id = editId;
+            }
 
             // PHP expects emails as an array
             if (email) {
@@ -346,13 +394,23 @@
             const submitBtn = $form.find('[type="submit"]');
             const originalText = submitBtn.text();
 
-            ContactsAjax.createContact(formData, {
+            const ajaxMethod = isEdit ? ContactsAjax.updateContact : ContactsAjax.createContact;
+            const successMessage = isEdit ? 'Contact updated successfully!' : 'Contact added successfully!';
+            const loadingText = isEdit ? 'Updating...' : 'Adding...';
+
+            ajaxMethod(formData, {
                 beforeSend: function() {
-                    submitBtn.prop('disabled', true).text('Adding...');
+                    submitBtn.prop('disabled', true).text(loadingText);
                 },
                 success: function(data) {
-                    alert('Contact added successfully!');
+                    alert(successMessage);
                     $form[0].reset();
+                    $form.removeData('edit-id');
+
+                    // Reset modal to create mode
+                    $('#add-contact-modal .wpc-modal-header h2').text('Add Contact');
+                    submitBtn.text('Add Contact');
+
                     ModalHandler.close('add-contact-modal');
                     ContactsPage.loadContacts();
                 },
@@ -521,7 +579,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🚀 NEW VERSION 1.0.3 LOADED - If you see this, the cache is cleared! 🚀');
+            console.log('🚀 NEW VERSION 1.0.4 LOADED - If you see this, the cache is cleared! 🚀');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
