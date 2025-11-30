@@ -77,7 +77,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Company created successfully.', 'wproject-contacts-pro'),
-            'data' => $company->to_array(),
+            'company' => $company->to_array(),
         ));
     }
     
@@ -114,7 +114,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Company updated successfully.', 'wproject-contacts-pro'),
-            'data' => $company->to_array(),
+            'company' => $company->to_array(),
         ));
     }
     
@@ -165,9 +165,7 @@ class WProject_Contacts_Ajax {
             ));
         }
         
-        wp_send_json_success(array(
-            'data' => $company->to_array(),
-        ));
+        wp_send_json_success($company->to_array());
     }
     
     /**
@@ -193,13 +191,11 @@ class WProject_Contacts_Ajax {
         }, $result['companies']);
         
         wp_send_json_success(array(
-            'data' => array(
-                'companies' => $companies,
-                'total' => $result['total'],
-                'page' => $result['page'],
-                'per_page' => $result['per_page'],
-                'total_pages' => $result['total_pages'],
-            ),
+            'companies' => $companies,
+            'total' => $result['total'],
+            'page' => $result['page'],
+            'per_page' => $result['per_page'],
+            'total_pages' => $result['total_pages'],
         ));
     }
     
@@ -270,7 +266,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Contact created successfully.', 'wproject-contacts-pro'),
-            'data' => $contact->to_array(),
+            'contact' => $contact->to_array(),
         ));
     }
     
@@ -348,7 +344,7 @@ class WProject_Contacts_Ajax {
         
         wp_send_json_success(array(
             'message' => __('Contact updated successfully.', 'wproject-contacts-pro'),
-            'data' => $contact->to_array(),
+            'contact' => $contact->to_array(),
         ));
     }
     
@@ -399,9 +395,7 @@ class WProject_Contacts_Ajax {
             ));
         }
         
-        wp_send_json_success(array(
-            'data' => $contact->to_array(),
-        ));
+        wp_send_json_success($contact->to_array());
     }
     
     /**
@@ -427,13 +421,11 @@ class WProject_Contacts_Ajax {
         }, $result['contacts']);
         
         wp_send_json_success(array(
-            'data' => array(
-                'contacts' => $contacts,
-                'total' => $result['total'],
-                'page' => $result['page'],
-                'per_page' => $result['per_page'],
-                'total_pages' => $result['total_pages'],
-            ),
+            'contacts' => $contacts,
+            'total' => $result['total'],
+            'page' => $result['page'],
+            'per_page' => $result['per_page'],
+            'total_pages' => $result['total_pages'],
         ));
     }
     
@@ -458,10 +450,8 @@ class WProject_Contacts_Ajax {
         }, $result['contacts']);
         
         wp_send_json_success(array(
-            'data' => array(
-                'contacts' => $contacts,
-                'total' => $result['total'],
-            ),
+            'contacts' => $contacts,
+            'total' => $result['total'],
         ));
     }
 }

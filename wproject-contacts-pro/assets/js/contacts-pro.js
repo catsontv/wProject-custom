@@ -24,7 +24,13 @@
             data = data || {};
             data.action = action;
             data.nonce = wpContactsPro.nonce;
-            
+
+            console.log('=== AJAX Request ===');
+            console.log('Action:', action);
+            console.log('Data being sent:', data);
+            console.log('AJAX URL:', wpContactsPro.ajaxurl);
+            console.log('Nonce:', wpContactsPro.nonce);
+
             $.ajax({
                 url: wpContactsPro.ajaxurl,
                 type: 'POST',
@@ -46,8 +52,24 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.error('AJAX Error Details:');
+                    console.error('Status:', status);
+                    console.error('Error:', error);
+                    console.error('Response Text:', xhr.responseText);
+                    console.error('Response Status:', xhr.status);
+                    console.error('Full XHR:', xhr);
+
                     if (callbacks.error) {
-                        callbacks.error('Request failed: ' + error);
+                        let errorMsg = 'Request failed: ' + error;
+                        if (xhr.responseText) {
+                            try {
+                                const response = JSON.parse(xhr.responseText);
+                                errorMsg = response.message || response.data?.message || errorMsg;
+                            } catch(e) {
+                                errorMsg += ' (Server response: ' + xhr.responseText.substring(0, 200) + ')';
+                            }
+                        }
+                        callbacks.error(errorMsg);
                     }
                 },
                 complete: function() {
@@ -352,7 +374,7 @@
                     const $select = $('#contact-company');
                     $select.find('option:not(:first)').remove();
                     companies.forEach(function(company) {
-                        $select.append('<option value="' + company.id + '">' + company.name + '</option>');
+                        $select.append('<option value="' + company.id + '">' + company.company_name + '</option>');
                     });
                 }
             });
@@ -386,9 +408,9 @@
          */
         renderContactCard: function(contact) {
             const name = contact.first_name + ' ' + contact.last_name;
-            const email = contact.email || 'No email';
-            const phone = contact.phone || 'No phone';
-            const position = contact.position || '';
+            const email = contact.primary_email || 'No email';
+            const phone = contact.primary_phone || 'No phone';
+            const role = contact.role || '';
             const company = contact.company_name || '';
 
             return `
@@ -398,7 +420,7 @@
                     </div>
                     <div class="contact-info">
                         <h3>${name}</h3>
-                        ${position ? '<p class="contact-position">' + position + '</p>' : ''}
+                        ${role ? '<p class="contact-role">' + role + '</p>' : ''}
                         ${company ? '<p class="contact-company">' + company + '</p>' : ''}
                         <p class="contact-email"><i data-feather="mail"></i> ${email}</p>
                         <p class="contact-phone"><i data-feather="phone"></i> ${phone}</p>
@@ -445,7 +467,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🚀 NEW VERSION 1.0.1 LOADED - If you see this, the cache is cleared! 🚀');
+            console.log('🚀 NEW VERSION 1.0.2 LOADED - If you see this, the cache is cleared! 🚀');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
