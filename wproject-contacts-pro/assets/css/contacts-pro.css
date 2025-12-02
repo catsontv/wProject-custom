@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend Styles
- * Version: 2.1.0 - RIGHT-SIDE SLIDING DETAIL PANEL
- * Fixed forms + Beautiful sliding detail panel from right
+ * Version: 2.1.1 - TABLE LIST LAYOUT + FIXED NOTES OVERLAP
+ * Table-style contacts list like wProject theme
  */
 
 /* ==================================================
@@ -524,6 +524,10 @@ body.wpc-panel-open {
     margin-bottom: 30px;
 }
 
+.contact-detail-section:last-of-type {
+    margin-bottom: 50px; /* FIXED: Extra space before action buttons to prevent overlap */
+}
+
 .contact-detail-section h3 {
     display: flex;
     align-items: center;
@@ -624,7 +628,7 @@ body.wpc-panel-open {
     color: #fff;
 }
 
-/* Notes */
+/* Notes - FIXED OVERLAP */
 .contact-notes {
     background: #f9f9f9;
     padding: 15px;
@@ -643,6 +647,10 @@ body.wpc-panel-open {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #ddd;
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding-bottom: 25px;
 }
 
 /* Hide Email and Call buttons */
@@ -696,6 +704,96 @@ body.wpc-panel-open {
 }
 
 /* ==================================================
+   CONTACTS TABLE/LIST LAYOUT
+   ================================================== */
+
+.contacts-table-wrapper {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.contacts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contacts-table thead {
+    background: #f9f9f9;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.contacts-table thead th {
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contacts-table tbody tr {
+    border-bottom: 1px solid #e5e5e5;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.contacts-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.contacts-table tbody td {
+    padding: 15px 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.contacts-table tbody td.company-cell {
+    color: #0073aa;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.contacts-table tbody td.company-cell:hover {
+    text-decoration: underline;
+}
+
+.contacts-table tbody td.contact-cell {
+    font-weight: 500;
+}
+
+.contacts-table tbody td.email-cell,
+.contacts-table tbody td.phone-cell {
+    color: #666;
+}
+
+.contacts-table tbody td.email-cell a,
+.contacts-table tbody td.phone-cell a {
+    color: #666;
+    text-decoration: none;
+}
+
+.contacts-table tbody td.email-cell a:hover,
+.contacts-table tbody td.phone-cell a:hover {
+    color: #0073aa;
+    text-decoration: underline;
+}
+
+/* Empty state */
+.contacts-table-empty {
+    padding: 60px 20px;
+    text-align: center;
+    color: #999;
+}
+
+.contacts-table-empty p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* ==================================================
    RESPONSIVE - Stack on mobile
    ================================================== */
 
@@ -744,6 +842,43 @@ body.wpc-panel-open {
     .wpc-panel-content {
         width: 100%;
         max-width: 100%;
+    }
+    
+    /* Stack table on mobile */
+    .contacts-table {
+        display: block;
+    }
+    
+    .contacts-table thead {
+        display: none;
+    }
+    
+    .contacts-table tbody,
+    .contacts-table tr,
+    .contacts-table td {
+        display: block;
+    }
+    
+    .contacts-table tbody tr {
+        margin-bottom: 15px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+    }
+    
+    .contacts-table tbody td {
+        padding: 10px 15px;
+        border: none;
+        position: relative;
+    }
+    
+    .contacts-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 11px;
+        color: #999;
+        display: block;
+        margin-bottom: 5px;
     }
 }
 
@@ -801,7 +936,6 @@ body.wpc-panel-open {
     text-align: center;
     padding: 60px 20px;
     color: #999;
-    grid-column: 1 / -1;
 }
 
 .contacts-empty h3 {
@@ -939,114 +1073,13 @@ body.wpc-panel-open {
     pointer-events: none;
 }
 
+/* Hide old grid styles */
 .contacts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    display: none;
 }
 
 .contact-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    gap: 15px;
-    position: relative;
-    transition: all 0.2s;
-}
-
-.contact-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-}
-
-.contact-card .contact-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.contact-card .contact-avatar i {
-    width: 30px;
-    height: 30px;
-    color: #666;
-}
-
-.contact-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.contact-info h3 {
-    margin: 0 0 5px;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.contact-info p {
-    margin: 3px 0;
-    font-size: 14px;
-    color: #666;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.contact-info p i {
-    width: 14px;
-    height: 14px;
-    color: #999;
-    flex-shrink: 0;
-}
-
-.contact-role {
-    font-weight: 600;
-    color: #333 !important;
-}
-
-.contact-company {
-    color: #0073aa !important;
-}
-
-.contact-actions {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 5px;
-}
-
-.contact-actions button {
-    background: transparent;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.2s;
-}
-
-.contact-actions button:hover {
-    background: #f0f0f0;
-}
-
-.contact-actions button i {
-    width: 16px;
-    height: 16px;
-    color: #666;
-}
-
-.contact-actions .delete-contact:hover i,
-.contact-actions .delete-company:hover i {
-    color: #d00;
+    display: none;
 }
 
 .wpc-modal {
