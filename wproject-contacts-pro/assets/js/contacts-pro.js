@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend JavaScript
  * Phase 2 Complete - All Features Implemented
- * Version: 2.0.7 - Fixed Repeater Fields
+ * Version: 2.2.0 - Table Layout Fixed
  */
 
 (function($) {
@@ -305,6 +305,119 @@
     };
 
     /**
+     * Company Detail Panel Handler
+     */
+    const CompanyDetailPanel = {
+        open: function(companyId) {
+            const $panel = $('#company-detail-panel');
+            $panel.fadeIn(300).addClass('open');
+            $('body').addClass('wpc-panel-open');
+
+            // Load company data
+            this.loadCompany(companyId);
+        },
+
+        close: function() {
+            const $panel = $('#company-detail-panel');
+            $panel.fadeOut(300).removeClass('open');
+            $('body').removeClass('wpc-panel-open');
+        },
+
+        loadCompany: function(companyId) {
+            const $panelBody = $('#company-detail-panel .wpc-panel-body');
+            $panelBody.html('<div class="loading">Loading company...</div>');
+
+            ContactsAjax.getCompany(companyId, {
+                success: function(company) {
+                    const html = CompanyDetailPanel.renderCompanyDetail(company);
+                    $panelBody.html(html);
+
+                    // Re-initialize feather icons
+                    if (typeof feather !== 'undefined') {
+                        feather.replace();
+                    }
+                },
+                error: function(message) {
+                    $panelBody.html('<div class="error">Error loading company: ' + message + '</div>');
+                }
+            });
+        },
+
+        renderCompanyDetail: function(company) {
+            const name = company.company_name || 'Unnamed Company';
+            const type = company.company_type || 'client';
+
+            let html = `
+                <div class="contact-detail-header">
+                    <div class="contact-detail-avatar">
+                        <i data-feather="briefcase"></i>
+                    </div>
+                    <div class="contact-detail-info">
+                        <h2>${name}</h2>
+                        <p class="company">${type.charAt(0).toUpperCase() + type.slice(1)}</p>
+                    </div>
+                </div>
+
+                <div class="contact-detail-section">
+                    <h3><i data-feather="info"></i> Company Information</h3>
+                    <div class="contact-detail-items">
+            `;
+
+            if (company.company_website) {
+                html += `
+                    <div class="contact-detail-item">
+                        <a href="${company.company_website}" target="_blank">${company.company_website}</a>
+                        <span class="label">Website</span>
+                    </div>
+                `;
+            }
+
+            if (company.company_email) {
+                html += `
+                    <div class="contact-detail-item">
+                        <a href="mailto:${company.company_email}">${company.company_email}</a>
+                        <span class="label">Email</span>
+                    </div>
+                `;
+            }
+
+            if (company.company_phone) {
+                html += `
+                    <div class="contact-detail-item">
+                        <a href="tel:${company.company_phone}">${company.company_phone}</a>
+                        <span class="label">Phone</span>
+                    </div>
+                `;
+            }
+
+            html += `
+                    </div>
+                </div>
+
+                <div class="contact-detail-actions">
+                    <button class="button edit-company-from-panel" data-id="${company.id}">
+                        <i data-feather="edit"></i> Edit
+                    </button>
+                    <button class="button delete-company-from-panel" data-id="${company.id}">
+                        <i data-feather="trash-2"></i> Delete
+                    </button>
+                </div>
+            `;
+
+            if (company.company_notes) {
+                html += `
+                    <div class="contact-detail-section">
+                        <h3><i data-feather="file-text"></i> Notes</h3>
+                        <div class="contact-notes">${company.company_notes}</div>
+                    </div>
+                `;
+            }
+
+            return html;
+        }
+    };
+
+    /**
      * Form Field Handlers
      */
     const FormFieldHandlers = {
@@ -455,7 +568,7 @@
          * Initialize
          */
         init: function() {
-            console.log('ContactsPage.init() called - Version 2.0.7');
+            console.log('ContactsPage.init() called - Version 2.2.0 - Table Layout');
             this.bindEvents();
             this.filterContacts('all');
             this.loadCompanies();
@@ -502,6 +615,7 @@
             $(document).on('click', '.wpc-panel-close, .wpc-panel-overlay', function(e) {
                 e.preventDefault();
                 DetailPanel.close();
+                CompanyDetailPanel.close();
             });
 
             // ESC key to close
@@ -509,6 +623,7 @@
                 if (e.key === 'Escape') {
                     ModalHandler.closeAll();
                     DetailPanel.close();
+                    CompanyDetailPanel.close();
                 }
             });
 
@@ -606,25 +721,21 @@
                 ContactsPage.applyFilters();
             });
 
-            // View contact detail
-            $(document).on('click', '.view-contact', function(e) {
+            // Click on contact name in table
+            $(document).on('click', '.contact-cell', function(e) {
                 e.preventDefault();
-                const contactId = $(this).data('id');
-                DetailPanel.open(contactId);
+                const contactId = $(this).closest('tr').data('contact-id');
+                if (contactId) {
+                    DetailPanel.open(contactId);
+                }
             });
 
-            // Click on contact card to view detail
-            $(document).on('click', '.contact-card', function(e) {
-                // Don't open if clicking on action buttons
-                if ($(e.target).closest('.contact-actions').length > 0) {
-                    return;
-                }
-
-                const contactId = $(this).data('id');
-                const cardType = $(this).data('type');
-
-                if (cardType !== 'company' && contactId) {
-                    DetailPanel.open(contactId);
+            // Click on company name in table
+            $(document).on('click', '.company-cell', function(e) {
+                e.preventDefault();
+                const companyId = $(this).closest('tr').data('company-id');
+                if (companyId) {
+                    CompanyDetailPanel.open(companyId);
                 }
             });
 
@@ -669,28 +780,48 @@
                 }
             });
 
-            // Edit contact button
+            // Edit company from panel
+            $(document).on('click', '.edit-company-from-panel', function(e) {
+                e.preventDefault();
+                const companyId = $(this).data('id');
+                CompanyDetailPanel.close();
+                setTimeout(function() {
+                    ContactsPage.editCompany(companyId);
+                }, 300);
+            });
+
+            // Delete company from panel
+            $(document).on('click', '.delete-company-from-panel', function(e) {
+                e.preventDefault();
+                const companyId = $(this).data('id');
+                if (confirm('Are you sure you want to delete this company?')) {
+                    ContactsPage.deleteCompany(companyId);
+                    CompanyDetailPanel.close();
+                }
+            });
+
+            // Edit contact button (legacy - for any remaining grid cards)
             $(document).on('click', '.edit-contact', function(e) {
                 e.preventDefault();
                 const contactId = $(this).data('id');
                 ContactsPage.editContact(contactId);
             });
 
-            // Delete contact button
+            // Delete contact button (legacy)
             $(document).on('click', '.delete-contact', function(e) {
                 e.preventDefault();
                 const contactId = $(this).data('id');
                 ContactsPage.deleteContact(contactId);
             });
 
-            // Edit company button
+            // Edit company button (legacy)
             $(document).on('click', '.edit-company', function(e) {
                 e.preventDefault();
                 const companyId = $(this).data('id');
                 ContactsPage.editCompany(companyId);
             });
 
-            // Delete company button
+            // Delete company button (legacy)
             $(document).on('click', '.delete-company', function(e) {
                 e.preventDefault();
                 const companyId = $(this).data('id');
@@ -1267,26 +1398,68 @@
                     ContactsPage.renderContacts(data.contacts || []);
                 },
                 error: function(message) {
-                    $('#contacts-grid').html('<p>Error loading contacts: ' + message + '</p>');
+                    const $tbody = $('#contacts-table-body');
+                    $tbody.html('<tr><td colspan="4" class="contacts-table-empty">Error loading contacts: ' + message + '</td></tr>');
                 }
             });
+        },
+
+        /**
+         * Render contact as table row
+         */
+        renderContactTableRow: function(contact) {
+            const preferredEmail = (contact.emails || []).find(e => e.is_preferred == 1) || (contact.emails || [])[0] || {};
+            const preferredPhone = (contact.phones || []).find(p => p.is_preferred == 1 && p.phone_type === 'cell') || 
+                                   (contact.phones || []).find(p => p.phone_type === 'cell') || {};
+            
+            const companyName = contact.company_name || '';
+            const contactName = contact.first_name + ' ' + contact.last_name;
+            const email = preferredEmail.email || '';
+            const phone = preferredPhone.phone_number || '';
+
+            return `
+                <tr data-contact-id="${contact.id}" ${contact.company_id ? 'data-company-id="' + contact.company_id + '"' : ''}>
+                    <td class="company-cell"${contact.company_id ? ' style="cursor:pointer;color:#0073aa;text-decoration:none;"' : ''}>${companyName}</td>
+                    <td class="contact-cell" style="cursor:pointer;color:#0073aa;text-decoration:none;">${contactName}</td>
+                    <td class="email-cell">${email ? '<a href="mailto:' + email + '">' + email + '</a>' : ''}</td>
+                    <td class="phone-cell">${phone ? '<a href="tel:' + phone + '">' + phone + '</a>' : ''}</td>
+                </tr>
+            `;
+        },
+
+        /**
+         * Render company as table row
+         */
+        renderCompanyTableRow: function(company) {
+            const companyName = company.company_name || 'Unnamed Company';
+            const email = company.company_email || '';
+            const phone = company.company_phone || '';
+
+            return `
+                <tr data-company-id="${company.id}">
+                    <td class="company-cell" style="cursor:pointer;color:#0073aa;text-decoration:none;">${companyName}</td>
+                    <td class="contact-cell"></td>
+                    <td class="email-cell">${email ? '<a href="mailto:' + email + '">' + email + '</a>' : ''}</td>
+                    <td class="phone-cell">${phone ? '<a href="tel:' + phone + '">' + phone + '</a>' : ''}</td>
+                </tr>
+            `;
         },
 
         /**
          * Render contacts
          */
         renderContacts: function(contacts) {
-            const $grid = $('#contacts-grid');
-            $grid.empty();
+            const $tbody = $('#contacts-table-body');
+            $tbody.empty();
 
             if (contacts.length === 0) {
-                $grid.html('<p class="no-contacts">No contacts found. Click "Add Contact" to get started.</p>');
+                $tbody.html('<tr><td colspan="4" class="contacts-table-empty">No contacts found. Click "Add Contact" to get started.</td></tr>');
                 return;
             }
 
             contacts.forEach(function(contact) {
-                const html = ContactsPage.renderContactCard(contact);
-                $grid.append(html);
+                const html = ContactsPage.renderContactTableRow(contact);
+                $tbody.append(html);
             });
 
             // Re-initialize feather icons
@@ -1296,71 +1469,26 @@
         },
 
         /**
-         * Render contact card
+         * Render companies only
          */
-        renderContactCard: function(contact) {
-            const name = contact.first_name + ' ' + contact.last_name;
-            const email = contact.primary_email || 'No email';
-            const phone = contact.primary_phone || 'No phone';
-            const role = contact.role || '';
-            const company = contact.company_name || '';
+        renderCompanies: function(companies) {
+            const $tbody = $('#contacts-table-body');
+            $tbody.empty();
 
-            return `
-                <div class="contact-card" data-id="${contact.id}" style="cursor: pointer;">
-                    <div class="contact-avatar">
-                        <i data-feather="user"></i>
-                    </div>
-                    <div class="contact-info">
-                        <h3>${name}</h3>
-                        ${role ? '<p class="contact-role">' + role + '</p>' : ''}
-                        ${company ? '<p class="contact-company">' + company + '</p>' : ''}
-                        <p class="contact-email"><i data-feather="mail"></i> ${email}</p>
-                        <p class="contact-phone"><i data-feather="phone"></i> ${phone}</p>
-                    </div>
-                    <div class="contact-actions">
-                        <button class="edit-contact" data-id="${contact.id}">
-                            <i data-feather="edit"></i>
-                        </button>
-                        <button class="delete-contact" data-id="${contact.id}">
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-        },
+            if (companies.length === 0) {
+                $tbody.html('<tr><td colspan="4" class="contacts-table-empty">No companies found. Click "Add Company" to get started.</td></tr>');
+                return;
+            }
 
-        /**
-         * Render company card
-         */
-        renderCompanyCard: function(company) {
-            const name = company.company_name || 'Unnamed Company';
-            const email = company.company_email || 'No email';
-            const phone = company.company_phone || 'No phone';
-            const website = company.company_website || '';
-            const type = company.company_type || 'client';
+            companies.forEach(function(company) {
+                const html = ContactsPage.renderCompanyTableRow(company);
+                $tbody.append(html);
+            });
 
-            return `
-                <div class="contact-card company-card" data-id="${company.id}" data-type="company">
-                    <div class="contact-avatar">
-                        <i data-feather="briefcase"></i>
-                    </div>
-                    <div class="contact-info">
-                        <h3>${name}</h3>
-                        <p class="contact-role">${type.charAt(0).toUpperCase() + type.slice(1)}</p>
-                        ${website ? '<p class="contact-company"><i data-feather="globe"></i> ' + website + '</p>' : ''}
-                        <p class="contact-email"><i data-feather="mail"></i> ${email}</p>
-                        <p class="contact-phone"><i data-feather="phone"></i> ${phone}</p>
-                    </div>
-                    <div class="contact-actions">
-                        <button class="edit-company" data-id="${company.id}">
-                            <i data-feather="edit"></i>
-                        </button>
-                        <button class="delete-company" data-id="${company.id}">
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
+            // Re-initialize feather icons
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
         },
 
         /**
@@ -1386,8 +1514,8 @@
             console.log('Filtering by: ' + filter);
             this.currentFilter = filter;
 
-            const $grid = $('#contacts-grid');
-            $grid.html('<div class="loading">Loading...</div>');
+            const $tbody = $('#contacts-table-body');
+            $tbody.html('<tr><td colspan="4" class="loading">Loading...</td></tr>');
 
             if (filter === 'all') {
                 let contactsData = [];
@@ -1401,6 +1529,9 @@
                         if (loadedCount === 2) {
                             ContactsPage.renderAll(contactsData, companiesData);
                         }
+                    },
+                    error: function(message) {
+                        $tbody.html('<tr><td colspan="4" class="contacts-table-empty">Error loading contacts: ' + message + '</td></tr>');
                     }
                 });
 
@@ -1411,6 +1542,11 @@
                         if (loadedCount === 2) {
                             ContactsPage.renderAll(contactsData, companiesData);
                         }
+                    },
+                    error: function(message) {
+                        if (loadedCount < 2) {
+                            $tbody.html('<tr><td colspan="4" class="contacts-table-empty">Error loading companies: ' + message + '</td></tr>');
+                        }
                     }
                 });
             } else if (filter === 'contacts') {
@@ -1419,7 +1555,7 @@
                         ContactsPage.renderContacts(data.contacts || []);
                     },
                     error: function(message) {
-                        $grid.html('<p>Error loading contacts: ' + message + '</p>');
+                        $tbody.html('<tr><td colspan="4" class="contacts-table-empty">Error loading contacts: ' + message + '</td></tr>');
                     }
                 });
             } else if (filter === 'companies') {
@@ -1428,7 +1564,7 @@
                         ContactsPage.renderCompanies(data.companies || []);
                     },
                     error: function(message) {
-                        $grid.html('<p>Error loading companies: ' + message + '</p>');
+                        $tbody.html('<tr><td colspan="4" class="contacts-table-empty">Error loading companies: ' + message + '</td></tr>');
                     }
                 });
             }
@@ -1438,47 +1574,24 @@
          * Render all (contacts and companies)
          */
         renderAll: function(contacts, companies) {
-            const $grid = $('#contacts-grid');
-            $grid.empty();
+            const $tbody = $('#contacts-table-body');
+            $tbody.empty();
 
             if (contacts.length === 0 && companies.length === 0) {
-                $grid.html('<p class="no-contacts">No contacts or companies found. Click "Add Contact" or "Add Company" to get started.</p>');
+                $tbody.html('<tr><td colspan="4" class="contacts-table-empty">No contacts or companies found. Click "Add Contact" or "Add Company" to get started.</td></tr>');
                 return;
             }
 
             // Render companies first
             companies.forEach(function(company) {
-                const html = ContactsPage.renderCompanyCard(company);
-                $grid.append(html);
+                const html = ContactsPage.renderCompanyTableRow(company);
+                $tbody.append(html);
             });
 
             // Then render contacts
             contacts.forEach(function(contact) {
-                const html = ContactsPage.renderContactCard(contact);
-                $grid.append(html);
-            });
-
-            // Re-initialize feather icons
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-        },
-
-        /**
-         * Render companies only
-         */
-        renderCompanies: function(companies) {
-            const $grid = $('#contacts-grid');
-            $grid.empty();
-
-            if (companies.length === 0) {
-                $grid.html('<p class="no-contacts">No companies found. Click "Add Company" to get started.</p>');
-                return;
-            }
-
-            companies.forEach(function(company) {
-                const html = ContactsPage.renderCompanyCard(company);
-                $grid.append(html);
+                const html = ContactsPage.renderContactTableRow(contact);
+                $tbody.append(html);
             });
 
             // Re-initialize feather icons
@@ -1493,7 +1606,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 2.0.7 - REPEATER FIELDS FIXED! 🎉');
+            console.log('🎉 VERSION 2.2.0 - TABLE LAYOUT FIXED! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
