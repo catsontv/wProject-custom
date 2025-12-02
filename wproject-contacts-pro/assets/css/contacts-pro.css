@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend Styles
  * Phase 2 Complete - All features styled to match wProject
- * Version: 2.0.1 - Responsive Form Fixes
+ * Version: 2.0.2 - Complete Responsive Form Rebuild
  */
 
 /* ===========================
@@ -334,7 +334,7 @@
 }
 
 /* ===========================
-   MODALS
+   MODALS - COMPLETE REBUILD
    =========================== */
 .wpc-modal {
     display: none;
@@ -352,8 +352,8 @@
     background-color: #fff;
     margin: 30px auto;
     border-radius: 8px;
-    width: 90%;
-    max-width: 800px;
+    width: 95%;
+    max-width: 850px;
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -369,6 +369,8 @@
     top: 0;
     background: #fff;
     z-index: 1;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .wpc-modal-header h2 {
@@ -399,6 +401,7 @@
     padding: 25px;
 }
 
+/* Form fieldsets */
 .wpc-modal form fieldset {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -427,9 +430,10 @@
     margin-bottom: 0;
 }
 
+/* Split fields - completely rebuilt */
 .wpc-modal form ul li.split-2 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
 }
 
@@ -440,6 +444,7 @@
     font-size: 14px;
 }
 
+/* All form inputs - force proper box sizing */
 .wpc-modal form input[type="text"],
 .wpc-modal form input[type="email"],
 .wpc-modal form input[type="tel"],
@@ -454,6 +459,7 @@
     font-size: 14px;
     font-family: inherit;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 .wpc-modal form input:focus,
@@ -471,6 +477,7 @@
     color: #666;
 }
 
+/* Form actions - properly sized buttons */
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -481,12 +488,17 @@
     flex-wrap: wrap;
 }
 
+.form-actions button {
+    min-width: 100px;
+    padding: 10px 20px;
+}
+
 body.wpc-modal-open {
     overflow: hidden;
 }
 
 /* ===========================
-   REPEATER FIELDS
+   REPEATER FIELDS - COMPLETE REBUILD
    =========================== */
 .repeater-field {
     margin-bottom: 10px;
@@ -494,14 +506,15 @@ body.wpc-modal-open {
 
 .field-row {
     display: grid;
-    grid-template-columns: minmax(150px, 2fr) minmax(100px, 1.2fr) minmax(80px, 1fr) auto;
+    grid-template-columns: 1fr auto auto auto;
     gap: 10px;
-    align-items: center;
-    transition: all 0.2s ease;
+    align-items: start;
+    margin-bottom: 10px;
 }
 
 .field-input {
     min-width: 0;
+    grid-column: 1;
 }
 
 .field-input input {
@@ -510,7 +523,9 @@ body.wpc-modal-open {
 }
 
 .field-label {
-    min-width: 0;
+    min-width: 120px;
+    max-width: 150px;
+    grid-column: 2;
 }
 
 .field-label select {
@@ -519,7 +534,10 @@ body.wpc-modal-open {
 }
 
 .field-preferred {
-    min-width: 80px;
+    min-width: 90px;
+    grid-column: 3;
+    display: flex;
+    align-items: center;
 }
 
 .field-preferred label {
@@ -540,6 +558,7 @@ body.wpc-modal-open {
 
 .field-remove {
     min-width: 36px;
+    grid-column: 4;
 }
 
 .field-remove button {
@@ -549,6 +568,8 @@ body.wpc-modal-open {
     cursor: pointer;
     border-radius: 4px;
     transition: background 0.2s;
+    width: 36px;
+    height: 36px;
 }
 
 .field-remove button:hover {
@@ -805,26 +826,52 @@ body.wpc-panel-open {
 }
 
 /* ===========================
-   RESPONSIVE
+   RESPONSIVE BREAKPOINTS
    =========================== */
 
-/* Large tablets and small desktops */
-@media (max-width: 1024px) {
+/* Smaller desktops - 1200px */
+@media (max-width: 1200px) {
     .wpc-modal-content {
-        max-width: 700px;
-    }
-    
-    .field-row {
-        grid-template-columns: minmax(120px, 2fr) minmax(90px, 1fr) minmax(70px, 0.8fr) auto;
-        gap: 8px;
-    }
-    
-    .field-preferred label {
-        font-size: 12px;
+        max-width: 750px;
+        width: 92%;
     }
 }
 
-/* Tablets */
+/* Large tablets - 900px */
+@media (max-width: 900px) {
+    .wpc-modal-content {
+        max-width: 650px;
+        width: 90%;
+    }
+    
+    .field-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    
+    .field-input {
+        grid-column: 1 / -1;
+    }
+    
+    .field-label {
+        grid-column: 1;
+        grid-row: 2;
+        min-width: 100px;
+        max-width: none;
+    }
+    
+    .field-preferred {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    
+    .field-remove {
+        grid-column: 2;
+        grid-row: 1;
+    }
+}
+
+/* Tablets - 768px */
 @media (max-width: 768px) {
     .contacts-header {
         flex-direction: column;
@@ -873,8 +920,12 @@ body.wpc-panel-open {
     
     .field-input,
     .field-label,
-    .field-preferred {
+    .field-preferred,
+    .field-remove {
+        grid-column: 1;
+        grid-row: auto;
         min-width: 0;
+        max-width: none;
     }
 
     .field-preferred label {
@@ -899,7 +950,7 @@ body.wpc-panel-open {
     }
 }
 
-/* Mobile phones */
+/* Mobile - 480px */
 @media (max-width: 480px) {
     .contacts-actions {
         width: 100%;
@@ -946,7 +997,7 @@ body.wpc-panel-open {
 }
 
 /* ===========================
-   DARK MODE SUPPORT (wProject)
+   DARK MODE SUPPORT
    =========================== */
 body.dark-mode .contact-card,
 body.dark-mode .wpc-modal-content,
