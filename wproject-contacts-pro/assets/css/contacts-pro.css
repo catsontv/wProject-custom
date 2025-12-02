@@ -1,6 +1,6 @@
 /**
  * wProject Contacts Pro - Frontend Styles
- * Version: 2.1.1 - TABLE LIST LAYOUT + FIXED NOTES OVERLAP
+ * Version: 2.2.0 - FIXED NOTES OVERLAP + TABLE LIST LAYOUT
  * Table-style contacts list like wProject theme
  */
 
@@ -525,7 +525,7 @@ body.wpc-panel-open {
 }
 
 .contact-detail-section:last-of-type {
-    margin-bottom: 50px; /* FIXED: Extra space before action buttons to prevent overlap */
+    margin-bottom: 80px; /* FIXED: Increased from 50px to 80px to prevent overlap with buttons */
 }
 
 .contact-detail-section h3 {
@@ -737,7 +737,6 @@ body.wpc-panel-open {
 .contacts-table tbody tr {
     border-bottom: 1px solid #e5e5e5;
     transition: background 0.2s;
-    cursor: pointer;
 }
 
 .contacts-table tbody tr:hover {
@@ -762,6 +761,12 @@ body.wpc-panel-open {
 
 .contacts-table tbody td.contact-cell {
     font-weight: 500;
+    cursor: pointer;
+    color: #0073aa;
+}
+
+.contacts-table tbody td.contact-cell:hover {
+    text-decoration: underline;
 }
 
 .contacts-table tbody td.email-cell,
