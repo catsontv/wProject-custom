@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend JavaScript
  * Phase 2 Complete - All Features Implemented
- * Version: 2.2.1 - Phone Display & Company Panel Buttons Fixed
+ * Version: 2.2.2 - ENHANCED DEBUGGING & PHONE FIX
  */
 
 (function($) {
@@ -568,7 +568,7 @@
          * Initialize
          */
         init: function() {
-            console.log('ContactsPage.init() called - Version 2.2.1 - Phone & Company Panel Fixed');
+            console.log('ContactsPage.init() called - Version 2.2.2 - ENHANCED DEBUGGING');
             this.bindEvents();
             this.filterContacts('all');
             this.loadCompanies();
@@ -1408,45 +1408,60 @@
          * Render contact as table row
          */
         renderContactTableRow: function(contact) {
-            console.log('Rendering contact:', contact);
+            console.log('====== RENDERING CONTACT ======');
+            console.log('Contact ID:', contact.id);
+            console.log('Full contact object:', JSON.stringify(contact, null, 2));
+            console.log('Phones array:', contact.phones);
+            console.log('Primary phone:', contact.primary_phone);
             
             // Get preferred email or first email
             const preferredEmail = (contact.emails || []).find(e => e.is_preferred == 1) || (contact.emails || [])[0] || {};
             
-            // Find mobile/cell phone - try multiple strategies
+            // Find mobile/cell phone with detailed logging
             let preferredPhone = null;
             
-            // Strategy 1: Look for preferred cell phone
-            if (contact.phones && contact.phones.length > 0) {
+            if (contact.phones && Array.isArray(contact.phones) && contact.phones.length > 0) {
+                console.log('Phones array exists with', contact.phones.length, 'items');
+                console.log('Each phone:', contact.phones.map(p => `${p.phone_number} (type: ${p.phone_type}, label: ${p.label}, pref: ${p.is_preferred})`));
+                
+                // Strategy 1: Look for preferred cell phone
                 preferredPhone = contact.phones.find(p => p.is_preferred == 1 && (p.phone_type === 'cell' || p.label === 'mobile' || p.label === 'assistant_mobile'));
+                console.log('Strategy 1 result (preferred cell):', preferredPhone);
+                
+                // Strategy 2: Look for any cell/mobile phone
+                if (!preferredPhone) {
+                    preferredPhone = contact.phones.find(p => p.phone_type === 'cell' || p.label === 'mobile' || p.label === 'assistant_mobile');
+                    console.log('Strategy 2 result (any cell):', preferredPhone);
+                }
+                
+                // Strategy 3: Use any preferred phone
+                if (!preferredPhone) {
+                    preferredPhone = contact.phones.find(p => p.is_preferred == 1);
+                    console.log('Strategy 3 result (any preferred):', preferredPhone);
+                }
+                
+                // Strategy 4: Use first phone
+                if (!preferredPhone) {
+                    preferredPhone = contact.phones[0];
+                    console.log('Strategy 4 result (first phone):', preferredPhone);
+                }
+            } else {
+                console.log('NO phones array or empty array');
             }
             
-            // Strategy 2: Look for any cell/mobile phone
-            if (!preferredPhone && contact.phones && contact.phones.length > 0) {
-                preferredPhone = contact.phones.find(p => p.phone_type === 'cell' || p.label === 'mobile' || p.label === 'assistant_mobile');
-            }
-            
-            // Strategy 3: Use primary_phone if available
+            // Strategy 5: Use primary_phone if available
             if (!preferredPhone && contact.primary_phone) {
+                console.log('Using primary_phone field:', contact.primary_phone);
                 preferredPhone = { phone_number: contact.primary_phone };
-            }
-            
-            // Strategy 4: Use any preferred phone
-            if (!preferredPhone && contact.phones && contact.phones.length > 0) {
-                preferredPhone = contact.phones.find(p => p.is_preferred == 1);
-            }
-            
-            // Strategy 5: Use first phone
-            if (!preferredPhone && contact.phones && contact.phones.length > 0) {
-                preferredPhone = contact.phones[0];
             }
             
             const companyName = contact.company_name || '';
             const contactName = contact.first_name + ' ' + contact.last_name;
             const email = preferredEmail.email || '';
-            const phone = preferredPhone ? preferredPhone.phone_number || '' : '';
+            const phone = preferredPhone ? (preferredPhone.phone_number || '') : '';
 
-            console.log('Phone found:', phone);
+            console.log('FINAL phone value for table:', phone);
+            console.log('==============================');
 
             return `
                 <tr data-contact-id="${contact.id}" ${contact.company_id ? 'data-company-id="' + contact.company_id + '"' : ''}>
@@ -1488,6 +1503,8 @@
                 return;
             }
 
+            console.log('====== RENDER CONTACTS CALLED ======');
+            console.log('Total contacts:', contacts.length);
             contacts.forEach(function(contact) {
                 const html = ContactsPage.renderContactTableRow(contact);
                 $tbody.append(html);
@@ -1620,6 +1637,8 @@
             });
 
             // Then render contacts
+            console.log('====== RENDER ALL CONTACTS ======');
+            console.log('Total contacts:', contacts.length);
             contacts.forEach(function(contact) {
                 const html = ContactsPage.renderContactTableRow(contact);
                 $tbody.append(html);
@@ -1637,7 +1656,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 2.2.1 - PHONE DISPLAY & COMPANY PANEL FIXED! 🎉');
+            console.log('🎉 VERSION 2.2.2 - ENHANCED DEBUGGING & FIXES! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
