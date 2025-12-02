@@ -2,7 +2,7 @@
 /**
  * Template for displaying contacts page
  *
- * Phase 2 Complete - All features implemented
+ * Version 2.0.8 - Fixed repeater field buttons
  */
 
 if (!defined('ABSPATH')) {
@@ -158,8 +158,8 @@ get_header();
                                             </label>
                                         </div>
                                         <div class="field-remove">
-                                            <button type="button" class="remove-email" style="display:none;">
-                                                <i data-feather="trash-2"></i>
+                                            <button type="button" class="remove-email" style="display:none;" title="Remove">
+                                                ✕
                                             </button>
                                         </div>
                                     </div>
@@ -194,8 +194,8 @@ get_header();
                                             </label>
                                         </div>
                                         <div class="field-remove">
-                                            <button type="button" class="remove-cell-phone" style="display:none;">
-                                                <i data-feather="trash-2"></i>
+                                            <button type="button" class="remove-cell-phone" style="display:none;" title="Remove">
+                                                ✕
                                             </button>
                                         </div>
                                     </div>
@@ -231,8 +231,8 @@ get_header();
                                             </label>
                                         </div>
                                         <div class="field-remove">
-                                            <button type="button" class="remove-local-phone" style="display:none;">
-                                                <i data-feather="trash-2"></i>
+                                            <button type="button" class="remove-local-phone" style="display:none;" title="Remove">
+                                                ✕
                                             </button>
                                         </div>
                                     </div>
