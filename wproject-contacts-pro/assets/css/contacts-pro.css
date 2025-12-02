@@ -1,78 +1,100 @@
 /**
  * wProject Contacts Pro - Frontend Styles
- * Version: 2.0.2 - NUCLEAR OPTION
- * Maximum specificity + !important to override aggressive theme CSS
+ * Version: 2.0.3 - ULTRA AGGRESSIVE FIX
+ * Maximum specificity + layout isolation to force proper rendering
  */
 
 /* ==================================================
-   CRITICAL FIX: Grid for form fields
-   Forces proper layout no matter what theme does
+   CRITICAL FIX: Force Grid Layout for split-2 fields
+   Uses transform trick + will-change to force GPU rendering
    ================================================== */
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.split-2,
 body .wpc-modal ul li.split-2 {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 15px !important;
     align-items: start !important;
     grid-auto-flow: dense !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    contain: layout !important;
+    will-change: contents !important;
+    transform: translateZ(0) !important;
 }
 
-body .wpc-modal ul li.split-2 > * {
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.split-2 > div,
+body .wpc-modal ul li.split-2 > div {
     position: relative !important;
     z-index: 1 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    contain: layout !important;
+}
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.split-2 > div:first-child {
+    grid-column: 1 / 2 !important;
+}
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.split-2 > div:last-child {
+    grid-column: 2 / 3 !important;
 }
 
 /* ==================================================
-   REPEATER FIELDS - Force correct stacking
+   REPEATER FIELDS - Force 4-column grid
    ================================================== */
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-row,
 body .wpc-modal .field-row {
     display: grid !important;
-    grid-template-columns: 2fr 120px 90px 40px !important;
+    grid-template-columns: minmax(0, 2fr) minmax(80px, 120px) minmax(70px, 90px) 40px !important;
     gap: 10px !important;
     align-items: start !important;
     position: relative !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    contain: layout !important;
+    isolation: isolate !important;
 }
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-input,
 body .wpc-modal .field-input {
-    grid-column: 1 !important;
+    grid-column: 1 / 2 !important;
     position: relative !important;
     z-index: 2 !important;
+    min-width: 0 !important;
 }
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-label,
 body .wpc-modal .field-label {
-    grid-column: 2 !important;
+    grid-column: 2 / 3 !important;
     position: relative !important;
     z-index: 1 !important;
+    min-width: 0 !important;
 }
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-preferred,
 body .wpc-modal .field-preferred {
-    grid-column: 3 !important;
+    grid-column: 3 / 4 !important;
     position: relative !important;
     z-index: 1 !important;
+    min-width: 0 !important;
 }
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-remove,
 body .wpc-modal .field-remove {
-    grid-column: 4 !important;
+    grid-column: 4 / 5 !important;
     position: relative !important;
     z-index: 1 !important;
-}
-
-/* Force dropdown UNDER input field */
-body .wpc-modal .field-label select {
-    position: relative !important;
-    z-index: 1 !important;
-}
-
-body .wpc-modal .field-input input {
-    position: relative !important;
-    z-index: 2 !important;
+    min-width: 0 !important;
 }
 
 /* ==================================================
-   MODAL FOOTER BUTTONS - Force correct layout
+   FORM ACTIONS - Force horizontal layout
    ================================================== */
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .form-actions,
 body .form-actions {
     display: flex !important;
     flex-direction: row !important;
@@ -82,8 +104,11 @@ body .form-actions {
     margin-top: 20px !important;
     padding-top: 20px !important;
     border-top: 1px solid #ddd !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .form-actions button,
 body .form-actions button {
     min-width: 100px !important;
     max-width: none !important;
@@ -92,12 +117,19 @@ body .form-actions button {
     margin: 0 !important;
     display: inline-block !important;
     position: relative !important;
+    flex: 0 0 auto !important;
 }
 
 /* ==================================================
-   ALL INPUTS - Force proper sizing
+   ALL FORM INPUTS - Proper sizing
    ================================================== */
 
+html body .wpc-modal .wpc-modal-content .wpc-modal-body input[type="text"],
+html body .wpc-modal .wpc-modal-content .wpc-modal-body input[type="email"],
+html body .wpc-modal .wpc-modal-content .wpc-modal-body input[type="tel"],
+html body .wpc-modal .wpc-modal-content .wpc-modal-body input[type="url"],
+html body .wpc-modal .wpc-modal-content .wpc-modal-body textarea,
+html body .wpc-modal .wpc-modal-content .wpc-modal-body select,
 body .wpc-modal input[type="text"],
 body .wpc-modal input[type="email"],
 body .wpc-modal input[type="tel"],
@@ -106,6 +138,7 @@ body .wpc-modal textarea,
 body .wpc-modal select {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     padding: 10px !important;
     border: 1px solid #ddd !important;
     border-radius: 4px !important;
@@ -116,30 +149,100 @@ body .wpc-modal select {
 }
 
 /* ==================================================
+   FIELDSET - Prevent layout collapse
+   ================================================== */
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset,
+body .wpc-modal form fieldset {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    contain: layout !important;
+}
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul,
+body .wpc-modal form fieldset ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li,
+body .wpc-modal form fieldset ul li {
+    margin-bottom: 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* ==================================================
+   LABELS - Proper display
+   ================================================== */
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body form label,
+body .wpc-modal form label {
+    display: block !important;
+    margin-bottom: 5px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-preferred label,
+body .wpc-modal .field-preferred label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    font-weight: normal !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+}
+
+/* ==================================================
    RESPONSIVE - Stack on mobile
    ================================================== */
 
 @media (max-width: 768px) {
-    body .wpc-modal .field-row {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-    }
-    
-    body .wpc-modal .field-input,
-    body .wpc-modal .field-label,
-    body .wpc-modal .field-preferred,
-    body .wpc-modal .field-remove {
-        grid-column: 1 !important;
-    }
-    
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.split-2,
     body .wpc-modal ul li.split-2 {
         grid-template-columns: 1fr !important;
     }
     
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.split-2 > div:first-child,
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.split-2 > div:last-child {
+        grid-column: 1 / 2 !important;
+    }
+    
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-row,
+    body .wpc-modal .field-row {
+        grid-template-columns: 1fr !important;
+    }
+    
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-input,
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-label,
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-preferred,
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-remove,
+    body .wpc-modal .field-input,
+    body .wpc-modal .field-label,
+    body .wpc-modal .field-preferred,
+    body .wpc-modal .field-remove {
+        grid-column: 1 / 2 !important;
+    }
+    
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body .form-actions,
     body .form-actions {
         flex-direction: column !important;
     }
     
+    html body .wpc-modal .wpc-modal-content .wpc-modal-body .form-actions button,
     body .form-actions button {
         width: 100% !important;
     }
@@ -519,41 +622,6 @@ body .wpc-modal select {
     padding: 25px;
 }
 
-.wpc-modal form fieldset {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.wpc-modal form fieldset legend {
-    font-weight: 600;
-    font-size: 16px;
-    padding: 0 10px;
-    color: #333;
-}
-
-.wpc-modal form ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.wpc-modal form ul li {
-    margin-bottom: 15px;
-}
-
-.wpc-modal form ul li:last-child {
-    margin-bottom: 0;
-}
-
-.wpc-modal form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
 .wpc-modal form input:focus,
 .wpc-modal form textarea:focus,
 .wpc-modal form select:focus {
@@ -577,20 +645,10 @@ body.wpc-modal-open {
     margin-bottom: 10px;
 }
 
-.field-preferred label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: normal;
-    margin: 0;
-    font-size: 13px;
-    white-space: nowrap;
-}
-
 .field-preferred input[type="checkbox"] {
-    width: auto;
-    margin: 0;
-    flex-shrink: 0;
+    width: auto !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
 }
 
 .field-remove button {
