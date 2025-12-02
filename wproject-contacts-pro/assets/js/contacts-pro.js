@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend JavaScript
  * Phase 2 Complete - All Features Implemented
- * Version: 2.2.0 - Table Layout Fixed
+ * Version: 2.2.1 - Phone Display & Company Panel Buttons Fixed
  */
 
 (function($) {
@@ -568,7 +568,7 @@
          * Initialize
          */
         init: function() {
-            console.log('ContactsPage.init() called - Version 2.2.0 - Table Layout');
+            console.log('ContactsPage.init() called - Version 2.2.1 - Phone & Company Panel Fixed');
             this.bindEvents();
             this.filterContacts('all');
             this.loadCompanies();
@@ -1408,14 +1408,45 @@
          * Render contact as table row
          */
         renderContactTableRow: function(contact) {
+            console.log('Rendering contact:', contact);
+            
+            // Get preferred email or first email
             const preferredEmail = (contact.emails || []).find(e => e.is_preferred == 1) || (contact.emails || [])[0] || {};
-            const preferredPhone = (contact.phones || []).find(p => p.is_preferred == 1 && p.phone_type === 'cell') || 
-                                   (contact.phones || []).find(p => p.phone_type === 'cell') || {};
+            
+            // Find mobile/cell phone - try multiple strategies
+            let preferredPhone = null;
+            
+            // Strategy 1: Look for preferred cell phone
+            if (contact.phones && contact.phones.length > 0) {
+                preferredPhone = contact.phones.find(p => p.is_preferred == 1 && (p.phone_type === 'cell' || p.label === 'mobile' || p.label === 'assistant_mobile'));
+            }
+            
+            // Strategy 2: Look for any cell/mobile phone
+            if (!preferredPhone && contact.phones && contact.phones.length > 0) {
+                preferredPhone = contact.phones.find(p => p.phone_type === 'cell' || p.label === 'mobile' || p.label === 'assistant_mobile');
+            }
+            
+            // Strategy 3: Use primary_phone if available
+            if (!preferredPhone && contact.primary_phone) {
+                preferredPhone = { phone_number: contact.primary_phone };
+            }
+            
+            // Strategy 4: Use any preferred phone
+            if (!preferredPhone && contact.phones && contact.phones.length > 0) {
+                preferredPhone = contact.phones.find(p => p.is_preferred == 1);
+            }
+            
+            // Strategy 5: Use first phone
+            if (!preferredPhone && contact.phones && contact.phones.length > 0) {
+                preferredPhone = contact.phones[0];
+            }
             
             const companyName = contact.company_name || '';
             const contactName = contact.first_name + ' ' + contact.last_name;
             const email = preferredEmail.email || '';
-            const phone = preferredPhone.phone_number || '';
+            const phone = preferredPhone ? preferredPhone.phone_number || '' : '';
+
+            console.log('Phone found:', phone);
 
             return `
                 <tr data-contact-id="${contact.id}" ${contact.company_id ? 'data-company-id="' + contact.company_id + '"' : ''}>
@@ -1606,7 +1637,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 2.2.0 - TABLE LAYOUT FIXED! 🎉');
+            console.log('🎉 VERSION 2.2.1 - PHONE DISPLAY & COMPANY PANEL FIXED! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
