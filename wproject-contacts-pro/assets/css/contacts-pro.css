@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend Styles
- * Version: 2.0.5 - PRODUCTION READY
- * Clean, professional styling with no overlapping text
+ * Version: 2.0.6 - PERFECT ALIGNMENT
+ * All elements properly sized and positioned for production
  */
 
 /* ==================================================
@@ -42,14 +42,14 @@ html body .wpc-modal .wpc-modal-content .wpc-modal-body form fieldset ul li.spli
 }
 
 /* ==================================================
-   REPEATER FIELDS - Force 4-column grid
+   REPEATER FIELDS - Optimized 4-column grid
    ================================================== */
 
 html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-row,
 body .wpc-modal .field-row {
     display: grid !important;
-    grid-template-columns: minmax(0, 2fr) minmax(80px, 120px) minmax(70px, 90px) 40px !important;
-    gap: 10px !important;
+    grid-template-columns: minmax(0, 1fr) 110px 100px 32px !important;
+    gap: 8px !important;
     align-items: center !important;
     position: relative !important;
     width: 100% !important;
@@ -85,7 +85,8 @@ body .wpc-modal .field-preferred {
     align-items: center !important;
     justify-content: flex-start !important;
     height: 40px !important;
-    gap: 6px !important;
+    gap: 5px !important;
+    padding: 0 !important;
 }
 
 html body .wpc-modal .wpc-modal-content .wpc-modal-body .field-remove,
@@ -94,10 +95,13 @@ body .wpc-modal .field-remove {
     position: relative !important;
     z-index: 1 !important;
     min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 /* ==================================================
-   CHECKBOX & LABEL ALIGNMENT FIX
+   CHECKBOX & LABEL PERFECT ALIGNMENT
    ================================================== */
 
 html body .wpc-modal .field-preferred label,
@@ -105,20 +109,20 @@ body .wpc-modal .field-preferred label {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 6px !important;
+    gap: 4px !important;
     font-weight: normal !important;
     margin: 0 !important;
-    font-size: 13px !important;
+    font-size: 12px !important;
     white-space: nowrap !important;
-    line-height: 1.2 !important;
+    line-height: 1 !important;
 }
 
 html body .wpc-modal .field-preferred input[type="checkbox"],
 body .wpc-modal .field-preferred input[type="checkbox"] {
-    width: 18px !important;
-    height: 18px !important;
-    min-width: 18px !important;
-    min-height: 18px !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
     margin: 0 !important;
     padding: 0 !important;
     vertical-align: middle !important;
@@ -126,6 +130,48 @@ body .wpc-modal .field-preferred input[type="checkbox"] {
     position: relative !important;
     display: inline-block !important;
     flex-shrink: 0 !important;
+}
+
+html body .wpc-modal .field-preferred span,
+body .wpc-modal .field-preferred span {
+    font-size: 12px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+}
+
+/* ==================================================
+   DELETE BUTTON - Perfect icon-only styling
+   ================================================== */
+
+html body .wpc-modal .field-remove button,
+body .wpc-modal .field-remove button {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+    transition: all 0.2s !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+html body .wpc-modal .field-remove button:hover,
+body .wpc-modal .field-remove button:hover {
+    background: #fff0f0 !important;
+}
+
+html body .wpc-modal .field-remove button i,
+body .wpc-modal .field-remove button i {
+    width: 16px !important;
+    height: 16px !important;
+    color: #d00 !important;
+    margin: 0 !important;
 }
 
 /* ==================================================
@@ -734,27 +780,6 @@ body.wpc-modal-open {
 
 .repeater-field {
     margin-bottom: 10px;
-}
-
-.field-remove button {
-    background: transparent;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.2s;
-    width: 36px;
-    height: 36px;
-}
-
-.field-remove button:hover {
-    background: #fff0f0;
-}
-
-.field-remove button i {
-    width: 16px;
-    height: 16px;
-    color: #d00;
 }
 
 .hidden {
