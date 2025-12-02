@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend JavaScript
  * Phase 2 Complete - All Features Implemented
- * Version: 2.0.2
+ * Version: 2.0.7 - Fixed Repeater Fields
  */
 
 (function($) {
@@ -337,8 +337,8 @@
                                 </label>
                             </div>
                             <div class="field-remove">
-                                <button type="button" class="remove-email">
-                                    <i data-feather="trash-2"></i>
+                                <button type="button" class="remove-email" title="Remove">
+                                    ✕
                                 </button>
                             </div>
                         </div>
@@ -348,11 +348,6 @@
 
             $('#email-fields-container').append(html);
             this.updateRemoveButtons('#email-fields-container', '.remove-email');
-
-            // Re-initialize feather icons
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
         },
 
         addCellPhoneField: function() {
@@ -378,8 +373,8 @@
                                 </label>
                             </div>
                             <div class="field-remove">
-                                <button type="button" class="remove-cell-phone">
-                                    <i data-feather="trash-2"></i>
+                                <button type="button" class="remove-cell-phone" title="Remove">
+                                    ✕
                                 </button>
                             </div>
                         </div>
@@ -389,10 +384,6 @@
 
             $('#cell-phone-fields-container').append(html);
             this.updateRemoveButtons('#cell-phone-fields-container', '.remove-cell-phone');
-
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
         },
 
         addLocalPhoneField: function() {
@@ -419,8 +410,8 @@
                                 </label>
                             </div>
                             <div class="field-remove">
-                                <button type="button" class="remove-local-phone">
-                                    <i data-feather="trash-2"></i>
+                                <button type="button" class="remove-local-phone" title="Remove">
+                                    ✕
                                 </button>
                             </div>
                         </div>
@@ -430,10 +421,6 @@
 
             $('#local-phone-fields-container').append(html);
             this.updateRemoveButtons('#local-phone-fields-container', '.remove-local-phone');
-
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
         },
 
         updateRemoveButtons: function(containerSelector, buttonSelector) {
@@ -468,7 +455,7 @@
          * Initialize
          */
         init: function() {
-            console.log('ContactsPage.init() called - Phase 2 Complete');
+            console.log('ContactsPage.init() called - Version 2.0.7');
             this.bindEvents();
             this.filterContacts('all');
             this.loadCompanies();
@@ -817,8 +804,8 @@
                                             </label>
                                         </div>
                                         <div class="field-remove">
-                                            <button type="button" class="remove-email" style="display:none;">
-                                                <i data-feather="trash-2"></i>
+                                            <button type="button" class="remove-email" style="display:none;" title="Remove">
+                                                ✕
                                             </button>
                                         </div>
                                     </div>
@@ -867,8 +854,8 @@
                                             </label>
                                         </div>
                                         <div class="field-remove">
-                                            <button type="button" class="remove-cell-phone" style="display:none;">
-                                                <i data-feather="trash-2"></i>
+                                            <button type="button" class="remove-cell-phone" style="display:none;" title="Remove">
+                                                ✕
                                             </button>
                                         </div>
                                     </div>
@@ -917,8 +904,8 @@
                                             </label>
                                         </div>
                                         <div class="field-remove">
-                                            <button type="button" class="remove-local-phone" style="display:none;">
-                                                <i data-feather="trash-2"></i>
+                                            <button type="button" class="remove-local-phone" style="display:none;" title="Remove">
+                                                ✕
                                             </button>
                                         </div>
                                     </div>
@@ -942,11 +929,6 @@
             FormFieldHandlers.updateRemoveButtons('#email-fields-container', '.remove-email');
             FormFieldHandlers.updateRemoveButtons('#cell-phone-fields-container', '.remove-cell-phone');
             FormFieldHandlers.updateRemoveButtons('#local-phone-fields-container', '.remove-local-phone');
-
-            // Re-initialize feather icons
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
         },
 
         /**
@@ -1511,7 +1493,7 @@
      */
     $(document).ready(function() {
         try {
-            console.log('🎉 VERSION 2.0.2 - PHASE 2 COMPLETE! 🎉');
+            console.log('🎉 VERSION 2.0.7 - REPEATER FIELDS FIXED! 🎉');
             console.log('=== wProject Contacts Pro Initialization ===');
             console.log('jQuery version:', $.fn.jquery);
             console.log('wpContactsPro defined:', typeof wpContactsPro !== 'undefined');
