@@ -2,7 +2,7 @@
 /**
  * Template for displaying contacts page
  *
- * Version 2.0.8 - Fixed repeater field buttons
+ * Version 2.2.0 - Table list layout
  */
 
 if (!defined('ABSPATH')) {
@@ -81,7 +81,27 @@ get_header();
         </div>
     </div>
 
-    <div class="contacts-grid" id="contacts-grid">
+    <!-- Contacts Table (replaces grid) -->
+    <div class="contacts-table-wrapper">
+        <table id="contacts-table" class="contacts-table">
+            <thead>
+                <tr>
+                    <th><?php _e('Company', 'wproject-contacts-pro'); ?></th>
+                    <th><?php _e('Contact', 'wproject-contacts-pro'); ?></th>
+                    <th><?php _e('Email', 'wproject-contacts-pro'); ?></th>
+                    <th><?php _e('Phone', 'wproject-contacts-pro'); ?></th>
+                </tr>
+            </thead>
+            <tbody id="contacts-table-body">
+                <tr>
+                    <td colspan="4" class="loading"><?php _e('Loading contacts...', 'wproject-contacts-pro'); ?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Keep old grid hidden for backwards compatibility -->
+    <div class="contacts-grid" id="contacts-grid" style="display:none;">
         <div class="loading"><?php _e('Loading contacts...', 'wproject-contacts-pro'); ?></div>
     </div>
 
@@ -384,6 +404,21 @@ get_header();
             </div>
             <div class="wpc-panel-body">
                 <div class="loading"><?php _e('Loading contact...', 'wproject-contacts-pro'); ?></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Company Detail Panel -->
+    <div id="company-detail-panel" class="wpc-detail-panel" style="display: none;">
+        <div class="wpc-panel-overlay"></div>
+        <div class="wpc-panel-content">
+            <div class="wpc-panel-header">
+                <button class="wpc-panel-close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="wpc-panel-body">
+                <div class="loading"><?php _e('Loading company...', 'wproject-contacts-pro'); ?></div>
             </div>
         </div>
     </div>
