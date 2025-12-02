@@ -380,9 +380,16 @@ class WProject_Contact {
             $contact = new self($row);
             // Load minimal relations for list view
             $contact->emails = $wpdb->get_results($wpdb->prepare(
-                "SELECT * FROM {$wpdb->prefix}wproject_contact_emails WHERE contact_id = %d ORDER BY is_preferred DESC LIMIT 1",
+                "SELECT * FROM {$wpdb->prefix}wproject_contact_emails WHERE contact_id = %d ORDER BY is_preferred DESC, id ASC",
                 $row['id']
             ), ARRAY_A);
+            
+            // Load phones (THIS WAS MISSING!)
+            $contact->phones = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}wproject_contact_phones WHERE contact_id = %d ORDER BY is_preferred DESC, id ASC",
+                $row['id']
+            ), ARRAY_A);
+            
             $contacts[] = $contact;
         }
         
