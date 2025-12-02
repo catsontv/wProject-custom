@@ -1,7 +1,7 @@
 /**
  * wProject Contacts Pro - Frontend Styles
  * Phase 2 Complete - All features styled to match wProject
- * Version: 2.0.0
+ * Version: 2.0.1 - Responsive Form Fixes
  */
 
 /* ===========================
@@ -353,7 +353,7 @@
     margin: 30px auto;
     border-radius: 8px;
     width: 90%;
-    max-width: 700px;
+    max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -429,7 +429,7 @@
 
 .wpc-modal form ul li.split-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
 }
 
@@ -453,6 +453,7 @@
     border-radius: 4px;
     font-size: 14px;
     font-family: inherit;
+    box-sizing: border-box;
 }
 
 .wpc-modal form input:focus,
@@ -477,6 +478,7 @@
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #ddd;
+    flex-wrap: wrap;
 }
 
 body.wpc-modal-open {
@@ -492,17 +494,32 @@ body.wpc-modal-open {
 
 .field-row {
     display: grid;
-    grid-template-columns: 2fr 1.2fr 1fr auto;
+    grid-template-columns: minmax(150px, 2fr) minmax(100px, 1.2fr) minmax(80px, 1fr) auto;
     gap: 10px;
     align-items: center;
+    transition: all 0.2s ease;
+}
+
+.field-input {
+    min-width: 0;
 }
 
 .field-input input {
     width: 100%;
+    box-sizing: border-box;
+}
+
+.field-label {
+    min-width: 0;
 }
 
 .field-label select {
     width: 100%;
+    box-sizing: border-box;
+}
+
+.field-preferred {
+    min-width: 80px;
 }
 
 .field-preferred label {
@@ -512,11 +529,17 @@ body.wpc-modal-open {
     font-weight: normal;
     margin: 0;
     font-size: 13px;
+    white-space: nowrap;
 }
 
 .field-preferred input[type="checkbox"] {
     width: auto;
     margin: 0;
+    flex-shrink: 0;
+}
+
+.field-remove {
+    min-width: 36px;
 }
 
 .field-remove button {
@@ -784,6 +807,24 @@ body.wpc-panel-open {
 /* ===========================
    RESPONSIVE
    =========================== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+    .wpc-modal-content {
+        max-width: 700px;
+    }
+    
+    .field-row {
+        grid-template-columns: minmax(120px, 2fr) minmax(90px, 1fr) minmax(70px, 0.8fr) auto;
+        gap: 8px;
+    }
+    
+    .field-preferred label {
+        font-size: 12px;
+    }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
     .contacts-header {
         flex-direction: column;
@@ -827,11 +868,22 @@ body.wpc-panel-open {
 
     .field-row {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 10px;
+    }
+    
+    .field-input,
+    .field-label,
+    .field-preferred {
+        min-width: 0;
     }
 
     .field-preferred label {
-        justify-content: center;
+        justify-content: flex-start;
+        font-size: 14px;
+    }
+    
+    .field-remove {
+        text-align: right;
     }
 
     .wpc-modal form ul li.split-2 {
@@ -847,9 +899,11 @@ body.wpc-panel-open {
     }
 }
 
+/* Mobile phones */
 @media (max-width: 480px) {
     .contacts-actions {
         width: 100%;
+        flex-direction: column;
     }
 
     .contacts-actions button {
@@ -866,6 +920,28 @@ body.wpc-panel-open {
         position: static;
         justify-content: center;
         margin-top: 15px;
+    }
+    
+    .wpc-modal-content {
+        margin: 5px;
+        width: calc(100% - 10px);
+        max-height: calc(100vh - 10px);
+    }
+    
+    .wpc-modal-body {
+        padding: 15px;
+    }
+    
+    .wpc-modal form fieldset {
+        padding: 15px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        width: 100%;
     }
 }
 
